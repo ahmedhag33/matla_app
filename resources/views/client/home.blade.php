@@ -1,10 +1,11 @@
 @extends('client.layouts.app')
 
 @section('content')
-    <header class="bg-primary bg-gradient text-white">
+    <header class="bg-gradient text-dark" style="background-color: #ffffff !important;">
         <div class="container px-4 text-center">
-            <h1 class="fw-bolder">{{ __('Welcome To Trial Version') }}</h1>
-            <p class="lead">{{ __('Private Content Version To All Projects') }}</p>
+            <h1 class="fw-bolder">{{ __('Digital Solution Management for Media Services') }}</h1>
+            <p class="lead">{{ __('Digital Solution Management for Different Media Services') }}</p>
+            <a class="btn btn-lg text-white" href="#" style="background-color: #17233C !important">{{ __('Create Your Media Workspace Now') }}</a>
         </div>
     </header>
     <!-- About section-->
@@ -12,8 +13,8 @@
         <div class="container px-4">
             <div class="row gx-4 justify-content-center">
                 <div class="col-lg-8">
-                    <h2>{{ __('Welcome To Trial Version') }}</h2>
-                    <p class="lead">{{ __('Private Content Version To All Projects Description') }}</p>
+                    <h2>{{ __('Digital Solution Management for Media Services') }}</h2>
+                    <p class="lead">{{ __('Digital Solution Management for Different Media Services') }}</p>
                 </div>
             </div>
         </div>
