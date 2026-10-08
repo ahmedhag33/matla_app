@@ -1,0 +1,60 @@
+.login_register {
+    background: #e0eff4 none repeat scroll 100% 0;
+}
+
+.login_register_title {
+    margin-bottom: 20px;
+    margin-top: 0;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.login {
+    background: #fff none repeat scroll 100% 0;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    padding: 60px;
+}
+
+.register {
+    background: #fff none repeat scroll 100% 0;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    padding: 60px;
+}
+
+.works_area {
+    padding-top: 60px;
+    padding-bottom: 50px;
+}
+
+.portfolio-filters {
+    margin-bottom: 60px
+}
+
+.portfolio-filters li.active {
+    color: #fff;
+    background: #030303;
+    border-radius: 500px;
+    padding: 8px 30px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.portfolio-filters li {
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    /* font-family: 'Noto Kufi Arabic', sans-serif; */
+    font-weight: 500;
+    margin-left: 5px;
+    padding: 8px 30px;
+    text-transform: capitalize;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
