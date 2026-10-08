@@ -19,7 +19,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="d-flex flex-column min-vh-100">
     <!-- Navigation-->
     @include('client.layouts.nav')
     <!-- Header-->
