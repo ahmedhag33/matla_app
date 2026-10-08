@@ -17,8 +17,11 @@
                                  href="{{ getURLLocalization('ar') }}">العربية</a></li>
                      @endif
                  </div>
-                 <li class="nav-item"><a class="nav-link text-dark" href="#"></a>
-                     <b>{{ __('Login as member at the workspace') }}</b> </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="#"
+                         style="background-color: #F59E0B; color: #17233C; font-weight: bold; border-radius: 4px; padding: 8px 16px;">
+                         {{ __('Login as member at the workspace') }} </a>
+                 </li>
                  <div style="display: none;">
                      @if (!auth()->check())
                          <li class="nav-item"><a class="nav-link text-dark" data-toggle="modal"
