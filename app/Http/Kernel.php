@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+        'redirectToSoon' => \App\Http\Middleware\RedirectToSoonPage::class,
         'userAuthCheck' => \App\Http\Middleware\Client\UserAuthCheck::class,
         'checkEmailVerfiy' => \App\Http\Middleware\Client\CheckEmailVerfiy::class,
         'redirctedIfVerfiy' => \App\Http\Middleware\Client\RedirctedIfVerfiy::class,
