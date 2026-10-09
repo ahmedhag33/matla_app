@@ -75,7 +75,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapAdminRoutes()
     {
-        Route::prefix(LaravelLocalization::setLocale() . '/dashboard')
+        Route::prefix(LaravelLocalization::setLocale() . '/admin')
             ->middleware(['web', 'localizationRedirect', 'localeViewPath'])
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
