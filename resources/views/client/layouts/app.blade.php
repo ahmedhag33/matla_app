@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>{{ __('Trial Version') }}</title>
+    <title>{{ __('Home') }}</title>
     @include('client.layouts.link')
     @include('client.layouts.custom-link')
     @yield('style')
