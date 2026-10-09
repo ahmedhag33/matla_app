@@ -8,15 +8,6 @@
                  class="navbar-toggler-icon"></span></button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
              <ul class="navbar-nav ms-auto">
-                 <div style="display: none;">
-                     @if (getCurrentLanguage() == 'ar')
-                         <li class="nav-item"><a class="nav-link text-white"
-                                 href="{{ getURLLocalization('en') }}">English</a></li>
-                     @else
-                         <li class="nav-item"><a class="nav-link text-white"
-                                 href="{{ getURLLocalization('ar') }}">العربية</a></li>
-                     @endif
-                 </div>
                  <li class="nav-item">
                      <a class="nav-link" href="#"
                          style="background-color: #F59E0B; color: #17233C; font-weight: bold; border-radius: 4px; padding: 8px 16px;">

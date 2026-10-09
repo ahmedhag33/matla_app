@@ -4,15 +4,6 @@
          <li class="nav-item">
              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
          </li>
-         @if (getCurrentLanguage() == 'ar')
-             <li class="nav-item d-none d-sm-inline-block">
-                 <a href="{{ getURLLocalization('en') }}" class="nav-link">English</a>
-             </li>
-         @else
-             <li class="nav-item d-none d-sm-inline-block">
-                 <a href="{{ getURLLocalization('ar') }}" class="nav-link">العربية</a>
-             </li>
-         @endif
          <li class="nav-item d-none d-sm-inline-block">
              <a onclick="logout();" class="nav-link">{{ __('Logout') }}</a>
          </li>

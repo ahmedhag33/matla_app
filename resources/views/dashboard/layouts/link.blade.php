@@ -1,3 +1,4 @@
+ <link rel="icon" type="image/png"  href="{{ asset('public/img/matla_logo_in_client_side.png') }}" />
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
  <!-- Font Awesome Icons -->
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/fontawesome-free/css/all.min.css') }}">
