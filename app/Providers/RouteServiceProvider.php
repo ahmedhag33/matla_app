@@ -16,14 +16,12 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-
     /**
      * The path to the "home" route for your application.
      *
      * @var string
      */
     public const HOME = '/home';
-
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -32,10 +30,8 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
         parent::boot();
     }
-
     /**
      * Define the routes for the application.
      *
@@ -48,10 +44,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapAdminRoutes();
-
         //
     }
-
     /**
      * Define the "web" routes for the application.
      *
@@ -80,7 +74,20 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
     }
-
+    /**
+     * Define the "workspace" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapWorkspaceRoutes()
+    {
+        Route::prefix(LaravelLocalization::setLocale() . '/workspace')
+            ->middleware(['web', 'localizationRedirect', 'localeViewPath'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/workspace.php'));
+    }
     /**
      * Define the "api" routes for the application.
      *
