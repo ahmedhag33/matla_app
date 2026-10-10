@@ -1,40 +1,45 @@
-@font-face {
+/* @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-Regular.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-Regular.ttf') format('truetype');
     font-weight: 400;
-}
+} */
 
 @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-Medium.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-Medium.ttf') format('truetype');
     font-weight: 500;
 }
 
 @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-Bold.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-Bold.ttf') format('truetype');
     font-weight: 700;
 }
+
 @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-ExtraBold.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-ExtraBold.ttf') format('truetype');
     font-weight: 800;
 }
+
 @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-Black.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-Black.ttf') format('truetype');
     font-weight: 900;
 }
+
 @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-Light.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-Light.ttf') format('truetype');
     font-weight: 300;
 }
+
 @font-face {
     font-family: 'Tajawal';
-    src: url('/demo_project_2026/public/fonts/Tajawal-ExtraLight.ttf') format('truetype');
+    src: url('/public/fonts/Tajawal-ExtraLight.ttf') format('truetype');
     font-weight: 600;
 }
+
 * {
     font-family: 'Tajawal', sans-serif;
 }

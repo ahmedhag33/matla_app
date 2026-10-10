@@ -17,7 +17,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="">{{ __('Trial Version') }}</a>
+            <img src="{{ asset('public/img/matla_logo_in_workspace_side.png') }}" alt="Matla" height="100">
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -59,7 +59,7 @@
                     <!-- /.col -->
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-login">{{ __('Login') }}</button>
+                            <button type="submit" class="btn btn-matla btn-login">{{ __('Login') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>

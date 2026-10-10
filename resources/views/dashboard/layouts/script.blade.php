@@ -3,7 +3,6 @@
  <script src="{{ asset('public/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
  <!-- AdminLTE App -->
  <script src="{{ asset('public/dashboard/dist/js/adminlte.min.js') }}"></script>
- <script src="{{ asset('public/dist/js/demo.js') }}"></script>
  <script src="{{ asset('public/js/toastr.min.js') }}"></script>
  <script src="{{ asset('public/js/sweetalert2@11.js') }}"></script>
  <script>
