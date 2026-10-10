@@ -1024,5 +1024,14 @@
     "Powered By":"تمت البرمجة والتطوير بواسطة",
     "Dashboard Manager":"لوحة تحكم المدير",
     "Cancel" :"الغاء",
-    "Workspace":"مساحة العمل"
+    "Workspace":"مساحة العمل",
+    "Workspace Management":"ادارة مساحة العمل",
+    "Workspace Settings":"اعدادات مساحة العمل",
+    "Invite Members":"دعوة الاعضاء",
+    "Members":"الاعضاء",
+    "Program Management":"ادارة البرنامج",
+    "Program Settings":"اعدادات البرنامج",
+    "Program Episodes":"الحلقات",
+    "Programs":"البرامج",
+    "Segments":"الفقرات"
 }
