@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('workspace.index');
-})->name('workspace.index-page');
+    return view('workspace.dashboard.index');
+});

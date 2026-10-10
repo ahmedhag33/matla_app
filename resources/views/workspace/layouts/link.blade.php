@@ -1,0 +1,1 @@
+@include('admin_layouts.link')
