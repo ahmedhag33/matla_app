@@ -27,12 +27,14 @@
  <script>
      function logout() {
          Swal.fire({
-             title: "{{ __('Do you want to log out??') }}",
+             title: "<b>{{ __('Do you want to log out??') }}</b>",
              icon: "warning",
+             iconColor: "#17233C",
              showCancelButton: true,
-             confirmButtonColor: "#3085d6",
-             cancelButtonColor: "#d33",
-             confirmButtonText: "{{ __('Logout') }}"
+             confirmButtonColor: "#17233C",
+             cancelButtonColor: "#F59E0B",
+             confirmButtonText: "{{ __('Logout') }}",
+             cancelButtonText: "{{ __('Cancel') }}"
          }).then((result) => {
              if (result.isConfirmed) {
                  window.location.href = "{{ route('dashboard.auth.logout') }}";

@@ -1,0 +1,34 @@
+button.btn-matla {
+    background-color: #F59E0B !important;
+    color: #17233C !important;
+    font-weight: bold;
+    border-color: #F59E0B !important;
+}
+
+button.btn-matla:hover {
+    background-color: #D97706 !important;
+    color: #FFFFFF !important;
+}
+/* تنبيه النجاح - Success */
+#toast-container > .toast-success {
+    background-color: #17233C !important; /* اللون الأخضر المخصص */
+    color: #F8FAFC !important;           /* لون النص */
+}
+
+/* تنبيه الخطأ - Error */
+#toast-container > .toast-error {
+    background-color: #F59E0B  !important; /* اللون الأحمر المخصص */
+    color: #000000 !important;
+}
+
+/* تنبيه المعلومات - Info */
+#toast-container > .toast-info {
+    background-color: #3498db !important; /* اللون الأزرق المخصص */
+    color: #ffffff !important;
+}
+
+/* تنبيه التحذير - Warning */
+#toast-container > .toast-warning {
+    background-color: #f1c40f !important; /* اللون الأصفر المخصص */
+    color: #000000 !important;           /* نص أسود لتباين أفضل */
+}

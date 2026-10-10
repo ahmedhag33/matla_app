@@ -2,7 +2,7 @@
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
  <!-- Font Awesome Icons -->
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/fontawesome-free/css/all.min.css') }}">
- <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/buttons.css') }}">
+ <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/matla.css') }}">
  <!-- Theme style -->
  @if (getCurrentLanguage() == 'ar')
      <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/admintle.rtl.min.css') }}">
