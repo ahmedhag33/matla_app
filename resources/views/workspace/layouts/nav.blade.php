@@ -12,9 +12,26 @@
          <!-- Notifications Dropdown Menu -->
          <li class="nav-item dropdown">
              <a class="nav-link" data-toggle="dropdown" href="#">
-                 <i class="far fa-bell"></i>
-                 <span class="badge badge-warning navbar-badge" style="display: none;">0</span>
+                  <i class="far fa-bell"></i>
+                 <span class="badge badge-matla navbar-badge-matla" style="display: none;">3</span>
              </a>
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="display: none;">
+                 <a href="#" class="dropdown-item">
+                     <!-- Message Start -->
+                     <div class="media">
+                         <img src="{{ asset('public/img/user-solid-full.svg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                         <div class="media-body">
+                             <h3 class="dropdown-item-title">
+                                رئيس التحرير
+                             </h3>
+                             <p class="text-sm">تم انشاء برنامج الكلاسيكو بواسطة رئيس التحرير</p>
+                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 ساعات</p>
+                         </div>
+                     </div>
+                     <!-- Message End -->
+                 </a>
+                 <div class="dropdown-divider"></div>
+             </div>
          </li>
      </ul>
  </nav>
