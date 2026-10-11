@@ -8,8 +8,12 @@
       <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+              <div class="image">
+                  <img src="{{ asset('public/img/building-regular-full.svg') }}" class="img-circle elevation-2"
+                      alt="User Image">
+              </div>
               <div class="info text-white">
-                  <b> {{ __('Workspace') }}</b>
+                  <b> ON E Channel</b>
               </div>
           </div>
 
@@ -265,8 +269,8 @@
                           </li>
                           <li class="nav-item">
                               <a href="" class="nav-link text-white">
-                                  <img src="{{ asset('public/img/bell-solid-full.svg') }}"
-                                      alt="Notifications" style="width: 30px;">
+                                  <img src="{{ asset('public/img/bell-solid-full.svg') }}" alt="Notifications"
+                                      style="width: 30px;">
                                   <p>{{ __('Notifications') }}</p>
                               </a>
                           </li>
