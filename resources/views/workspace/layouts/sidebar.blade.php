@@ -81,11 +81,70 @@
                                   <p>{{ __('Program Episodes') }}</p>
                               </a>
                           </li>
-                           <li class="nav-item">
+                          <li class="nav-item">
                               <a href="" class="nav-link text-white">
                                   <img src="{{ asset('public/img/object-ungroup-regular-full.svg') }}" alt="Segments"
                                       style="width: 30px;">
                                   <p>{{ __('Segments') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/list-check-solid-full.svg') }}" alt="Program Management"
+                              style="width: 30px;">
+                          <p>
+                              {{ __('Tasks Management') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/table-list-solid-full.svg') }}" alt="Programs"
+                                      style="width: 30px;">
+                                  <p>{{ __('Tasks') }}</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/list-solid-full.svg') }}" alt="Programs"
+                                      style="width: 30px;">
+                                  <p>{{ __('My Tasks') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/newspaper-solid-full.svg') }}" alt="Program Management"
+                              style="width: 30px;">
+                          <p>
+                              {{ __('News Management') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/newspaper-solid-full.svg') }}" alt="News"
+                                      style="width: 30px;">
+                                  <p>{{ __('News') }}</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/cloud-arrow-up-solid-full.svg') }}" alt="Import News"
+                                      style="width: 30px;">
+                                  <p>{{ __('Import News') }}</p>
+                              </a>
+                          </li>
+                             <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/rss-solid-full.svg') }}" alt="News Service"
+                                      style="width: 30px;">
+                                  <p>{{ __('News Service') }}</p>
                               </a>
                           </li>
                       </ul>

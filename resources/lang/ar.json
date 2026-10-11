@@ -1033,5 +1033,12 @@
     "Program Settings":"اعدادات البرنامج",
     "Program Episodes":"الحلقات",
     "Programs":"البرامج",
-    "Segments":"الفقرات"
+    "Segments":"الفقرات",
+    "Tasks Management":"ادارة المهام",
+    "Tasks":"المهام",
+    "My Tasks":"مهامى",
+    "News Management":"ادارة الاخبار",
+    "News":"الاخبار",
+    "Import News":"استيراد الاخبار",
+    "News Service":"RSS خدمة الاخبار"
 }
