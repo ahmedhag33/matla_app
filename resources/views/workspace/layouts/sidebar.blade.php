@@ -211,11 +211,63 @@
                                   <p>{{ __('Content Review') }}</p>
                               </a>
                           </li>
-                           <li class="nav-item">
+                          <li class="nav-item">
                               <a href="" class="nav-link text-white">
                                   <img src="{{ asset('public/img/notes-medical-solid-full.svg') }}"
                                       alt="Review History" style="width: 30px;">
                                   <p>{{ __('Review History') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/border-all-solid-full.svg') }}" alt="Review and Approval"
+                              style="width: 30px;">
+                          <p>
+                              {{ __('The Rundown') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/diagram-next-solid-full.svg') }}"
+                                      alt="Rundown Settings" style="width: 30px;">
+                                  <p>{{ __('Rundown Settings') }}</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/pen-solid-full.svg') }}" alt="Script Espisodes"
+                                      style="width: 30px;">
+                                  <p>{{ __('Script Espisodes') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/users-between-lines-solid-full.svg') }}" alt="Collaboration"
+                              style="width: 30px;">
+                          <p>
+                              {{ __('Collaboration') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/road-circle-check-solid-full.svg') }}"
+                                      alt="Activities" style="width: 30px;">
+                                  <p>{{ __('Activities') }}</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/bell-solid-full.svg') }}"
+                                      alt="Notifications" style="width: 30px;">
+                                  <p>{{ __('Notifications') }}</p>
                               </a>
                           </li>
                       </ul>
