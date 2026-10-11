@@ -1040,5 +1040,14 @@
     "News Management":"ادارة الاخبار",
     "News":"الاخبار",
     "Import News":"استيراد الاخبار",
-    "News Service":"RSS خدمة الاخبار"
+    "News Service":"RSS خدمة الاخبار",
+    "Discovery Management":"ادارة الابحاث",
+    "Discovery Sources":"الابحاث والمصادر",
+    "Staff Management":"ادارة الضيوف",
+    "Staff":"الضيوف",
+    "Guests":"ضيوف الحلقات",
+    "Guest Settings":"اعداد الضيف",
+    "Review and Approval":"المراجعة والاعتماد",
+    "Content Review":"مراجعة المحتوى",
+    "Review History":"سجل المراجعة"
 }

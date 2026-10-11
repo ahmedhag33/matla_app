@@ -135,16 +135,87 @@
                           </li>
                           <li class="nav-item">
                               <a href="" class="nav-link text-white">
-                                  <img src="{{ asset('public/img/cloud-arrow-up-solid-full.svg') }}" alt="Import News"
-                                      style="width: 30px;">
+                                  <img src="{{ asset('public/img/cloud-arrow-up-solid-full.svg') }}"
+                                      alt="Import News" style="width: 30px;">
                                   <p>{{ __('Import News') }}</p>
                               </a>
                           </li>
-                             <li class="nav-item">
+                          <li class="nav-item">
                               <a href="" class="nav-link text-white">
                                   <img src="{{ asset('public/img/rss-solid-full.svg') }}" alt="News Service"
                                       style="width: 30px;">
                                   <p>{{ __('News Service') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/magnifying-glass-solid-full.svg') }}"
+                              alt="Program Management" style="width: 30px;">
+                          <p>
+                              {{ __('Discovery Management') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/algolia-brands-solid-full.svg') }}"
+                                      alt="Discovery Sources" style="width: 30px;">
+                                  <p>{{ __('Discovery Sources') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/user-tie-solid-full.svg') }}" alt="Staff Management"
+                              style="width: 30px;">
+                          <p>
+                              {{ __('Staff Management') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/person-circle-question-solid-full.svg') }}"
+                                      alt="Guests" style="width: 30px;">
+                                  <p>{{ __('Guests') }}</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/user-gear-solid-full.svg') }}" alt="Guest Settings"
+                                      style="width: 30px;">
+                                  <p>{{ __('Guest Settings') }}</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link text-white">
+                          <img src="{{ asset('public/img/code-compare-solid-full.svg') }}" alt="Review and Approval"
+                              style="width: 30px;">
+                          <p>
+                              {{ __('Review and Approval') }}
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/check-to-slot-solid-full.svg') }}"
+                                      alt="Content Review" style="width: 30px;">
+                                  <p>{{ __('Content Review') }}</p>
+                              </a>
+                          </li>
+                           <li class="nav-item">
+                              <a href="" class="nav-link text-white">
+                                  <img src="{{ asset('public/img/notes-medical-solid-full.svg') }}"
+                                      alt="Review History" style="width: 30px;">
+                                  <p>{{ __('Review History') }}</p>
                               </a>
                           </li>
                       </ul>
