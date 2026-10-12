@@ -9,7 +9,17 @@ button.btn-matla:hover {
     background-color: #D97706 !important;
     color: #FFFFFF !important;
 }
+a.btn-matla {
+    background-color: #F59E0B !important;
+    color: #17233C !important;
+    font-weight: bold;
+    border-color: #F59E0B !important;
+}
 
+a.btn-matla:hover {
+    background-color: #D97706 !important;
+    color: #FFFFFF !important;
+}
 /* تنبيه النجاح - Success */
 #toast-container>.toast-success {
     background-color: #17233C !important;
@@ -71,4 +81,20 @@ button.btn-matla:hover {
 .navbar-matla .navbar-nav .nav-link:hover,
 .navbar-matla .navbar-nav .nav-link:focus {
     color: #F59E0B !important;
+}
+.card-matla {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #F59E0B;
+    background-clip: border-box;
+    border: #F8FAFC;
+    border-radius: .25rem
+}
+ .card-matla .card-header {
+    border-top: 3px solid #F59E0B;
 }
