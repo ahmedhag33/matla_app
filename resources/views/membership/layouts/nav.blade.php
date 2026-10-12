@@ -49,7 +49,7 @@
              <a class="nav-link" data-toggle="dropdown" href="#">
                  <img src="{{ asset('public/img/bell-solid-full.svg') }}" alt="Members" width="30"
                      >
-                 <span class="badge badge-matla navbar-badge-matla">3</span>
+                 <span class="badge badge-matla navbar-badge-matla" style="display: none;">0</span>
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="display: none;">
                  <a href="#" class="dropdown-item">
