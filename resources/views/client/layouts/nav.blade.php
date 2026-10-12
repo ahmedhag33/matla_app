@@ -9,7 +9,7 @@
          <div class="collapse navbar-collapse" id="navbarResponsive">
              <ul class="navbar-nav ms-auto">
                  <li class="nav-item">
-                     <a class="nav-link" href="#"
+                     <a class="nav-link" href="{{ route('workspace.auth.login') }}" target="_blank"
                          style="background-color: #F59E0B; color: #17233C; font-weight: bold; border-radius: 4px; padding: 8px 16px;">
                          {{ __('Login as member at the workspace') }} </a>
                  </li>

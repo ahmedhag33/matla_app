@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('/member', function () {
     return view('membership.index');
 });
+Route::get('/login', function () {
+    return view('membership.auth.login');
+})->name('workspace.auth.login');
