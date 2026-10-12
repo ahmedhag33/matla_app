@@ -22,3 +22,6 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('membership.auth.login');
 })->name('workspace.auth.login');
+Route::get('/register', function () {
+    return view('membership.auth.register');
+})->name('workspace.auth.register');
