@@ -16,7 +16,7 @@
                      <a href="#" class="nav-link">{{ __('Home') }}</a>
                  </li>
                  <li class="nav-item text-white">
-                     <a href="#" class="nav-link">{{ __('Workpspaces') }}</a>
+                     <a href="#" class="nav-link">{{ __('Add Workspace') }}</a>
                  </li>
              </ul>
          </div>
