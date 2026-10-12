@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('workspace.dashboard.index');
 });
-Route::get('/member', function () {
+Route::get('/', function () {
     return view('membership.index');
 });
 Route::get('/login', function () {
