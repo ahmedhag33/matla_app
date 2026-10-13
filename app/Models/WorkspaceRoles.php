@@ -43,4 +43,18 @@ class WorkspaceRoles extends Model
             $workspaceRole->slug = str()->slug($workspaceRole->name_en);
         });
     }
+    /**
+     * Get the permissions that belong to the role.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permission()
+    {
+        return $this->belongsToMany(
+            WorkspacePermission::class,
+            new WorkspaceRolePermission()->getTable(),
+            'role_id',
+            'permission_id'
+        );
+    }
 }

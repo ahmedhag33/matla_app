@@ -48,6 +48,20 @@ class WorkspacePermission extends Model
         return $this->hasMany(WorkspacePermission::class, 'parent_id');
     }
     /**
+     * Get the roles that have the permission.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function role()
+    {
+        return $this->belongsToMany(
+            WorkspaceRoles::class,
+            new WorkspaceRolePermission()->getTable(),
+            'permission_id',
+            'role_id'
+        );
+    }
+    /**
      * Scope a query to only include permissions without a parent.
      *
      * @param  Builder $query
