@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WorkspaceRoles extends Model
 {
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
@@ -23,6 +25,9 @@ class WorkspaceRoles extends Model
         'name_en',
         'slug',
         'level',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
     /**
      * The "booting" method of the model.

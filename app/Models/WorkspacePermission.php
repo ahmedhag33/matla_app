@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WorkspacePermission extends Model
 {
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
@@ -18,7 +20,15 @@ class WorkspacePermission extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'slug', 'name', 'parent_id'];
+    protected $fillable = [
+        'id',
+        'slug',
+        'name',
+        'parent_id',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
     /**
      * Get the parent permission of the current permission.
      *
