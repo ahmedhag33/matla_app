@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkspacePermission extends Model
@@ -35,5 +36,15 @@ class WorkspacePermission extends Model
     public function children()
     {
         return $this->hasMany(WorkspacePermission::class, 'parent_id');
+    }
+    /**
+     * Scope a query to only include permissions without a parent.
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopePermissionIsNull(Builder $query)
+    {
+        return $query->whereNull('parent_id');
     }
 }
