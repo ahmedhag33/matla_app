@@ -35,7 +35,7 @@ class WorkspaceRoles extends Model
         // Automatically generate slug when creating a new workspace role
         static::creating(function ($workspaceRole) {
             // Generate slug from name
-            $workspaceRole->slug = str()->slug($workspaceRole->name);
+            $workspaceRole->slug = str()->slug($workspaceRole->name_en);
         });
     }
 }
