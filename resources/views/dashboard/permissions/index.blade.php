@@ -16,9 +16,11 @@
                                 <div class="form-group">
                                     <select class="custom-select form-control-border" id="exampleSelectBorder">
                                         <option>{{ __('The Role') }}</option>
-                                       @foreach ($roles as $role)
-                                         <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                       @endforeach
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}"
+                                                @if ($code == $role->slug) selected @endif>{{ $role->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -30,7 +32,9 @@
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="custom-control-input" type="checkbox"
-                                                        id="permission_{{ $item->id }}" value="{{ $item->id }}">
+                                                        id="permission_{{ $item->id }}" value="{{ $item->id }}"
+                                                        @if ($code == null) disabled @endif
+                                                        @if (in_array($item->id, $permissions_ids)) checked @endif>
                                                     <label for="permission_{{ $item->id }}"
                                                         class="custom-control-label">{{ $item->name }}</label>
                                                 </div>
