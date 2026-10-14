@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\WorkspacePermission;
 use App\Models\WorkspaceRoles;
 use App\Service\Base\JsonAPIMessages;
 
@@ -27,6 +28,10 @@ class RoleController extends Controller
      */
     public function role_permission()
     {
-        return view('dashboard.permissions.index');
+        $permissions = WorkspacePermission::with('children')->parentIsNull()->get();
+
+        $roles = WorkspaceRoles::select('id', 'name','slug')->get();
+        // get all permissions
+        return view('dashboard.permissions.index', compact('permissions', 'roles'));
     }
 }

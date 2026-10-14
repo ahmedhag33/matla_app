@@ -102,3 +102,11 @@ a.btn-matla:hover {
     background-color: #17233C !important;
     color: #F8FAFC !important;
 }
+.card-matla .card-header{
+    background-color: #17233C !important;
+    color: #F8FAFC !important;
+}
+.card-matla .card-footer{
+    background-color: #17233C !important;
+    color: #F8FAFC !important;
+}

@@ -5,6 +5,7 @@
  <script src="{{ asset('public/dashboard/dist/js/adminlte.min.js') }}"></script>
  <script src="{{ asset('public/js/toastr.min.js') }}"></script>
  <script src="{{ asset('public/js/sweetalert2@11.js') }}"></script>
+ <script src="{{ asset('public/dashboard/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}" type="text/javascript"></script>
  <script>
      toastr.options = {
          "closeButton": true,

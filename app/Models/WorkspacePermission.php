@@ -67,7 +67,7 @@ class WorkspacePermission extends Model
      * @param  Builder $query
      * @return Builder
      */
-    public function scopePermissionIsNull(Builder $query)
+    public function scopeParentIsNull(Builder $query)
     {
         return $query->whereNull('parent_id');
     }
