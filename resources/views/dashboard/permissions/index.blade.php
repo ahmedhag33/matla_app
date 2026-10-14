@@ -14,10 +14,10 @@
                         <form>
                             <div class="row">
                                 <div class="form-group">
-                                    <select class="custom-select form-control-border" id="exampleSelectBorder">
-                                        <option>{{ __('The Role') }}</option>
+                                    <select class="custom-select form-control-border" id="role_id" name="role_id">
+                                        <option value="0" data-slug="0">{{ __('The Role') }}</option>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}"
+                                            <option data-slug="{{ $role->slug }}" value="{{ $role->id }}"
                                                 @if ($code == $role->slug) selected @endif>{{ $role->name }}
                                             </option>
                                         @endforeach
@@ -52,4 +52,17 @@
         </div><!-- /.container-fluid -->
     </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $('#role_id').change(function() {
+            var role = $(this).find('option:selected').data('slug');
+
+            if (role != 0) {
+                window.location.href = "{{ url()->current() }}?role=" + role;
+            } else {
+                window.location.href = "{{ url()->current() }}";
+            }
+        });
+    </script>
 @endsection
