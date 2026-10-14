@@ -20,28 +20,20 @@
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
-                                    <thead>
+                                    <thead class="table-matla">
                                         <tr>
                                             <th>{{ __('The Role') }}</th>
                                             <th>Code</th>
                                             <th>{{ __('Date') . '/' . __('Time') }}</th>
                                             <th>{{ __('Status') }}</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($roles as $role)
                                             <tr>
                                                 <td>{{ $role->name }}</td>
-                                                <td>{{ $role->code }}</td>
+                                                <td>{{ $role->slug }}</td>
                                                 <td>{{ dateFormat($role->created_at) . ' ' . timeFormat($role->created_at) ?? '-' }}
-                                                </td>
-                                                <td>
-                                                    @if ($role->is_active == 1)
-                                                        <span class="badge badge-success">{{ __('Active') }}</span>
-                                                    @else
-                                                        <span class="badge badge-danger">{{ __('Inactive') }}</span>
-                                                    @endif
                                                 </td>
                                                 <td>
                                                     <div class="btn-group">
