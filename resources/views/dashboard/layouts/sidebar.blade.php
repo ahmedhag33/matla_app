@@ -35,10 +35,10 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('dashboard.user.index') }}" class="nav-link text-white">
+                              <a href="{{ route('dashboard.permissions.index') }}" class="nav-link text-white">
                                   <img src="{{ asset('public/img/users-solid-full.svg') }}" alt="User Avatar"
                                       alt="User Image" style="width: 30px;">
-                                  <p>{{ __('Users') }}</p>
+                                  <p>{{ __('Permission') }}</p>
                               </a>
                           </li>
                       </ul>

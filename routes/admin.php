@@ -48,5 +48,8 @@ Route::middleware(['checkAdminIsAuthticate'])->group(function () {
         Route::prefix('users')->controller(UsersController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard.user.index');
         });
+        Route::prefix('permissions')->controller(RoleController::class)->group(function () {
+            Route::get('/', 'role_permission')->name('dashboard.permissions.index');
+        });
     });
 });

@@ -20,4 +20,13 @@ class RoleController extends Controller
         // get all roles
         return view('dashboard.role.index', compact('roles'));
     }
+    /**
+     * Show the application dashboard.
+     *
+     *  @return \Illuminate\View\View
+     */
+    public function role_permission()
+    {
+        return view('dashboard.permissions.index');
+    }
 }
