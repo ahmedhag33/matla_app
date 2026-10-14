@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/start', function () {
     return view('workspace.dashboard.index');
 });
 Route::get('/', function () {
