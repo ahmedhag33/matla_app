@@ -7,6 +7,7 @@ use App\Models\WorkspacePermission;
 use App\Models\WorkspaceRolePermission;
 use App\Models\WorkspaceRoles;
 use App\Service\Base\JsonAPIMessages;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -52,5 +53,40 @@ class RoleController extends Controller
             'dashboard.permissions.index',
             compact('permissions', 'roles', 'code', 'permissions_ids')
         );
+    }
+    /**
+     * role permission store and update
+     *
+     * @return \Illuminate\Http\JsonResponse|string
+     * */
+    public function update_permission(Request $request)
+    {
+        try {
+            runTransaction(function () use ($request) {
+                WorkspaceRolePermission::create([
+                    'workspace_role_id' => $request->input('role_id'),
+                    'workspace_permission_id' => $request->input('permission_id'),
+                ]);
+            });
+            return $this->returnData(['message' => 'success']);
+        } catch (\Exception $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        }
+    }
+    /**
+     * role permission delete
+     *
+     * @return \Illuminate\Http\JsonResponse|string
+     * */
+    public function delete_permission(Request $request)
+    {
+        try {
+            runTransaction(function () use ($request) {
+                WorkspaceRolePermission::where('workspace_role_id', $request->input('role_id'))->where('workspace_permission_id', $request->input('permission_id'))->delete();
+            });
+            return $this->returnData(['message' => 'success']);
+        } catch (\Exception $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        }
     }
 }

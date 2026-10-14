@@ -31,7 +31,7 @@
                                         @foreach ($permission->children as $item)
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" type="checkbox"
+                                                    <input class="custom-control-input" name="permission_id" type="checkbox"
                                                         id="permission_{{ $item->id }}" value="{{ $item->id }}"
                                                         @if ($code == null) disabled @endif
                                                         @if (in_array($item->id, $permissions_ids)) checked @endif>
@@ -63,6 +63,34 @@
             } else {
                 window.location.href = "{{ url()->current() }}";
             }
+        });
+    </script>
+    <script>
+        $('input[name="permission_id"]').change(function() {
+            // Avoid triggering the change event recursively
+            var $this = $(this);
+            if ($this.is(':checked')) {
+                var route = "{{ route('dashboard.permissions.update') }}";
+            } else {
+                var route = "{{ route('dashboard.permissions.delete') }}";
+            }
+            // Use the value of the permission_id, not the jQuery object
+            var permission_id = $this.val();
+            var role_id = $('#role_id').val();
+            var role = $('#role_id').find('option:selected').data('slug');
+            $.ajax({
+                type: 'post',
+                url: route,
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    'role_id': role_id,
+                    'permission_id': permission_id
+                },
+                success: function(data) {
+                    window.location.href = "{{ url()->current() }}?role=" + role;
+                }
+            });
         });
     </script>
 @endsection

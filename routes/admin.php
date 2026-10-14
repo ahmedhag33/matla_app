@@ -50,6 +50,10 @@ Route::middleware(['checkAdminIsAuthticate'])->group(function () {
         });
         Route::prefix('permissions')->controller(RoleController::class)->group(function () {
             Route::get('/', 'role_permission')->name('dashboard.permissions.index');
+            // add route to store
+            Route::post('/store', 'update_permission')->name('dashboard.permissions.update');
+           // add route to delete
+            Route::post('/delete', 'delete_permission')->name('dashboard.permissions.delete');
         });
     });
 });
