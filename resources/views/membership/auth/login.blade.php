@@ -35,27 +35,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 position-relative">
                         <input type="password" name="password" id="password" class="form-control"
                             placeholder="{{ __('Password') }}">
-                        <span class="text-danger password_err"></span>
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+
+                        <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password"
+                            class="show-password">
                     </div>
-                    <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password"
-                        style="
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            z-index: 10;
-        ">
                     <!-- /.col -->
                     <div class="row">
                         <div class="col-12">
@@ -92,23 +84,7 @@
     @endif
     <script>
         $(document).ready(function() {
-            $('#togglePassword').on('click', function() {
-                const password = $('#password');
-                if (password.attr('type') === 'password') {
-                    password.attr('type', 'text');
-                    $(this).attr(
-                        'src',
-                        "{{ asset('public/img/eye-slash-solid-full.svg') }}"
-                    );
-                } else {
-                    password.attr('type', 'password');
-
-                    $(this).attr(
-                        'src',
-                        "{{ asset('public/img/eye-solid-full.svg') }}"
-                    );
-                }
-            });
+            togglePasswordVisibility('password', 'togglePassword');
             $(document).on('click', '.btn-login', function(e) {
                 e.preventDefault();
                 var formData = new FormData($('#login-form')[0]);

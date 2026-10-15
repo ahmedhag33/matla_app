@@ -61,19 +61,16 @@
                             </div>
                         </div>
 
-                        <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password"
-                            style="
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            z-index: 10;
-        ">
+                        <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password" class="show-password">
                     </div>
-
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="strong_password">
+                            <label class="custom-control-label" for="strong_password">
+                                {{ __('Create a Strong Password') }}
+                            </label>
+                        </div>
+                    </div>
                     <span class="text-danger password_err"></span>
 
                     <div class="input-group mb-3 position-relative">
@@ -87,17 +84,7 @@
                         </div>
 
                         <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="toggle-confirmPassword"
-                            alt="Show confirm password"
-                            style="
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            z-index: 10;
-        ">
+                            alt="Show confirm password" class="show-password">
                     </div>
 
                     <!-- /.col -->
@@ -127,32 +114,20 @@
     @include('membership.layouts.script')
     <script>
         $(document).ready(function() {
-            $('.role').select2()
-
-            function togglePasswordVisibility(inputId, toggleId) {
-                $('#' + toggleId).on('click', function() {
-                    const password = $('#' + inputId);
-
-                    if (password.attr('type') === 'password') {
-                        password.attr('type', 'text');
-
-                        $(this).attr(
-                            'src',
-                            "{{ asset('public/img/eye-slash-solid-full.svg') }}"
-                        );
-                    } else {
-                        password.attr('type', 'password');
-
-                        $(this).attr(
-                            'src',
-                            "{{ asset('public/img/eye-solid-full.svg') }}"
-                        );
-                    }
-                });
-            }
+            $('.role').select2();
+            $('#strong_password').change(function() {
+                var password = "{{ passwordGenerator() }}";
+                if ($(this).is(':checked')) {
+                    $('#password').val(password);
+                    $('#password_confirmation').val(password);
+                } else {
+                    $('#password').val('');
+                    $('#password_confirmation').val('');
+                }
+            });
             togglePasswordVisibility('password', 'togglePassword');
 
-            togglePasswordVisibility('confirm-password', 'toggle-confirmPassword');
+            togglePasswordVisibility('password_confirmation', 'toggle-confirmPassword');
 
             $(document).on('click', '.btn-login', function(e) {
                 e.preventDefault();

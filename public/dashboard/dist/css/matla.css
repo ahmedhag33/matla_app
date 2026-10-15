@@ -9,6 +9,7 @@ button.btn-matla:hover {
     background-color: #D97706 !important;
     color: #FFFFFF !important;
 }
+
 a.btn-matla {
     background-color: #F59E0B !important;
     color: #17233C !important;
@@ -20,6 +21,7 @@ a.btn-matla:hover {
     background-color: #D97706 !important;
     color: #FFFFFF !important;
 }
+
 /* تنبيه النجاح - Success */
 #toast-container>.toast-success {
     background-color: #17233C !important;
@@ -82,6 +84,7 @@ a.btn-matla:hover {
 .navbar-matla .navbar-nav .nav-link:focus {
     color: #F59E0B !important;
 }
+
 .card-matla {
     position: relative;
     display: -ms-flexbox;
@@ -95,18 +98,34 @@ a.btn-matla:hover {
     border: #F8FAFC;
     border-radius: .25rem
 }
- .card-matla .card-header {
+
+.card-matla .card-header {
     border-top: 3px solid #F59E0B;
 }
-.table-matla{
+
+.table-matla {
     background-color: #17233C !important;
     color: #F8FAFC !important;
 }
-.card-matla .card-header{
+
+.card-matla .card-header {
     background-color: #17233C !important;
     color: #F8FAFC !important;
 }
-.card-matla .card-footer{
+
+.card-matla .card-footer {
     background-color: #17233C !important;
     color: #F8FAFC !important;
+}
+
+.show-password {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 10;
+    margin-left: 20px;
 }
