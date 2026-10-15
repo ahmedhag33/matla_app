@@ -57,4 +57,13 @@ class WorkspaceRoles extends Model
             'permission_id'
         );
     }
+    /**
+     * Get the members that belong to the role.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function member()
+    {
+        return $this->hasMany(Member::class, 'workspace_role_id');
+    }
 }

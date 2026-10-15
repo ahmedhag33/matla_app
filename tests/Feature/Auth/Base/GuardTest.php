@@ -16,7 +16,7 @@ class GuardTest extends TestCase
      */
     public function test_guard_is_found(): void
     {
-       $this->assertInstanceOf(Guard::class, $this->guard());
+        $this->assertInstanceOf(Guard::class, $this->guard());
     }
     /**
      * test employee guard is defined
@@ -28,12 +28,25 @@ class GuardTest extends TestCase
         $this->assertArrayHasKey('admin', config('auth.guards'));
     }
     /**
+     * test member guard is defined
+     *
+     * @return void
+     */
+    public function test_member_guard_is_defined()
+    {
+        $this->assertArrayHasKey('member', config('auth.guards'));
+    }
+    /**
      * test employee guard is found
      *
      * @return void
      */
     public function test_employee_guard_is_found()
     {
-        $this->assertInstanceOf(Guard::class,auth()->guard('admin'));
+        $this->assertInstanceOf(Guard::class, auth()->guard('admin'));
+    }
+    public function test_member_guard_is_found()
+    {
+        $this->assertInstanceOf(Guard::class, auth()->guard('member'));
     }
 }
