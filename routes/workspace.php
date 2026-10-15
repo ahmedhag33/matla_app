@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/start', function () {
+Route::get('workspace/start', function () {
     return view('workspace.dashboard.index');
 });
-Route::get('/', function () {
+Route::get('membership/', function () {
     return view('membership.index');
 });
-Route::get('/login', function () {
+Route::get('membership/login', function () {
     return view('membership.auth.login');
 })->name('workspace.auth.login');
-Route::get('/register', function () {
+Route::get('membership/register', function () {
     return view('membership.auth.register');
 })->name('workspace.auth.register');

@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapAdminRoutes();
-        
+
         $this->mapWorkspaceRoutes();
     }
     /**
@@ -84,7 +84,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWorkspaceRoutes()
     {
-        Route::prefix(LaravelLocalization::setLocale() . '/workspace')
+        Route::prefix(LaravelLocalization::setLocale())
             ->middleware(['web', 'localizationRedirect', 'localeViewPath'])
             ->namespace($this->namespace)
             ->group(base_path('routes/workspace.php'));
