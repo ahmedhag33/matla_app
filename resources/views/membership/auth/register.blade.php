@@ -43,7 +43,14 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <select class="form-control role" name="role_id" style="width: 100%;">
+                            <option value="0" selected="selected">{{ __('The Role') }}</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->slug }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="input-group mb-3 position-relative">
                         <input type="password" name="password" id="password" class="form-control"
                             placeholder="{{ __('Password') }}">
@@ -70,8 +77,8 @@
                     <span class="text-danger password_err"></span>
 
                     <div class="input-group mb-3 position-relative">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
-                            placeholder="{{ __('Confirm Password') }}">
+                        <input type="password" name="password_confirmation" id="password_confirmation"
+                            class="form-control" placeholder="{{ __('Confirm Password') }}">
 
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -120,6 +127,7 @@
     @include('membership.layouts.script')
     <script>
         $(document).ready(function() {
+            $('.role').select2()
 
             function togglePasswordVisibility(inputId, toggleId) {
                 $('#' + toggleId).on('click', function() {
