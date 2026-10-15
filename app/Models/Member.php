@@ -42,4 +42,13 @@ class Member extends Authenticatable
     {
         return $this->belongsTo(WorkspaceRoles::class, 'workspace_role_id');
     }
+    /**
+     * Get the verfication codes for the member.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function verfication_codes()
+    {
+        return $this->hasMany(MemberVerficationCodes::class, 'member_id');
+    }
 }
