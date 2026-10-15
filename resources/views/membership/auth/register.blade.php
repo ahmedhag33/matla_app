@@ -23,7 +23,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg" style="font-weight: bold;">{{ __('Register a new membership') }}</p>
-                <form id="login-form">
+                <form id="register-form">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="{{ __('Name') }}">
@@ -70,7 +70,7 @@
                     <span class="text-danger password_err"></span>
 
                     <div class="input-group mb-3 position-relative">
-                        <input type="password" name="confirm_password" id="confirm-password" class="form-control"
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
                             placeholder="{{ __('Confirm Password') }}">
 
                         <div class="input-group-append">
