@@ -67,15 +67,20 @@ class Kernel extends HttpKernel
         'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
         'redirectToSoon' => \App\Http\Middleware\RedirectToSoonPage::class,
+        // client middleware
         'userAuthCheck' => \App\Http\Middleware\Client\UserAuthCheck::class,
         'checkEmailVerfiy' => \App\Http\Middleware\Client\CheckEmailVerfiy::class,
         'redirctedIfVerfiy' => \App\Http\Middleware\Client\RedirctedIfVerfiy::class,
         'checkUserISVerify' => \App\Http\Middleware\Client\CheckUserISVerify::class,
         'auth.api.user' => \App\Http\Middleware\Api\AuthApiUser::class,
         'api.user.email.is.not.verify' => \App\Http\Middleware\Api\UserEmailIsNotVerify::class,
+        // admin middleware
         'checkAdminIsAuthticate' => \App\Http\Middleware\DashBoard\CheckAdminIsAuthticate::class,
         'adminIsAuthticate' => \App\Http\Middleware\DashBoard\AdminIsAuthticate::class,
         'adminPasswordIsNotChange' => \App\Http\Middleware\DashBoard\AdminPasswordIsNotChange::class,
         'adminPasswordIsChange' => \App\Http\Middleware\DashBoard\AdminPasswordIsChange::class,
+        // workspace middleware
+        'member-not-authenticate' => \App\Http\Middleware\Workspace\MemberNotAuthenticate::class,
+        'member-is-authenticate' => \App\Http\Middleware\Workspace\MemberIsAuthenticate::class,
     ];
 }

@@ -18,19 +18,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('member')->group(function () {
-    // add route to login
-    Route::controller(LoginController::class)->group(function () {
-        Route::get('/login', 'index')->name('workspace.auth.login');
+
+    Route::middleware('member-is-authenticate')->group(function () {
+        // add controller for auth
+        Route::controller(LoginController::class)->group(function () {
+            Route::get('/login', 'index')->name('workspace.auth.login');
+        });
+        Route::controller(RegisterController::class)->group(function () {
+            Route::get('/register', 'index')->name('workspace.auth.register');
+        });
     });
-    Route::controller(RegisterController::class)->group(function () {
-        Route::get('/register', 'index')->name('workspace.auth.register');
-    });
-    Route::controller(MemberController::class)->group(function () {
-        Route::get('/', 'index')->name('workspace.member.index');
+    Route::middleware('member-not-authenticate')->group(function () {
+        // add controller for member
+        Route::controller(MemberController::class)->group(function () {
+            Route::get('/', 'index')->name('workspace.member.index');
+        });
     });
 });
-Route::prefix('workspace')->group(function () {
-    Route::controller(HomeController::class)->group(function () {
-        Route::get('/', 'index')->name('workspace.dashboard.index');
+Route::middleware('member-not-authenticate')->group(function () {
+    Route::prefix('workspace')->group(function () {
+        Route::controller(HomeController::class)->group(function () {
+            Route::get('/', 'index')->name('workspace.dashboard.index');
+        });
     });
 });

@@ -85,6 +85,11 @@
 
     <!-- jQuery -->
     @include('membership.layouts.script')
+    @if (session()->has('error-member-message'))
+        <script>
+            toastr.error("{{ session()->get('error-member-message') }}");
+        </script>
+    @endif
     <script>
         $(document).ready(function() {
             $('#togglePassword').on('click', function() {
