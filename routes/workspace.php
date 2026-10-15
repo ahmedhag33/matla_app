@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Workspace\Auth\LoginController;
+use App\Http\Controllers\Workspace\Auth\RegisterController;
+use App\Http\Controllers\Workspace\HomeController;
+use App\Http\Controllers\Workspace\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('workspace/start', function () {
-    return view('workspace.dashboard.index');
+Route::prefix('member')->group(function () {
+    // add route to login
+    Route::controller(LoginController::class)->group(function () {
+        Route::get('/login', 'index')->name('workspace.auth.login');
+    });
+    Route::controller(RegisterController::class)->group(function () {
+        Route::get('/register', 'index')->name('workspace.auth.register');
+    });
+    Route::controller(MemberController::class)->group(function () {
+        Route::get('/', 'index')->name('workspace.member.index');
+    });
 });
-Route::get('membership/', function () {
-    return view('membership.index');
+Route::prefix('workspace')->group(function () {
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/', 'index')->name('workspace.dashboard.index');
+    });
 });
-Route::get('membership/login', function () {
-    return view('membership.auth.login');
-})->name('workspace.auth.login');
-Route::get('membership/register', function () {
-    return view('membership.auth.register');
-})->name('workspace.auth.register');

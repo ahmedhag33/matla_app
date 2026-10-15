@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -65,5 +66,15 @@ class WorkspaceRoles extends Model
     public function member()
     {
         return $this->hasMany(Member::class, 'workspace_role_id');
+    }
+    /**
+     * Scope a query to only include highest level roles.
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeHighest(Builder $query)
+    {
+        return $query->where('level', 1);
     }
 }
