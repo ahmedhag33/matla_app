@@ -96,7 +96,7 @@
                     <!-- /.col -->
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-matla btn-login">{{ __('Login') }}</button>
+                            <button type="submit" class="btn btn-matla btn-login">{{ __('Create Account') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -106,10 +106,10 @@
                     <span class="sr-only">Loading...</span>
                 </div>
                 <br>
-                <!-- /.social-auth-links -->
-                {{-- <p class="mb-1">
-                    <a href="forgot-password.html">{{ __('I forgot my password') }}</a>
-                </p> --}}
+                <p class="mb-0">
+                    <a href="{{ route('workspace.auth.login') }}" class="text-center"
+                        style="color: #17233C;">{{ __('Already have an account ?') }}</a>
+                </p>
             </div>
             <!-- /.login-card-body -->
         </div>
