@@ -13,7 +13,7 @@ class LoginAuthService extends BaseLoginAuthService
      *
      * @var string
      */
-    protected $redirection = 'member.index';
+    protected $redirection = 'workspace.member.index';
     /**
      * The redirection path after logout
      *
