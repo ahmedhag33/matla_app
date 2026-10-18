@@ -23,9 +23,13 @@ Route::prefix('member')->group(function () {
         // add controller for auth
         Route::controller(LoginController::class)->group(function () {
             Route::get('/login', 'index')->name('workspace.auth.login');
+            // add route to login
+            Route::post('/login', 'login')->name('workspace.auth.login.post');
         });
         Route::controller(RegisterController::class)->group(function () {
             Route::get('/register', 'index')->name('workspace.auth.register');
+            // add route to register
+            Route::post('/register', 'register')->name('workspace.auth.register.post');
         });
     });
     Route::middleware('member-not-authenticate')->group(function () {
@@ -39,6 +43,8 @@ Route::prefix('member')->group(function () {
             // add controller for member
             Route::controller(MemberController::class)->group(function () {
                 Route::get('/', 'index')->name('workspace.member.index');
+                // add route to logout
+                Route::get('/logout', 'logout')->name('workspace.member.logout');
             });
         });
     });

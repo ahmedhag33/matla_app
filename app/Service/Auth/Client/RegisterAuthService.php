@@ -62,6 +62,12 @@ class RegisterAuthService extends BaseRegisterAuthService
         }
     }
     /**
+     * The redirection
+     *
+     * @var string
+     */
+    protected $redirection = 'workspace.verification.index';
+    /**
      * create new user and authenticate it
      *
      * @param Request $request
@@ -98,17 +104,5 @@ class RegisterAuthService extends BaseRegisterAuthService
         dispatch(new SendToUserVerifcationMail($this->email, __('Activation Code is') . ' ' . $this->verificationCode))->delay(now()->addSeconds(5));
         // return user
         return $create;
-    }
-    /**
-     * override Get the redirection to be used during authentication.
-     *
-     * @return string
-     */
-    protected function getRedirection()
-    {
-        if (session()->has('url.intended')) {
-            return lastUrl();
-        }
-        return route('index-page', ['is_verify' => 0]);
     }
 }
