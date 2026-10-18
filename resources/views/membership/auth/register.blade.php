@@ -26,7 +26,7 @@
                 <form id="register-form">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="{{ __('Name') }}">
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('Name') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -90,13 +90,13 @@
                     <!-- /.col -->
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-matla btn-login">{{ __('Create Account') }}</button>
+                            <button type="submit" class="btn btn-matla btn-register">{{ __('Create Account') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>
                     <!-- /.col -->
                 </form>
-                <div id="login-loading" class="spinner-grow text-dark" role="status" style="display: none;">
+                <div id="register-loading" class="spinner-grow text-dark" role="status" style="display: none;">
                     <span class="sr-only">Loading...</span>
                 </div>
                 <br>
@@ -129,7 +129,7 @@
 
             togglePasswordVisibility('password_confirmation', 'toggle-confirmPassword');
 
-            $(document).on('click', '.btn-login', function(e) {
+            $(document).on('click', '.btn-register', function(e) {
                 e.preventDefault();
                 var formData = new FormData($('#login-form')[0]);
                 $.ajax({
@@ -142,8 +142,8 @@
                     contentType: false,
                     cache: false,
                     beforeSend: function() {
-                        $('#login-loading').show();
-                        $('#login-form').hide();
+                        $('#register-loading').show();
+                        $('#register-form').hide();
                     },
                     error: function(data) {
                         $('#login-loading').hide();

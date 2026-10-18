@@ -18,6 +18,8 @@ class MemberIsAuthenticate
         if (auth()->guard('member')->check()) {
             // Flash a message to the session
             session()->flash('auth-member-message', __('You are not authorized to access this page. Please log in as a member.'));
+            // Store the intended URL in the session
+            session()->put('url.intended', $request->fullUrl());
             // Redirect to the login page or any other appropriate route
             return redirect(session()->get('url.intended') ?? route('workspace.member.index'));
         }
