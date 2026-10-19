@@ -22,4 +22,14 @@
         toastr.success("{{ session()->get('success-message-user-verify') }}");
     </script>
 @endif
+@if (session()->has('login-success'))
+    <script>
+        toastr.success("{{ session()->get('login-success') }}");
+    </script>
+@endif
+@if (session()->has('auth-member-message'))
+    <script>
+        toastr.success("{{ session()->get('auth-member-message') }}");
+    </script>
+@endif
 @yield('script')

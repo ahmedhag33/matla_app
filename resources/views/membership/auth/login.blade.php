@@ -35,6 +35,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="text-danger email_err"></span>
                     <div class="input-group mb-3 position-relative">
                         <input type="password" name="password" id="password" class="form-control"
                             placeholder="{{ __('Password') }}">
@@ -48,6 +49,7 @@
                         <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password"
                             class="show-password">
                     </div>
+                    <span class="text-danger password_err"></span>
                     <!-- /.col -->
                     <div class="row">
                         <div class="col-12">
