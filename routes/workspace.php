@@ -37,6 +37,10 @@ Route::prefix('member')->group(function () {
             Route::controller(VerifcationController::class)->group(function () {
                 // add route to verify email
                 Route::get('/', 'index')->name('workspace.verification.index');
+                // add route to verify email
+                Route::post('/verify', 'verify')->name('workspace.verification.verify');
+                // add route to resend verification code
+                Route::get('/resend', 'resend')->name('workspace.verification.resend');
             });
         });
         Route::middleware('member-is-not-verfiy')->group(function () {
