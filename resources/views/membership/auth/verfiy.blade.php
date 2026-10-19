@@ -66,6 +66,11 @@
 
     <!-- jQuery -->
     @include('membership.layouts.script')
+    @if (session()->has('register-success'))
+        <script>
+            toastr.success("{{ session()->get('register-success') }}");
+        </script>
+    @endif
     <script>
         function resendCode() {
             $.ajax({
@@ -148,8 +153,8 @@
                     contentType: false,
                     cache: false,
                     beforeSend: function() {
-                        $('#register-loading').show();
-                        $('#register-form').hide();
+                        $('#verification-loading').show();
+                        $('#verification-form').hide();
                     },
                     error: function(data) {
                         $('#verification-loading').hide();

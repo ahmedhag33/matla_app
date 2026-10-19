@@ -37,13 +37,13 @@
                     <div class="input-group mb-3">
                         <input type="email" name="email" id="email" class="form-control"
                             placeholder="{{ __('The Email') }}">
-                        <span class="text-danger email_err"></span>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
+                    <span class="text-danger email_err"></span>
                     <div class="form-group">
                         <select class="form-control role" name="role_id" style="width: 100%;">
                             <option value="0" selected="selected">{{ __('The Role') }}</option>
@@ -52,19 +52,21 @@
                             @endforeach
                         </select>
                     </div>
-                    <span class="text-danger role_err"></span>
+                    <span class="text-danger role_id_err"></span>
                     <div class="input-group mb-3 position-relative">
                         <input type="password" name="password" id="password" class="form-control"
                             placeholder="{{ __('Password') }}">
-
+                        <span class="text-danger password_err"></span>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
 
-                        <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password" class="show-password">
+                        <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="togglePassword" alt="Show password"
+                            class="show-password">
                     </div>
+                    <span class="text-danger password_err"></span>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="strong_password">
@@ -73,26 +75,24 @@
                             </label>
                         </div>
                     </div>
-                    <span class="text-danger password_err"></span>
-
                     <div class="input-group mb-3 position-relative">
                         <input type="password" name="password_confirmation" id="password_confirmation"
                             class="form-control" placeholder="{{ __('Confirm Password') }}">
-
+                        <span class="text-danger password_confirmation_err"></span>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-
                         <img src="{{ asset('public/img/eye-solid-full.svg') }}" id="toggle-confirmPassword"
                             alt="Show confirm password" class="show-password">
                     </div>
-
+                    <span class="text-danger password_confirmation_err"></span>
                     <!-- /.col -->
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-matla btn-register">{{ __('Create Account') }}</button>
+                            <button type="submit"
+                                class="btn btn-matla btn-register">{{ __('Create Account') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>

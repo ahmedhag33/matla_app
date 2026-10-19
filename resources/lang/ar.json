@@ -1065,5 +1065,6 @@
     "Register a new membership":"تسجيل عضوية جديدة",
     "Already have an account ?":"لديك حساب بالفعل ؟",
     "You are not authorized to access this page. Please log in as a member.":"ليس لديك صلاحية الوصول لهذه الصفحة. يرجى تسجيل الدخول كعضو.",
-    "This Field must be String":"هذا الحقل يجب ان يكون نص"
+    "This Field must be String":"هذا الحقل يجب ان يكون نص",
+    "Please Select a Role":"يرجى اختيار دور"
 }
