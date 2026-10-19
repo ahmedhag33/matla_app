@@ -2,8 +2,20 @@
 
 namespace App\Http\Controllers\Workspace\Auth;
 
+use App\Exceptions\AuthException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Auth\ResetPassordRequest;
+use App\Http\Requests\Client\Auth\VerfiyRequest;
+use App\Http\Requests\Workspace\ForgetRequest;
+use App\Jobs\Member\SendToMemberVerifcationMail;
+use App\Models\Member;
+use App\Models\MemberVerficationCodes;
 use App\Service\Base\JsonAPIMessages;
+use App\Service\Enum\HttpStatusCode;
+use App\Service\Enum\VerificationActionType;
+use App\Service\Enum\VerificationType;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Hash;
 
 class ForgetPasswordController extends Controller
 {
@@ -18,6 +30,60 @@ class ForgetPasswordController extends Controller
         return view('membership.auth.forget');
     }
     /**
+     * Handle the incoming request to send a password reset email.
+     *
+     * @param ForgetRequest $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws \Exception
+     * @throws AuthException
+     * @throws HttpResponseException
+     */
+    public function forget(ForgetRequest $request)
+    {
+        try {
+            $email = $request->input('email');
+            // check if email exist
+            if (!in_array($email, Member::pluck('email')->toArray())) {
+                throw new AuthException(
+                    __('Email does not exist in our records'),
+                    HttpStatusCode::UNAUTHORIZED->value
+                );
+            }
+            // set verification code and send email
+            $code = (string) random_int(100000, 999999);
+            // store email in session to use it in the next step
+            session()->put('email', $email);
+            // store verification code in database
+            $vercificationCode = (object) runTransaction(function () use ($code, $email) {
+                $verificationCode = MemberVerficationCodes::create([
+                    'code' => createHash($code),
+                    'email' => $email,
+                    'type' => VerificationType::EMAIL->value,
+                    'action_type' => VerificationActionType::RESET_PASSWORD->value,
+                ]);
+                // return verification code
+                return $verificationCode;
+            });
+            // sent email to user with verification code
+            dispatch(new SendToMemberVerifcationMail($code, $email))->delay(now()->addSeconds(10));
+            // store verification code in session
+            $request->session()->put('verification_email', $email);
+            // store verification code in session
+            $request->session()->put('timer', $vercificationCode->expires_at->toISOString());
+            // return response to client
+            return $this->returnData([
+                'message' => __('Verification code sent to your email'),
+                'url' => route('workspace.auth.verify-password'),
+            ]);
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred'));
+        } catch (AuthException $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
      * Show verify password page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -27,6 +93,45 @@ class ForgetPasswordController extends Controller
         return view('membership.auth.verify-password');
     }
     /**
+     * Handle the incoming request to verify the code sent to the user's email.
+     *
+     * @param VerfiyRequest $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws \Exception
+     * @throws HttpResponseException
+     * @throws AuthException
+     */
+    public function verify(VerfiyRequest $request)
+    {
+        try {
+            // get verification code
+            $vercificationCode = MemberVerficationCodes::where('email', session()->get('verification_email'))
+                ->where('type', VerificationType::EMAIL->value)
+                ->where('action_type', VerificationActionType::RESET_PASSWORD->value)
+                ->whereNull('verified_at')
+                ->where('expires_at', '>', now())
+                ->latest()
+                ->first();
+            // check if code exist
+            if (!$vercificationCode || !Hash::check($request->input('verification_code'), $vercificationCode->code)) {
+                throw new AuthException(__('Verification code is invalid'), HttpStatusCode::UNAUTHORIZED->value);
+            }
+            // update verification code
+            $vercificationCode->update(['verified_at' => now()]);
+            // return response to client
+            return $this->returnData([
+                'message' => __('Email verified successfully.'),
+                'url' => route('workspace.auth.reset-password'),
+            ]);
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        } catch (AuthException $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
      * Show reset password page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -34,5 +139,47 @@ class ForgetPasswordController extends Controller
     public function resetPasswordPage()
     {
         return view('membership.auth.reset-password');
+    }
+    /**
+     * Handle the incoming request to reset the user's password.
+     *
+     * @param ResetPassordRequest $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws \Exception
+     * @throws \invalidArgumentException
+     */
+    public function resetPassord(ResetPassordRequest $request)
+    {
+        try {
+            // get email from session
+            $email = session()->get('email');
+            // find user by email
+            $user = (object) Member::where('email', $email)->first();
+            // update password
+            $user->password = createHash($request->input('password'));
+            // update user
+            $user->save();
+            // attempt to login
+            $attempt = ['email' => $email, 'password' => $request->input('password')];
+            // check if login attempt is successful
+            if (auth()->guard('member')->attempt($attempt)) {
+                // clear email
+                session()->forget('email');
+                // return response to client
+                $data = ['message' => __('Login Success'), 'url' => route('workspace.member.index')];
+                // put login success message in session
+                session()->flash('login-success', __('Login Success'));
+                // return data to the user
+                return $this->returnData($data);
+            } else {
+                throw new AuthException(__('Login Failed'), HttpStatusCode::FORBIDDEN->value);
+            }
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred'));
+        } catch (AuthException $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
     }
 }

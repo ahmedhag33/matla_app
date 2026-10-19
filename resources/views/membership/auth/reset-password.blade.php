@@ -105,19 +105,19 @@
                 $.ajax({
                     type: 'post',
                     enctype: "multipart/form-data",
-                    url: "",
+                    url: "{{ route('workspace.auth.reset-password.post') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,
                     contentType: false,
                     cache: false,
                     beforeSend: function() {
-                        $('#register-loading').show();
-                        $('#register-form').hide();
+                        $('#reset-loading').show();
+                        $('#reset-form').hide();
                     },
                     error: function(data) {
-                        $('#register-loading').hide();
-                        $('#register-form').show();
+                        $('#reset-loading').hide();
+                        $('#reset-form').show();
                         if (data.status === 422) {
                             printErrorMsgLogin(data.responseJSON.message[0]);
                         } else {
@@ -128,8 +128,8 @@
                         }
                     },
                     complete: function() {
-                        $('#register-loading').hide();
-                        $('#register-form').show();
+                        $('#reset-loading').hide();
+                        $('#reset-form').show();
                     },
                     success: function(data) {
                         window.location.href = data.url;

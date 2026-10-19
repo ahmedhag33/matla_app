@@ -23,7 +23,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg" style="font-weight: bold;">{{ __('Please Enter Your Email') }}</p>
-                <form id="login-form">
+                <form id="forget-form">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" name="email" id="email" class="form-control"
@@ -45,7 +45,7 @@
                     </div>
                     <!-- /.col -->
                 </form>
-                <div id="login-loading" class="spinner-grow text-dark" role="status" style="display: none;">
+                <div id="forget-loading" class="spinner-grow text-dark" role="status" style="display: none;">
                     <span class="sr-only">Loading...</span>
                 </div>
                 <br>
@@ -74,7 +74,7 @@
                 $.ajax({
                     type: 'post',
                     enctype: "multipart/form-data",
-                    url: "",
+                    url: "{{ route('workspace.auth.forget-password.post') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,

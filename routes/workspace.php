@@ -35,13 +35,19 @@ Route::prefix('member')->group(function () {
         Route::controller(ForgetPasswordController::class)->group(function () {
             Route::get('/forget-password', 'forgetPage')->name('workspace.auth.forget-password');
             // add route to forget password
+            Route::post('/forget-password', 'forget')->name('workspace.auth.forget-password.post');
+            // add route to forget password
             Route::get('/verify-password', 'verifyPage')
                 ->middleware('ensure-verification-code-sent')
                 ->name('workspace.auth.verify-password');
+            // add route to forget password
+            Route::post('/verify-password', 'verify')->name('workspace.auth.verify-password.post');
             // add route to reset password
             Route::get('/reset-password', 'resetPasswordPage')
             ->middleware('ensure-verification-code-sent')
             ->name('workspace.auth.reset-password');
+            // add route to reset password
+            Route::post('/reset-password', 'resetPassord')->name('workspace.auth.reset-password.post');
         });
     });
     Route::middleware('member-not-authenticate')->group(function () {

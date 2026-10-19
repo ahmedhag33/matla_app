@@ -66,49 +66,6 @@
 
     <!-- jQuery -->
     @include('membership.layouts.script')
-    @if (session()->has('register-success'))
-        <script>
-            toastr.success("{{ session()->get('register-success') }}");
-        </script>
-    @endif
-    <script>
-        function resendCode() {
-            $.ajax({
-                type: 'get',
-                url: "{{ route('workspace.verification.resend') }}",
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-                cache: false,
-
-                beforeSend: function() {
-                    $('#resend-loading').show();
-                    $('#resend-code').hide();
-                },
-
-                error: function(data) {
-                    toastr.error(
-                        data.responseJSON.message ||
-                        "{{ __('An error occurred') }}"
-                    );
-                },
-
-                complete: function() {
-                    $('#resend-loading').hide();
-                    $('#resend-code').show();
-                },
-
-                success: function(data) {
-                    toastr.success(data.message);
-
-                    $('#verification-form').show();
-                    $('#resend-code').hide();
-
-                    startVerificationTimer(data.timer);
-                }
-            });
-        }
-    </script>
     <script>
         function startVerificationTimer(expiresAt) {
             const timerElement = $('#verification-countdown');
@@ -119,9 +76,7 @@
                 const remaining = endTime - Date.now();
 
                 if (remaining <= 0) {
-                    clearInterval(interval);
-                    $('#verification-form').hide();
-                    $('#resend-code').show();
+                    window.location.href = "{{ route('workspace.auth.forget-password') }}";
                     return;
                 }
                 const totalSeconds = Math.floor(remaining / 1000);
@@ -135,7 +90,7 @@
             }, 1000);
         }
         startVerificationTimer(
-            "{{ session()->get('verification-timer') }}",
+            "{{ session()->get('timer') }}",
         );
     </script>
     <script>
@@ -146,7 +101,7 @@
                 $.ajax({
                     type: 'post',
                     enctype: "multipart/form-data",
-                    url: "",
+                    url: "{{ route('workspace.auth.verify-password.post') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,
