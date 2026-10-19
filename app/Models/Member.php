@@ -23,6 +23,7 @@ class Member extends Authenticatable
         'id',
         'name',
         'email',
+        'slug',
         'password',
         'phone',
         'address',
@@ -33,6 +34,19 @@ class Member extends Authenticatable
         'created_at',
         'updated_at'
     ];
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        // create slug from name when creating a new member
+        static::creating(function ($member) {
+            $member->slug = str()->slug($member->name);
+        });
+    }
     /**
      *  Get the role that the member belongs to.
      *

@@ -91,7 +91,7 @@
                 $.ajax({
                     type: 'post',
                     enctype: "multipart/form-data",
-                    url: "",
+                    url: "{{ route('workspace.auth.login.post') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,

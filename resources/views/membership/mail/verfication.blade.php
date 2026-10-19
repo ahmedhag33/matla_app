@@ -220,7 +220,7 @@
                                                                 <td style="line-height: 24px; font-size: 16px; margin: 0;"
                                                                     align="left">
                                                                     <img class="w-24"
-                                                                        src="{{ $message->embed('public/client/img/matla_logo_in_client_side.png') }}"
+                                                                        src="{{ $message->embed('public/img/matla_logo_in_client_side.png') }}"
                                                                         style="height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; width: 200px; border-style: none; border-width: 0;"
                                                                         width="200">
                                                                 </td>

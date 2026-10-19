@@ -33,6 +33,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="text-danger name_err"></span>
                     <div class="input-group mb-3">
                         <input type="email" name="email" id="email" class="form-control"
                             placeholder="{{ __('The Email') }}">
@@ -47,10 +48,11 @@
                         <select class="form-control role" name="role_id" style="width: 100%;">
                             <option value="0" selected="selected">{{ __('The Role') }}</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role->slug }}">{{ $role->name }}</option>
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
                     </div>
+                    <span class="text-danger role_err"></span>
                     <div class="input-group mb-3 position-relative">
                         <input type="password" name="password" id="password" class="form-control"
                             placeholder="{{ __('Password') }}">
@@ -131,11 +133,11 @@
 
             $(document).on('click', '.btn-register', function(e) {
                 e.preventDefault();
-                var formData = new FormData($('#login-form')[0]);
+                var formData = new FormData($('#register-form')[0]);
                 $.ajax({
                     type: 'post',
                     enctype: "multipart/form-data",
-                    url: "",
+                    url: "{{ route('workspace.auth.register.post') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,
@@ -146,8 +148,8 @@
                         $('#register-form').hide();
                     },
                     error: function(data) {
-                        $('#login-loading').hide();
-                        $('#login-form').show();
+                        $('#register-loading').hide();
+                        $('#register-form').show();
                         if (data.status === 422) {
                             printErrorMsgLogin(data.responseJSON.message[0]);
                         } else {
@@ -158,8 +160,8 @@
                         }
                     },
                     complete: function() {
-                        $('#login-loading').hide();
-                        $('#login-form').show();
+                        $('#register-loading').hide();
+                        $('#register-form').show();
                     },
                     success: function(data) {
                         window.location.href = data.url;

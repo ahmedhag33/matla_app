@@ -21,7 +21,7 @@ class MemberIsAuthenticate
             // Store the intended URL in the session
             session()->put('url.intended', $request->fullUrl());
             // Redirect to the login page or any other appropriate route
-            return redirect(session()->get('url.intended') ?? route('workspace.member.index'));
+            return redirect(route('workspace.member.index'));
         }
         return $next($request);
     }

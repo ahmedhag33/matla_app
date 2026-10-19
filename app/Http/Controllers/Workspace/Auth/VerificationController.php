@@ -96,7 +96,7 @@ class VerificationController extends Controller
             });
             session()->put('verification-timer', $create->expires_at->toISOString());
             // send verification code to user email
-            dispatch(new SendToMemberVerifcationMail($user->email,$create->code))->delay(now()->addSeconds(5));
+            dispatch(new SendToMemberVerifcationMail($create->code,$user->email))->delay(now()->addSeconds(5));
             // send success response
             return $this->returnData([
                 'success' => true,

@@ -62,7 +62,20 @@ class RegisterAuthService extends BaseRegisterAuthService
             return $this->timer;
         }
     }
-     /**
+
+    /**
+     * The guard name for admin authentication.
+     *
+     * @var string
+     */
+    protected $guardname = 'member';
+    /**
+     * The redirection path after login
+     *
+     * @var string
+     */
+    protected $redirection = 'workspace.verification.index';
+    /**
      * show Register Form if the user is not authenticated
      *
      * @return \Illuminate\View\View
@@ -87,7 +100,7 @@ class RegisterAuthService extends BaseRegisterAuthService
             $create = Member::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'workspace_role' => $request->input('role_id'),
+                'workspace_role_id' => $request->input('role_id'),
                 'password' => createHash($request->input('password')),
             ]);
             $createverficationCode = MemberVerficationCodes::create([
@@ -108,7 +121,7 @@ class RegisterAuthService extends BaseRegisterAuthService
         // put verification code and timer in session
         session()->put('verification-timer', $this->timer);
         // send verification code to user email
-        dispatch(new SendToMemberVerifcationMail($this->email, $this->verificationCode))->delay(now()->addSeconds(5));
+        dispatch(new SendToMemberVerifcationMail($this->verificationCode,$this->email))->delay(now()->addSeconds(5));
         // return user
         return $create;
     }

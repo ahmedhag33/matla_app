@@ -13,7 +13,7 @@
                     <div class="card card-matla card-outline">
                         <div class="card-header">
                             <h3 class="card-title" style="font-weight: bold;">
-                                {{ __('Welcome') }} Ahmed Khaled
+                                {{ __('Welcome') . ' ' . auth()->guard('member')->user()->name }}
                             </h3>
                         </div>
 
