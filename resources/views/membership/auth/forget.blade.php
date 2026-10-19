@@ -61,6 +61,11 @@
 
     <!-- jQuery -->
     @include('membership.layouts.script')
+    @if (session()->has('error-message-user-verify'))
+        <script>
+            toastr.error("{{ session()->get('error-message-user-verify') }}");
+        </script>
+    @endif
     <script>
         $(document).ready(function() {
             $(document).on('click', '.btn-forget', function(e) {

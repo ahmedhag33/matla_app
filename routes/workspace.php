@@ -38,6 +38,10 @@ Route::prefix('member')->group(function () {
             Route::get('/verify-password', 'verifyPage')
                 ->middleware('ensure-verification-code-sent')
                 ->name('workspace.auth.verify-password');
+            // add route to reset password
+            Route::get('/reset-password', 'resetPasswordPage')
+            ->middleware('ensure-verification-code-sent')
+            ->name('workspace.auth.reset-password');
         });
     });
     Route::middleware('member-not-authenticate')->group(function () {

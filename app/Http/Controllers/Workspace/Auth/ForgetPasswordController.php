@@ -26,4 +26,13 @@ class ForgetPasswordController extends Controller
     {
         return view('membership.auth.verify-password');
     }
+    /**
+     * Show reset password page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function resetPasswordPage()
+    {
+        return view('membership.auth.reset-password');
+    }
 }
