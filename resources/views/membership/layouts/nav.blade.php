@@ -36,7 +36,7 @@
                      {{ __('Update Password') }}
                  </a>
                  <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
+                 <a onclick="logout();" class="dropdown-item">
                      {{ __('Logout') }}
                  </a>
                  <div class="dropdown-divider"></div>
@@ -47,8 +47,7 @@
          <!-- Notifications Dropdown Menu -->
          <li class="nav-item dropdown">
              <a class="nav-link" data-toggle="dropdown" href="#">
-                 <img src="{{ asset('public/img/bell-solid-full.svg') }}" alt="Members" width="30"
-                     >
+                 <img src="{{ asset('public/img/bell-solid-full.svg') }}" alt="Members" width="30">
                  <span class="badge badge-matla navbar-badge-matla" style="display: none;">0</span>
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="display: none;">
