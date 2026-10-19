@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Workspace\Auth\ForgetPasswordController;
 use App\Http\Controllers\Workspace\Auth\LoginController;
 use App\Http\Controllers\Workspace\Auth\RegisterController;
 use App\Http\Controllers\Workspace\Auth\VerificationController;
@@ -30,6 +31,13 @@ Route::prefix('member')->group(function () {
             Route::get('/register', 'index')->name('workspace.auth.register');
             // add route to register
             Route::post('/register', 'register')->name('workspace.auth.register.post');
+        });
+        Route::controller(ForgetPasswordController::class)->group(function () {
+            Route::get('/forget-password', 'forgetPage')->name('workspace.auth.forget-password');
+            // add route to forget password
+            Route::get('/verify-password', 'verifyPage')
+                ->middleware('ensure-verification-code-sent')
+                ->name('workspace.auth.verify-password');
         });
     });
     Route::middleware('member-not-authenticate')->group(function () {

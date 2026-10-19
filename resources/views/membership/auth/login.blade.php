@@ -65,7 +65,7 @@
                 <br>
                 <!-- /.social-auth-links -->
                 <p class="mb-1">
-                    <a href="#" style="color: #17233C;">{{ __('I forgot my password') }}</a>
+                    <a href="{{ route('workspace.auth.forget-password') }}" style="color: #17233C;">{{ __('I forgot my password') }}</a>
                 </p>
                 <p class="mb-0">
                     <a href="{{ route('workspace.auth.register') }}" class="text-center"

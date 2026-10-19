@@ -1066,5 +1066,6 @@
     "Already have an account ?":"لديك حساب بالفعل ؟",
     "You are not authorized to access this page. Please log in as a member.":"ليس لديك صلاحية الوصول لهذه الصفحة. يرجى تسجيل الدخول كعضو.",
     "This Field must be String":"هذا الحقل يجب ان يكون نص",
-    "Please Select a Role":"يرجى اختيار دور"
+    "Please Select a Role":"يرجى اختيار دور",
+    "Please Enter Your Email":"برجاء ادخال البريد الالكترونى الخاص بك "
 }
