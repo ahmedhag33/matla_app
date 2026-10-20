@@ -17,7 +17,7 @@ class Country extends Model
      *
      * @var array
      */
-    protected $fillable = ['id','name', 'code', 'timezone', 'currency_id','active'];
+    protected $fillable = ['id','name', 'code', 'timezone','utc','currency_id','active'];
     /**
      * Get the currency that the country belongs to.
      *
