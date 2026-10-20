@@ -42,7 +42,7 @@ class Workspace extends Model
         static::creating(function ($workspace) {
             $workspace->slug = str()->slug($workspace->name);
             // check if user is logged in
-            if (!auth()->guard('member')->check()) {
+            if (auth()->guard('member')->check()) {
                 $workspace->created_by = auth()->guard('member')->user()->id;
             }
         });
@@ -87,5 +87,14 @@ class Workspace extends Model
             'workspace_id',
             'member_id'
         );
+    }
+    /**
+     * Get the activity logs for the workspace.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class, 'workspace_id');
     }
 }
