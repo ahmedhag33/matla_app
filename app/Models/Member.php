@@ -65,4 +65,18 @@ class Member extends Authenticatable
     {
         return $this->hasMany(MemberVerficationCodes::class, 'member_id');
     }
+    /**
+     * Get the workspaces that the member belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function workspaces()
+    {
+        return $this->belongsToMany(
+            Workspace::class,
+            new WorkspaceMembers()->getTable(),
+            'member_id',
+            'workspace_id'
+        );
+    }
 }
