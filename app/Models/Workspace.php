@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Service\Database\LogsActivity;
+use App\Service\Enum\Crud;
 use Illuminate\Database\Eloquent\Model;
 
 class Workspace extends Model
 {
+    use LogsActivity;
     /**
      * The table associated with the model.
      *
@@ -30,6 +33,25 @@ class Workspace extends Model
         'created_at',
         'updated_at',
     ];
+    /**
+     * Get a custom description for an activity log entry.
+     *
+     * Default hook that returns null, meaning no custom description.
+     * Override it in a model to return a readable message for a given
+     * action (e.g. "created", "updated", "deleted").
+     *
+     * @param  string  $action  The action being logged.
+     * @return string|null      The description, or null to use none.
+     */
+    protected function getActivityDescription(string $action): ?string
+    {
+        return match ($action) {
+            Crud::CREATE->value => __('New Workspace Created'),
+            Crud::UPDATE->value => __('Workspace Updated'),
+            Crud::DELETE->value => __('Workspace Deleted'),
+            default => '---',
+        };
+    }
     /**
      * The "booting" method of the model.
      *
