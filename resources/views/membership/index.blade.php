@@ -29,43 +29,51 @@
         <div class="content">
             <div class="container">
 
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 mb-3">
-                        <div class="card card-matla card-outline h-100">
-                            <div class="card-header">
-                                <div class="image">
-                                    <img src="{{ asset('public/img/display-solid-full.svg') }}" alt="Members"
-                                        width="30">
+                @if (auth()->guard('member')->user()->workspaces()->exists())
+                    <div class="row">
+                        @php
+                            $workspaces = auth()->guard('member')->user()->workspaces()->get();
+                        @endphp
+                        @foreach ($workspaces as $workspace)
+                            <div class="col-lg-6 col-md-6 mb-3">
+                                <div class="card card-matla card-outline h-100">
+                                    <div class="card-header">
+                                        <div class="image">
+                                            <img src="{{ asset('public/img/display-solid-full.svg') }}" alt="Members"
+                                                width="30">
+                                        </div>
+                                        <h5 class="card-title m-0" style="font-weight: bold;">{{ $workspace->name }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">{{ __('Media Workspace') }}</p>
+                                        <a href="#" class="btn btn-matla">
+                                            {{ __('Access Workspace') }}
+                                        </a>
+                                    </div>
                                 </div>
-                                <h5 class="card-title m-0" style="font-weight: bold;">ON Tv Channel</h5>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ __('Media Workspace') }}</p>
-                                <a href="#" class="btn btn-matla">
-                                    {{ __('Access Workspace') }}
+                        @endforeach
+                    </div>
+                @else
+                    <section class="content">
+                        <div class="error-page">
+                            <h2 class="headline text-warning-matla">{{ __('Sorry') }}</h2>
+                            <div class="error-content">
+                                <h3><i
+                                        class="fas fa-exclamation-triangle text-warning-matla"></i>{{ __('You have no workspace') }}
+                                </h3>
+                                <p>
+                                    {{ __('Do you want to create a new workspace?') }}
+                                </p>
+                                <a href="{{ route('workspace.create-workspace.index') }}" class="btn btn-matla">
+                                    {{ __('Add Workspace') }}
                                 </a>
                             </div>
+                            <!-- /.error-content -->
                         </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 mb-3">
-                        <div class="card card-matla card-outline h-100">
-                            <div class="card-header">
-                                <div class="image">
-                                    <img src="{{ asset('public/img/display-solid-full.svg') }}" alt="Members"
-                                        width="30">
-                                </div>
-                                <h5 class="card-title m-0" style="font-weight: bold;">DMC Tv Channel</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ __('Media Workspace') }}</p>
-                                <a href="#" class="btn btn-matla">
-                                    {{ __('Access Workspace') }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <!-- /.error-page -->
+                    </section>
+                @endif
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

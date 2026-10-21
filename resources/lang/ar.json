@@ -1070,5 +1070,7 @@
     "Please Enter Your Email":"برجاء ادخال البريد الالكترونى الخاص بك ",
     "New Workspace Created":"تم انشاء مساحة عمل جديدة",
     "Workspace Updated":"تم تعديل بيانات مساحة العمل",
-    "Workspace Deleted":"تم حذف مساحة العمل"
+    "Workspace Deleted":"تم حذف مساحة العمل",
+    "You have no workspace":"لا يوجد مساحة عمل لديك الان",
+    "Do you want to create a new workspace?":"هل تريد انشاء مساحة عمل جديدة؟"
 }

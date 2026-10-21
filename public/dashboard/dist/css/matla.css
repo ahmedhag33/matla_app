@@ -129,3 +129,6 @@ a.btn-matla:hover {
     z-index: 10;
     margin-left: 20px;
 }
+.text-warning-matla {
+    color: #397BC1!important;
+}
