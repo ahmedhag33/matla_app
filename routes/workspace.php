@@ -6,6 +6,7 @@ use App\Http\Controllers\Workspace\Auth\RegisterController;
 use App\Http\Controllers\Workspace\Auth\VerificationController;
 use App\Http\Controllers\Workspace\HomeController;
 use App\Http\Controllers\Workspace\MemberController;
+use App\Http\Controllers\Workspace\WorkspaceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,9 @@ Route::prefix('member')->group(function () {
                 Route::get('/', 'index')->name('workspace.member.index');
                 // add route to logout
                 Route::get('/logout', 'logout')->name('workspace.member.logout');
+            });
+            Route::controller(WorkspaceController::class)->prefix('create-workspace')->group(function () {
+                Route::get('/', 'createPage')->name('workspace.create-workspace.index');
             });
         });
     });

@@ -16,7 +16,7 @@
                      <a href="#" class="nav-link">{{ __('Home') }}</a>
                  </li>
                  <li class="nav-item text-white">
-                     <a href="#" class="nav-link">{{ __('Add Workspace') }}</a>
+                     <a href="{{ route('workspace.create-workspace.index') }}" class="nav-link">{{ __('Add Workspace') }}</a>
                  </li>
              </ul>
          </div>
@@ -28,11 +28,11 @@
                      class="rounded-circle">
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                 <a href="#" class="dropdown-item">
+                 <a href="#" class="dropdown-item" style="display: none;">
                      {{ __('User Profile') }}
                  </a>
                  <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
+                 <a href="#" class="dropdown-item" style="display: none;">
                      {{ __('Update Password') }}
                  </a>
                  <div class="dropdown-divider"></div>
