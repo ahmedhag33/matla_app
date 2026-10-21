@@ -129,6 +129,22 @@ a.btn-matla:hover {
     z-index: 10;
     margin-left: 20px;
 }
+
 .text-warning-matla {
-    color: #397BC1!important;
+    color: #397BC1 !important;
+}
+
+.bs-stepper-circle-matla {
+    background-color: #17233C !important;
+    color: #F8FAFC !important;
+
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
 }
