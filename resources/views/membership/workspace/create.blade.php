@@ -24,11 +24,19 @@
                                             </button>
                                         </div>
                                         <div class="line"></div>
-                                        <div class="step" data-target="#information-part">
+                                        <div class="step" data-target="#country-part">
                                             <button type="button" class="step-trigger" role="tab"
-                                                aria-controls="information-part" id="information-part-trigger">
-                                                <span class="bs-stepper-circle-matla">1</span>
-                                                <span class="bs-stepper-label">Various information</span>
+                                                aria-controls="country-part" id="country-part-trigger">
+                                                <span class="bs-stepper-circle-matla">2</span>
+                                                <span class="bs-stepper-label">{{ __('Select Country') }}</span>
+                                            </button>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="step" data-target="#media-part">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                aria-controls="media-part" id="media-part-trigger">
+                                                <span class="bs-stepper-circle-matla">3</span>
+                                                <span class="bs-stepper-label">{{ __('Select Media Activity') }}</span>
                                             </button>
                                         </div>
                                     </div>
@@ -53,24 +61,27 @@
                                             <button class="btn btn-matla"
                                                 onclick="stepper.next()">{{ __('Next') }}</button>
                                         </div>
-                                        <div id="information-part" class="content" role="tabpanel"
-                                            aria-labelledby="information-part-trigger">
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">File input</label>
-                                                <div class="input-group">
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input"
-                                                            id="exampleInputFile">
-                                                        <label class="custom-file-label" for="exampleInputFile">Choose
-                                                            file</label>
-                                                    </div>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">Upload</span>
-                                                    </div>
-                                                </div>
+                                        <div id="country-part" class="content" role="tabpanel"
+                                            aria-labelledby="country-part-trigger">
+                                            <p>{{ __('Select Workspace Country') }}</p>
+                                            <div class="form-group col-md-8">
+                                                <label>{{ __('Country') }}</label>
+                                                <select name="country_id" class="form-control country" style="width: 100%;">
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <button class="btn btn-primary" onclick="stepper.previous()">Previous</button>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button class="btn btn-matla"
+                                                onclick="stepper.next()">{{ __('Next') }}</button>
+                                            <button class="btn btn-matla"
+                                                onclick="stepper.previous()">{{ __('Previous') }}</button>
+                                        </div>
+                                        <div id="media-part" class="content" role="tabpanel"
+                                            aria-labelledby="media-part-trigger">
+                                            <button class="btn btn-matla"
+                                                onclick="stepper.previous()">{{ __('Previous') }}</button>
+                                            <button type="submit" class="btn btn-matla">{{ __('Confirm') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -84,6 +95,9 @@
     </div>
 @endsection
 @section('script')
+    <script>
+        $('.country').select2();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.stepper = new Stepper(document.querySelector('.bs-stepper'))

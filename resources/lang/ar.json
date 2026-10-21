@@ -1079,5 +1079,8 @@
     "Example : Media Workspace":"مثال :اسم النشاط الاعلامى الخاص بك",
     "Workspace Description":"وصف مساحة العمل",
     "Write a short description for your team or job":"اكتب وصفًا مختصرًا لفريقك أو طبيعة عملك...",
-    "Ready to build your media workspace":"ابدأ بتجهيز بيئة العمل الإعلامية الخاصة بك."
+    "Ready to build your media workspace":"ابدأ بتجهيز بيئة العمل الإعلامية الخاصة بك.",
+    "Select Country":"اختيار الدولة",
+    "Select Workspace Country":"حدد الدولة الخاصة بمساحة العمل.",
+    "Select Media Activity":"اختيار النشاط الإعلامي"
 }
