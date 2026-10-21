@@ -65,7 +65,7 @@
                                             aria-labelledby="country-part-trigger">
                                             <p>{{ __('Select Workspace Country') }}</p>
                                             <div class="form-group col-md-8">
-                                                <label>{{ __('Country') }}</label>
+                                                <label>{{ __('Country') }} <span class="text-danger">*</span></label>
                                                 <select name="country_id" class="form-control country" style="width: 100%;">
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
