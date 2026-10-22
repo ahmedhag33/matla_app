@@ -79,6 +79,22 @@
                                         </div>
                                         <div id="media-part" class="content" role="tabpanel"
                                             aria-labelledby="media-part-trigger">
+
+                                            <div class="row">
+                                                @foreach ($workspaceTypes as $workspaceType)
+                                                    <div class="col-md-3 col-sm-6 col-12">
+                                                        <div class="info-box">
+                                                            <img src="{{ asset('public/img/' . $workspaceType->photo) }}"
+                                                                alt="Members" width="30">
+                                                            <div class="info-box-content">
+                                                                <span
+                                                                    class="info-box-number">{{ $workspaceType->name }}</span>
+                                                                <p>{{ $workspaceType->description  }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                             <button class="btn btn-matla"
                                                 onclick="stepper.previous()">{{ __('Previous') }}</button>
                                             <button type="submit" class="btn btn-matla">{{ __('Confirm') }}</button>
