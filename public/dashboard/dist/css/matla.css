@@ -148,3 +148,13 @@ a.btn-matla:hover {
 
     font-weight: bold;
 }
+.workspace-type-card {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.workspace-type-card.selected {
+    border-color: #F59E0B;
+    background-color: #fff8e8;
+}

@@ -13,6 +13,8 @@
                             <div class="card-header">
                                 <h3 class="card-title">{{ __('Ready to build your media workspace') }}</h3>
                             </div>
+                            {{-- <form id="create-form">
+                                @csrf --}}
                             <div class="card-body p-0">
                                 <div class="bs-stepper workpace-create">
                                     <div class="bs-stepper-header" role="tablist">
@@ -68,7 +70,8 @@
                                                 <label>{{ __('Country') }} <span class="text-danger">*</span></label>
                                                 <select name="country_id" class="form-control country" style="width: 100%;">
                                                     @foreach ($countries as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                        <option value="{{ $country->id }}">{{ $country->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -84,17 +87,22 @@
                                             <div class="row">
                                                 @foreach ($workspaceTypes as $workspaceType)
                                                     <div class="col-md-3 col-sm-6 col-12">
-                                                        <div class="info-box">
+                                                        <div class="info-box workspace-type-card"
+                                                            data-workspace-type="{{ $workspaceType->id }}">
+
                                                             <img src="{{ asset('public/img/' . $workspaceType->photo) }}"
-                                                                alt="Members" width="30">
+                                                                alt="{{ $workspaceType->name }}" width="30">
+
                                                             <div class="info-box-content">
-                                                                <span
-                                                                    class="info-box-number">{{ $workspaceType->name }}</span>
+                                                                <span class="info-box-number">
+                                                                    {{ $workspaceType->name }}
+                                                                </span>
                                                                 <p>{{ $workspaceType->description }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
+                                                <input type="hidden" name="workspace_type_id" id="workspace_type_id">
                                             </div>
                                             <button class="btn btn-matla"
                                                 onclick="stepper.previous()">{{ __('Previous') }}</button>
@@ -103,6 +111,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- </form> --}}
                         </div>
                         <!-- /.card -->
                     </div>
@@ -118,6 +127,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.stepper = new Stepper(document.querySelector('.workpace-create'));
+        });
+        $(document).on('click', '.workspace-type-card', function() {
+            // إزالة التحديد من كل الكروت
+            $('.workspace-type-card').removeClass('selected');
+            // تحديد الكارت الذي ضغط عليه المستخدم
+            $(this).addClass('selected');
+            // الحصول على ID النوع المختار
+            let workspaceTypeId = $(this).data('workspace-type');
+            // تخزينه في الـ hidden input
+            $('#workspace_type_id').val(workspaceTypeId);
+
         });
     </script>
 @endsection
