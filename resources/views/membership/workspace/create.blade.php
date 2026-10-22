@@ -14,7 +14,7 @@
                                 <h3 class="card-title">{{ __('Ready to build your media workspace') }}</h3>
                             </div>
                             <div class="card-body p-0">
-                                <div class="bs-stepper">
+                                <div class="bs-stepper workpace-create">
                                     <div class="bs-stepper-header" role="tablist">
                                         <div class="step" data-target="#basic-part">
                                             <button type="button" class="step-trigger" role="tab"
@@ -79,7 +79,8 @@
                                         </div>
                                         <div id="media-part" class="content" role="tabpanel"
                                             aria-labelledby="media-part-trigger">
-
+                                            <h2>{{ __('What is the nature of your media activity?') }}</h2>
+                                            <p>{{ __('Choose the activity most suitable for the workspace.') }}</p>
                                             <div class="row">
                                                 @foreach ($workspaceTypes as $workspaceType)
                                                     <div class="col-md-3 col-sm-6 col-12">
@@ -89,7 +90,7 @@
                                                             <div class="info-box-content">
                                                                 <span
                                                                     class="info-box-number">{{ $workspaceType->name }}</span>
-                                                                <p>{{ $workspaceType->description  }}</p>
+                                                                <p>{{ $workspaceType->description }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -116,7 +117,7 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'));
+            window.stepper = new Stepper(document.querySelector('.workpace-create'));
         });
     </script>
 @endsection
