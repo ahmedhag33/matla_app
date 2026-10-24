@@ -46,7 +46,8 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">{{ __('Media Workspace') }}</p>
-                                        <a href="#" class="btn btn-matla">
+                                        <a href="{{ route('workspace.dashboard.index', ['slug' => $workspace->slug]) }}"
+                                            class="btn btn-matla">
                                             {{ __('Access Workspace') }}
                                         </a>
                                     </div>

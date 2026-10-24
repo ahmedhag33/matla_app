@@ -13,7 +13,7 @@
                       alt="User Image">
               </div>
               <div class="info text-white">
-                  <b> ON E Channel</b>
+                  <b> {{ current_workspace()->name }}</b>
               </div>
           </div>
 

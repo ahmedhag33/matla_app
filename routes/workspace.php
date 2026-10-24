@@ -79,7 +79,7 @@ Route::prefix('member')->group(function () {
         });
     });
 });
-Route::prefix('{slug}/workspace')->middleware(['member-is-authenticate', 'member-is-not-verfiy', 'identify-workspace-app'])->group(function () {
+Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'member-is-not-verfiy', 'identify-workspace-app'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.dashboard.index');
     });
