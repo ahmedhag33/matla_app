@@ -1084,5 +1084,10 @@
     "Select Workspace Country":"حدد الدولة الخاصة بمساحة العمل.",
     "Select Media Activity":"اختيار النشاط الإعلامي",
     "What is the nature of your media activity?":"ما طبيعة نشاطك الإعلامي؟",
-    "Choose the activity most suitable for the workspace.":"اختر النشاط الأنسب لمساحة العمل."
+    "Choose the activity most suitable for the workspace.":"اختر النشاط الأنسب لمساحة العمل.",
+    "Please Enter Workspace Name": "يرجى إدخال اسم مساحة العمل",
+    "Please select a country": "يرجى اختيار الدولة",
+    "Please choose your media activity": "يرجى اختيار النشاط الإعلامي الخاص بك",
+    "This Field must not exceed 255 characters": "هذا الحقل يجب ألا يتجاوز 255 حرفًا",
+    "Workspace is already taken": "مساحة العمل موجودة بالفعل"
 }

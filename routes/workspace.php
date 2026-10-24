@@ -45,8 +45,8 @@ Route::prefix('member')->group(function () {
             Route::post('/verify-password', 'verify')->name('workspace.auth.verify-password.post');
             // add route to reset password
             Route::get('/reset-password', 'resetPasswordPage')
-            ->middleware('ensure-verification-code-sent')
-            ->name('workspace.auth.reset-password');
+                ->middleware('ensure-verification-code-sent')
+                ->name('workspace.auth.reset-password');
             // add route to reset password
             Route::post('/reset-password', 'resetPassord')->name('workspace.auth.reset-password.post');
         });
@@ -71,6 +71,8 @@ Route::prefix('member')->group(function () {
             });
             Route::controller(WorkspaceController::class)->prefix('create-workspace')->group(function () {
                 Route::get('/', 'createPage')->name('workspace.create-workspace.index');
+                // add route to handle workspace step
+                Route::post('/validate/{step}', 'step')->name('workspace.create-workspace.step');
             });
         });
     });
