@@ -126,12 +126,17 @@
 
                                                 <a class="btn btn-matla"
                                                     onclick="stepper.previous()">{{ __('Previous') }}</a>
-                                                <button type="submit" class="btn btn-matla">{{ __('Confirm') }}</button>
+                                                <button type="submit"
+                                                    class="btn btn-matla btn-confirm">{{ __('Confirm') }}</button>
                                             </div>
 
                                         </div>
                                     </div>
                                 </form>
+                                <div id="workspace-loading" class="spinner-grow text-dark" role="status"
+                                    style="display: none;">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card -->
@@ -259,6 +264,49 @@
                     success: () => stepper.next(),
                     error: (xhr) => handleFail(xhr)
                 });
+            });
+            $(document).on('click', '.btn-confirm', function(e) {
+                e.preventDefault();
+                var formData = new FormData($('#workspaceForm')[0]);
+                $.ajax({
+                    type: 'post',
+                    enctype: "multipart/form-data",
+                    url: "{{ route('workspace.create-workspace.store') }}",
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function() {
+                        $('#workspace-loading').show();
+                        $('#workspaceForm').hide();
+                    },
+                    error: function(data) {
+                        $('#workspace-loading').hide();
+                        $('#workspaceForm').show();
+                        if (data.status === 422) {
+                            printErrorMsgWorkspace(data.responseJSON.message[0]);
+                        } else {
+                            toastr.error(
+                                data.responseJSON.message ||
+                                "{{ __('An error occurred') }}"
+                            );
+                        }
+                    },
+                    complete: function() {
+                        $('#workspace-loading').hide();
+                        $('#workspaceForm').show();
+                    },
+                    success: function(data) {
+                        window.location.href = data.url;
+                    }
+                });
+
+                function printErrorMsgWorkspace(errors) {
+                    $.each(errors, function(index, value) {
+                        $('.' + value.field + '_err').html(value.messages);
+                    });
+                }
             });
         });
     </script>

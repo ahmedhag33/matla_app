@@ -409,3 +409,14 @@ if (!function_exists('createToken')) {
         return str()->random($length);
     }
 }
+if (!function_exists('current_workspace')) {
+    /**
+     * Get Current Workspace
+     *
+     * @return object|null
+     */
+    function current_workspace()
+    {
+        return app()->bound('current_workspace') ? app('current_workspace') : null;
+    }
+}

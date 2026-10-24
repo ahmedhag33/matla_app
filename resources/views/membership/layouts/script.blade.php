@@ -32,4 +32,9 @@
         toastr.success("{{ session()->get('auth-member-message') }}");
     </script>
 @endif
+@if (session()->has('create-workspace-success'))
+    <script>
+        toastr.success("{{ session()->get('create-workspace-success') }}");
+    </script>
+@endif
 @yield('script')

@@ -73,11 +73,13 @@ Route::prefix('member')->group(function () {
                 Route::get('/', 'createPage')->name('workspace.create-workspace.index');
                 // add route to handle workspace step
                 Route::post('/validate/{step}', 'step')->name('workspace.create-workspace.step');
+                // add route to store workspace
+                Route::post('/', 'store')->name('workspace.create-workspace.store');
             });
         });
     });
 });
-Route::prefix('workspace')->middleware(['member-is-authenticate', 'member-is-not-verfiy'])->group(function () {
+Route::prefix('{slug}/workspace')->middleware(['member-is-authenticate', 'member-is-not-verfiy', 'identify-workspace-app'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.dashboard.index');
     });

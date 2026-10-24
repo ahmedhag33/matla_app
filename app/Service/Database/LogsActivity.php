@@ -80,6 +80,7 @@ trait LogsActivity
         // Create the activity log entry.
         ActivityLog::create([
             'workspace_id' => $workspaceId,
+            'event' => $action,
             'action' => $action,
             'description' => $description,
             // Changed old/new values for updates, or a full attribute snapshot otherwise.
