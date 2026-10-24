@@ -13,15 +13,15 @@
                      class="rounded-circle">
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                 <a href="#" class="dropdown-item">
+                 <a href="{{ route('workspace.member.index') }}" class="dropdown-item">
                      {{ __('User Profile') }}
                  </a>
                  <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
+                 <a href="#" class="dropdown-item" style="display: none;">
                      {{ __('Update Password') }}
                  </a>
                  <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
+                 <a href="#" class="dropdown-item" style="display: none;">
                      {{ __('Logout') }}
                  </a>
                  <div class="dropdown-divider"></div>
