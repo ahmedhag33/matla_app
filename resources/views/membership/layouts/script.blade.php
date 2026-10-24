@@ -37,4 +37,9 @@
         toastr.success("{{ session()->get('create-workspace-success') }}");
     </script>
 @endif
+@if (session()->has('error-message-workspace-member'))
+    <script>
+        toastr.error("{{ session()->get('error-message-workspace-member') }}");
+    </script>
+@endif
 @yield('script')

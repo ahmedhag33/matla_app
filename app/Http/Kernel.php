@@ -86,5 +86,6 @@ class Kernel extends HttpKernel
         'member-is-verfiy' => \App\Http\Middleware\Workspace\MemberIsVerfiy::class,
         'ensure-verification-code-sent' => \App\Http\Middleware\Workspace\EnsureVerificationCodeSent::class,
         'identify-workspace-app' => \App\Http\Middleware\Workspace\IdentifyWorkspaceApp::class,
+        'check-member-workspace' => \App\Http\Middleware\Workspace\CheckMemberWorkspace::class,
     ];
 }
