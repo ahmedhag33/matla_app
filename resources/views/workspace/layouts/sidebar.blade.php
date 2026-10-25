@@ -23,43 +23,49 @@
                   data-accordion="false">
 
                   <!-- Workspace Management -->
-                  <li class="nav-item has-treeview">
-                      <a href="#" class="nav-link text-white">
-                          <img src="{{ asset('public/img/code-merge-solid-full.svg') }}" alt="Workspace Management"
-                              style="width: 30px;">
-                          <p>
-                              {{ __('Workspace Management') }}
-                              <i class="fas fa-angle-left right"></i>
-                          </p>
-                      </a>
+                  @if (auth()->guard('member')->user()->hasMainPermission('manage-workspace'))
+                      <li class="nav-item has-treeview">
+                          <a href="#" class="nav-link text-white">
+                              <img src="{{ asset('public/img/code-merge-solid-full.svg') }}" alt="Workspace Management"
+                                  style="width: 30px;">
+                              <p>
+                                  {{ __('Workspace Management') }}
+                                  <i class="fas fa-angle-left right"></i>
+                              </p>
+                          </a>
 
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <a href="" class="nav-link text-white">
-                                  <img src="{{ asset('public/img/gear-solid-full.svg') }}" alt="Workspace Settings"
-                                      style="width: 30px;">
-                                  <p>{{ __('Workspace Settings') }}</p>
-                              </a>
-                          </li>
+                          <ul class="nav nav-treeview">
+                              @if (auth()->guard('member')->user()->hasPermission('edit-workspace'))
+                                  <li class="nav-item">
+                                      <a href="" class="nav-link text-white">
+                                          <img src="{{ asset('public/img/gear-solid-full.svg') }}"
+                                              alt="Workspace Settings" style="width: 30px;">
+                                          <p>{{ __('Workspace Settings') }}</p>
+                                      </a>
+                                  </li>
+                              @endif
 
-                          <li class="nav-item">
-                              <a href="" class="nav-link text-white">
-                                  <img src="{{ asset('public/img/person-circle-plus-solid-full.svg') }}"
-                                      alt="Invite Members" style="width: 30px;">
-                                  <p>{{ __('Invite Members') }}</p>
-                              </a>
-                          </li>
-
-                          <li class="nav-item">
-                              <a href="" class="nav-link text-white">
-                                  <img src="{{ asset('public/img/user-group-solid-full.svg') }}" alt="Members"
-                                      style="width: 30px;">
-                                  <p>{{ __('Members') }}</p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-
+                              @if (auth()->guard('member')->user()->hasPermission('invite-members'))
+                                  <li class="nav-item">
+                                      <a href="" class="nav-link text-white">
+                                          <img src="{{ asset('public/img/person-circle-plus-solid-full.svg') }}"
+                                              alt="Invite Members" style="width: 30px;">
+                                          <p>{{ __('Invite Members') }}</p>
+                                      </a>
+                                  </li>
+                              @endif
+                              @if (auth()->guard('member')->user()->hasPermission('view-members'))
+                                  <li class="nav-item">
+                                      <a href="" class="nav-link text-white">
+                                          <img src="{{ asset('public/img/user-group-solid-full.svg') }}" alt="Members"
+                                              style="width: 30px;">
+                                          <p>{{ __('Members') }}</p>
+                                      </a>
+                                  </li>
+                              @endif
+                          </ul>
+                      </li>
+                  @endif
                   <!-- Program Management -->
                   <li class="nav-item has-treeview">
                       <a href="#" class="nav-link text-white">

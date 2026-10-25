@@ -97,4 +97,27 @@ class Member extends Authenticatable
             ->where('workspace_permission_id', $workspacePermission)
             ->exists();
     }
+    /**
+     * Check if the member has the specified main permission.
+     *
+     * @param string $slug
+     * @return bool
+     */
+    public function hasMainPermission($slug)
+    {
+        $workspacePermission = WorkspacePermission::where('slug', $slug)->whereNull('parent_id')->first()->id;
+        // Get the role ID of the member
+        $role_id = self::role()->first()->id;
+        // Get the workspace permission roles for the member's role and the specified main permission
+        $workspacePermissionRoles = WorkspaceRolePermission::where('workspace_role_id', $role_id)
+            ->where('workspace_permission_id', $workspacePermission)
+            ->whereIn('workspace_permission_id', WorkspacePermission::where('parent_id', $workspacePermission)->pluck('id'))
+            ->pluck('id')->all();
+        // If there are no workspace permission roles, return false
+        if (!is_countable($workspacePermissionRoles) && count($workspacePermissionRoles) === 0) {
+            return false;
+        }
+        // If there are workspace permission roles, return true
+        return true;
+    }
 }
