@@ -1091,5 +1091,6 @@
     "This Field must not exceed 255 characters": "هذا الحقل يجب ألا يتجاوز 255 حرفًا",
     "Workspace is already taken": "مساحة العمل موجودة بالفعل",
     "Workspace created successfully": "تم انشاء مساحة العمل بنجاح",
-    "You do not have access to this workspace": "ليس لديك صلاحية الوصول لهذه مساحة العمل"
+    "You do not have access to this workspace": "ليس لديك صلاحية الوصول لهذه مساحة العمل",
+    "You do not have permission to perform this action.": "ليس لديك صلاحية لتنفيذ هذا الإجراء."
 }

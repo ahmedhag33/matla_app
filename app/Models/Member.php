@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\WorkspacePermission;
+use App\Models\WorkspaceRolePermission;
 
 class Member extends Authenticatable
 {
@@ -78,5 +80,21 @@ class Member extends Authenticatable
             'member_id',
             'workspace_id'
         );
+    }
+    /**
+     * Check if the member has the specified permission.
+     *
+     * @param string $slug
+     * @return bool
+     */
+    public function hasPermission($slug)
+    {
+        $workspacePermission = WorkspacePermission::where('slug', $slug)->first()->id;
+        // Get the role ID of the member
+        $role_id = self::role()->first()->id;
+        // Check if the role has the specified permission
+        return WorkspaceRolePermission::where('workspace_role_id', $role_id)
+            ->where('workspace_permission_id', $workspacePermission)
+            ->exists();
     }
 }

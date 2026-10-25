@@ -69,7 +69,7 @@ Route::prefix('member')->group(function () {
                 // add route to logout
                 Route::get('/logout', 'logout')->name('workspace.member.logout');
             });
-            Route::controller(WorkspaceController::class)->prefix('create-workspace')->group(function () {
+            Route::controller(WorkspaceController::class)->middleware('check-member-permission:add-workspace')->prefix('create-workspace')->group(function () {
                 Route::get('/', 'createPage')->name('workspace.create-workspace.index');
                 // add route to handle workspace step
                 Route::post('/validate/{step}', 'step')->name('workspace.create-workspace.step');

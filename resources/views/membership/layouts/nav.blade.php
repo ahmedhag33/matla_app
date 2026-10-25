@@ -1,6 +1,6 @@
  <nav class="main-header navbar navbar-expand-md navbar-matla">
      <div class="container">
-         <a href="" class="navbar-brand">
+         <a href="{{ route('workspace.member.index') }}" class="navbar-brand">
              <img src="{{ asset('public/img/matla_logo_in_workspace_side.png') }}" alt="Matla" height="50">
          </a>
 
@@ -13,11 +13,14 @@
              <!-- Left navbar links -->
              <ul class="navbar-nav">
                  <li class="nav-item text-white">
-                     <a href="#" class="nav-link">{{ __('Home') }}</a>
+                     <a href="{{ route('workspace.member.index') }}" class="nav-link">{{ __('Home') }}</a>
                  </li>
-                 <li class="nav-item text-white">
-                     <a href="{{ route('workspace.create-workspace.index') }}" class="nav-link">{{ __('Add Workspace') }}</a>
-                 </li>
+                 @if (auth()->guard('member')->user()->hasPermission('add-workspace'))
+                     <li class="nav-item text-white">
+                         <a href="{{ route('workspace.create-workspace.index') }}"
+                             class="nav-link">{{ __('Add Workspace') }}</a>
+                     </li>
+                 @endif
              </ul>
          </div>
      </div>

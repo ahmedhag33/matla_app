@@ -69,3 +69,8 @@
          });
      }
  </script>
+ @if (session()->has('error-message-permission'))
+     <script>
+         toastr.error("{{ session('error-message-permission') }}");
+     </script>
+ @endif
