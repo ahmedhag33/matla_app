@@ -33,6 +33,8 @@ Route::prefix('member')->group(function () {
             Route::get('/register', 'index')->name('workspace.auth.register');
             // add route to register
             Route::post('/register', 'register')->name('workspace.auth.register.post');
+            // add route to invention register form
+            Route::get('/invention-register/{token}', 'inventionRegisterForm')->name('workspace.auth.invention-register');
         });
         Route::controller(ForgetPasswordController::class)->group(function () {
             Route::get('/forget-password', 'forgetPage')->name('workspace.auth.forget-password');
@@ -86,6 +88,9 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
     });
     Route::prefix('inventions')->controller(InventionController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.invention.index')
+            ->middleware('check-member-permission:invite-members');
+
+        Route::post('/', 'create')->name('workspace.invention.create')
             ->middleware('check-member-permission:invite-members');
     });
 });

@@ -1099,5 +1099,10 @@
     "No Inventions Found": "لا توجد دعوات اعضاء",
     "Send": "ارسال",
     "Invitation Sent": "مرسل الدعوة",
-    "Invited By": "تمت الدعوة بواسطة"
+    "Invited By": "تمت الدعوة بواسطة",
+    "You are invited to join the workspace of": "تم دعوتك للانضمام لمساحة العمل الخاصة ب",
+    "New Invitation Created": "تم انشاء دعوة انضمام جديدة",
+    "Expired": "منتهي",
+    "Unknown": "غير معروف",
+    "Invitation Expiration Date": "تاريخ انتهاء الدعوة"
 }

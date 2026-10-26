@@ -36,7 +36,11 @@ class RegisterController extends Controller
     {
         return $this->registerService->showRegisterForm();
     }
-     /**
+    public function inventionRegisterForm($token)
+    {
+        // show invention register form
+    }
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param RegisterRequest $request
