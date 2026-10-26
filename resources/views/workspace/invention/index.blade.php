@@ -33,6 +33,8 @@
                                             <tr>
                                                 <th>{{ __('Name') }}</th>
                                                 <th>{{ __('Email') }}</th>
+                                                <th>{{ __('The Role') }}</th>
+                                                <th>{{ __('Invited By') }}</th>
                                                 <th>{{ __('Date') }}</th>
                                                 <th>{{ __('Status') }}</th>
                                                 <th>{{ __('Invitation Date') }}</th>
@@ -44,6 +46,8 @@
                                                 <tr>
                                                     <td>{{ $invention->name }}</td>
                                                     <td>{{ $invention->email }}</td>
+                                                    <td>{{ $invention->role->name }}</td>
+                                                    <td>{{ $invention->invitedBy->name }}</td>
                                                     <td>{{ $invention->date }}</td>
                                                     <td>{!! $invention->status !!}</td>
                                                     <td>{{ dateformat($invention->invitation_date) }}</td>

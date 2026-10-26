@@ -1097,5 +1097,7 @@
     "Acceptance Date": "تاريخ تلبية الدعوة",
     "Add Invitation": "اضافة دعوة جديدة",
     "No Inventions Found": "لا توجد دعوات اعضاء",
-    "Send": "ارسال"
+    "Send": "ارسال",
+    "Invitation Sent": "مرسل الدعوة",
+    "Invited By": "تمت الدعوة بواسطة"
 }
