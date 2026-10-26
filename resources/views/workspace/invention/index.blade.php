@@ -18,8 +18,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title"><button type="button"
-                                        class="btn btn-block btn-matla">{{ __('Add Invitation') }}</button></h3>
+                                <h3 class="card-title">
+                                    <button type="button" class="btn btn-matla" data-toggle="modal"
+                                        data-target="#add-invention">
+                                        {{ __('Add Invitation') }}
+                                    </button>
+                                </h3>
                             </div>
                             <!-- /.card-header -->
                             @if ($inventions->isNotEmpty())
@@ -55,7 +59,8 @@
                                         <div class="error-page">
 
                                             <div class="error-content">
-                                                <h3><i class="fas fa-exclamation-triangle text-warning-matla"></i> {{ __('No Inventions Found') }}</h3>
+                                                <h3><i class="fas fa-exclamation-triangle text-warning-matla"></i>
+                                                    {{ __('No Inventions Found') }}</h3>
                                             </div>
                                             <!-- /.error-content -->
                                         </div>
@@ -71,6 +76,10 @@
             </div>
         </section>
     </div>
+    @include('workspace.invention.create')
 @endsection
 @section('script')
+<script>
+    $('.role').select2();
+</script>
 @endsection
