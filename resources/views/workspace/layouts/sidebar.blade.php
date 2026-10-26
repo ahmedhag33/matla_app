@@ -47,7 +47,7 @@
 
                               @if (auth()->guard('member')->user()->hasPermission('invite-members'))
                                   <li class="nav-item">
-                                      <a href="" class="nav-link text-white">
+                                      <a href="{{ route('workspace.invention.index',['slug' => request()->route('slug')]) }}" class="nav-link text-white">
                                           <img src="{{ asset('public/img/person-circle-plus-solid-full.svg') }}"
                                               alt="Invite Members" style="width: 30px;">
                                           <p>{{ __('Invite Members') }}</p>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Workspace\Auth\LoginController;
 use App\Http\Controllers\Workspace\Auth\RegisterController;
 use App\Http\Controllers\Workspace\Auth\VerificationController;
 use App\Http\Controllers\Workspace\HomeController;
+use App\Http\Controllers\Workspace\InventionController;
 use App\Http\Controllers\Workspace\MemberController;
 use App\Http\Controllers\Workspace\WorkspaceController;
 use Illuminate\Support\Facades\Route;
@@ -82,5 +83,9 @@ Route::prefix('member')->group(function () {
 Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'member-is-not-verfiy', 'identify-workspace-app', 'check-member-workspace'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.dashboard.index');
+    });
+    Route::prefix('inventions')->controller(InventionController::class)->group(function () {
+        Route::get('/', 'index')->name('workspace.invention.index')
+            ->middleware('check-member-permission:invite-members');
     });
 });

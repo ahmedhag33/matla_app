@@ -77,4 +77,14 @@ class WorkspaceRoles extends Model
     {
         return $query->where('level', 1);
     }
+    /**
+     * Scope a query to only include non-highest level roles.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeNotHighest(Builder $query)
+    {
+        return $query->where('level', '!=', 1);
+    }
 }
