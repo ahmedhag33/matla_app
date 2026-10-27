@@ -1106,5 +1106,7 @@
     "Unknown": "غير معروف",
     "Invitation Expiration Date": "تاريخ انتهاء الدعوة",
     "New Membership Invitation": "دعوة لتسجيل عضوية جديدة فى",
-    "Verify Your Account": "يممكنك التحقق من حسابك من هنا"
+    "Verify Your Account": "يممكنك التحقق من حسابك من هنا",
+    "Email Verification":"التحقق من البريد الإلكتروني",
+    "Please check your email for the verification link.": "يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق."
 }

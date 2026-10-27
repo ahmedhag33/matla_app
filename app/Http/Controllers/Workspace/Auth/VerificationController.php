@@ -26,7 +26,7 @@ class VerificationController extends Controller
     {
         return view('membership.auth.verfiy');
     }
-     /**
+    /**
      * Verify the user's email address.
      *
      * @param VerfiyRequest $request
@@ -96,7 +96,7 @@ class VerificationController extends Controller
             });
             session()->put('verification-timer', $create->expires_at->toISOString());
             // send verification code to user email
-            dispatch(new SendToMemberVerifcationMail($create->code,$user->email))->delay(now()->addSeconds(5));
+            dispatch(new SendToMemberVerifcationMail($create->code, $user->email))->delay(now()->addSeconds(5));
             // send success response
             return $this->returnData([
                 'success' => true,
@@ -112,4 +112,49 @@ class VerificationController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Show the invention verification page.
+     *
+     * @param string $token
+     * @return \Illuminate\View\View
+     */
+    public function inventionPage($token)
+    {
+        $verification = MemberVerficationCodes::where('code', hash('sha256', $token))->first();
+        // Check if the verification code has expired
+        if ($verification && now()->greaterThanOrEqualTo($verification->expires_at)) {
+            abort(403);
+        }
+        if (!$verification) {
+            abort(404);
+        }
+        return view('membership.auth.verification', ['verification' => $verification]);
+    }
+    /**
+     * Verify the invention using the provided token.
+     *
+     * @param string $token
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function verfiyDone($token)
+    {
+        $user = (object) auth()->guard('member')->user();
+        // Retrieve the verification code from the database based on the token
+        $verification = MemberVerficationCodes::where('code', hash('sha256', $token))->first();
+        // Check if the verification code has expired
+        if ($verification && now()->greaterThanOrEqualTo($verification->expires_at)) {
+            abort(403);
+        }
+        if (!$verification) {
+            abort(404);
+        }
+        $verification->update(['verified_at' => now()]);
+        // update user
+        $user->update(['email_verified_at' => now()]);
+        // put success message in session
+        session()->flash('success-message-user-verify', __('Email verified successfully.'));
+        // redirect to member index page with success message
+        return redirect()->route('workspace.member.index');
+    }
+
 }

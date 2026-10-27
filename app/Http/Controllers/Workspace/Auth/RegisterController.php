@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\RegisterRequest;
 use App\Models\WorkspaceInvitations;
 use App\Service\Auth\Member\RegisterAuthService;
+use App\Service\Auth\Member\RegisterInventionService;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -20,13 +21,23 @@ class RegisterController extends Controller
      * @var RegisterAuthService */
     protected ?RegisterAuthService $registerService;
     /**
+     * var RegisterInventionService
+     *
+     * @var RegisterInventionService
+     */
+    protected ?RegisterInventionService $registerInventionService;
+    /**
      * Create a new controller instance.
      *
      * @param RegisterAuthService $registerService
+     * @param RegisterInventionService $registerInventionService
+     * @return void
      */
-    public function __construct(RegisterAuthService $registerService)
+    public function __construct(RegisterAuthService $registerService, RegisterInventionService $registerInventionService)
     {
         $this->registerService = $registerService;
+        // Set the invention register service
+        $this->registerInventionService = $registerInventionService;
     }
     /**
      * Show the application's register form.
@@ -60,6 +71,28 @@ class RegisterController extends Controller
         }
         // Pass the invitation data to the view
         return view('membership.auth.register_invention', ['invention' => $invention]);
+    }
+    /**
+     * Handle the invention register form submission.
+     *
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse|string|void
+     * @throws AuthException
+     * @throws HttpResponseException
+     * @throws \Exception
+     */
+    public function inventionRegister(RegisterRequest $request)
+    {
+        try {
+            // Call the invention register service
+            return $this->registerInventionService->register($request);
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (AuthException $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
     }
     /**
      * Create a new user instance after a valid registration.

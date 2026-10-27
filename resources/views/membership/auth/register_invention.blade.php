@@ -22,7 +22,8 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg" style="font-weight: bold;">{{ __('New Membership Invitation').' '.$invention->workspace->name }}</p>
+                <p class="login-box-msg" style="font-weight: bold;">
+                    {{ __('New Membership Invitation') . ' ' . $invention->workspace->name }}</p>
                 <form id="register-form">
                     @csrf
                     <div class="form-group">
@@ -42,7 +43,7 @@
                     <div class="form-group">
                         <label for="role_id">{{ __('The Role') }}</label>
                         <p>{{ $invention->role->name }}</p>
-                        <input type="text" name="workspace_role_id" id="workspace_role_id" class="form-control"
+                        <input type="text" name="role_id" id="role_id" class="form-control"
                             value="{{ $invention->workspace_role_id }}" hidden>
                     </div>
                     <span class="text-danger role_id_err"></span>
@@ -125,7 +126,7 @@
                 $.ajax({
                     type: 'post',
                     enctype: "multipart/form-data",
-                    url: "",
+                    url: "{{ route('workspace.auth.invention-register.post') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,

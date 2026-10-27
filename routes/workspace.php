@@ -35,6 +35,8 @@ Route::prefix('member')->group(function () {
             Route::post('/register', 'register')->name('workspace.auth.register.post');
             // add route to invention register form
             Route::get('/invention-register/{token}', 'inventionRegisterForm')->name('workspace.auth.invention-register');
+            // add route to invention register form post
+            Route::post('/invention-register', 'inventionRegister')->name('workspace.auth.invention-register.post');
         });
         Route::controller(ForgetPasswordController::class)->group(function () {
             Route::get('/forget-password', 'forgetPage')->name('workspace.auth.forget-password');
@@ -63,6 +65,10 @@ Route::prefix('member')->group(function () {
                 Route::post('/verify', 'verify')->name('workspace.verification.verify');
                 // add route to resend verification code
                 Route::get('/resend', 'resend')->name('workspace.verification.resend');
+                // add route to invention verification page
+                Route::get('/invention-verify/{token}', 'inventionPage')->name('workspace.auth.invention-verify');
+                // add route to handle invention verification
+                Route::get('/verify-done/{token}', 'verfiyDone')->name('workspace.auth.verify-done');
             });
         });
         Route::middleware('member-is-not-verfiy')->group(function () {
