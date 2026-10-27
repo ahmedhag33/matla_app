@@ -38,11 +38,15 @@ class InventionController extends Controller
     public function create(InventionRequest $request)
     {
         try {
-            $create = (object) runTransaction(function () use ($request) {
+            // Generate a token for the invitation if not already set
+            $token = createToken(20);
+            // Pass the generated token to the creation function
+            $create = (object) runTransaction(function () use ($request, $token) {
                 $create = WorkspaceInvitations::create([
                     'name' => $request->input('name'),
                     'workspace_role_id' => $request->input('role_id'),
                     'email' => $request->input('email'),
+                    'token' => createHash($token),
                 ]);
                 return $create;
             });
@@ -51,7 +55,7 @@ class InventionController extends Controller
                 $create->email,
                 $create->name,
                 current_workspace()->name,
-                route('workspace.auth.invention-register', ['token' => $create->token])
+                route('workspace.auth.invention-register', ['token' => $token])
             ))->delay(now()->addSeconds(5));
             // Flash a success message to the session
             session()->flash('success-invention', __('New Invitation Created'));

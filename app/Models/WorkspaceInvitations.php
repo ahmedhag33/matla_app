@@ -64,8 +64,6 @@ class WorkspaceInvitations extends Model
         parent::booted();
         // Automatically generate a token when creating a new invitation
         static::creating(function ($workspaceInvitions) {
-            // Generate a token for the invitation if not already set
-            $workspaceInvitions->token = createToken(20);
             // Set the expiration date for the invitation
             $workspaceInvitions->expires_at = now()->addDays(7);
             // Set the invited_by field if the user is authenticated as a member
