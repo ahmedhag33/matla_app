@@ -54,6 +54,10 @@ class RegisterController extends Controller
         if (now()->greaterThanOrEqualTo($invention->expires_at)) {
             abort(403);
         }
+        // Check if the invitation has already been accepted
+        if ($invention->accepted_at) {
+            abort(403);
+        }
         // Pass the invitation data to the view
         return view('membership.auth.register_invention', ['invention' => $invention]);
     }
