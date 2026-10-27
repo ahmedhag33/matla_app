@@ -58,17 +58,18 @@
                 @else
                     <section class="content">
                         <div class="error-page">
-                            <h2 class="headline text-warning-matla">{{ __('Sorry') }}</h2>
                             <div class="error-content">
                                 <h3><i
                                         class="fas fa-exclamation-triangle text-warning-matla"></i>{{ __('You have no workspace') }}
                                 </h3>
-                                <p>
-                                    {{ __('Do you want to create a new workspace?') }}
-                                </p>
-                                <a href="{{ route('workspace.create-workspace.index') }}" class="btn btn-matla">
-                                    {{ __('Add Workspace') }}
-                                </a>
+                                @if (auth()->guard('member')->user()->hasPermission('add-workspace'))
+                                    <p>
+                                        {{ __('Do you want to create a new workspace?') }}
+                                    </p>
+                                    <a href="{{ route('workspace.create-workspace.index') }}" class="btn btn-matla">
+                                        {{ __('Add Workspace') }}
+                                    </a>
+                                @endif
                             </div>
                             <!-- /.error-content -->
                         </div>
