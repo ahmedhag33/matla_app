@@ -46,7 +46,7 @@ class InventionController extends Controller
                     'name' => $request->input('name'),
                     'workspace_role_id' => $request->input('role_id'),
                     'email' => $request->input('email'),
-                    'token' => createHash($token),
+                    'token' => hash('sha256', $token),
                 ]);
                 return $create;
             });

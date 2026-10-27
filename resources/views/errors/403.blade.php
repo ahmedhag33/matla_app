@@ -59,7 +59,7 @@
         </div><!--- END CONTAINER -->
     </section>
     <!-- Latest jQuery -->
-    @include('client.client-layout.script')
+    @include('client.layouts.script')
 </body>
 
 </html>
