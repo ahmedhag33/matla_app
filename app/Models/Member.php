@@ -82,6 +82,15 @@ class Member extends Authenticatable
         );
     }
     /**
+     * Get the notifications for the member.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notification()
+    {
+        return $this->hasMany(WorkspaceNotification::class, 'member_id');
+    }
+    /**
      * Check if the member has the specified permission.
      *
      * @param string $slug
@@ -119,5 +128,17 @@ class Member extends Authenticatable
         }
         // If there are workspace permission roles, return true
         return true;
+    }
+    /**
+     * Get the unread notifications for the member in the current workspace.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function showNotifications()
+    {
+        return $this->notification()->orderBy('created_at', 'desc')
+            ->whereNull('read_at')
+            ->where('workspace_id', current_workspace()->id)
+            ->get();
     }
 }
