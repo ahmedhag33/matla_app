@@ -1108,5 +1108,7 @@
     "New Membership Invitation": "دعوة لتسجيل عضوية جديدة فى",
     "Verify Your Account": "يممكنك التحقق من حسابك من هنا",
     "Email Verification":"التحقق من البريد الإلكتروني",
-    "Please check your email for the verification link.": "يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق."
+    "Please check your email for the verification link.": "يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق.",
+    "Invitation Accepted": "تم قبول الدعوة للانضمام لمساحة العمل من قبل ",
+    "New Member": "عضو جديد"
 }

@@ -33,9 +33,9 @@
          <li class="nav-item dropdown">
              <a class="nav-link" data-toggle="dropdown" href="#">
                  <i class="far fa-bell"></i>
-                 <span class="badge badge-matla navbar-badge-matla" style="display: none;">3</span>
+                 <span class="badge badge-matla navbar-badge-matla count-notifications"></span>
              </a>
-             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="display: none;">
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                  <a href="#" class="dropdown-item">
                      <!-- Message Start -->
                      <div class="media">

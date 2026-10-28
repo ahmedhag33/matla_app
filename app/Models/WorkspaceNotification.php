@@ -58,7 +58,7 @@ class WorkspaceNotification extends Model
             // Set member_id to the currently authenticated member's ID if available
             if (auth()->guard('member')->check()) {
                 // Set the member_id to the currently authenticated member's ID
-                $workspaceNotification->member_id = auth()->guard('member')->user()->id;
+                $workspaceNotification->notify_by = auth()->guard('member')->user()->id;
             }
         });
         // Apply the current workspace scope to all queries

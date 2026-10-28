@@ -158,3 +158,12 @@ a.btn-matla:hover {
     border-color: #F59E0B;
     background-color: #fff8e8;
 }
+.toast .toast-header {
+    background-color: #fff !important;
+    color: #6c757d !important;
+}
+
+.toast .toast-body {
+    background-color: #fff !important;
+    color: #343a40 !important;
+}
