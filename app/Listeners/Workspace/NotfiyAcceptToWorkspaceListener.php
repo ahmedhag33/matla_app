@@ -22,7 +22,7 @@ class NotfiyAcceptToWorkspaceListener
             'message' => __('Invitation Accepted') . ' ' . $event->memberName,
             'data' => [
                 'url' => $event->url,
-                'photo' => asset('public/img/user-solid-full.svg'), // You can set the member's photo URL here if available
+                'photo' => asset('public/img/usersolidfull.svg'), // You can set the member's photo URL here if available
             ],
         ]);
     }

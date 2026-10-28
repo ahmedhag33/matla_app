@@ -82,7 +82,7 @@ class NotfiyAcceptToWorkspace implements ShouldBroadcast
             'title' => __('New Member'),
             'date_time' => dateformat(now()) . ' ' . timeFormat(now()),
             'url' => $this->url,
-            'photo' => asset('public/img/user-solid-full.svg'), // You can set the member's photo URL here if available
+            'photo' => asset('public/img/usersolidfull.svg'), // You can set the member's photo URL here if available
             'member_name' => $this->memberName,
             'workspace_id' => $this->workspaceId,
             'member_id' => $this->memberId,

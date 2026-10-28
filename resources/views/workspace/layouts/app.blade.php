@@ -58,6 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         var count_notifications = $('.count-notifications');
         var member_id = @json(auth()->guard('member')->id());
         var workspace_id = @json(current_workspace()->id);
+        var noNotificationsElem = $('.no-notifications');
 
         var channelName = 'workspace-notify-accept-' + workspace_id + '-' + member_id;
 
@@ -69,8 +70,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 var newNotificationHtml = `<a href="${data.url}" class="dropdown-item">
                          <!-- Message Start -->
                          <div class="media">
-                             <img src="${data.photo}" alt="User Avatar"
-                                  class="img-size-50 mr-3 img-circle">
+                           <img src="${data.photo}" alt="User Avatar"
+     class="img-size-50 mr-3 img-circle">
                              <div class="media-body">
                                  <h3 class="dropdown-item-title">
                                      ${data.title}
@@ -87,8 +88,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 notificationsCount += 1;
                 notificationsCountElem.data('count', notificationsCount);
                 notificationsCountElem.text(notificationsCount);
+                count_notifications.show();
                 count_notifications.data('count', notificationsCount);
                 count_notifications.text(notificationsCount);
+                noNotificationsElem.hide();
+
             }
         );
     </script>

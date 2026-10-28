@@ -34,10 +34,12 @@
              <a class="nav-link dropdown-notifications-toggle" data-toggle="dropdown" href="javascript:void(0)">
                  <i class="far fa-bell"></i>
                  <span class="badge badge-matla navbar-badge-matla count-notifications"
-                     data-count="{{ auth()->guard('member')->user()->showNotifications(true)->count() }}">
-                     @if (auth()->guard('member')->user()->showNotifications(true)->count() > 0)
-                         {{ auth()->guard('member')->user()->showNotifications(true)->count() }}
+                     data-count="{{ auth()->guard('member')->user()->showNotifications(true)->count() }}"
+                     @if (auth()->guard('member')->user()->showNotifications(true)->count() == 0)
+                         style="display: none;"
                      @endif
+                     >
+                     {{ auth()->guard('member')->user()->showNotifications(true)->count() }}
                  </span>
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right dropdown-notifications">
@@ -62,7 +64,7 @@
                          </a>
                      @endforeach
                  @else
-                     <a href="#" class="dropdown-item">
+                     <a href="#" class="dropdown-item no-notifications">
                          {{ __('No new notifications') }}
                      </a>
                  @endif
