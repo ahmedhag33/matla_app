@@ -77,8 +77,8 @@ class MemberController extends Controller
             event(new NotfiyAcceptToWorkspace(
                 $workspaceId,
                 $workspace->created_by,
-                auth()->guard('member')->user()->id,
                 $create->id,
+                auth()->guard('member')->user()->name,
                 route('workspace.invention.index', ['slug' => $workspace->slug])
             ));
             // Flash a success message to the session

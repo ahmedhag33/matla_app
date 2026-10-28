@@ -33,19 +33,25 @@
          <li class="nav-item dropdown">
              <a class="nav-link dropdown-notifications-toggle" data-toggle="dropdown" href="javascript:void(0)">
                  <i class="far fa-bell"></i>
-                 <span class="badge badge-matla navbar-badge-matla count-notifications" data-count="{{ auth()->guard('member')->user()->showNotifications(true)->count() }}"></span>
+                 <span class="badge badge-matla navbar-badge-matla count-notifications"
+                     data-count="{{ auth()->guard('member')->user()->showNotifications(true)->count() }}">
+                     @if (auth()->guard('member')->user()->showNotifications(true)->count() > 0)
+                         {{ auth()->guard('member')->user()->showNotifications(true)->count() }}
+                     @endif
+                 </span>
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right dropdown-notifications">
                  @if (auth()->guard('member')->user()->showNotifications(true)->count() > 0)
                      @foreach (auth()->guard('member')->user()->showNotifications(true) as $notification)
-                         <a href="{{ $notification->data['url'] }}" class="dropdown-item">
+                         <a href="{{ $notification->data['url'] }}" class="dropdown-item read-notification"
+                             data-notification-id="{{ $notification->id }}">
                              <!-- Message Start -->
                              <div class="media">
                                  <img src="{{ $notification->data['photo'] }}" alt="User Avatar"
                                      class="img-size-50 mr-3 img-circle">
                                  <div class="media-body">
                                      <h3 class="dropdown-item-title">
-                                         {{ $notification->notifyBy->name }}
+                                         {{ $notification->title }}
                                      </h3>
                                      <p class="text-sm">{{ $notification->message }}</p>
                                      <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>

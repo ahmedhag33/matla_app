@@ -93,6 +93,8 @@ Route::prefix('member')->group(function () {
 Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'member-is-not-verfiy', 'identify-workspace-app', 'check-member-workspace'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.dashboard.index');
+        // add route to mark a notification as read
+        Route::post('/read-notification', 'readNotification')->name('workspace.dashboard.read-notification');
     });
     Route::prefix('inventions')->controller(InventionController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.invention.index')

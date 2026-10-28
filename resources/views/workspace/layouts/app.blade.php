@@ -73,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   class="img-size-50 mr-3 img-circle">
                              <div class="media-body">
                                  <h3 class="dropdown-item-title">
-                                     ${data.member_name}
+                                     ${data.title}
                                  </h3>
                                  <p class="text-sm">${data.message}</p>
                                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
@@ -91,6 +91,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 count_notifications.text(notificationsCount);
             }
         );
+    </script>
+    <script>
+        $(document).on('click', '.read-notification', function(e) {
+            e.preventDefault();
+            var notificationId = $(this).data('notification-id');
+            var url = $(this).attr('href');
+            var notification = $(this);
+            $.ajax({
+                url: "{{ route('workspace.dashboard.read-notification', ['slug' => request()->route('slug')]) }}",
+                method: "POST",
+                data: {
+                    id: notificationId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function() {
+                    notification.remove();
+                    window.location.href = url;
+                }
+            });
+        });
     </script>
 </body>
 
