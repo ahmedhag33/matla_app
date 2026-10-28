@@ -17,4 +17,9 @@
          });
      }
  </script>
+ @if (session()->has('success-message-accept-invitation'))
+     <script>
+         toastr.success("{{ session()->get('success-message-accept-invitation') }}");
+     </script>
+ @endif
  @yield('script')

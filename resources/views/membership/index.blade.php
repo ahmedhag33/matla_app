@@ -24,7 +24,43 @@
                 </div>
             </div>
         </section>
-
+        @if ($inventions->isNotEmpty())
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card card-matla card-outline">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ __('Pending Invitations') }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- we are adding the accordion ID so Bootstrap's collapse plugin detects it -->
+                            @foreach ($inventions as $invention)
+                                <div id="accordion{{ $invention->id }}">
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <h4 class="card-title w-100">
+                                                <a class="d-block w-100" data-toggle="collapse"
+                                                    href="#collapse{{ $invention->id }}">
+                                                    {{ $invention->workspace->name }}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse{{ $invention->id }}" class="collapse show"
+                                            data-parent="#accordion{{ $invention->id }}">
+                                            <div class="card-body">
+                                                <a href="javascript:void(0);" class="btn btn-matla btn-confirm"
+                                                    data-workspace-id="{{ $invention->workspace_id }}">
+                                                    {{ __('Accept Invitation') }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         <!-- Main content -->
         <div class="content">
             <div class="container">
@@ -81,4 +117,36 @@
         </div>
         <!-- /.content -->
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('.btn-confirm').on('click', function() {
+                Swal.fire({
+                    title: "<b>{{ __('Do you want to accept the invitation?') }}</b>",
+                    icon: "warning",
+                    iconColor: "#17233C",
+                    showCancelButton: true,
+                    confirmButtonColor: "#17233C",
+                    cancelButtonColor: "#F59E0B",
+                    confirmButtonText: "{{ __('Accept') }}",
+                    cancelButtonText: "{{ __('Cancel') }}"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('workspace.member.accept-invitation') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                workspace_id: $(this).data('workspace-id')
+                            },
+                            success: function(data) {
+                                window.location.href = data.url;
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

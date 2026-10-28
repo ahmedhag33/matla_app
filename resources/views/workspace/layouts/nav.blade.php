@@ -31,26 +31,35 @@
          <!-- Messages Dropdown Menu -->
          <!-- Notifications Dropdown Menu -->
          <li class="nav-item dropdown">
-             <a class="nav-link" data-toggle="dropdown" href="#">
+             <a class="nav-link dropdown-notifications-toggle" data-toggle="dropdown" href="javascript:void(0)">
                  <i class="far fa-bell"></i>
-                 <span class="badge badge-matla navbar-badge-matla count-notifications"></span>
+                 <span class="badge badge-matla navbar-badge-matla count-notifications" data-count="{{ auth()->guard('member')->user()->showNotifications(true)->count() }}"></span>
              </a>
-             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                 <a href="#" class="dropdown-item">
-                     <!-- Message Start -->
-                     <div class="media">
-                         <img src="{{ asset('public/img/user-solid-full.svg') }}" alt="User Avatar"
-                             class="img-size-50 mr-3 img-circle">
-                         <div class="media-body">
-                             <h3 class="dropdown-item-title">
-                                 رئيس التحرير
-                             </h3>
-                             <p class="text-sm">تم انشاء برنامج الكلاسيكو بواسطة رئيس التحرير</p>
-                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 ساعات</p>
-                         </div>
-                     </div>
-                     <!-- Message End -->
-                 </a>
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right dropdown-notifications">
+                 @if (auth()->guard('member')->user()->showNotifications(true)->count() > 0)
+                     @foreach (auth()->guard('member')->user()->showNotifications(true) as $notification)
+                         <a href="{{ $notification->data['url'] }}" class="dropdown-item">
+                             <!-- Message Start -->
+                             <div class="media">
+                                 <img src="{{ $notification->data['photo'] }}" alt="User Avatar"
+                                     class="img-size-50 mr-3 img-circle">
+                                 <div class="media-body">
+                                     <h3 class="dropdown-item-title">
+                                         {{ $notification->notifyBy->name }}
+                                     </h3>
+                                     <p class="text-sm">{{ $notification->message }}</p>
+                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
+                                         {{ $notification->created_at_formatted }}</p>
+                                 </div>
+                             </div>
+                             <!-- Message End -->
+                         </a>
+                     @endforeach
+                 @else
+                     <a href="#" class="dropdown-item">
+                         {{ __('No new notifications') }}
+                     </a>
+                 @endif
                  <div class="dropdown-divider"></div>
              </div>
          </li>

@@ -119,7 +119,7 @@ class WorkspaceInvitations extends Model
                     $this->span('warning', __('Pending')),
 
                 WorkspaceStatus::ACCEPTED->value =>
-                    $this->span('success', __('Accepted')),
+                    $this->span('success', __('Accepted Event')),
 
                 WorkspaceStatus::EXPIRED->value =>
                     $this->span('danger', __('Expired')),

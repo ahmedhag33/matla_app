@@ -54,7 +54,7 @@ class ActivityLog extends Model
      */
     public function createdBy()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Member::class, 'created_by');
     }
     /**
      * Get the workspace associated with the activity log.

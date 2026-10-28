@@ -55,5 +55,6 @@ return [
         ],
 
     ],
+    'pusher_console' => env('PUSHER_CONSOLE', false),
 
 ];

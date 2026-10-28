@@ -89,7 +89,7 @@ trait LogsActivity
             'subject_type' => $this->getMorphClass(),
             'subject_id' => $this->getKey(),
             // Logged-in member who did the action (null if no member is logged in, e.g. queue/CLI).
-            'created_by' => auth()->guard('member')->id(),
+            'created_by' => auth()->guard('member')->user()->id,
         ]);
     }
     /**

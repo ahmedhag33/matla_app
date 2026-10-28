@@ -49,7 +49,7 @@ class NotfiyAcceptToWorkspace implements ShouldBroadcast
      * @param string $memberName The name of the user who accepted the workspace invitation.
      * @return void
      */
-    public function __construct(int $workspaceId, int $memberId, int $workspaceMemberId, string $memberName, string $url = '')
+    public function __construct(int $workspaceId, int $memberId, int $workspaceMemberId, string $memberName, string $url)
     {
         $this->workspaceId = $workspaceId;
         // Set the member ID
@@ -81,10 +81,8 @@ class NotfiyAcceptToWorkspace implements ShouldBroadcast
             'message' => __('Invitation Accepted') . ' ' . $this->memberName,
             'title' => __('New Member'),
             'date_time' => dateformat(now()) . ' ' . timeFormat(now()),
-            'data' => [
-                'url' => $this->url,
-                'photo' => asset('public/img/user-solid-full.svg'), // You can set the member's photo URL here if available
-            ],
+            'url' => $this->url,
+            'photo' => asset('public/img/user-solid-full.svg'), // You can set the member's photo URL here if available
             'member_name' => $this->memberName,
             'workspace_id' => $this->workspaceId,
             'member_id' => $this->memberId,

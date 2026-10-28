@@ -75,6 +75,8 @@ Route::prefix('member')->group(function () {
             // add controller for member
             Route::controller(MemberController::class)->group(function () {
                 Route::get('/', 'index')->name('workspace.member.index');
+                // add route to accept workspace invitation
+                Route::post('/accept-invitation', 'acceptInvitation')->name('workspace.member.accept-invitation');
                 // add route to logout
                 Route::get('/logout', 'logout')->name('workspace.member.logout');
             });
@@ -95,7 +97,7 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
     Route::prefix('inventions')->controller(InventionController::class)->group(function () {
         Route::get('/', 'index')->name('workspace.invention.index')
             ->middleware('check-member-permission:invite-members');
-
+        // add route to show invention details
         Route::post('/', 'create')->name('workspace.invention.create')
             ->middleware('check-member-permission:invite-members');
     });

@@ -1110,5 +1110,11 @@
     "Email Verification":"التحقق من البريد الإلكتروني",
     "Please check your email for the verification link.": "يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق.",
     "Invitation Accepted": "تم قبول الدعوة للانضمام لمساحة العمل من قبل ",
-    "New Member": "عضو جديد"
+    "New Member": "عضو جديد",
+    "No new notifications": "لا توجد إشعارات جديدة",
+    "Pending Invitations": "دعوات الانضمام المعلقة",
+    "Accept Invitation": "قبول الدعوة",
+    "Invitation accepted successfully.": "تم قبول الدعوة بنجاح.",
+    "Do you want to accept the invitation?": "هل تريد قبول الدعوة؟",
+    "Accepted Event": "تم قبول الدعوة"
 }

@@ -39,16 +39,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     @include('workspace.layouts.script')
     <script>
-        Pusher.logToConsole = true;
+        $('.dropdown-notifications-toggle').on('click', function() {
+            $('.dropdown-notifications').toggle();
+        });
+    </script>
+    <script>
+        Pusher.logToConsole = {{ config('broadcasting.pusher_console') }};
 
         var pusher = new Pusher(
             '{{ config('broadcasting.connections.pusher.key') }}', {
                 cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}'
             }
         );
-
-        var member_id = "{{ auth()->guard('member')->user()->id }}";
-        var workspace_id = "{{ current_workspace()->id }}";
+        var notificationsWrapper = $('.dropdown-notifications');
+        var notificationsToggle = $('.dropdown-notifications-toggle');
+        var notificationsCountElem = notificationsToggle.find('span[data-count]');
+        var notificationsCount = parseInt(notificationsCountElem.data('count'), 10) || 0;
+        var count_notifications = $('.count-notifications');
+        var member_id = @json(auth()->guard('member')->id());
+        var workspace_id = @json(current_workspace()->id);
 
         var channelName = 'workspace-notify-accept-' + workspace_id + '-' + member_id;
 
@@ -57,13 +66,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
         workspace_notify_accept_channel.bind(
             'App\\Events\\Workspace\\NotfiyAcceptToWorkspace',
             function(data) {
-                $(document).Toasts('create', {
-                    body: data.message,
-                    title: data.title,
-                    subtitle: data.date_time,
-                    image: '{{ asset('public/img/user-solid-full.svg') }}',
-                    imageAlt: 'User Picture',
-                });
+                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item">
+                         <!-- Message Start -->
+                         <div class="media">
+                             <img src="${data.photo}" alt="User Avatar"
+                                  class="img-size-50 mr-3 img-circle">
+                             <div class="media-body">
+                                 <h3 class="dropdown-item-title">
+                                     ${data.member_name}
+                                 </h3>
+                                 <p class="text-sm">${data.message}</p>
+                                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
+                                     ${data.date_time}</p>
+                             </div>
+                         </div>
+                         <!-- Message End -->
+                     </a>`;
+
+                notificationsWrapper.prepend(newNotificationHtml);
+                notificationsCount += 1;
+                notificationsCountElem.data('count', notificationsCount);
+                notificationsCountElem.text(notificationsCount);
+                count_notifications.data('count', notificationsCount);
+                count_notifications.text(notificationsCount);
             }
         );
     </script>

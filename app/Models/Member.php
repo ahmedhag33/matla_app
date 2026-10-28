@@ -134,11 +134,13 @@ class Member extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function showNotifications()
+    public function showNotifications($isworkspace = false)
     {
-        return $this->notification()->orderBy('created_at', 'desc')
-            ->whereNull('read_at')
-            ->where('workspace_id', current_workspace()->id)
-            ->get();
+        $query = $this->notification()->with('notifyBy')->orderBy('created_at', 'desc')->whereNull('read_at');
+        // check if we need to filter by workspace
+        if ($isworkspace === true) {
+            $query->where('workspace_id', current_workspace()->id);
+        }
+        return $query->get();
     }
 }

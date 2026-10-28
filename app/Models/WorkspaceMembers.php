@@ -30,7 +30,7 @@ class WorkspaceMembers extends Model
         static::creating(function ($workspaceMember) {
             // Automatically set the member_id to the currently authenticated member if available
             if (auth()->guard('member')->check()) {
-                $workspaceMember->member_id = auth()->guard('member')->id();
+                $workspaceMember->member_id = auth()->guard('member')->user()->id;
             }
         });
     }
