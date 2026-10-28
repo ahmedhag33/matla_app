@@ -7,6 +7,7 @@ use App\Service\Database\LogsActivity;
 use App\Service\Enum\Crud;
 use App\Service\Enum\WorkspaceStatus;
 use App\Service\Layouts\GenralStatus;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkspaceInvitations extends Model
@@ -104,18 +105,78 @@ class WorkspaceInvitations extends Model
         return $this->belongsTo(Workspace::class, 'workspace_id');
     }
     /**
-     * Get the status badge color for the invitation status.
+     * Interact with the  attribute for the formatted status.
      *
-     * @param  string  $value
-     * @return string
+     * @return Attribute
      */
-    public function getStatusAttribute($value)
+    public function statusFormatted(): Attribute
     {
-        return match ($value) {
-            WorkspaceStatus::PENDING->value => $this->span('warning', __('Pending')),
-            WorkspaceStatus::ACCEPTED->value => $this->span('success', __('Accepted')),
-            WorkspaceStatus::EXPIRED->value => $this->span('danger', __('Expired')),
-            default => $this->span('secondary', __('Unknown')),
-        };
+        return Attribute::make(
+            get: fn() => match ($this->status instanceof WorkspaceStatus
+            ? $this->status->value
+            : $this->status) {
+                WorkspaceStatus::PENDING->value =>
+                    $this->span('warning', __('Pending')),
+
+                WorkspaceStatus::ACCEPTED->value =>
+                    $this->span('success', __('Accepted')),
+
+                WorkspaceStatus::EXPIRED->value =>
+                    $this->span('danger', __('Expired')),
+
+                default =>
+                    $this->span('secondary', __('Unknown')),
+            },
+        );
+    }
+    /**
+     * Get the created_at attribute value.
+     *
+     * @return Attribute
+     */
+    public function createdAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => dateFormat($this->created_at)
+                . ' ' . timeFormat($this->created_at),
+        );
+    }
+    /**
+     * Get the updated_at attribute value.
+     *
+     * @return Attribute
+     */
+    public function updatedAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => dateFormat($this->updated_at)
+                . ' ' . timeFormat($this->updated_at),
+        );
+    }
+    /**
+     * Get the expires_at attribute value.
+     *
+     * @return Attribute
+     */
+    public function expiresAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => dateFormat($this->expires_at)
+                . ' ' . timeFormat($this->expires_at),
+        );
+    }
+    /**
+     * Get the accepted_at attribute value.
+     *
+     * @return Attribute
+     */
+    public function acceptedAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->accepted_at === null
+                ? '-'
+                : dateFormat($this->accepted_at)
+                . ' ' . timeFormat($this->accepted_at),
+        );
     }
 }

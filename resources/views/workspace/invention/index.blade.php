@@ -48,10 +48,10 @@
                                                     <td>{{ $invention->email }}</td>
                                                     <td>{{ $invention->role->name }}</td>
                                                     <td>{{ $invention->invitedBy->name }}</td>
-                                                    <td>{!! $invention->status !!}</td>
-                                                    <td>{{ dateformat($invention->created_at) }}</td>
-                                                    <td>{{ (is_null($invention->expires_at) ? '-' : dateformat($invention->expires_at)) }}</td>
-                                                    <td>{{ (is_null($invention->accepted_at) ? '-' : dateformat($invention->accepted_at)) }}</td>
+                                                    <td>{!! $invention->status_formatted !!}</td>
+                                                    <td>{{ $invention->created_at_formatted }}</td>
+                                                    <td>{{ $invention->expires_at_formatted }}</td>
+                                                    <td>{{ $invention->accepted_at_formatted }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

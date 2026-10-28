@@ -65,31 +65,39 @@ class WorkspaceNotification extends Model
         static::addGlobalScope(new CurrentWorkspaceScope());
     }
     /**
+     * Get the read_at attribute value.
+     *
+     * @return Attribute
+     */
+    public function readAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->read_at ? dateFormat($this->read_at) . ' ' . timeFormat($this->read_at) : null,
+        );
+    }
+    /**
      * Get the created_at attribute value.
      *
      * @return Attribute
      */
-    public function createdAt(): Attribute
+    public function createdAtFormatted(): Attribute
     {
-        return Attribute::make(fn($value) => dateFormat($value) . ' ' . timeFormat($value));
+        return Attribute::make(
+            get: fn() => dateFormat($this->created_at)
+                . ' ' . timeFormat($this->created_at),
+        );
     }
     /**
      * Get the updated_at attribute value.
      *
      * @return Attribute
      */
-    public function updatedAt(): Attribute
+    public function updatedAtFormatted(): Attribute
     {
-        return Attribute::make(fn($value) => dateFormat($value) . ' ' . timeFormat($value));
-    }
-    /**
-     * Interact with the  attribute.
-     *
-     * @return Attribute
-     */
-    public function readAt(): Attribute
-    {
-        return Attribute::get(fn($value) => $value ? dateFormat($value) . ' ' . timeFormat($value) : null);
+        return Attribute::make(
+            get: fn() => dateFormat($this->updated_at)
+                . ' ' . timeFormat($this->updated_at),
+        );
     }
     /**
      * Get the member that owns the notification.
