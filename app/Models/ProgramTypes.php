@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class ProgramTypes extends Model
@@ -25,4 +26,15 @@ class ProgramTypes extends Model
         'icon',
         'is_active',
     ];
+    /**
+     * Interact with the icon attribute.
+     *
+     * @return Attribute
+     */
+    public function iconAtFull(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => asset('public/img/' . $this->icon),
+        );
+    }
 }
