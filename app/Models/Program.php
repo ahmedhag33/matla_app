@@ -80,6 +80,15 @@ class Program extends Model
         return $this->belongsTo(Member::class, 'created_by');
     }
     /**
+     * Get the presenters associated with the program.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function presenters()
+    {
+        return $this->belongsToMany(Member::class, 'program_presenters', 'program_id', 'presenter_id');
+    }
+    /**
      * Interact with the broadcast_mode attribute.
      *
      * @return Attribute
