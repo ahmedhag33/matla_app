@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Scopes\CurrentWorkspaceScope;
+use App\Service\Database\LogsActivity;
 use App\Service\Enum\BroadcastMode;
 use App\Service\Enum\BroadcastSchedule;
+use App\Service\Enum\Crud;
 use App\Service\Enum\ProgramStatus;
 use App\Service\Layouts\GenralStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Program extends Model
 {
-    use GenralStatus;
+    use GenralStatus, LogsActivity;
     /**
      * The table associated with the model.
      *
@@ -41,6 +43,25 @@ class Program extends Model
         'created_at',
         'updated_at'
     ];
+    /**
+     * Get a custom description for an activity log entry.
+     *
+     * Default hook that returns null, meaning no custom description.
+     * Override it in a model to return a readable message for a given
+     * action (e.g. "created", "updated", "deleted").
+     *
+     * @param  string  $action  The action being logged.
+     * @return string|null      The description, or null to use none.
+     */
+    protected function getActivityDescription(string $action): ?string
+    {
+        return match ($action) {
+            Crud::CREATE->value => __('New Program Created'),
+            Crud::UPDATE->value => __('Program Updated'),
+            Crud::DELETE->value => __('Program Deleted'),
+            default => null,
+        };
+    }
     /**
      * Apply the current workspace scope to all queries for this model.
      *
@@ -87,6 +108,15 @@ class Program extends Model
     public function presenters()
     {
         return $this->belongsToMany(Member::class, 'program_presenters', 'program_id', 'presenter_id');
+    }
+    /**
+     * Get the broadcast days associated with the program.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function broadcastDays()
+    {
+        return $this->hasMany(ProgramBroadcastDays::class, 'program_id');
     }
     /**
      * Interact with the broadcast_mode attribute.

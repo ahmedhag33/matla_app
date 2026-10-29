@@ -1123,5 +1123,15 @@
     "weekly": "أسبوعي",
     "monthly": "شهري",
     "pending": "قيد الانتظار",
-    "inactive": "غير نشط"
+    "inactive": "غير نشط",
+    "New Program Created": "تم انشاء برنامج جديد ",
+    "Program Updated": "تم تحديث البرنامج",
+    "Program Deleted": "تم حذف البرنامج",
+    "sunday": "الأحد",
+    "monday": "الاثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "saturday": "السبت"
 }
