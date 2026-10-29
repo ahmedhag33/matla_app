@@ -1116,5 +1116,12 @@
     "Accept Invitation": "قبول الدعوة",
     "Invitation accepted successfully.": "تم قبول الدعوة بنجاح.",
     "Do you want to accept the invitation?": "هل تريد قبول الدعوة؟",
-    "Accepted Event": "تم قبول الدعوة"
+    "Accepted Event": "تم قبول الدعوة",
+    "live": "مباشر",
+    "recorded": "مسجل",
+    "daily": "يومي",
+    "weekly": "أسبوعي",
+    "monthly": "شهري",
+    "pending": "قيد الانتظار",
+    "inactive": "غير نشط"
 }
