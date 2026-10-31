@@ -7,6 +7,7 @@ use App\Http\Controllers\Workspace\Auth\VerificationController;
 use App\Http\Controllers\Workspace\HomeController;
 use App\Http\Controllers\Workspace\InventionController;
 use App\Http\Controllers\Workspace\MemberController;
+use App\Http\Controllers\Workspace\ProgramController;
 use App\Http\Controllers\Workspace\WorkspaceController;
 use Illuminate\Support\Facades\Route;
 
@@ -102,5 +103,9 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to show invention details
         Route::post('/', 'create')->name('workspace.invention.create')
             ->middleware('check-member-permission:invite-members');
+    });
+    Route::prefix('programs')->controller(ProgramController::class)->group(function () {
+        Route::get('/', 'index')->name('workspace.program.index')
+            ->middleware('check-member-permission:view-program');
     });
 });

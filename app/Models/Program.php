@@ -64,6 +64,9 @@ class Program extends Model
     }
     /**
      * Apply the current workspace scope to all queries for this model.
+     * This ensures that all queries for programs are automatically scoped to the current workspace.
+     * It also automatically sets the workspace_id and created_by fields when creating a new program.
+     * This is done using the booted method and the creating event.
      *
      * @return void
      */
@@ -72,13 +75,21 @@ class Program extends Model
         parent::booted();
         // Apply the current workspace scope to all queries for this model.
         static::addGlobalScope(new CurrentWorkspaceScope());
+
+        static::creating(function ($program) {
+            $program->workspace_id = current_workspace()->id;
+            // Set the created_by field if a member is authenticated.
+            if (auth()->guard('member')->check()) {
+                $program->created_by = auth()->guard('member')->user()->id;
+            }
+        });
     }
     /**
      * Get the program type associated with the program.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function programType()
+    public function type()
     {
         return $this->belongsTo(ProgramTypes::class, 'program_type_id');
     }

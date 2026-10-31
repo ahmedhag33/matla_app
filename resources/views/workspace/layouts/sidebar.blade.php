@@ -81,7 +81,7 @@
                           <ul class="nav nav-treeview">
                               @if (auth()->guard('member')->user()->hasPermission('view-program'))
                                   <li class="nav-item">
-                                      <a href="" class="nav-link text-white">
+                                      <a href="{{ route('workspace.program.index', ['slug' => request()->route('slug')]) }}" class="nav-link text-white">
                                           <img src="{{ asset('public/img/chromecast-brands-solid-full.svg') }}"
                                               alt="Programs" style="width: 30px;">
                                           <p>{{ __('Programs') }}</p>
