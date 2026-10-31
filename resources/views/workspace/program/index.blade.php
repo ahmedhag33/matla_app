@@ -79,4 +79,5 @@
             </div>
         </section>
     </div> <!-- /.content-wrapper -->
+    @include('workspace.program.create')
 @endsection
