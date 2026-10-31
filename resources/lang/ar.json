@@ -1140,5 +1140,10 @@
     "Program Providers": "مقدمو البرنامج",
     "Duration and Broadcast": "المدة والبث",
     "Additional Settings": "الاعدادت الاضافية",
-    "Add New Program": "اضافة برنامج جديد"
+    "Add New Program": "اضافة برنامج جديد",
+    "Program Name": "اسم البرنامج",
+    "Slug": "الاسم المختصر",
+    "Slug Description": "يستخدم فى  الرابط ويجب ان يكون فريدأ",
+    "Program Description": "وصف البرنامج",
+    "Program Short Description": "امتب نبذة مختصرا عن البرنامج ومحتواه"
 }

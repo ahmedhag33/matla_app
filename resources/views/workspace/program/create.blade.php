@@ -55,6 +55,34 @@
                                      <div class="form-group">
                                          <label for="basic-information">{{ __('Basic Information') }}</label>
                                      </div>
+                                     <div class="row">
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label for="program-name">{{ __('Program Name') }}
+                                                     <span class="text-muted">*</span>
+                                                 </label>
+                                                 <input type="text" placeholder="{{ __('Program Name') }}"
+                                                     class="form-control" id="program-name" name="program_name">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label for="slug">{{ __('Slug') }} (Slug)
+                                                     <span class="text-muted">*</span>
+                                                 </label>
+                                                 <input type="text" placeholder="{{ __('Slug') }}"
+                                                     class="form-control" id="slug" name="slug">
+                                                 <small
+                                                     class="form-text text-muted">{{ __('Slug Description') }}</small>
+                                             </div>
+                                         </div>
+                                         <div class="form-group col-md-12">
+                                             <label for="description">{{ __('Program Description') }}</label>
+                                             <textarea id="description" name="description" class="form-control" rows="4"
+                                                 placeholder="{{ __('Program Short Description') }}"></textarea>
+                                             <span class="text-danger" data-error="description"></span>
+                                         </div>
+                                     </div>
                                      <a class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>
                                  <div id="program-providers-part" class="content" role="tabpanel"
@@ -62,28 +90,24 @@
                                      <div class="form-group">
                                          <label for="program-providers">{{ __('Program Providers') }}</label>
                                      </div>
-                                     <a class="btn btn-matla"
-                                         onclick="stepper.previous()">{{ __('Previous') }}</a>
-                                     <a class="btn btn-matla"
-                                         onclick="stepper.next()">{{ __('Next') }}</a>
+                                     <a class="btn btn-matla" onclick="stepper.previous()">{{ __('Previous') }}</a>
+                                     <a class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>
                                  <div id="duration-and-broadcast-part" class="content" role="tabpanel"
                                      aria-labelledby="duration-and-broadcast-part-trigger">
                                      <div class="form-group">
-                                         <label for="duration-and-broadcast">{{ __('Duration and Broadcast') }}</label>
+                                         <label
+                                             for="duration-and-broadcast">{{ __('Duration and Broadcast') }}</label>
                                      </div>
-                                     <a class="btn btn-matla"
-                                         onclick="stepper.previous()">{{ __('Previous') }}</a>
-                                     <a class="btn btn-matla"
-                                         onclick="stepper.next()">{{ __('Next') }}</a>
+                                     <a class="btn btn-matla" onclick="stepper.previous()">{{ __('Previous') }}</a>
+                                     <a class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>
                                  <div id="additional-settings-part" class="content" role="tabpanel"
                                      aria-labelledby="additional-settings-part-trigger">
                                      <div class="form-group">
                                          <label for="additional-settings">{{ __('Additional Settings') }}</label>
                                      </div>
-                                     <a class="btn btn-matla"
-                                         onclick="stepper.previous()">{{ __('Previous') }}</a>
+                                     <a class="btn btn-matla" onclick="stepper.previous()">{{ __('Previous') }}</a>
                                      <button class="btn btn-matla btn-save">{{ __('Save') }}</button>
                                  </div>
                              </div>
