@@ -32,13 +32,13 @@ class ProgramBroadcastDays extends Model
     {
         return Attribute::make(
             get: fn() => match ($this->day) {
-                BroadcastDay::Sunday->value => __('sunday'),
-                BroadcastDay::Monday->value => __('monday'),
-                BroadcastDay::Tuesday->value => __('tuesday'),
-                BroadcastDay::Wednesday->value => __('wednesday'),
-                BroadcastDay::Thursday->value => __('thursday'),
-                BroadcastDay::Friday->value => __('friday'),
-                BroadcastDay::Saturday->value => __('saturday'),
+                BroadcastDay::SUNDAY->value => __('sunday'),
+                BroadcastDay::MONDAY->value => __('monday'),
+                BroadcastDay::TUESDAY->value => __('tuesday'),
+                BroadcastDay::WEDNESDAY->value => __('wednesday'),
+                BroadcastDay::THURSDAY->value => __('thursday'),
+                BroadcastDay::FRIDAY->value => __('friday'),
+                BroadcastDay::SATURDAY->value => __('saturday'),
             },
         );
     }

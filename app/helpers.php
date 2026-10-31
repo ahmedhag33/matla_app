@@ -1,5 +1,9 @@
 <?php
 
+use App\Service\Enum\BroadcastDay;
+use App\Service\Enum\BroadcastMode;
+use App\Service\Enum\BroadcastSchedule;
+use App\Service\Enum\ProgramStatus;
 use App\Service\Secure\PasswordGenerator;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -418,5 +422,68 @@ if (!function_exists('current_workspace')) {
     function current_workspace()
     {
         return app()->bound('current_workspace') ? app('current_workspace') : null;
+    }
+}
+if (!function_exists('broadcastDays')) {
+    /**
+     * Get Broadcast Days
+     *
+     * @return array
+     */
+    function broadcastDays()
+    {
+        return [
+            BroadcastDay::SUNDAY->value => __('sunday'),
+            BroadcastDay::MONDAY->value => __('monday'),
+            BroadcastDay::TUESDAY->value => __('tuesday'),
+            BroadcastDay::WEDNESDAY->value => __('wednesday'),
+            BroadcastDay::THURSDAY->value => __('thursday'),
+            BroadcastDay::FRIDAY->value => __('friday'),
+            BroadcastDay::SATURDAY->value => __('saturday')
+        ];
+    }
+}
+if (!function_exists('broadcastMode')) {
+    /**
+     * Get Broadcast Mode
+     *
+     * @return array
+     */
+    function broadcastMode()
+    {
+        return [
+            BroadcastMode::LIVE->value => __('live'),
+            BroadcastMode::RECORDED->value => __('recorded')
+        ];
+    }
+}
+if (!function_exists('broadcastSchedule')) {
+    /**
+     * Get Broadcast Schedule
+     *
+     * @return array
+     */
+    function broadcastSchedule()
+    {
+        return [
+            BroadcastSchedule::DAILY->value => __('daily'),
+            BroadcastSchedule::WEEKLY->value => __('weekly'),
+            BroadcastSchedule::MONTHLY->value => __('monthly')
+        ];
+    }
+}
+if (!function_exists('broadcastStatus')) {
+    /**
+     * Get Broadcast Status
+     *
+     * @return array
+     */
+    function broadcastStatus()
+    {
+        return [
+            ProgramStatus::ACTIVE->value => __('active'),
+            ProgramStatus::PENDING->value => __('pending'),
+            ProgramStatus::INACTIVE->value => __('inactive')
+        ];
     }
 }
