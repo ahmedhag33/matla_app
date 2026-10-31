@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\WorkspacePermission;
@@ -89,6 +90,33 @@ class Member extends Authenticatable
     public function notification()
     {
         return $this->hasMany(WorkspaceNotification::class, 'member_id');
+    }
+    /**
+     * Scope a query to only include members in the current workspace.
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeInWorkspace(Builder $query)
+    {
+        return $query->whereHas('workspaces', function ($q) {
+            $q->where('workspace_id', current_workspace()->id);
+        });
+    }
+    /**
+     * Scope a query to only include members with the specified role.
+     *
+     * @param  Builder $query
+     * @param  string $role
+     * @return Builder
+     */
+    public function scopeEqualRole(Builder $query, $role)
+    {
+        return $query->whereIn('workspace_role_id', function ($q) use ($role) {
+            $q->select('id')
+            ->from((new WorkspaceRoles())->getTable())
+            ->where('slug', $role);
+        });
     }
     /**
      * Check if the member has the specified permission.

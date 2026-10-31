@@ -97,5 +97,6 @@
             $('#program_type_id').val(programTypeId);
 
         });
+        $('.select-presenters').select2();
     </script>
 @endsection

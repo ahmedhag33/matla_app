@@ -27,6 +27,8 @@
  <script src="{{ asset('public/dashboard/plugins/bs-stepper/js/bs-stepper.min.js') }}"></script>
  <!-- dropzonejs -->
  <script src="{{ asset('public/dashboard/plugins/dropzone/min/dropzone.min.js') }}"></script>
+
+ <script src="{{ asset('public/dashboard/plugins/select2/js/select2.full.min.js') }}"></script>
  <script>
      toastr.options = {
          "closeButton": true,
