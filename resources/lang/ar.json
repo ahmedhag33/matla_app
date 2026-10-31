@@ -1147,5 +1147,8 @@
     "Program Description": "وصف البرنامج",
     "Program Short Description": "امتب نبذة مختصرا عن البرنامج ومحتواه",
     "Program Type": "نوع البرنامج",
-    "Select Presenters": "اختيار المقدمين"
+    "Select Presenters": "اختيار المقدمين",
+    "Broadcast Schedule": "نمط البث المعتاد",
+    "Default Episode Duration": "المدة الافتراضية للحلقة",
+    "Minute": "دقيقة"
 }

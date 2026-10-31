@@ -487,3 +487,25 @@ if (!function_exists('broadcastStatus')) {
         ];
     }
 }
+if (!function_exists('defaultEpisodeDurationHours')) {
+    /**
+     * Get Default Episode Duration
+     *
+     * @return string
+     */
+    function defaultEpisodeDurationHours() : array
+    {
+       return range(1,10);
+    }
+}
+if (!function_exists('defaultEpisodeDurationMinutes')) {
+    /**
+     * Get Default Episode Duration Minutes
+     *
+     * @return array
+     */
+    function defaultEpisodeDurationMinutes() : array
+    {
+        return range(0, 60);
+    }
+}

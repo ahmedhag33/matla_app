@@ -117,10 +117,12 @@
                                              <div class="form-group">
                                                  <label>{{ __('Select Presenters') }}</label>
                                                  <select class="select-presenters" multiple="multiple"
-                                                     data-placeholder="{{ __('Select Presenters') }}" style="width: 100%;">
-                                                    @foreach ($presenters as $presenter)
-                                                         <option value="{{ $presenter->id }}">{{ $presenter->name }}</option>
-                                                    @endforeach
+                                                     data-placeholder="{{ __('Select Presenters') }}"
+                                                     style="width: 100%;">
+                                                     @foreach ($presenters as $presenter)
+                                                         <option value="{{ $presenter->id }}">{{ $presenter->name }}
+                                                         </option>
+                                                     @endforeach
                                                  </select>
                                              </div>
                                          </div>
@@ -131,8 +133,60 @@
                                  <div id="duration-and-broadcast-part" class="content" role="tabpanel"
                                      aria-labelledby="duration-and-broadcast-part-trigger">
                                      <div class="form-group">
-                                         <label
-                                             for="duration-and-broadcast">{{ __('Duration and Broadcast') }}</label>
+                                         <div class="row">
+                                             <div class="col-md-6">
+                                                 <div class="form-group">
+                                                     <label>{{ __('Broadcast Schedule') }}</label>
+
+                                                     <div class="form-check">
+                                                         @foreach (broadcastSchedule() as $key => $item)
+                                                             <div class="mb-2">
+                                                                 <input class="form-check-input" type="radio"
+                                                                     name="broadcast_schedule"
+                                                                     id="schedule-{{ $key }}"
+                                                                     value="{{ $key }}">
+
+                                                                 <label class="form-check-label"
+                                                                     for="schedule-{{ $key }}">
+                                                                     {{ $item }}
+                                                                 </label>
+                                                             </div>
+                                                         @endforeach
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <div class="form-group">
+                                                     <label>
+                                                         {{ __('Default Episode Duration') }}
+                                                     </label>
+
+                                                     <div class="row">
+                                                         <div class="col-md-6">
+                                                             <select class="form-control" id="duration_hours"
+                                                                 name="duration_hours">
+                                                                 @foreach (defaultEpisodeDurationHours() as $hour)
+                                                                     <option value="{{ $hour }}">
+                                                                         {{ $hour }} {{ __('Hour') }}
+                                                                     </option>
+                                                                 @endforeach
+                                                             </select>
+                                                         </div>
+
+                                                         <div class="col-md-6">
+                                                             <select class="form-control" id="duration_minutes"
+                                                                 name="duration_minutes">
+                                                                 @foreach (defaultEpisodeDurationMinutes() as $minute)
+                                                                     <option value="{{ $minute }}">
+                                                                         {{ $minute }} {{ __('Minute') }}
+                                                                     </option>
+                                                                 @endforeach
+                                                             </select>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
                                      </div>
                                      <a class="btn btn-matla" onclick="stepper.previous()">{{ __('Previous') }}</a>
                                      <a class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</a>
