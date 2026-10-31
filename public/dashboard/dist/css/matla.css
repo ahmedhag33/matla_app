@@ -148,6 +148,7 @@ a.btn-matla:hover {
 
     font-weight: bold;
 }
+
 .workspace-type-card {
     cursor: pointer;
     border: 2px solid transparent;
@@ -158,6 +159,7 @@ a.btn-matla:hover {
     border-color: #F59E0B;
     background-color: #fff8e8;
 }
+
 .toast .toast-header {
     background-color: #fff !important;
     color: #6c757d !important;
@@ -166,4 +168,68 @@ a.btn-matla:hover {
 .toast .toast-body {
     background-color: #fff !important;
     color: #343a40 !important;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background-color: #17233C;
+    border-bottom: 3px solid #F59E0B;
+    border-radius: 6px 6px 0 0;
+}
+
+.modal-header .modal-title {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-header-matla {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    background-color: #17233C;
+    border-bottom: 3px solid #F59E0B;
+    border-radius: 6px 6px 0 0;
+}
+
+.modal-header-matla .modal-title {
+    color: #FFFFFF !important;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-header-matla .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    color: #FFFFFF !important;
+    background: transparent;
+    border: none;
+    opacity: 0.85;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+    text-shadow: none;
+    transition: all 0.2s ease;
+}
+
+.modal-header-matla .close:hover {
+    color: #F59E0B !important;
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.modal-header-matla .close:focus {
+    outline: none;
+    box-shadow: none;
 }

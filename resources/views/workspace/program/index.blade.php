@@ -20,7 +20,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
-                            {{ __('Add Program') }}
+                            <span><i class="fas fa-plus"></i></span>
                         </button>
                     </h3>
                 </div>
