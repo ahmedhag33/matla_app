@@ -16,34 +16,61 @@
         </div>
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
-                <div class="row mt-3">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="list-group">
-                            <div class="list-group-item program-item">
-                                <div class="row align-items-center">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
+                            {{ __('Add Program') }}
+                        </button>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mt-3">
+                            <div class="col-md-10 offset-md-1">
+                                <div class="list-group">
+                                    @forelse ($programs as $program)
+                                        <div class="list-group-item program-item">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto program-actions">
+                                                    <button class="btn btn-matla">
+                                                        {{ __('Manage Episodes') }}
+                                                    </button>
+                                                </div>
+                                                <div class="col px-4 program-info">
+                                                    {!! $program->status_attribute !!}
+                                                    <h3>{{ $program->name }}</h3>
+                                                    <span class="program-type">
+                                                        <img src="{{ $program->type->icon_at_full }}"
+                                                            alt="{{ $program->type->name }}">
+                                                        {{ $program->type->name }}
+                                                    </span>
+                                                    <p class="mb-3">
+                                                        {{ $program->description }}
+                                                    </p>
+                                                    <div class="program-details">
+                                                        <span>{{ $program->broadcast_schedule_attribute }}</span>
+                                                        <span>{{ $program->duration_attribute }}</span>
+                                                        <span>0</span>
+                                                    </div>
 
-                                    <div class="col-auto program-actions">
-                                        <button class="btn btn-matla">▶ إدارة الحلقات</button>
-                                    </div>
-                                    <div class="col px-4 program-info">
-                                        <div class="program-status">نشط</div>
-                                        <h3>الكلاسيكو</h3>
-                                        <span class="program-type">⚽ رياضي</span>
-                                        <p class="mb-3">
-                                            برنامج رياضي حواري يتناول أهم أحداث كرة القدم
-                                            محلياً وعالمياً.
-                                        </p>
-                                        <div class="program-details">
-                                            <span>📅 كل أسبوع</span>
-                                            <span>🕒 01:30 مدة الحلقة</span>
-                                            <span>🎬 12 حلقة</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <img class="img-fluid program-image"
+                                                        src="{{ asset('public/img/program.png') }}" alt="Program">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <img class="img-fluid program-image" src="{{ asset('public/img/program.png') }}"
-                                            alt="صورة البرنامج">
-                                    </div>
+                                    @empty
+                                        <div class="error-page">
+
+                                            <div class="error-content">
+                                                <h3><i class="fas fa-exclamation-triangle text-warning-matla"></i>
+                                                    {{ __('No Programs Found') }}</h3>
+                                            </div>
+                                            <!-- /.error-content -->
+                                        </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -51,5 +78,5 @@
                 </div>
             </div>
         </section>
-    </div>
+    </div> <!-- /.content-wrapper -->
 @endsection
