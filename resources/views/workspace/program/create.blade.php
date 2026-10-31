@@ -46,43 +46,48 @@
                                  </button>
                              </div>
                          </div>
-                         <div class="bs-stepper-content">
-                             <!-- your steps content here -->
-                             <div id="basic-information-part" class="content" role="tabpanel"
-                                 aria-labelledby="basic-information-part-trigger">
-                                 <div class="form-group">
-                                     <label for="basic-information">{{ __('Basic Information') }}</label>
+                         <form id="add-program-form">
+                             @csrf
+                             <div class="bs-stepper-content">
+                                 <!-- your steps content here -->
+                                 <div id="basic-information-part" class="content" role="tabpanel"
+                                     aria-labelledby="basic-information-part-trigger">
+                                     <div class="form-group">
+                                         <label for="basic-information">{{ __('Basic Information') }}</label>
+                                     </div>
+                                     <a class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>
-                                 <button class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</button>
-                             </div>
-                             <div id="program-providers-part" class="content" role="tabpanel"
-                                 aria-labelledby="program-providers-part-trigger">
-                                 <div class="form-group">
-                                     <label for="program-providers">{{ __('Program Providers') }}</label>
+                                 <div id="program-providers-part" class="content" role="tabpanel"
+                                     aria-labelledby="program-providers-part-trigger">
+                                     <div class="form-group">
+                                         <label for="program-providers">{{ __('Program Providers') }}</label>
+                                     </div>
+                                     <a class="btn btn-matla"
+                                         onclick="stepper.previous()">{{ __('Previous') }}</a>
+                                     <a class="btn btn-matla"
+                                         onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>
-                                 <button class="btn btn-matla"
-                                     onclick="stepper.previous()">{{ __('Previous') }}</button>
-                                 <button class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</button>
-                             </div>
-                             <div id="duration-and-broadcast-part" class="content" role="tabpanel"
-                                 aria-labelledby="duration-and-broadcast-part-trigger">
-                                 <div class="form-group">
-                                     <label for="duration-and-broadcast">{{ __('Duration and Broadcast') }}</label>
+                                 <div id="duration-and-broadcast-part" class="content" role="tabpanel"
+                                     aria-labelledby="duration-and-broadcast-part-trigger">
+                                     <div class="form-group">
+                                         <label for="duration-and-broadcast">{{ __('Duration and Broadcast') }}</label>
+                                     </div>
+                                     <a class="btn btn-matla"
+                                         onclick="stepper.previous()">{{ __('Previous') }}</a>
+                                     <a class="btn btn-matla"
+                                         onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>
-                                 <button class="btn btn-matla"
-                                     onclick="stepper.previous()">{{ __('Previous') }}</button>
-                                 <button class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</button>
-                             </div>
-                             <div id="additional-settings-part" class="content" role="tabpanel"
-                                 aria-labelledby="additional-settings-part-trigger">
-                                 <div class="form-group">
-                                     <label for="additional-settings">{{ __('Additional Settings') }}</label>
+                                 <div id="additional-settings-part" class="content" role="tabpanel"
+                                     aria-labelledby="additional-settings-part-trigger">
+                                     <div class="form-group">
+                                         <label for="additional-settings">{{ __('Additional Settings') }}</label>
+                                     </div>
+                                     <a class="btn btn-matla"
+                                         onclick="stepper.previous()">{{ __('Previous') }}</a>
+                                     <button class="btn btn-matla btn-save">{{ __('Save') }}</button>
                                  </div>
-                                 <button class="btn btn-matla"
-                                     onclick="stepper.previous()">{{ __('Previous') }}</button>
-                                 <button class="btn btn-matla">{{ __('Save') }}</button>
                              </div>
-                         </div>
+                         </form>
                      </div>
                  </div>
              </div>
