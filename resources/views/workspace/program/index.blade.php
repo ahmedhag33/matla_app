@@ -85,6 +85,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-        })
+        });
+           $(document).on('click', '.program-type-card', function() {
+            // إزالة التحديد من كل الكروت
+            $('.program-type-card').removeClass('selected');
+            // تحديد الكارت الذي ضغط عليه المستخدم
+            $(this).addClass('selected');
+            // الحصول على ID النوع المختار
+            let programTypeId = $(this).data('program-type');
+            // تخزينه في الـ hidden input
+            $('#program_type_id').val(programTypeId);
+
+        });
     </script>
 @endsection

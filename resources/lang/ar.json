@@ -1145,5 +1145,6 @@
     "Slug": "الاسم المختصر",
     "Slug Description": "يستخدم فى  الرابط ويجب ان يكون فريدأ",
     "Program Description": "وصف البرنامج",
-    "Program Short Description": "امتب نبذة مختصرا عن البرنامج ومحتواه"
+    "Program Short Description": "امتب نبذة مختصرا عن البرنامج ومحتواه",
+    "Program Type": "نوع البرنامج"
 }

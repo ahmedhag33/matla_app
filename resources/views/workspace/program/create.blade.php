@@ -82,6 +82,31 @@
                                                  placeholder="{{ __('Program Short Description') }}"></textarea>
                                              <span class="text-danger" data-error="description"></span>
                                          </div>
+                                         <div class="form-group">
+                                             <label for="type">{{ __('Program Type') }}
+                                                <span class="text-muted">*</span>
+                                             </label>
+                                             <div class="row">
+                                                 @foreach ($programsTypes as $programType)
+                                                     <div class="col-md-3 col-sm-6 col-4">
+                                                         <div class="info-box program-type-card"
+                                                             data-program-type="{{ $programType->id }}">
+
+                                                             <img src="{{ $programType->icon_at_full }}"
+                                                                 alt="{{ $programType->name }}" width="30">
+
+                                                             <div class="info-box-content">
+                                                                 <span
+                                                                     class="info-box-number">{{ $programType->name }}</span>
+                                                                 <p>{{ $programType->description }}</p>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 @endforeach
+
+                                                 <input type="hidden" name="program_type_id" id="program_type_id">
+                                             </div>
+                                         </div>
                                      </div>
                                      <a class="btn btn-matla" onclick="stepper.next()">{{ __('Next') }}</a>
                                  </div>

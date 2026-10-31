@@ -233,3 +233,50 @@ a.btn-matla:hover {
     outline: none;
     box-shadow: none;
 }
+.program-type-card {
+    min-height: 75px !important;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.program-type-card img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.program-type-card .info-box-content {
+    padding: 0;
+    min-width: 0;
+}
+
+.program-type-card .info-box-number {
+    font-size: 13px;
+    font-weight: 600;
+    color: #17233C;
+    white-space: normal;
+    line-height: 1.3;
+}
+
+.program-type-card p {
+    font-size: 11px;
+    color: #6c757d;
+    line-height: 1.3;
+    margin: 3px 0 0;
+}
+.program-type-card.selected {
+    color: #F59E0B;
+    border-color: #F59E0B;
+    background-color: #17233C ;
+}
+.program-type-card.selected .info-box-number {
+    color: #FFFF;
+}
+.program-type-card.selected p {
+    color: #FFFF;
+}
