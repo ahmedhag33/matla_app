@@ -98,5 +98,6 @@
 
         });
         $('.select-presenters').select2();
+        $('.select-days-of-the-week').select2();
     </script>
 @endsection

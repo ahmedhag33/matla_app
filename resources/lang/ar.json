@@ -1150,5 +1150,9 @@
     "Select Presenters": "اختيار المقدمين",
     "Broadcast Schedule": "نمط البث المعتاد",
     "Default Episode Duration": "المدة الافتراضية للحلقة",
-    "Minute": "دقيقة"
+    "Minute": "دقيقة",
+    "Broadcast Type": "نوع البث",
+    "Days Of The Week": "أيام الأسبوع",
+    "Select Days Of The Week": "اختر أيام الأسبوع",
+    "Program Status": "حالة البرنامج"
 }
