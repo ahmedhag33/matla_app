@@ -36,7 +36,7 @@ class ProgramController extends Controller
      * @param  int  $step
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function step(ProgramStepRequest $request, int $step)
+    public function step(ProgramStepRequest $request, $step)
     {
         try {
             return $this->returnData(['step' => $step, 'data' => $request->validated()]);

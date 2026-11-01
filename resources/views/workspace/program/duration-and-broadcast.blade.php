@@ -110,7 +110,7 @@
           {{ __('Previous') }}
       </a>
 
-      <a class="btn btn-matla" onclick="stepper.next()">
+      <a class="btn btn-matla btn-next-step" data-step="3">
           {{ __('Next') }}
       </a>
 

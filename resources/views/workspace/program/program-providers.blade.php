@@ -4,7 +4,7 @@
          <div class="col-md-6">
              <div class="form-group">
                  <label>{{ __('Select Presenters') }}
-                    <span class="text-muted">*</span>
+                     <span class="text-muted">*</span>
                  </label>
 
                  <select class="select-presenters" multiple="multiple" data-placeholder="{{ __('Select Presenters') }}"
@@ -25,7 +25,7 @@
          {{ __('Previous') }}
      </a>
 
-     <a class="btn btn-matla" onclick="stepper.next()">
+     <a class="btn btn-matla btn-next-step" data-step="2">
          {{ __('Next') }}
      </a>
 

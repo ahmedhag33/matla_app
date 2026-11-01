@@ -27,7 +27,7 @@
                   </label>
 
                   <input type="text" placeholder="{{ __('Slug') }}" class="form-control" id="slug"
-                      name="slug" pattern="[a-z0-9-]+">
+                      name="slug" oninput="this.value = this.value.replace(/[\u0600-\u06FF]/g, '')">
                   <span class="text-danger" data-error="slug"></span>
 
                   <small class="form-text text-muted">
@@ -85,7 +85,7 @@
 
       </div>
 
-      <a class="btn btn-matla" onclick="stepper.next()">
+      <a class="btn btn-matla btn-next-step" data-step="1">
           {{ __('Next') }}
       </a>
 
