@@ -2,7 +2,9 @@
 
 namespace App\Support;
 
-class WorkspaceRules
+use App\Support\RulesInterface;
+
+class WorkspaceRules implements RulesInterface
 {
     /**
      * Get the validation rules for a specific step.
