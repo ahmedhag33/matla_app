@@ -64,7 +64,7 @@
 
                         <form id="add-program-form">
                             @csrf
-
+                            <input type="hidden" name="program_id" value="">
                             <div class="bs-stepper-content">
 
                                 <!-- Step 1: Basic Information -->
@@ -85,7 +85,7 @@
                                                 </label>
 
                                                 <input type="text" placeholder="{{ __('Program Name') }}"
-                                                    class="form-control" id="program-name" name="program_name">
+                                                    class="form-control" id="program-name" name="name">
                                             </div>
                                         </div>
 
@@ -175,7 +175,7 @@
 
                                                 <select class="select-presenters" multiple="multiple"
                                                     data-placeholder="{{ __('Select Presenters') }}"
-                                                    style="width: 100%;">
+                                                    style="width: 100%;" name="presenters[]">
 
                                                     @foreach ($presenters as $presenter)
                                                         <option value="{{ $presenter->id }}">
@@ -292,7 +292,7 @@
 
                                                 <select class="select-days-of-the-week" multiple="multiple"
                                                     data-placeholder="{{ __('Select Days Of The Week') }}"
-                                                    style="width: 100%;">
+                                                    style="width: 100%;" name="days_of_the_week[]">
 
                                                     @foreach (broadcastDays() as $key => $item)
                                                         <option value="{{ $key }}">
