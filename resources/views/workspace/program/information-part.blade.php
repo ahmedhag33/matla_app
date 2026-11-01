@@ -27,7 +27,7 @@
                   </label>
 
                   <input type="text" placeholder="{{ __('Slug') }}" class="form-control" id="slug"
-                      name="slug">
+                      name="slug" pattern="[a-z0-9-]+">
                   <span class="text-danger" data-error="slug"></span>
 
                   <small class="form-text text-muted">
