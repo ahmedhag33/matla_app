@@ -15,6 +15,7 @@
 
                   <input type="text" placeholder="{{ __('Program Name') }}" class="form-control" id="program-name"
                       name="name">
+                  <span class="text-danger" data-error="name"></span>
               </div>
           </div>
 
@@ -27,6 +28,7 @@
 
                   <input type="text" placeholder="{{ __('Slug') }}" class="form-control" id="slug"
                       name="slug">
+                  <span class="text-danger" data-error="slug"></span>
 
                   <small class="form-text text-muted">
                       {{ __('Slug Description') }}
@@ -76,7 +78,7 @@
                       @endforeach
 
                       <input type="hidden" name="program_type_id" id="program_type_id">
-
+                      <span class="text-danger" data-error="program_type_id"></span>
                   </div>
               </div>
           </div>

@@ -3,7 +3,9 @@
      <div class="row">
          <div class="col-md-6">
              <div class="form-group">
-                 <label>{{ __('Select Presenters') }}</label>
+                 <label>{{ __('Select Presenters') }}
+                    <span class="text-muted">*</span>
+                 </label>
 
                  <select class="select-presenters" multiple="multiple" data-placeholder="{{ __('Select Presenters') }}"
                      style="width: 100%;" name="presenters[]">
@@ -13,8 +15,8 @@
                              {{ $presenter->name }}
                          </option>
                      @endforeach
-
                  </select>
+                 <span class="text-danger" data-error="presenters"></span>
              </div>
          </div>
      </div>

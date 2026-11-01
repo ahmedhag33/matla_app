@@ -5,7 +5,9 @@
 
           <div class="col-md-6">
               <div class="form-group">
-                  <label>{{ __('Broadcast Schedule') }}</label>
+                  <label>{{ __('Broadcast Schedule') }}
+                      <span class="text-muted">*</span>
+                  </label>
 
                   <div class="form-check">
                       @foreach (broadcastSchedule() as $key => $item)
@@ -18,6 +20,7 @@
                               </label>
                           </div>
                       @endforeach
+                      <span class="text-danger" data-error="broadcast_schedule"></span>
                   </div>
               </div>
           </div>
@@ -26,6 +29,7 @@
               <div class="form-group">
                   <label>
                       {{ __('Default Episode Duration') }}
+                      <span class="text-muted">*</span>
                   </label>
 
                   <div class="row">
@@ -60,7 +64,9 @@
 
           <div class="col-md-6">
               <div class="form-group">
-                  <label>{{ __('Broadcast Type') }}</label>
+                  <label>{{ __('Broadcast Type') }}
+                      <span class="text-muted">*</span>
+                  </label>
 
                   @foreach (broadcastMode() as $key => $item)
                       <div class="mb-2">
@@ -73,12 +79,15 @@
                       </div>
                   @endforeach
 
+                  <span class="text-danger" data-error="broadcast_mode"></span>
               </div>
           </div>
 
           <div class="col-md-6">
               <div class="form-group">
-                  <label>{{ __('Days Of The Week') }}</label>
+                  <label>{{ __('Days Of The Week') }}
+                      <span class="text-muted">*</span>
+                  </label>
 
                   <select class="select-days-of-the-week" multiple="multiple"
                       data-placeholder="{{ __('Select Days Of The Week') }}" style="width: 100%;"
@@ -91,6 +100,7 @@
                       @endforeach
 
                   </select>
+                  <span class="text-danger" data-error="days_of_the_week"></span>
               </div>
           </div>
 

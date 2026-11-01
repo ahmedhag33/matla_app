@@ -2,7 +2,9 @@
 
 
       <div class="form-group">
-          <label>{{ __('Program Status') }}</label>
+          <label>{{ __('Program Status') }}
+            <span class="text-muted">*</span>
+          </label>
           @foreach (broadcastStatus() as $key => $item)
               <div class="mb-2">
                   <input class="form-check-input" type="radio" name="program_status"
@@ -13,6 +15,7 @@
                   </label>
               </div>
           @endforeach
+          <span class="text-danger" data-error="program_status"></span>
           <a class="btn btn-matla" onclick="stepper.previous()">
               {{ __('Previous') }}
           </a>
