@@ -517,6 +517,6 @@ if (!function_exists('workspaceURL')) {
      */
     function workspaceURL(array $route)
     {
-        return config('app.url').'/'.(current_workspace() ? current_workspace()->slug : '').'/workspace'.implode('/', $route);
+        return config('app.url').'/'.(current_workspace() ? current_workspace()->slug : '').'/workspace/'.implode('/', $route);
     }
 }
