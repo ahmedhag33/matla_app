@@ -41,6 +41,12 @@ class NotfiyAcceptToWorkspace implements ShouldBroadcast
      */
     public string $url;
     /**
+     * The unique code for the notification.
+     *
+     * @var string
+     */
+    public string $code;
+    /**
      * Create a new event instance.
      *
      * @param int $workspaceId
@@ -60,6 +66,8 @@ class NotfiyAcceptToWorkspace implements ShouldBroadcast
         $this->memberName = $memberName;
         // Set the URL
         $this->url = $url;
+        // Generate a unique code for the notification
+        $this->code = uniqid();
     }
     /**
      * Get the channels the event should broadcast on.
@@ -83,6 +91,7 @@ class NotfiyAcceptToWorkspace implements ShouldBroadcast
             'date_time' => dateformat(now()) . ' ' . timeFormat(now()),
             'url' => $this->url,
             'photo' => asset('public/img/usersolidfull.svg'), // You can set the member's photo URL here if available
+            'code' => $this->code,
             'member_name' => $this->memberName,
             'workspace_id' => $this->workspaceId,
             'member_id' => $this->memberId,

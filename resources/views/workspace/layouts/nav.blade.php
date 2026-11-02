@@ -46,7 +46,7 @@
                  @if (auth()->guard('member')->user()->showNotifications(true)->count() > 0)
                      @foreach (auth()->guard('member')->user()->showNotifications(true) as $notification)
                          <a href="{{ $notification->data['url'] }}" class="dropdown-item read-notification"
-                             data-notification-id="{{ $notification->id }}">
+                             data-notification-code="{{ $notification->code }}">
                              <!-- Message Start -->
                              <div class="media">
                                  <img src="{{ $notification->data['photo'] }}" alt="User Avatar"

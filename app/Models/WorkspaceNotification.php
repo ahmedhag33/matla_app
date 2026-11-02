@@ -23,6 +23,7 @@ class WorkspaceNotification extends Model
      */
     protected $fillable = [
         'id',
+        'code',
         'member_id',
         'workspace_id',
         'notification_type',

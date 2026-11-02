@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function readNotification(Request $request)
     {
         try {
-            $notification = auth()->guard('member')->user()->notification()->find($request->input('id'));
+            $notification = auth()->guard('member')->user()->notification()->where('code', $request->input('code'))->first();
             // Mark the notification as read if it exists
             $notification->update(['read_at' => now()]);
             // Return a success response regardless of whether the notification existed or not

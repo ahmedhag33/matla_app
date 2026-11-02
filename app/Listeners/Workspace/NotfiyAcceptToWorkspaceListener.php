@@ -14,6 +14,7 @@ class NotfiyAcceptToWorkspaceListener
     public function handle(NotfiyAcceptToWorkspace $event): void
     {
         WorkspaceNotification::create([
+            'code' => $event->code,
             'member_id' => $event->memberId,
             'workspace_id' => $event->workspaceId,
             'notification_type' => WorkspaceMembers::class,

@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         workspace_notify_accept_channel.bind(
             'App\\Events\\Workspace\\NotfiyAcceptToWorkspace',
             function(data) {
-                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item">
+                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item" data-notification-code="${data.code}">
                          <!-- Message Start -->
                          <div class="media">
                            <img src="${data.photo}" alt="User Avatar"
@@ -99,14 +99,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
         $(document).on('click', '.read-notification', function(e) {
             e.preventDefault();
-            var notificationId = $(this).data('notification-id');
+            var notificationCode = $(this).data('notification-code');
             var url = $(this).attr('href');
             var notification = $(this);
             $.ajax({
                 url: "{{ route('workspace.dashboard.read-notification', ['slug' => request()->route('slug')]) }}",
                 method: "POST",
                 data: {
-                    id: notificationId,
+                    code: notificationCode,
                     _token: "{{ csrf_token() }}"
                 },
                 success: function() {
