@@ -1189,5 +1189,6 @@
     "The day of the week is required.": "يوم الأسبوع مطلوب.",
     "The day of the week must be a string.": "يجب أن يكون يوم الأسبوع نصًا.",
     "The selected day of the week is invalid.": "يوم الأسبوع المحدد غير صالح.",
-    "The days of the week is required.": "أيام الأسبوع مطلوبة."
+    "The days of the week is required.": "أيام الأسبوع مطلوبة.",
+    "Created by workspace manager.": "تم الإنشاء بواسطة مدير مساحة العمل."
 }
