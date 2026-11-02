@@ -509,3 +509,14 @@ if (!function_exists('defaultEpisodeDurationMinutes')) {
         return range(0, 60);
     }
 }
+if (!function_exists('workspaceURL')) {
+    /**
+     * Get Workspace URL
+     *
+     * @return string|null
+     */
+    function workspaceURL(array $route)
+    {
+        return config('app.url').'/'.(current_workspace() ? current_workspace()->slug : '').'/workspace'.implode('/', $route);
+    }
+}

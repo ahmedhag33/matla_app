@@ -30,6 +30,18 @@ class ProgramController extends Controller
         return view('workspace.program.index', compact('programs', 'programsTypes', 'presenters'));
     }
     /**
+     * retrieve the program details by slug.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\View\View
+     */
+    public function details($slug)
+    {
+        $program = Program::with(['type', 'createdBy', 'presenters', 'broadcastDays'])->where('slug', $slug)->firstOrFail();
+        // Return the program details view with the retrieved program.
+        return view('workspace.program.details.index', compact('program'));
+    }
+    /**
      * Handle the program step request.
      *
      * @param  ProgramStepRequest  $request
