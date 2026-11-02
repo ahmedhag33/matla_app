@@ -27,38 +27,16 @@
                                     <span class="bs-stepper-label">{{ __('Basic Information') }}</span>
                                 </button>
                             </div>
-
-                            <div class="line"></div>
-
-                            <div class="step" data-target="#program-providers-part">
-                                <button type="button" class="step-trigger" role="tab"
-                                    aria-controls="program-providers-part" id="program-providers-part-trigger">
-                                    <span class="bs-stepper-circle-matla">2</span>
-                                    <span class="bs-stepper-label">{{ __('Program Providers') }}</span>
-                                </button>
-                            </div>
-
                             <div class="line"></div>
 
                             <div class="step" data-target="#duration-and-broadcast-part">
                                 <button type="button" class="step-trigger" role="tab"
                                     aria-controls="duration-and-broadcast-part"
                                     id="duration-and-broadcast-part-trigger">
-                                    <span class="bs-stepper-circle-matla">3</span>
+                                    <span class="bs-stepper-circle-matla">2</span>
                                     <span class="bs-stepper-label">{{ __('Duration and Broadcast') }}</span>
                                 </button>
                             </div>
-
-                            <div class="line"></div>
-
-                            <div class="step" data-target="#additional-settings-part">
-                                <button type="button" class="step-trigger" role="tab"
-                                    aria-controls="additional-settings-part" id="additional-settings-part-trigger">
-                                    <span class="bs-stepper-circle-matla">4</span>
-                                    <span class="bs-stepper-label">{{ __('Additional Settings') }}</span>
-                                </button>
-                            </div>
-
                         </div>
                         <!-- End Stepper Header -->
 
@@ -70,19 +48,9 @@
                                 <!-- Step 1: Basic Information -->
                                 @include('workspace.program.information-part')
                                 <!-- End Step 1 -->
-                                <!-- Step 2: Program Providers -->
-                                @include('workspace.program.program-providers')
-                                <!-- End Step 2 -->
-
-
-                                <!-- Step 3: Duration and Broadcast -->
+                                <!-- Step 2: Duration and Broadcast -->
                                 @include('workspace.program.duration-and-broadcast')
-                                <!-- End Step 3 -->
-
-
-                                <!-- Step 4: Additional Settings -->
-                                @include('workspace.program.additional-settings')
-                                <!-- End Stepper Content -->
+                                <!-- End Step 2 -->
 
                         </form>
 

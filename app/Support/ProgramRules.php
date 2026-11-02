@@ -2,10 +2,8 @@
 
 namespace App\Support;
 
-use App\Models\WorkspaceRoles;
 use App\Service\Enum\BroadcastSchedule;
 use App\Service\Enum\BroadcastMode;
-use App\Service\Enum\ProgramStatus;
 use Illuminate\Validation\Rule;
 
 class ProgramRules implements RulesInterface
@@ -42,28 +40,12 @@ class ProgramRules implements RulesInterface
                 ]
             ],
             2 => [
-                'presenters' => [
-                    'required',
-                    'array',
-                    'min:1',
-                ],
-
-                'presenters.*' => [
-                    'required',
-                    'integer',
-                    Rule::exists('members', 'id')->whereIn('workspace_role_id',WorkspaceRoles::where('slug', 'presenter')->pluck('id')),
-                        ]
-            ],
-            3 => [
                 'broadcast_schedule' => ['required', 'string', Rule::enum(BroadcastSchedule::class)],
                 'duration_hours' => ['required', 'integer'],
                 'duration_minutes' => ['required', 'integer', 'min:0', 'max:60'],
                 'broadcast_mode' => ['required', 'string', Rule::enum(BroadcastMode::class)],
                 'days_of_the_week' => ['required', 'array', 'min:1'],
                 'days_of_the_week.*' => ['required', 'string', Rule::in(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])]
-            ],
-            4 => [
-                'status' => ['required', 'string', Rule::enum(ProgramStatus::class)],
             ],
             default => [],
         };
@@ -96,9 +78,6 @@ class ProgramRules implements RulesInterface
             'program_type_id.required' => __('The program type is required.'),
             'program_type_id.integer' => __('The program type must be an integer.'),
             'program_type_id.exists' => __('The selected program type is invalid.'),
-            'presenters.required' => __('The presenter is required.'),
-            'presenters.*.integer' => __('The presenter must be an integer.'),
-            'presenters.*.exists' => __('The selected presenter is invalid.'),
             'broadcast_schedule.required' => __('The broadcast schedule is required.'),
             'broadcast_schedule.string' => __('The broadcast schedule must be a string.'),
             'broadcast_schedule.enum' => __('The selected broadcast schedule is invalid.'),
@@ -116,9 +95,6 @@ class ProgramRules implements RulesInterface
             'day_of_the_week.required' => __('The day of the week is required.'),
             'day_of_the_week.string' => __('The day of the week must be a string.'),
             'day_of_the_week.in' => __('The selected day of the week is invalid.'),
-            'status.required' => __('The program status is required.'),
-            'status.string' => __('The program status must be a string.'),
-            'status.enum' => __('The selected program status is invalid.'),
             'days_of_the_week.required' => __('The days of the week is required.'),
             'days_of_the_week.array' => __('The days of the week must be an array.'),
             'days_of_the_week.min' => __('The days of the week must have at least one day.')
