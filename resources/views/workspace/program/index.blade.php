@@ -19,9 +19,11 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
-                            <span><i class="fas fa-plus"></i></span>
-                        </button>
+                        @if (auth()->guard('member')->user()->hasPermission('add-program'))
+                            <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
+                                <span><i class="fas fa-plus"></i></span>
+                            </button>
+                        @endif
                     </h3>
                 </div>
                 <div class="card-body">
@@ -52,10 +54,21 @@
                                                     <p class="mb-3">
                                                         {{ $program->description }}
                                                     </p>
+                                                    <p class="mb-3">
+                                                        <i class="fas fa-calendar-day"></i>
+                                                        @foreach ($program->broadcastDays as $day)
+                                                            <span class="badge bg-light">{{ $day->day_at_from_enum }}</span>
+                                                        @endforeach
+                                                    </p>
                                                     <div class="program-details">
-                                                        <span>{{ $program->broadcast_schedule_attribute }}</span>
-                                                        <span>{{ $program->duration_attribute }}</span>
-                                                        <span>0</span>
+                                                        <span>
+                                                            <i class="fas fa-calendar-alt"></i>
+                                                            {{ $program->broadcast_schedule_attribute }}</span>
+                                                        <span>
+                                                            <i class="far fa-clock"></i>
+                                                            {{ $program->default_duration_minutes_to_string }}</span>
+                                                        <i class="fas fa-podcast"></i>
+                                                        {!! $program->broadcast_mode_attribute !!}
                                                     </div>
 
                                                 </div>

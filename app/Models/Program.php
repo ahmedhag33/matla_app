@@ -138,7 +138,7 @@ class Program extends Model
     {
         return Attribute::make(
             get: fn() => match ($this->broadcast_mode) {
-                BroadcastMode::LIVE->value => $this->span('secondary', __('live')),
+                BroadcastMode::LIVE->value => $this->span('light', __('live')),
                 BroadcastMode::RECORDED->value => $this->span('info', __('recorded')),
                 default => 'unknown',
             },
@@ -174,6 +174,17 @@ class Program extends Model
                 BroadcastSchedule::MONTHLY->value => __('monthly'),
                 default => 'unknown',
             },
+        );
+    }
+    /**
+     * Interact with the defaultDurationMinutesToString attribute.
+     *
+     * @return Attribute
+     */
+    public function defaultDurationMinutesToString(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => create_duration_in_hours_and_minutes($this->default_duration_minutes),
         );
     }
 }

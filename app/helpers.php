@@ -515,7 +515,7 @@ if (!function_exists('workspaceURL')) {
      *
      * @return string|null
      */
-    function workspaceURL(string $workspaceSlug,array $route)
+    function workspaceURL(string $workspaceSlug, array $route)
     {
         return config('app.url') . '/' . $workspaceSlug . '/workspace/' . implode('/', $route);
     }
@@ -543,5 +543,21 @@ if (!function_exists('create_all_duration_minutes')) {
     function create_all_duration_minutes(int $hours, int $minutes): int
     {
         return create_hours_to_minutes($hours) + $minutes;
+    }
+}
+if (!function_exists('create_duration_in_hours_and_minutes')) {
+    /**
+     * Convert total minutes to hours and minutes
+     *
+     * @param int $totalMinutes
+     * @return string
+     */
+    function create_duration_in_hours_and_minutes(int $totalMinutes): string
+    {
+        $hours = intdiv($totalMinutes, 60);
+        // Calculate remaining minutes after extracting hours
+        $minutes = $totalMinutes % 60;
+        // Return formatted string as "Xh Ym"
+        return $hours .'  '. __('Hour') . '  ' . $minutes . '  ' . __('Minute');
     }
 }
