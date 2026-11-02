@@ -64,7 +64,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         var workspace_notify_accept_channel = pusher.subscribe(channelName);
 
-        var program_created_channel = pusher.subscribe(channelName);
+        var program_created_name = 'workspace-program-' + workspace_id + '-' + member_id;
+        var program_created_channel = pusher.subscribe(program_created_name);
 
         workspace_notify_accept_channel.bind(
             'App\\Events\\Workspace\\NotfiyAcceptToWorkspace',

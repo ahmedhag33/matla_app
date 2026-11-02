@@ -493,9 +493,9 @@ if (!function_exists('defaultEpisodeDurationHours')) {
      *
      * @return string
      */
-    function defaultEpisodeDurationHours() : array
+    function defaultEpisodeDurationHours(): array
     {
-       return range(1,10);
+        return range(1, 10);
     }
 }
 if (!function_exists('defaultEpisodeDurationMinutes')) {
@@ -504,7 +504,7 @@ if (!function_exists('defaultEpisodeDurationMinutes')) {
      *
      * @return array
      */
-    function defaultEpisodeDurationMinutes() : array
+    function defaultEpisodeDurationMinutes(): array
     {
         return range(0, 60);
     }
@@ -517,6 +517,31 @@ if (!function_exists('workspaceURL')) {
      */
     function workspaceURL(array $route)
     {
-        return config('app.url').'/'.(current_workspace() ? current_workspace()->slug : '').'/workspace/'.implode('/', $route);
+        return config('app.url') . '/' . (current_workspace() ? current_workspace()->slug : '') . '/workspace/' . implode('/', $route);
+    }
+}
+if (!function_exists('create_hours_to_minutes')) {
+    /**
+     * Convert hours to minutes
+     *
+     * @param int $hours
+     * @return int
+     */
+    function create_hours_to_minutes(int $hours): int
+    {
+        return $hours * 60;
+    }
+}
+if (!function_exists('create_all_duration_minutes')) {
+    /**
+     * Convert hours and minutes to total minutes
+     *
+     * @param int $hours
+     * @param int $minutes
+     * @return int
+     */
+    function create_all_duration_minutes(int $hours, int $minutes): int
+    {
+        return create_hours_to_minutes($hours) + $minutes;
     }
 }

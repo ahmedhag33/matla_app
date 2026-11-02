@@ -33,9 +33,13 @@
                                         <div class="list-group-item program-item">
                                             <div class="row align-items-center">
                                                 <div class="col-auto program-actions">
-                                                    <button class="btn btn-matla">
+                                                    <a href="{{ route('workspace.program.details', [
+                                                        'slug' => request()->route('slug'),
+                                                        'programSlug' => $program->slug,
+                                                    ]) }}"
+                                                        class="btn btn-matla">
                                                         {{ __('Manage Episodes') }}
-                                                    </button>
+                                                    </a>
                                                 </div>
                                                 <div class="col px-4 program-info">
                                                     {!! $program->status_attribute !!}
@@ -82,6 +86,11 @@
     @include('workspace.program.create')
 @endsection
 @section('script')
+    @if (session()->has('success-message-program'))
+        <script>
+            toastr.success("{{ session('success-message-program') }}");
+        </script>
+    @endif
     <script>
         const $form = $('#add-program-form');
         const panels = ['information-part', 'program-providers-part', 'duration-and-broadcast-part'];
@@ -188,6 +197,49 @@
                 success: () => stepper.next(),
                 error: (xhr) => handleFail(xhr)
             });
+        });
+        $(document).on('click', '.btn-save', function(e) {
+            e.preventDefault();
+            var formData = new FormData($($form)[0]);
+            $.ajax({
+                type: 'post',
+                enctype: "multipart/form-data",
+                url: "{{ route('workspace.program.create', ['slug' => request()->route('slug')]) }}",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function() {
+                    $('#add-program-loading').show();
+                    $form.hide();
+                },
+                error: function(data) {
+                    $('#add-program-loading').hide();
+                    $form.show();
+                    if (data.status === 422) {
+                        printError(data.responseJSON.message[0]);
+                    } else {
+                        toastr.error(
+                            data.responseJSON.message ||
+                            "{{ __('An error occurred') }}"
+                        );
+                    }
+                },
+                complete: function() {
+                    $('#add-program-loading').hide();
+                    $form.show();
+                },
+                success: function(data) {
+                    window.location.href = data.url;
+                }
+            });
+
+            function printError(errors) {
+                $.each(errors, function(index, value) {
+                    $('.' + value.field + '_err').html(value.messages);
+                });
+            }
         });
     </script>
 @endsection

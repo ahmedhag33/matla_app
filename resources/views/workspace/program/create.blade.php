@@ -53,7 +53,10 @@
                                 <!-- End Step 2 -->
 
                         </form>
-
+                        <div id="add-program-loading" class="spinner-grow text-dark" role="status"
+                            style="display: none;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
                     <!-- End Stepper -->
 

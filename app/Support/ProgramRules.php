@@ -14,7 +14,7 @@ class ProgramRules implements RulesInterface
      * @param int $step
      * @return array
      */
-    public static function step(int $step): array
+    public static function step($step): array
     {
         return match ($step) {
             1 => [
@@ -57,7 +57,7 @@ class ProgramRules implements RulesInterface
      */
     public static function all(): array
     {
-        return array_merge(self::step(1), self::step(2), self::step(3), self::step(4));
+        return array_merge(self::step(1), self::step(2));
     }
     /**
      * Get the custom validation messages.

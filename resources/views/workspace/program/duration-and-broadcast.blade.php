@@ -109,9 +109,8 @@
       <a class="btn btn-matla" onclick="stepper.previous()">
           {{ __('Previous') }}
       </a>
-
-      <a class="btn btn-matla btn-next-step" data-step="3">
-          {{ __('Next') }}
-      </a>
+      <button type="submit" class="btn btn-matla btn-save">
+          {{ __('Save') }}
+      </button>
 
   </div>

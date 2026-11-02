@@ -33,17 +33,30 @@ class ProgramCreated implements ShouldBroadcast
      *
      * @var string
      */
-    public string $code;
+    public string $code {
+        set {
+            $this->code = $value;
+        }
+        get {
+            return $this->code;
+        }
+    }
     /**
      * The ID of the member who created the program.
      *
-     * @var string
+     * @var int
      */
-    public string $member_id;
+    public int $member_id;
+    /**
+     * The ID of the workspace.
+     *
+     * @var int
+     */
+    public int $workspace_id;
     /**
      * Create a new event instance.
      */
-    public function __construct($program_id, $program_name, $program_slug, $member_id)
+    public function __construct(int $program_id, string $program_name, string $program_slug, int $member_id, int $workspace_id)
     {
         $this->program_id = $program_id;
         // Set the program name
@@ -54,6 +67,8 @@ class ProgramCreated implements ShouldBroadcast
         $this->code = uniqid();
         // Set the member ID
         $this->member_id = $member_id;
+        // Set the workspace ID
+        $this->workspace_id = $workspace_id;
     }
     /**
      * Get the channels the event should broadcast on.
@@ -62,7 +77,7 @@ class ProgramCreated implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        return ['workspace-program-' . current_workspace()->id . '-' . $this->member_id];
+        return ['workspace-program-' . $this->workspace_id . '-' . $this->member_id];
     }
     /**
      * Get the data to broadcast with the event.
@@ -73,7 +88,7 @@ class ProgramCreated implements ShouldBroadcast
     {
         return [
             'code' => $this->code,
-            'message' => __('New Program Created').': ' . $this->program_name.' '.__('Created by workspace manager.'),
+            'message' => __('New Program Created') . ': ' . $this->program_name . ' ' . __('Created by workspace manager.'),
             'title' => __('New Program Created'),
             'date_time' => dateformat(now()) . ' ' . timeFormat(now()),
             'url' => workspaceURL(['programs', $this->program_slug]),
