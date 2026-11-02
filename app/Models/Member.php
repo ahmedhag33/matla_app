@@ -104,6 +104,16 @@ class Member extends Authenticatable
         });
     }
     /**
+     * Scope a query to only include members not equal to the current user.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeNotEqualCurrentUser(Builder $query)
+    {
+        return $query->where('id', '!=', auth()->guard('member')->id());
+    }
+    /**
      * Scope a query to only include members with the specified role.
      *
      * @param  Builder $query
@@ -114,8 +124,8 @@ class Member extends Authenticatable
     {
         return $query->whereIn('workspace_role_id', function ($q) use ($role) {
             $q->select('id')
-            ->from((new WorkspaceRoles())->getTable())
-            ->where('slug', $role);
+                ->from((new WorkspaceRoles())->getTable())
+                ->where('slug', $role);
         });
     }
     /**
