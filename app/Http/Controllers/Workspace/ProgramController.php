@@ -114,7 +114,8 @@ class ProgramController extends Controller
                         $result['program']->name,
                         $result['program']->slug,
                         $member->id,
-                        current_workspace()->id
+                        current_workspace()->id,
+                        current_workspace()->slug
                     ));
                 }
             }

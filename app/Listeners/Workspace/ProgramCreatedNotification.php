@@ -22,7 +22,7 @@ class ProgramCreatedNotification
             'title' => __('New Program Created'),
             'message' =>__('New Program Created').': ' . $event->program_name.' '.__('Created by workspace manager.'),
             'data' => [
-                'url' => workspaceURL(['programs', $event->program_slug]),
+                'url' => workspaceURL($event->workspace_slug,['programs', $event->program_slug]),
                 'photo' => asset('public/img/program.png'), // You can set the member's photo URL here if available
             ],
         ]);

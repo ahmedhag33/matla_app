@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         workspace_notify_accept_channel.bind(
             'App\\Events\\Workspace\\NotfiyAcceptToWorkspace',
             function(data) {
-                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item" data-notification-code="${data.code}">
+                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item read-notification" data-notification-code="${data.code}">
                          <!-- Message Start -->
                          <div class="media">
                            <img src="${data.photo}" alt="User Avatar"
@@ -101,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         program_created_channel.bind(
             'App\\Events\\Workspace\\ProgramCreated',
             function(data) {
-                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item" data-notification-code="${data.code}">
+                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item read-notification" data-notification-code="${data.code}">
                          <!-- Message Start -->
                          <div class="media">
                            <img src="${data.photo}" alt="User Avatar"

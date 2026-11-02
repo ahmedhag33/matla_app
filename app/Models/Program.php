@@ -170,7 +170,7 @@ class Program extends Model
         return Attribute::make(
             get: fn() => match ($this->broadcast_schedule) {
                 BroadcastSchedule::DAILY->value => __('daily'),
-                BroadcastSchedule::WEEKLY->value => __('scheduled'),
+                BroadcastSchedule::WEEKLY->value => __('weekly'),
                 BroadcastSchedule::MONTHLY->value => __('monthly'),
                 default => 'unknown',
             },

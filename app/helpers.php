@@ -515,9 +515,9 @@ if (!function_exists('workspaceURL')) {
      *
      * @return string|null
      */
-    function workspaceURL(array $route)
+    function workspaceURL(string $workspaceSlug,array $route)
     {
-        return config('app.url') . '/' . (current_workspace() ? current_workspace()->slug : '') . '/workspace/' . implode('/', $route);
+        return config('app.url') . '/' . $workspaceSlug . '/workspace/' . implode('/', $route);
     }
 }
 if (!function_exists('create_hours_to_minutes')) {

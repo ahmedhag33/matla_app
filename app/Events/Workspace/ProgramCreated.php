@@ -54,9 +54,15 @@ class ProgramCreated implements ShouldBroadcast
      */
     public int $workspace_id;
     /**
+     * The slug of the workspace.
+     *
+     * @var string
+     */
+    public string $workspace_slug;
+    /**
      * Create a new event instance.
      */
-    public function __construct(int $program_id, string $program_name, string $program_slug, int $member_id, int $workspace_id)
+    public function __construct(int $program_id, string $program_name, string $program_slug, int $member_id, int $workspace_id, string $workspace_slug)
     {
         $this->program_id = $program_id;
         // Set the program name
@@ -69,6 +75,8 @@ class ProgramCreated implements ShouldBroadcast
         $this->member_id = $member_id;
         // Set the workspace ID
         $this->workspace_id = $workspace_id;
+
+        $this->workspace_slug = $workspace_slug;
     }
     /**
      * Get the channels the event should broadcast on.
@@ -91,7 +99,7 @@ class ProgramCreated implements ShouldBroadcast
             'message' => __('New Program Created') . ': ' . $this->program_name . ' ' . __('Created by workspace manager.'),
             'title' => __('New Program Created'),
             'date_time' => dateformat(now()) . ' ' . timeFormat(now()),
-            'url' => workspaceURL(['programs', $this->program_slug]),
+            'url' => workspaceURL($this->workspace_slug,['programs', $this->program_slug]),
             'photo' => asset('public/img/program.png'), // You can set the member's photo URL here if available
         ];
     }
