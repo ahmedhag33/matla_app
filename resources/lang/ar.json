@@ -1193,5 +1193,6 @@
     "Created by workspace manager.": "تم الإنشاء بواسطة مدير مساحة العمل.",
     "Program created successfully.": "تم إنشاء البرنامج بنجاح.",
     "Episodes": "الحلقات",
-    "Update Status": "تحديث الحالة "
+    "Update Status": "تحديث الحالة ",
+    "Program not found.": "البرنامج غير موجود."
 }

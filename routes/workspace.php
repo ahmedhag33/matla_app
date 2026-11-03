@@ -116,5 +116,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to create a new program
         Route::post('/', 'create')->name('workspace.program.create')
             ->middleware('check-member-permission:add-program');
+        // add route to get program by ID
+        Route::post('/get-by-id', 'getById')->name('workspace.program.get-by-id')
+            ->middleware('check-member-permission:edit-program');
     });
 });

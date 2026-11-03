@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\ProgramCreated;
+use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\ProgramStepRequest;
 use App\Models\Member;
@@ -11,6 +12,7 @@ use App\Models\ProgramTypes;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
@@ -39,7 +41,7 @@ class ProgramController extends Controller
     public function details($programSlug)
     {
         $program = Program::with(['type', 'createdBy', 'presenters', 'broadcastDays'])
-        ->where('slug', $programSlug)->first();
+            ->where('slug', $programSlug)->first();
         // Return the program details view with the retrieved program.
         return view('workspace.program.details.index', compact('program'));
     }
@@ -60,6 +62,14 @@ class ProgramController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
         }
     }
+    /**
+     * Handle the program creation request.
+     *
+     * @param  ProgramStepRequest  $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws HttpResponseException
+     * @throws \Exception
+     */
     public function create(ProgramStepRequest $request)
     {
         try {
@@ -128,6 +138,37 @@ class ProgramController extends Controller
             ]);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
+     * Get a program by its ID along with its broadcast days.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
+    public function getById(Request $request)
+    {
+        try {
+            $programId = $request->input('program_id');
+            // get the program by ID with its broadcast days
+            $program = Program::with('broadcastDays')->where('id', $programId);
+            // Check if the program exists in the database
+            if ($program->doesntExist()) {
+                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
+            }
+            // Get the first result from the query
+            $program = $program->first();
+            // Return the program with its broadcast days
+            return $this->returnData([
+                'error' => false,
+                'program' => $program,
+            ]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }

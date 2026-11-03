@@ -48,19 +48,27 @@
                                                                 <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-                                                                <a class="dropdown-item" data-edit-program="{{ $program->id }}" href="javascript:void(0)">
+                                                                <a class="dropdown-item edit-program"
+                                                                    data-edit-program="{{ $program->id }}"
+                                                                    href="javascript:void(0)">
                                                                     <i class="fas fa-edit"></i>
                                                                     {{ __('Edit') }}
                                                                 </a>
-                                                                <a class="dropdown-item" data-delete-program="{{ $program->id }}" href="javascript:void(0)">
+                                                                <a class="dropdown-item"
+                                                                    data-delete-program="{{ $program->id }}"
+                                                                    href="javascript:void(0)">
                                                                     <i class="fas fa-recycle"></i>
                                                                     {{ __('Delete') }}
                                                                 </a>
-                                                                <a class="dropdown-item" data-select-presenters="{{ $program->id }}" href="javascript:void(0)">
+                                                                <a class="dropdown-item"
+                                                                    data-select-presenters="{{ $program->id }}"
+                                                                    href="javascript:void(0)">
                                                                     <i class="fas fa-users"></i>
                                                                     {{ __('Select Presenters') }}
                                                                 </a>
-                                                                <a class="dropdown-item" data-update-status="{{ $program->id }}" href="javascript:void(0)">
+                                                                <a class="dropdown-item"
+                                                                    data-update-status="{{ $program->id }}"
+                                                                    href="javascript:void(0)">
                                                                     <i class="fas fa-sync-alt"></i>
                                                                     {{ __('Update Status') }}
                                                                 </a>
@@ -313,6 +321,28 @@
                     $('.' + value.field + '_err').html(value.messages);
                 });
             }
+        });
+        $(document).on('click', '.edit-program', function() {
+            var programId = $(this).data('edit-program');
+            var slug = "{{ current_Workspace()->slug }}";
+            $.ajax({
+                url: "{{ route('workspace.program.get-by-id', ['slug' => request()->route('slug')]) }}",
+                method: 'POST',
+                data: {
+                    program_id: programId,
+                    _token: "{{ csrf_token() }}"
+                },
+                headers: {
+                    'Accept': 'application/json'
+                },
+                success: function(data) {
+                    // Handle the program data here, e.g., populate a form for editing
+                    console.log(data.program);
+                },
+                error: function(xhr) {
+                    toastr.error(xhr.responseJSON.message || "{{ __('An error occurred') }}");
+                }
+            });
         });
     </script>
 @endsection
