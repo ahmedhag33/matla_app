@@ -101,6 +101,13 @@ class ProgramController extends Controller
                 $program->save();
                 // Capture changed values
                 $changes = $program->getChanges();
+                // Get old broadcast days before synchronization
+                $oldDays = $program->broadcastDays()
+                    ->get()
+                    ->sortBy('day')
+                    ->map(fn($broadcastDay) => $broadcastDay->day_at_from_enum)
+                    ->values()
+                    ->all();
                 // Delete existing broadcast days before synchronizing new ones.
                 $program->broadcastDays()->delete();
                 // Synchronize broadcast days
@@ -109,12 +116,21 @@ class ProgramController extends Controller
                         ->map(fn($day) => ['day' => $day])
                         ->all()
                 );
+                // Get new broadcast days after synchronization
+                $newDays = $program->broadcastDays()
+                    ->get()
+                    ->sortBy('day')
+                    ->map(fn($broadcastDay) => $broadcastDay->day_at_from_enum)
+                    ->values()
+                    ->all();
                 return [
                     'program' => $program,
                     'is_new' => $isNew,
                     'old_values' => $oldValues,
                     'changes' => $changes,
                     'sync_changes' => $syncChanges,
+                    'old_days' => $oldDays,
+                    'new_days' => $newDays,
                 ];
             });
             $members = Member::notEqualCurrentUser()->inWorkspace()->get();
@@ -142,6 +158,20 @@ class ProgramController extends Controller
                             __('Program name updated.'),
                             $old['name'],
                             $new['name'],
+                            $result['program']->slug,
+                            $member->id,
+                            current_workspace()->id,
+                            current_workspace()->slug
+                        ));
+                    }
+                    if ($result['old_days'] !== $result['new_days']) {
+                        $oldDaysString = implode(', ', $result['old_days']);
+                        $newDaysString = implode(', ', $result['new_days']);
+                        event(new ProgramUpdated(
+                            $result['program']->id,
+                            __('Program broadcast days updated.'),
+                            $oldDaysString,
+                            $newDaysString,
                             $result['program']->slug,
                             $member->id,
                             current_workspace()->id,

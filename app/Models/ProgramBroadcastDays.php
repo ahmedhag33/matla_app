@@ -24,6 +24,12 @@ class ProgramBroadcastDays extends Model
         'day',
     ];
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['day_at_from_enum'];
+    /**
      * Interact with the dayAt enum attribute.
      *
      * @return Attribute

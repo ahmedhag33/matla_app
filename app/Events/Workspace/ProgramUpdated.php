@@ -120,7 +120,7 @@ class ProgramUpdated implements ShouldBroadcast
         return [
             'code' => $this->code,
             'message' => $this->message . ' ' . __('From') . ' ' . $this->old . ' ' . __('To') . ' ' . $this->new,
-            'title' => __('New Program Created'),
+            'title' => __('Program Updated'),
             'date_time' => dateformat(now()) . ' ' . timeFormat(now()),
             'url' => workspaceURL($this->workspace_slug, ['programs', $this->program_slug]),
             'photo' => asset('public/img/program.png'), // You can set the member's photo URL here if available
