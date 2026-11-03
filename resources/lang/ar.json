@@ -1107,7 +1107,7 @@
     "Invitation Expiration Date": "تاريخ انتهاء الدعوة",
     "New Membership Invitation": "دعوة لتسجيل عضوية جديدة فى",
     "Verify Your Account": "يممكنك التحقق من حسابك من هنا",
-    "Email Verification":"التحقق من البريد الإلكتروني",
+    "Email Verification": "التحقق من البريد الإلكتروني",
     "Please check your email for the verification link.": "يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق.",
     "Invitation Accepted": "تم قبول الدعوة للانضمام لمساحة العمل من قبل ",
     "New Member": "عضو جديد",
@@ -1191,5 +1191,7 @@
     "The selected day of the week is invalid.": "يوم الأسبوع المحدد غير صالح.",
     "The days of the week is required.": "أيام الأسبوع مطلوبة.",
     "Created by workspace manager.": "تم الإنشاء بواسطة مدير مساحة العمل.",
-    "Program created successfully.": "تم إنشاء البرنامج بنجاح."
+    "Program created successfully.": "تم إنشاء البرنامج بنجاح.",
+    "Episodes": "الحلقات",
+    "Update Status": "تحديث الحالة "
 }

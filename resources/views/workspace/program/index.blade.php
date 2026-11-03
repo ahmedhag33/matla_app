@@ -34,67 +34,127 @@
                                     @forelse ($programs as $program)
                                         <div class="list-group-item program-item">
                                             <div class="row align-items-center">
+
+                                                {{-- Program Actions --}}
                                                 <div class="col-auto program-actions">
-                                                    <a href="{{ route('workspace.program.details', [
-                                                        'slug' => request()->route('slug'),
-                                                        'programSlug' => $program->slug,
-                                                    ]) }}"
-                                                        class="btn btn-matla">
-                                                        {{ __('Manage Episodes') }}
-                                                    </a>
+                                                    <div class="tools">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-matla">
+                                                                <i class="fas fa-cog"></i>
+                                                            </button>
+                                                            <button type="button"
+                                                                class="btn btn-default dropdown-toggle dropdown-icon"
+                                                                data-toggle="dropdown">
+                                                                <span class="sr-only">Toggle Dropdown</span>
+                                                            </button>
+                                                            <div class="dropdown-menu" role="menu">
+                                                                <a class="dropdown-item" data-edit-program="{{ $program->id }}" href="javascript:void(0)">
+                                                                    <i class="fas fa-edit"></i>
+                                                                    {{ __('Edit') }}
+                                                                </a>
+                                                                <a class="dropdown-item" data-delete-program="{{ $program->id }}" href="javascript:void(0)">
+                                                                    <i class="fas fa-recycle"></i>
+                                                                    {{ __('Delete') }}
+                                                                </a>
+                                                                <a class="dropdown-item" data-select-presenters="{{ $program->id }}" href="javascript:void(0)">
+                                                                    <i class="fas fa-users"></i>
+                                                                    {{ __('Select Presenters') }}
+                                                                </a>
+                                                                <a class="dropdown-item" data-update-status="{{ $program->id }}" href="javascript:void(0)">
+                                                                    <i class="fas fa-sync-alt"></i>
+                                                                    {{ __('Update Status') }}
+                                                                </a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('workspace.program.details', [
+                                                                        'slug' => request()->route('slug'),
+                                                                        'programSlug' => $program->slug,
+                                                                    ]) }}">
+                                                                    <i class="fas fa-list"></i>
+                                                                    {{ __('Manage Episodes') }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col px-4 program-info">
+
+                                                {{-- Program Information --}}
+                                                <div class="col program-info px-4">
+
                                                     {!! $program->status_attribute !!}
+
                                                     <h3>{{ $program->name }}</h3>
+
                                                     <span class="program-type">
                                                         <img src="{{ $program->type->icon_at_full }}"
                                                             alt="{{ $program->type->name }}">
+
                                                         {{ $program->type->name }}
                                                     </span>
+
                                                     <p class="mb-3">
                                                         {{ $program->description }}
                                                     </p>
-                                                    <p class="mb-3">
+
+                                                    {{-- Broadcast Days --}}
+                                                    <div class="mb-3">
                                                         <i class="fas fa-calendar-day"></i>
+
                                                         @foreach ($program->broadcastDays as $day)
-                                                            <span class="badge bg-light">{{ $day->day_at_from_enum }}</span>
+                                                            <span class="badge bg-light">
+                                                                {{ $day->day_at_from_enum }}
+                                                            </span>
                                                         @endforeach
-                                                    </p>
+                                                    </div>
+
+                                                    {{-- Program Details --}}
                                                     <div class="program-details">
+
                                                         <span>
                                                             <i class="fas fa-calendar-alt"></i>
-                                                            {{ $program->broadcast_schedule_attribute }}</span>
+                                                            {{ $program->broadcast_schedule_attribute }}
+                                                        </span>
+
                                                         <span>
                                                             <i class="far fa-clock"></i>
-                                                            {{ $program->default_duration_minutes_to_string }}</span>
-                                                        <i class="fas fa-podcast"></i>
-                                                        {!! $program->broadcast_mode_attribute !!}
+                                                            {{ $program->default_duration_minutes_to_string }}
+                                                        </span>
+
+                                                        <span>
+                                                            <i class="fas fa-podcast"></i>
+                                                            {!! $program->broadcast_mode_attribute !!}
+                                                        </span>
+
                                                     </div>
 
                                                 </div>
+
+                                                {{-- Program Image --}}
                                                 <div class="col-auto">
                                                     <img class="img-fluid program-image"
-                                                        src="{{ asset('public/img/program.png') }}" alt="Program">
+                                                        src="{{ asset('public/img/program.png') }}"
+                                                        alt="{{ $program->name }}">
                                                 </div>
-                                            </div>
-                                        </div>
-                                    @empty
-                                        <div class="error-page">
 
-                                            <div class="error-content">
-                                                <h3><i class="fas fa-exclamation-triangle text-warning-matla"></i>
-                                                    {{ __('No Programs Found') }}</h3>
                                             </div>
-                                            <!-- /.error-content -->
                                         </div>
-                                    @endforelse
                                 </div>
+                            @empty
+                                <div class="error-page">
+
+                                    <div class="error-content">
+                                        <h3><i class="fas fa-exclamation-triangle text-warning-matla"></i>
+                                            {{ __('No Programs Found') }}</h3>
+                                    </div>
+                                    <!-- /.error-content -->
+                                </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div> <!-- /.content-wrapper -->
     @include('workspace.program.create')
 @endsection

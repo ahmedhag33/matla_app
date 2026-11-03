@@ -233,6 +233,7 @@ a.btn-matla:hover {
     outline: none;
     box-shadow: none;
 }
+
 .program-type-card {
     min-height: 75px !important;
     padding: 8px 10px;
@@ -269,14 +270,39 @@ a.btn-matla:hover {
     line-height: 1.3;
     margin: 3px 0 0;
 }
+
 .program-type-card.selected {
     color: #F59E0B;
     border-color: #F59E0B;
-    background-color: #17233C ;
+    background-color: #17233C;
 }
+
 .program-type-card.selected .info-box-number {
     color: #FFFF;
 }
+
 .program-type-card.selected p {
     color: #FFFF;
+}
+
+.tools {
+    display: flex;
+    justify-content: space-between;
+    gap: 7px
+}
+
+.tools button {
+    background: #fff;
+    border: 1px solid #dce3ed;
+    border-radius: 7px;
+    width: calc(33.33% - 4px);
+    height: 43px;
+    color: #263d60;
+    font-size: 19px;
+    cursor: pointer
+}
+
+.tools button:hover {
+    border-color: var(--blue);
+    color: var(--blue)
 }
