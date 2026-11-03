@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\ProgramCreated;
+use App\Events\Workspace\ProgramUpdated;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\ProgramStepRequest;
@@ -100,6 +101,8 @@ class ProgramController extends Controller
                 $program->save();
                 // Capture changed values
                 $changes = $program->getChanges();
+                // Delete existing broadcast days before synchronizing new ones.
+                $program->broadcastDays()->delete();
                 // Synchronize broadcast days
                 $syncChanges = $program->broadcastDays()->createMany(
                     collect($request->input('days_of_the_week', []))
@@ -115,10 +118,14 @@ class ProgramController extends Controller
                 ];
             });
             $members = Member::notEqualCurrentUser()->inWorkspace()->get();
-            // Perform any additional logic with the members if needed.
-            if ($result['is_new']) {
-                // Notify members about the new program
-                foreach ($members as $member) {
+            // Extract old and new values for comparison
+            $old = $result['old_values'];
+            // Extract new values for comparison
+            $new = $result['changes'];
+            // Notify members about the new program
+            foreach ($members as $member) {
+                // Perform any additional logic with the members if needed.
+                if ($result['is_new']) {
                     event(new ProgramCreated(
                         $result['program']->id,
                         $result['program']->name,
@@ -127,10 +134,26 @@ class ProgramController extends Controller
                         current_workspace()->id,
                         current_workspace()->slug
                     ));
+                } else {
+                    // Notify members about the updated program
+                    if (array_key_exists('name', $new)) {
+                        event(new ProgramUpdated(
+                            $result['program']->id,
+                            __('Program name updated.'),
+                            $old['name'],
+                            $new['name'],
+                            $result['program']->slug,
+                            $member->id,
+                            current_workspace()->id,
+                            current_workspace()->slug
+                        ));
+                    }
                 }
             }
             // Flash a success message to the session
-            session()->flash('success-message-program', __('Program created successfully.'));
+            session()->flash('success-message-program', $result['is_new']
+                ? __('Program created successfully.')
+                : __('Program updated successfully.'));
             // Return the response with the redirect URL
             return $this->returnData([
                 'error' => false,

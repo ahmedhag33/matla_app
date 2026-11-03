@@ -343,8 +343,8 @@
                     $('#add-program-form input[name="slug"]').val(data.program.slug);
                     $('#add-program-form textarea[name="description"]').val(data.program.description);
                     var program_type = data.program.program_type_id;
-                    var program_id = data.program.id;
-                    $('#add-program-form input[name="program_id"]').val(program_id);
+                    var program_type_id = data.program.program_type_id;
+                    $('#add-program-form input[name="program_type_id"]').val(program_type_id);
                     $('.program-type-card').removeClass('selected');
                     $('.program-type-card[data-program-type="' + program_type + '"]')
                         .addClass('selected');
