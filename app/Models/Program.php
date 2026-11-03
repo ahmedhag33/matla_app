@@ -44,6 +44,12 @@ class Program extends Model
         'updated_at'
     ];
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['default_hours', 'default_minutes'];
+    /**
      * Get a custom description for an activity log entry.
      *
      * Default hook that returns null, meaning no custom description.
@@ -185,6 +191,28 @@ class Program extends Model
     {
         return Attribute::make(
             get: fn() => create_duration_in_hours_and_minutes($this->default_duration_minutes),
+        );
+    }
+    /**
+     * Interact with the default_hours attribute.
+     *
+     * @return Attribute
+     */
+    public function defaultHours(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => create_duration_in_hours_and_minutes_to_array($this->default_duration_minutes)['hours'],
+        );
+    }
+    /**
+     * Interact with the default_minutes attribute.
+     *
+     * @return Attribute
+     */
+    public function defaultMinutes(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => create_duration_in_hours_and_minutes_to_array($this->default_duration_minutes)['minutes'],
         );
     }
 }

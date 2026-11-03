@@ -325,6 +325,7 @@
         $(document).on('click', '.edit-program', function() {
             var programId = $(this).data('edit-program');
             var slug = "{{ current_Workspace()->slug }}";
+            var arr = [];
             $.ajax({
                 url: "{{ route('workspace.program.get-by-id', ['slug' => request()->route('slug')]) }}",
                 method: 'POST',
@@ -336,8 +337,32 @@
                     'Accept': 'application/json'
                 },
                 success: function(data) {
-                    // Handle the program data here, e.g., populate a form for editing
-                    console.log(data.program);
+                    $('#add-program').modal('show');
+                    $('#add-program-form input[name="program_id"]').val(data.program.id);
+                    $('#add-program-form input[name="name"]').val(data.program.name);
+                    $('#add-program-form input[name="slug"]').val(data.program.slug);
+                    $('#add-program-form textarea[name="description"]').val(data.program.description);
+                    var program_type = data.program.program_type_id;
+                    var program_id = data.program.id;
+                    $('#add-program-form input[name="program_id"]').val(program_id);
+                    $('.program-type-card').removeClass('selected');
+                    $('.program-type-card[data-program-type="' + program_type + '"]')
+                        .addClass('selected');
+                    $('#add-program-form input[name="broadcast_schedule"][value="' + data.program
+                            .broadcast_schedule + '"]')
+                        .prop('checked', true);
+                    $('#duration_hours option[value="' + data.program.default_hours + '"]')
+                        .prop('selected', true);
+
+                    $('#duration_minutes option[value="' + data.program.default_minutes + '"]')
+                        .prop('selected', true);
+                    $('#add-program-form input[name="broadcast_mode"][value="' + data.program
+                            .broadcast_mode + '"]')
+                        .prop('checked', true);
+                    $.each(data.program.broadcast_days, function(key, value) {
+                        arr.push(String(value.day));
+                    });
+                    $('.select-days-of-the-week').val(arr).trigger('change');
                 },
                 error: function(xhr) {
                     toastr.error(xhr.responseJSON.message || "{{ __('An error occurred') }}");

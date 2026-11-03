@@ -561,3 +561,19 @@ if (!function_exists('create_duration_in_hours_and_minutes')) {
         return $hours .'  '. __('Hour') . '  ' . $minutes . '  ' . __('Minute');
     }
 }
+if (!function_exists('create_duration_in_hours_and_minutes_to_array')) {
+    /**
+     * Convert total minutes to hours and minutes array
+     *
+     * @param int $totalMinutes
+     * @return array
+     */
+    function create_duration_in_hours_and_minutes_to_array(int $totalMinutes): array
+    {
+        $hours = intdiv($totalMinutes, 60);
+        // Calculate remaining minutes after extracting hours
+        $minutes = $totalMinutes % 60;
+        // Return array with hours and minutes
+        return ['hours' => $hours, 'minutes' => $minutes];
+    }
+}
