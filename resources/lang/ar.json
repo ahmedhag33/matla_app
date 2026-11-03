@@ -1194,5 +1194,6 @@
     "Program created successfully.": "تم إنشاء البرنامج بنجاح.",
     "Episodes": "الحلقات",
     "Update Status": "تحديث الحالة ",
-    "Program not found.": "البرنامج غير موجود."
+    "Program not found.": "البرنامج غير موجود.",
+    "Program updated successfully.": "تم تحديث البرنامج بنجاح."
 }

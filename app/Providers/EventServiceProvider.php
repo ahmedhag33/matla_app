@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use App\Listeners\Workspace\ProgramCreatedNotification;
 use App\Events\Workspace\NotfiyAcceptToWorkspace;
 use App\Events\Workspace\ProgramCreated;
+use App\Events\Workspace\ProgramUpdated;
 use App\Listeners\Workspace\NotfiyAcceptToWorkspaceListener;
+use App\Listeners\Workspace\ProgramCreatedNotification;
+use App\Listeners\Workspace\ProgramUpdatedNofiy;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProgramCreated::class => [
             ProgramCreatedNotification::class,
+        ],
+        ProgramUpdated::class => [
+            ProgramUpdatedNofiy::class,
         ],
     ];
 

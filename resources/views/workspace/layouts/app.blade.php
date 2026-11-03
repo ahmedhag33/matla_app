@@ -43,93 +43,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('.dropdown-notifications').toggle();
         });
     </script>
-    <script>
-        Pusher.logToConsole = {{ config('broadcasting.pusher_console') }};
+    @include('workspace.layouts.notfiy.public')
 
-        var pusher = new Pusher(
-            '{{ config('broadcasting.connections.pusher.key') }}', {
-                cluster: '{{ config('broadcasting.connections.pusher.options.cluster') }}'
-            }
-        );
-        var notificationsWrapper = $('.dropdown-notifications');
-        var notificationsToggle = $('.dropdown-notifications-toggle');
-        var notificationsCountElem = notificationsToggle.find('span[data-count]');
-        var notificationsCount = parseInt(notificationsCountElem.data('count'), 10) || 0;
-        var count_notifications = $('.count-notifications');
-        var member_id = @json(auth()->guard('member')->id());
-        var workspace_id = @json(current_workspace()->id);
-        var noNotificationsElem = $('.no-notifications');
-
-        var channelName = 'workspace-notify-accept-' + workspace_id + '-' + member_id;
-
-        var workspace_notify_accept_channel = pusher.subscribe(channelName);
-
-        var program_created_name = 'workspace-program-' + workspace_id + '-' + member_id;
-        var program_created_channel = pusher.subscribe(program_created_name);
-
-        workspace_notify_accept_channel.bind(
-            'App\\Events\\Workspace\\NotfiyAcceptToWorkspace',
-            function(data) {
-                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item read-notification" data-notification-code="${data.code}">
-                         <!-- Message Start -->
-                         <div class="media">
-                           <img src="${data.photo}" alt="User Avatar"
-     class="img-size-50 mr-3 img-circle">
-                             <div class="media-body">
-                                 <h3 class="dropdown-item-title">
-                                     ${data.title}
-                                 </h3>
-                                 <p class="text-sm">${data.message}</p>
-                                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
-                                     ${data.date_time}</p>
-                             </div>
-                         </div>
-                         <!-- Message End -->
-                     </a>`;
-
-                notificationsWrapper.prepend(newNotificationHtml);
-                notificationsCount += 1;
-                notificationsCountElem.data('count', notificationsCount);
-                notificationsCountElem.text(notificationsCount);
-                count_notifications.show();
-                count_notifications.data('count', notificationsCount);
-                count_notifications.text(notificationsCount);
-                noNotificationsElem.hide();
-
-            }
-        );
-        program_created_channel.bind(
-            'App\\Events\\Workspace\\ProgramCreated',
-            function(data) {
-                var newNotificationHtml = `<a href="${data.url}" class="dropdown-item read-notification" data-notification-code="${data.code}">
-                         <!-- Message Start -->
-                         <div class="media">
-                           <img src="${data.photo}" alt="User Avatar"
-     class="img-size-50 mr-3 img-circle">
-                             <div class="media-body">
-                                 <h3 class="dropdown-item-title">
-                                     ${data.title}
-                                 </h3>
-                                 <p class="text-sm">${data.message}</p>
-                                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
-                                     ${data.date_time}</p>
-                             </div>
-                         </div>
-                         <!-- Message End -->
-                     </a>`;
-
-                notificationsWrapper.prepend(newNotificationHtml);
-                notificationsCount += 1;
-                notificationsCountElem.data('count', notificationsCount);
-                notificationsCountElem.text(notificationsCount);
-                count_notifications.show();
-                count_notifications.data('count', notificationsCount);
-                count_notifications.text(notificationsCount);
-                noNotificationsElem.hide();
-
-            }
-        );
-    </script>
+    @include('workspace.layouts.notfiy.invention')
+    @include('workspace.layouts.notfiy.program')
     <script>
         $(document).on('click', '.read-notification', function(e) {
             e.preventDefault();
