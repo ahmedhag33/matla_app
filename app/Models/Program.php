@@ -124,7 +124,7 @@ class Program extends Model
      */
     public function presenters()
     {
-        return $this->belongsToMany(Member::class, 'program_presenters', 'program_id', 'presenter_id');
+        return $this->belongsToMany(Member::class, new ProgramPresenters()->getTable(), 'program_id', 'presenter_id');
     }
     /**
      * Get the broadcast days associated with the program.

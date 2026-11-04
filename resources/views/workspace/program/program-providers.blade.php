@@ -25,11 +25,10 @@
                              @endforeach
                          </select>
                      </div>
-                     <span class="text-danger" data-error="presenter_id"></span>
+                     <span class="text-danger" data-error="presenters"></span>
                      <div class="row">
                          <div class="col-12">
-                             <button type="submit"
-                                 class="btn btn-matla btn-add-program-providers">{{ __('Save') }}</button>
+                             <button type="submit" class="btn btn-matla save-program-providers">{{ __('Save') }}</button>
                          </div>
                          <!-- /.col -->
                      </div>

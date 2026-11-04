@@ -1198,5 +1198,15 @@
     "Program updated successfully.": "تم تحديث البرنامج بنجاح.",
     "Program name updated.": "تم تحديث اسم البرنامج .",
     "Program broadcast days updated.": "تم تحديث أيام بث البرنامج.",
-    "Add Presenters": "إضافة مقدمي البرامج"
+    "Add Presenters": "إضافة مقدمي البرامج",
+    "At least one presenter is required.": "مطلوب مقدم واحد على الأقل.",
+    "Presenters must be an array.": "يجب أن يكون مقدمو البرامج مصفوفة.",
+    "Each presenter is required.": "كل مقدم مطلوب.",
+    "Each presenter must be an integer.": "يجب أن يكون كل مقدم عددًا صحيحًا.",
+    "Each presenter must exist and have the presenter role in the current workspace.": "يجب أن يكون كل مقدم موجودًا وأن يكون له دور المقدم في مساحة العمل الحالية.",
+    "The person program ID is required.": "معرف برنامج الشخص مطلوب.",
+    "The person program ID must be an integer.": "يجب أن يكون معرف برنامج الشخص عددًا صحيحًا.",
+    "The person program ID must exist.": "يجب أن يكون معرف برنامج الشخص موجودًا.",
+    "Presenters added successfully.": "تمت إضافة مقدمي البرامج بنجاح.",
+    "No presenters assigned.": "لم يتم تعيين أي مقدمي برامج."
 }

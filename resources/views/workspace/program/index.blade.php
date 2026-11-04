@@ -122,6 +122,20 @@
                                                             </span>
                                                         @endforeach
                                                     </div>
+                                                    {{-- Program Presenters --}}
+                                                    <div class="mb-3">
+                                                        <i class="fas fa-users"></i>
+
+                                                        @forelse ($program->presenters as $presenter)
+                                                            <span class="badge bg-light">
+                                                                {{ $presenter->name }}
+                                                            </span>
+                                                        @empty
+                                                            <span class="badge bg-warning">
+                                                                {{ __('No presenters assigned.') }}
+                                                            </span>
+                                                        @endforelse
+                                                    </div>
 
                                                     {{-- Program Details --}}
                                                     <div class="program-details">
@@ -177,9 +191,14 @@
     @include('workspace.program.create')
 @endsection
 @section('script')
-    @if (session()->has('success-message-program'))
+    @if (session()->has('success-message-presenters'))
         <script>
-            toastr.success("{{ session('success-message-program') }}");
+            toastr.success("{{ session('success-message-presenters') }}");
+        </script>
+    @endif
+    @if (session()->has('add-presenters-success'))
+        <script>
+            toastr.success("{{ session('add-presenters-success') }}");
         </script>
     @endif
     <script>
@@ -411,6 +430,51 @@
                     toastr.error(xhr.responseJSON.message || "{{ __('An error occurred') }}");
                 }
             });
+        });
+    </script>
+    <script>
+        $(document).on('click', '.save-program-providers', function(e) {
+            e.preventDefault();
+            var formData = new FormData($('#add-program-providers-form')[0]);
+            $.ajax({
+                type: 'post',
+                enctype: "multipart/form-data",
+                url: "{{ route('workspace.program.add-presenters', ['slug' => request()->route('slug')]) }}",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function() {
+                    $('#add-program-providers-loading').show();
+                    $('#add-program-providers-form').hide();
+                },
+                error: function(data) {
+                    $('#add-program-providers-loading').hide();
+                    $('#add-program-providers-form').show();
+                    if (data.status === 422) {
+                        printError(data.responseJSON.message[0]);
+                    } else {
+                        toastr.error(
+                            data.responseJSON.message ||
+                            "{{ __('An error occurred') }}"
+                        );
+                    }
+                },
+                complete: function() {
+                    $('#add-program-providers-loading').hide();
+                    $('#add-program-providers-form').show();
+                },
+                success: function(data) {
+                    window.location.href = data.url;
+                }
+            });
+
+            function printError(errors) {
+                $.each(errors, function(index, value) {
+                    $('#add-program-providers-form .' + value.field + '_err').html(value.messages);
+                });
+            }
         });
     </script>
 @endsection

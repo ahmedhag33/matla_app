@@ -6,6 +6,7 @@ use App\Events\Workspace\ProgramCreated;
 use App\Events\Workspace\ProgramUpdated;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Workspace\PresenterRequest;
 use App\Http\Requests\Workspace\ProgramStepRequest;
 use App\Models\Member;
 use App\Models\Program;
@@ -219,6 +220,51 @@ class ProgramController extends Controller
             return $this->returnData([
                 'error' => false,
                 'program' => $program,
+            ]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
+     * Add presenters to a program.
+     *
+     * @param PresenterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
+    public function addPresenters(PresenterRequest $request)
+    {
+        try {
+            $programId = $request->input('person_program_id');
+            // Get the list of presenter IDs from the request
+            $presenters = $request->input('presenters');
+            // Find the program by its ID
+            $program = Program::find($programId);
+            // Check if the program exists
+            if (!$program) {
+                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
+            }
+            // Add each presenter to the program without detaching existing ones
+            $result = (array) runTransaction(function () use ($program, $presenters) {
+                $programPresenters = $program->presenters();
+                // Delete existing presenters for the program before adding new ones
+              $programPresenters->delete();
+                // Add new presenters for the program
+                $syncResult = $programPresenters->sync($presenters);
+                // Return the result of the sync operation
+                return [
+                    'syncResult' => $syncResult,
+                ];
+            });
+            session()->flash('add-presenters-success', __('Presenters added successfully.'));
+            // Return a success response after adding presenters
+            return $this->returnData([
+                'error' => false,
+                'message' => __('Presenters added successfully.'),
+                'url' => route('workspace.program.index', ['slug' => request()->route('slug')])
             ]);
         } catch (DatabaseException $e) {
             return $this->errorException($e->getCode(), $e->getMessage());

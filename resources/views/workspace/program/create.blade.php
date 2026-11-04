@@ -51,7 +51,7 @@
                                 <!-- Step 2: Duration and Broadcast -->
                                 @include('workspace.program.duration-and-broadcast')
                                 <!-- End Step 2 -->
-
+                            </div>
                         </form>
                         <div id="add-program-loading" class="spinner-grow text-dark" role="status"
                             style="display: none;">
