@@ -40,44 +40,55 @@
                                                     <div class="tools">
                                                         <div class="btn-group">
 
-                                                            <button type="button"
-                                                                class="btn btn-default dropdown-icon"
+                                                            <button type="button" class="btn btn-default dropdown-icon"
                                                                 data-toggle="dropdown">
                                                                 <i class="fas fa-cog"></i>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-                                                                <a class="dropdown-item edit-program"
-                                                                    data-edit-program="{{ $program->id }}"
-                                                                    href="javascript:void(0)">
-                                                                    <i class="fas fa-edit"></i>
-                                                                    {{ __('Edit') }}
-                                                                </a>
-                                                                <a class="dropdown-item"
-                                                                    data-delete-program="{{ $program->id }}"
-                                                                    href="javascript:void(0)">
-                                                                    <i class="fas fa-recycle"></i>
-                                                                    {{ __('Delete') }}
-                                                                </a>
-                                                                <a class="dropdown-item"
-                                                                    data-select-presenters="{{ $program->id }}"
-                                                                    href="javascript:void(0)">
-                                                                    <i class="fas fa-users"></i>
-                                                                    {{ __('Select Presenters') }}
-                                                                </a>
-                                                                <a class="dropdown-item"
-                                                                    data-update-status="{{ $program->id }}"
-                                                                    href="javascript:void(0)">
-                                                                    <i class="fas fa-sync-alt"></i>
-                                                                    {{ __('Update Status') }}
-                                                                </a>
+                                                                @if (auth()->guard('member')->user()->hasPermission('edit-program'))
+                                                                    <a class="dropdown-item edit-program"
+                                                                        data-edit-program="{{ $program->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="fas fa-edit"></i>
+                                                                        {{ __('Edit') }}
+                                                                    </a>
+                                                                @endif
+                                                                @if (auth()->guard('member')->user()->hasPermission('delete-program'))
+                                                                    <a class="dropdown-item"
+                                                                        data-delete-program="{{ $program->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="fas fa-recycle"></i>
+                                                                        {{ __('Delete') }}
+                                                                    </a>
+                                                                @endif
+                                                                @if (auth()->guard('member')->user()->hasPermission('add-program'))
+                                                                    <a class="dropdown-item add-program-providers"
+                                                                        data-toggle="modal"
+                                                                        data-target="#add-program-providers"
+                                                                        data-select-presenters="{{ $program->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="fas fa-users"></i>
+                                                                        {{ __('Select Presenters') }}
+                                                                    </a>
+                                                                @endif
+                                                                @if (auth()->guard('member')->user()->hasPermission('edit-program'))
+                                                                    <a class="dropdown-item"
+                                                                        data-update-status="{{ $program->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="fas fa-sync-alt"></i>
+                                                                        {{ __('Update Status') }}
+                                                                    </a>
+                                                                @endif
                                                                 <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('workspace.program.details', [
-                                                                        'slug' => request()->route('slug'),
-                                                                        'programSlug' => $program->slug,
-                                                                    ]) }}">
-                                                                    <i class="fas fa-list"></i>
-                                                                    {{ __('Manage Episodes') }}</a>
+                                                                @if (auth()->guard('member')->user()->hasPermission('view-program'))
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('workspace.program.details', [
+                                                                            'slug' => request()->route('slug'),
+                                                                            'programSlug' => $program->slug,
+                                                                        ]) }}">
+                                                                        <i class="fas fa-list"></i>
+                                                                        {{ __('Manage Episodes') }}</a>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -144,6 +155,7 @@
                                             </div>
                                         </div>
                                 </div>
+                                @include('workspace.program.program-providers')
                             @empty
                                 <div class="error-page">
 
@@ -171,6 +183,10 @@
         </script>
     @endif
     <script>
+        $(document).on('click', '.add-program-providers', function() {
+            const programId = $(this).data('select-presenters');
+            $('#add-program-providers input[name="person_program_id"]').val(programId);
+        });
         const $form = $('#add-program-form');
         const panels = ['information-part', 'program-providers-part', 'duration-and-broadcast-part'];
 

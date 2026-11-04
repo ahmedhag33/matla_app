@@ -29,7 +29,7 @@ class ProgramController extends Controller
         // Retrieve all program types.
         $programsTypes = ProgramTypes::all();
         // Retrieve all members with the role of presenter in the current workspace.
-        $presenters = Member::inWorkspace()->equalRole('presenter')->get();
+        $presenters = Member::with(['role'])->inWorkspace()->equalRole('presenter')->get();
         // Retrieve all programs with their related type, creator, presenters, and broadcast days.
         return view('workspace.program.index', compact('programs', 'programsTypes', 'presenters'));
     }
