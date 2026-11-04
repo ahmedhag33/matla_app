@@ -270,6 +270,14 @@ class ProgramController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Show presenters for a program.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
     public function showPresenters(Request $request)
     {
         try {

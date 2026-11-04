@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Workspace;
 
+use App\Models\WorkspaceMembers;
 use App\Models\WorkspaceRoles;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -29,7 +30,8 @@ class PresenterRequest extends FormRequest
                 'required',
                 'integer',
                 Rule::exists('members', 'id')
-                    ->whereIn('workspace_role_id', WorkspaceRoles::where('slug', 'presenter')->pluck('id'))
+                   ->whereIn('workspace_role_id', WorkspaceRoles::where('slug', 'presenter')->pluck('id'))
+                    ->whereIn('id', WorkspaceMembers::where('workspace_id', current_workspace()->id)->pluck('id'))
             ],
             'person_program_id' => [
                 'required',
