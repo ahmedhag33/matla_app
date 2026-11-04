@@ -204,7 +204,36 @@
             $('#program_type_id').val(programTypeId);
 
         });
-        $('.select-presenters').select2();
+
+        function formatPresenter(presenter) {
+            if (!presenter.id) {
+                return presenter.text;
+            }
+
+            const image = $(presenter.element).data('image');
+
+            return $(`
+        <span class="d-flex align-items-center">
+            <img
+                src="${image}"
+                alt="${presenter.text}"
+                class="rounded-circle mr-2"
+                width="35"
+                height="35"
+                style="object-fit: cover;"
+            >
+            <span>${presenter.text}</span>
+        </span>
+    `);
+        }
+
+        $('#presenters').select2({
+            multiple: true,
+            templateResult: formatPresenter,
+            templateSelection: formatPresenter,
+            escapeMarkup: markup => markup,
+            width: '100%'
+        });
         $('.select-days-of-the-week').select2();
         $('.program-type-card').on('click', function() {
             $('.program-type-card').removeClass('active');
