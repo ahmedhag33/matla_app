@@ -48,6 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('workspace.layouts.notfiy.invention')
     @include('workspace.layouts.notfiy.program')
     @include('workspace.layouts.notfiy.program-updated')
+    @include('workspace.layouts.notfiy.program-presenters')
     @include('workspace.layouts.notfiy.read-at')
 </body>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\ProgramCreated;
+use App\Events\Workspace\ProgramPresenterCreated;
 use App\Events\Workspace\ProgramUpdated;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
@@ -252,11 +253,28 @@ class ProgramController extends Controller
                 $programPresenters = $program->presenters();
                 // Add new presenters for the program
                 $syncResult = $programPresenters->sync($presenters);
+                // Get the changes made to the program after syncing presenters
+               $syncChanges = $program->getChanges();
+               // Get the newly attached presenters from the sync result
+               $newPresenters = $syncResult['attached'] ?? [];
                 // Return the result of the sync operation
                 return [
                     'syncResult' => $syncResult,
+                    'syncChanges' => $syncChanges,
+                    'newPresenters' => $newPresenters,
                 ];
             });
+            // Trigger the ProgramPresenterCreated event for each newly added presenter
+            foreach ($result['newPresenters'] as $presenterId) {
+                event(new ProgramPresenterCreated(
+                    $program->id,
+                    $program->name,
+                    $program->slug,
+                    $presenterId,
+                    current_workspace()->id,
+                    current_workspace()->slug
+                ));
+            }
             session()->flash('add-presenters-success', __('Presenters added successfully.'));
             // Return a success response after adding presenters
             return $this->returnData([

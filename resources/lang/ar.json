@@ -1208,5 +1208,10 @@
     "The person program ID must be an integer.": "يجب أن يكون معرف برنامج الشخص عددًا صحيحًا.",
     "The person program ID must exist.": "يجب أن يكون معرف برنامج الشخص موجودًا.",
     "Presenters added successfully.": "تمت إضافة مقدمي البرامج بنجاح.",
-    "No presenters assigned.": "لم يتم تعيين أي مقدمي برامج."
+    "No presenters assigned.": "لم يتم تعيين أي مقدمي برامج.",
+    "Program Presenter Created": "تم إنشاء مقدم البرنامج بنجاح.",
+    "Program Presenter Updated": "تم تحديث مقدم البرنامج بنجاح.",
+    "Program Presenter Deleted": "تم حذف مقدم البرنامج بنجاح.",
+    "You have been added as a program presenter to": "تم اضافتك كمقدم برنامج الى",
+    "You have been removed as a program presenter from": "تمت إزالتك كمقدم برنامج من"
 }
