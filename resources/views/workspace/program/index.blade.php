@@ -203,8 +203,23 @@
     @endif
     <script>
         $(document).on('click', '.add-program-providers', function() {
+            var presenters = [];
             const programId = $(this).data('select-presenters');
             $('#add-program-providers input[name="person_program_id"]').val(programId);
+            $.ajax({
+                url: "{{ route('workspace.program.showPresenters', ['slug' => request()->route('slug')]) }}",
+                method: 'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    person_program_id: programId
+                },
+                success: function(data) {
+                    $.each(data.presenters, function(key, value) {
+                        presenters.push(String(value.id));
+                    });
+                    $('#presenters').val(presenters).trigger('change');
+                }
+            });
         });
         const $form = $('#add-program-form');
         const panels = ['information-part', 'program-providers-part', 'duration-and-broadcast-part'];

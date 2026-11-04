@@ -250,8 +250,6 @@ class ProgramController extends Controller
             // Add each presenter to the program without detaching existing ones
             $result = (array) runTransaction(function () use ($program, $presenters) {
                 $programPresenters = $program->presenters();
-                // Delete existing presenters for the program before adding new ones
-              $programPresenters->delete();
                 // Add new presenters for the program
                 $syncResult = $programPresenters->sync($presenters);
                 // Return the result of the sync operation
@@ -265,6 +263,29 @@ class ProgramController extends Controller
                 'error' => false,
                 'message' => __('Presenters added successfully.'),
                 'url' => route('workspace.program.index', ['slug' => request()->route('slug')])
+            ]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    public function showPresenters(Request $request)
+    {
+        try {
+            // Get the program ID from the request
+            $programId = $request->input('person_program_id');
+            // Find the program by its ID and ensure it exists before fetching presenters
+            $program = Program::find($programId);
+            // Throw an exception if the program is not found
+            if (!$program) {
+                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
+            }
+            $presenters = $program->presenters()->get() ?? [];
+            // Return the list of presenters associated with the program
+            return $this->returnData([
+                'error' => false,
+                'presenters' => $presenters,
             ]);
         } catch (DatabaseException $e) {
             return $this->errorException($e->getCode(), $e->getMessage());
