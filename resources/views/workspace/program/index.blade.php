@@ -39,13 +39,11 @@
                                                 <div class="col-auto program-actions">
                                                     <div class="tools">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-matla">
-                                                                <i class="fas fa-cog"></i>
-                                                            </button>
+
                                                             <button type="button"
-                                                                class="btn btn-default dropdown-toggle dropdown-icon"
+                                                                class="btn btn-default dropdown-icon"
                                                                 data-toggle="dropdown">
-                                                                <span class="sr-only">Toggle Dropdown</span>
+                                                                <i class="fas fa-cog"></i>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
                                                                 <a class="dropdown-item edit-program"
