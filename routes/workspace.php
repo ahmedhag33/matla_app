@@ -119,11 +119,5 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to get program by ID
         Route::post('/get-by-id', 'getById')->name('workspace.program.get-by-id')
             ->middleware('check-member-permission:edit-program');
-        // add route to update a program
-        Route::post('/add-presenters', 'addPresenters')->name('workspace.program.add-presenters')
-            ->middleware('check-member-permission:edit-program');
-        // add route to show presenters for a program
-        Route::post('/show-presenters', 'showPresenters')->name('workspace.program.showPresenters')
-            ->middleware('check-member-permission:view-program');
     });
 });

@@ -4,7 +4,7 @@
             @if (auth()->guard('member')->user()->hasPermission('add-program'))
                 <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
                     <span><i class="fas fa-plus"></i>
-                    {{ __('Add Program') }}
+                        {{ __('Add Program') }}
                     </span>
                 </button>
             @endif
@@ -91,30 +91,12 @@
                                                 {{ __('Delete') }}
                                             </a>
                                         @endif
-                                        @if (auth()->guard('member')->user()->hasPermission('add-program'))
-                                            <a class="dropdown-item add-program-providers" data-toggle="modal"
-                                                data-target="#add-program-providers"
-                                                data-select-presenters="{{ $program->id }}" href="javascript:void(0)">
-                                                <i class="fas fa-users"></i>
-                                                {{ __('Select Presenters') }}
-                                            </a>
-                                        @endif
                                         @if (auth()->guard('member')->user()->hasPermission('edit-program'))
                                             <a class="dropdown-item" data-update-status="{{ $program->id }}"
                                                 href="javascript:void(0)">
                                                 <i class="fas fa-sync-alt"></i>
                                                 {{ __('Update Status') }}
                                             </a>
-                                        @endif
-                                        <div class="dropdown-divider"></div>
-                                        @if (auth()->guard('member')->user()->hasPermission('view-program'))
-                                            <a class="dropdown-item"
-                                                href="{{ route('workspace.program.details', [
-                                                    'slug' => request()->route('slug'),
-                                                    'programSlug' => $program->slug,
-                                                ]) }}">
-                                                <i class="fas fa-list"></i>
-                                                {{ __('Manage Episodes') }}</a>
                                         @endif
                                     </div>
                                     {{-- <a href="#" class="btn btn-sm bg-teal btn-matla">

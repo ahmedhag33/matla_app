@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\ProgramCreated;
-use App\Events\Workspace\ProgramPresenterCreated;
 use App\Events\Workspace\ProgramUpdated;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Workspace\PresenterRequest;
 use App\Http\Requests\Workspace\ProgramStepRequest;
 use App\Models\Member;
 use App\Models\Program;
@@ -221,97 +219,6 @@ class ProgramController extends Controller
             return $this->returnData([
                 'error' => false,
                 'program' => $program,
-            ]);
-        } catch (DatabaseException $e) {
-            return $this->errorException($e->getCode(), $e->getMessage());
-        } catch (\Exception $e) {
-            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
-        }
-    }
-    /**
-     * Add presenters to a program.
-     *
-     * @param PresenterRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws DatabaseException
-     * @throws \Exception
-     */
-    public function addPresenters(PresenterRequest $request)
-    {
-        try {
-            $programId = $request->input('person_program_id');
-            // Get the list of presenter IDs from the request
-            $presenters = $request->input('presenters');
-            // Find the program by its ID
-            $program = Program::find($programId);
-            // Check if the program exists
-            if (!$program) {
-                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
-            }
-            // Add each presenter to the program without detaching existing ones
-            $result = (array) runTransaction(function () use ($program, $presenters) {
-                $programPresenters = $program->presenters();
-                // Add new presenters for the program
-                $syncResult = $programPresenters->sync($presenters);
-                // Get the changes made to the program after syncing presenters
-               $syncChanges = $program->getChanges();
-               // Get the newly attached presenters from the sync result
-               $newPresenters = $syncResult['attached'] ?? [];
-                // Return the result of the sync operation
-                return [
-                    'syncResult' => $syncResult,
-                    'syncChanges' => $syncChanges,
-                    'newPresenters' => $newPresenters,
-                ];
-            });
-            // Trigger the ProgramPresenterCreated event for each newly added presenter
-            foreach ($result['newPresenters'] as $presenterId) {
-                event(new ProgramPresenterCreated(
-                    $program->id,
-                    $program->name,
-                    $program->slug,
-                    $presenterId,
-                    current_workspace()->id,
-                    current_workspace()->slug
-                ));
-            }
-            session()->flash('add-presenters-success', __('Presenters added successfully.'));
-            // Return a success response after adding presenters
-            return $this->returnData([
-                'error' => false,
-                'message' => __('Presenters added successfully.'),
-                'url' => route('workspace.program.index', ['slug' => request()->route('slug')])
-            ]);
-        } catch (DatabaseException $e) {
-            return $this->errorException($e->getCode(), $e->getMessage());
-        } catch (\Exception $e) {
-            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
-        }
-    }
-    /**
-     * Show presenters for a program.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws DatabaseException
-     * @throws \Exception
-     */
-    public function showPresenters(Request $request)
-    {
-        try {
-            // Get the program ID from the request
-            $programId = $request->input('person_program_id');
-            // Find the program by its ID and ensure it exists before fetching presenters
-            $program = Program::find($programId);
-            // Throw an exception if the program is not found
-            if (!$program) {
-                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
-            }
-            $presenters = $program->presenters()->get() ?? [];
-            // Return the list of presenters associated with the program
-            return $this->returnData([
-                'error' => false,
-                'presenters' => $presenters,
             ]);
         } catch (DatabaseException $e) {
             return $this->errorException($e->getCode(), $e->getMessage());
