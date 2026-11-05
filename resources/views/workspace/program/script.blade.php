@@ -187,6 +187,7 @@
          var programId = $(this).data('edit-program');
          var slug = "{{ current_Workspace()->slug }}";
          var arr = [];
+         var teamMembers = [];
          $.ajax({
              url: "{{ route('workspace.program.get-by-id', ['slug' => request()->route('slug')]) }}",
              method: 'POST',
@@ -224,6 +225,10 @@
                      arr.push(String(value.day));
                  });
                  $('.select-days-of-the-week').val(arr).trigger('change');
+                 $.each(data.team_members, function(key, value) {
+                     teamMembers.push(value.id);
+                 });
+                 $('#team-members').val(teamMembers).trigger('change');
              },
              error: function(xhr) {
                  toastr.error(xhr.responseJSON.message || "{{ __('An error occurred') }}");

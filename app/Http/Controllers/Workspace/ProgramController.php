@@ -164,18 +164,6 @@ class ProgramController extends Controller
                         current_workspace()->slug
                     ));
                 }
-                // Notify newly added team members only once.
-                foreach ($result['new_team_members'] as $team_member_id) {
-                    event(new ProgramMemberCreated(
-                        $result['program']->id,
-                        $result['program']->name,
-                        $result['program']->slug,
-                        $team_member_id,
-                        current_workspace()->id,
-                        current_workspace()->slug
-                    ));
-                }
-
             } else {
                 foreach ($members as $member) {
                     // Notify program members about program updates.
@@ -207,18 +195,29 @@ class ProgramController extends Controller
                             current_workspace()->slug
                         ));
                     }
-                    // Notify program members about removed team members.
-                    foreach ($result['removed_team_members'] as $team_member_id) {
-                        event(new ProgramMemberDeleted(
-                            $result['program']->id,
-                            $result['program']->name,
-                            $result['program']->slug,
-                            $team_member_id,
-                            current_workspace()->id,
-                            current_workspace()->slug
-                        ));
-                    }
                 }
+            }
+             // Notify newly added team members only once.
+            foreach ($result['new_team_members'] as $team_member_id) {
+                event(new ProgramMemberCreated(
+                    $result['program']->id,
+                    $result['program']->name,
+                    $result['program']->slug,
+                    $team_member_id,
+                    current_workspace()->id,
+                    current_workspace()->slug
+                ));
+            }
+            // Notify removed team members only once.
+            foreach ($result['removed_team_members'] as $team_member_id) {
+                event(new ProgramMemberDeleted(
+                    $result['program']->id,
+                    $result['program']->name,
+                    $result['program']->slug,
+                    $team_member_id,
+                    current_workspace()->id,
+                    current_workspace()->slug
+                ));
             }
             // Flash a success message to the session
             session()->flash('success-message-program', $result['is_new']
@@ -248,7 +247,7 @@ class ProgramController extends Controller
         try {
             $programId = $request->input('program_id');
             // get the program by ID with its broadcast days
-            $program = Program::with('broadcastDays')->where('id', $programId);
+            $program = Program::with(['broadcastDays', 'teamMembers'])->where('id', $programId);
             // Check if the program exists in the database
             if ($program->doesntExist()) {
                 throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
@@ -259,6 +258,7 @@ class ProgramController extends Controller
             return $this->returnData([
                 'error' => false,
                 'program' => $program,
+                'team_members' => $program->teamMembers,
             ]);
         } catch (DatabaseException $e) {
             return $this->errorException($e->getCode(), $e->getMessage());
