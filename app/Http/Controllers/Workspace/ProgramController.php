@@ -226,4 +226,35 @@ class ProgramController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Delete a program by its ID.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
+    public function delete(Request $request)
+    {
+        try {
+            $programId = $request->input('id');
+            // Find the program by ID
+            $program = Program::find($programId);
+            // Check if the program exists
+            if (!$program) {
+                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
+            }
+            // Delete the program from the database
+            $program->delete();
+            // Return a success message after deletion
+            return $this->returnData([
+                'error' => false,
+                'message' => __('Program deleted successfully.')
+            ]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
 }

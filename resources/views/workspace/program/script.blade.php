@@ -230,3 +230,35 @@
          });
      });
  </script>
+ <script>
+     $(document).on('click', '.delete-program', function(e) {
+         Swal.fire({
+             title: "<b>{{ __('Do you Are Delete') }}</b>",
+             icon: "warning",
+             iconColor: "#17233C",
+             showCancelButton: true,
+             confirmButtonColor: "#17233C",
+             cancelButtonColor: "#F59E0B",
+             confirmButtonText: "{{ __('Delete') }}",
+             cancelButtonText: "{{ __('Cancel') }}"
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 e.preventDefault();
+                 var id = $(this).attr('delete_id');
+                 $.ajax({
+                     type: 'DELETE',
+                     url: "{{ route('workspace.program.delete', ['slug' => request()->route('slug')]) }}",
+                     dataType: 'json',
+                     data: {
+                         _token: "{{ csrf_token() }}",
+                         'id': id,
+                     },
+                     success: function(data) {
+                         $('#show-program-' + id).remove();
+                         toastr.success(data.message);
+                     }
+                 });
+             }
+         });
+     });
+ </script>

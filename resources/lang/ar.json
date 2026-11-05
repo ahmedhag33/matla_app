@@ -1213,5 +1213,7 @@
     "Program Presenter Updated": "تم تحديث مقدم البرنامج بنجاح.",
     "Program Presenter Deleted": "تم حذف مقدم البرنامج بنجاح.",
     "You have been added as a program presenter to": "تم اضافتك كمقدم برنامج الى",
-    "You have been removed as a program presenter from": "تمت إزالتك كمقدم برنامج من"
+    "You have been removed as a program presenter from": "تمت إزالتك كمقدم برنامج من",
+    "Program deleted successfully.": "تم حذف البرنامج بنجاح.",
+    "There are no programs available at the moment.": "لا توجد برامج متاحة في الوقت الحالي."
 }

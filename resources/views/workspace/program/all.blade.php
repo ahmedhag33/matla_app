@@ -15,7 +15,8 @@
         <div class="card-body pb-0">
             <div class="row">
                 @forelse ($programs as $program)
-                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
+                        id="show-program-{{ $program->id }}">
 
                         <div class="card bg-primary d-flex flex-fill program-card">
                             <div class="card-header text-muted border-bottom-0">
@@ -85,8 +86,8 @@
                                             </a>
                                         @endif
                                         @if (auth()->guard('member')->user()->hasPermission('delete-program'))
-                                            <a class="dropdown-item" data-delete-program="{{ $program->id }}"
-                                                href="javascript:void(0)">
+                                            <a class="dropdown-item delete-program" delete_id="{{ $program->id }}"
+                                                data-delete-program="{{ $program->id }}" href="javascript:void(0)">
                                                 <i class="fas fa-recycle"></i>
                                                 {{ __('Delete') }}
                                             </a>
@@ -120,6 +121,17 @@
                     </div>
                     @include('workspace.program.program-providers')
                 @empty
+                    <div class="error-page">
+                        <h2 class="headline ">
+                            <i class="fas fa-cloud"></i>
+                        </h2>
+                        <div class="error-content">
+                            <h2>{{ __('No Data') }}</h2>
+                            <p>
+                                {{ __('There are no programs available at the moment.') }}
+                            </p>
+                        </div>
+                    </div>
                 @endforelse
             </div>
         </div>
