@@ -1,5 +1,15 @@
 <section class="content">
-
+    <div class="card-header">
+        <h3 class="card-title">
+            @if (auth()->guard('member')->user()->hasPermission('add-program'))
+                <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
+                    <span><i class="fas fa-plus"></i>
+                    {{ __('Add Program') }}
+                    </span>
+                </button>
+            @endif
+        </h3>
+    </div>
     <!-- Default box -->
     <div class="card card-solid">
         <div class="card-body pb-0">
