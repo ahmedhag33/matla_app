@@ -44,7 +44,7 @@
     `);
      }
 
-     $('#presenters').select2({
+     $('#team-members').select2({
          multiple: true,
          templateResult: formatPresenter,
          templateSelection: formatPresenter,
@@ -123,7 +123,8 @@
      }
      $('.btn-next-step').on('click', function() {
          var slug = "{{ current_Workspace()->slug }}"
-         const step = parseInt($(this).data('step'));
+         const step =$(this).data('step');
+         console.log(step);
          const $panel = $(this).closest('.content');
          clearErrors();
 

@@ -2,8 +2,9 @@
 
 namespace App\Support;
 
-use App\Service\Enum\BroadcastSchedule;
+use App\Models\WorkspaceMembers;
 use App\Service\Enum\BroadcastMode;
+use App\Service\Enum\BroadcastSchedule;
 use Illuminate\Validation\Rule;
 
 class ProgramRules implements RulesInterface
@@ -14,7 +15,7 @@ class ProgramRules implements RulesInterface
      * @param int $step
      * @return array
      */
-    public static function step($step): array
+    public static function step(int $step): array
     {
         return match ($step) {
             1 => [
@@ -40,6 +41,15 @@ class ProgramRules implements RulesInterface
                 ]
             ],
             2 => [
+                'team_members' => ['required', 'array', 'min:1'],
+                'team_members.*' => [
+                    'required',
+                    'integer',
+                    Rule::exists('members', 'id')
+                        ->whereIn('id', WorkspaceMembers::where('workspace_id', current_workspace()->id)->pluck('member_id'))
+                ],
+            ],
+            3 => [
                 'broadcast_schedule' => ['required', 'string', Rule::enum(BroadcastSchedule::class)],
                 'duration_hours' => ['required', 'integer'],
                 'duration_minutes' => ['required', 'integer', 'min:0', 'max:60'],
@@ -57,7 +67,7 @@ class ProgramRules implements RulesInterface
      */
     public static function all(): array
     {
-        return array_merge(self::step(1), self::step(2));
+        return array_merge(self::step(1), self::step(2), self::step(3));
     }
     /**
      * Get the custom validation messages.
@@ -67,6 +77,7 @@ class ProgramRules implements RulesInterface
     public static function messages(): array
     {
         return [
+            // step 1 rules
             'name.required' => __('The program name is required.'),
             'name.string' => __('The program name must be a string.'),
             'name.max' => __('The program name must not exceed 255 characters.'),
@@ -78,6 +89,14 @@ class ProgramRules implements RulesInterface
             'program_type_id.required' => __('The program type is required.'),
             'program_type_id.integer' => __('The program type must be an integer.'),
             'program_type_id.exists' => __('The selected program type is invalid.'),
+            // step 3 rules
+            'team_members.required' => __('The team is required.'),
+            'team_members.array' => __('The team must be an array.'),
+            'team_members.min' => __('The team must have at least one member.'),
+            'team_members.*.required' => __('Each team member is required.'),
+            'team_members.*.integer' => __('Each team member must be an integer.'),
+            'team_members.*.exists' => __('The selected team member is invalid.'),
+            // step 2 rules
             'broadcast_schedule.required' => __('The broadcast schedule is required.'),
             'broadcast_schedule.string' => __('The broadcast schedule must be a string.'),
             'broadcast_schedule.enum' => __('The selected broadcast schedule is invalid.'),

@@ -29,9 +29,9 @@ class ProgramController extends Controller
         // Retrieve all program types.
         $programsTypes = ProgramTypes::all();
         // Retrieve all members with the role of presenter in the current workspace.
-        $presenters = Member::inWorkspace()->equalRole('presenter')->get();
+        $members = Member::inWorkspace()->notWorkspaceCreators()->get();
         // Retrieve all programs with their related type, creator, presenters, and broadcast days.
-        return view('workspace.program.index', compact('programs', 'programsTypes', 'presenters'));
+        return view('workspace.program.index', compact('programs', 'programsTypes', 'members'));
     }
     /**
      * retrieve the program details by slug.
@@ -50,13 +50,12 @@ class ProgramController extends Controller
      * Handle the program step request.
      *
      * @param  ProgramStepRequest  $request
-     * @param  int  $step
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function step(ProgramStepRequest $request, $step)
+    public function step(ProgramStepRequest $request)
     {
         try {
-            return $this->returnData(['step' => $step, 'data' => $request->validated()]);
+            return $this->returnData(['step' => $request->route('step'), 'data' => $request->validated()]);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
         } catch (\Exception $e) {

@@ -28,12 +28,19 @@
                                 </button>
                             </div>
                             <div class="line"></div>
-
+                            <div class="step" data-target="#program-providers-part">
+                                <button type="button" class="step-trigger" role="tab"
+                                    aria-controls="program-providers-part" id="program-providers-part-trigger">
+                                    <span class="bs-stepper-circle-matla">2</span>
+                                    <span class="bs-stepper-label">{{ __('Team') }}</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
                             <div class="step" data-target="#duration-and-broadcast-part">
                                 <button type="button" class="step-trigger" role="tab"
                                     aria-controls="duration-and-broadcast-part"
                                     id="duration-and-broadcast-part-trigger">
-                                    <span class="bs-stepper-circle-matla">2</span>
+                                    <span class="bs-stepper-circle-matla">3</span>
                                     <span class="bs-stepper-label">{{ __('Duration and Broadcast') }}</span>
                                 </button>
                             </div>
@@ -47,10 +54,13 @@
 
                                 <!-- Step 1: Basic Information -->
                                 @include('workspace.program.information-part')
-                                <!-- End Step 1 -->
-                                <!-- Step 2: Duration and Broadcast -->
-                                @include('workspace.program.duration-and-broadcast')
+                                <!-- Step 2: Program Providers -->
+                                @include('workspace.program.program-providers')
                                 <!-- End Step 2 -->
+                                <!-- End Step 1 -->
+                                <!-- Step 3: Duration and Broadcast -->
+                                @include('workspace.program.duration-and-broadcast')
+                                <!-- End Step 3 -->
                             </div>
                         </form>
                         <div id="add-program-loading" class="spinner-grow text-dark" role="status"

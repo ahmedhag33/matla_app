@@ -114,6 +114,16 @@ class Member extends Authenticatable
         return $query->where('id', '!=', auth()->guard('member')->id());
     }
     /**
+     * Scope a query to only include members not equal to the creators of workspaces.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeNotWorkspaceCreators(Builder $query)
+    {
+        return $query->whereNotIn('id', Workspace::where('created_by', auth()->guard('member')->user()->id)->pluck('created_by'));
+    }
+    /**
      * Scope a query to only include members with the specified role.
      *
      * @param  Builder $query
