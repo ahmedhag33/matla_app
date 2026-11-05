@@ -27,7 +27,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::with(['type', 'createdBy', 'presenters', 'broadcastDays'])->get();
+        $programs = Program::with(['type', 'createdBy', 'presenters', 'broadcastDays'])->paginate(6);
         // Retrieve all program types.
         $programsTypes = ProgramTypes::all();
         // Retrieve all members with the role of presenter in the current workspace.
