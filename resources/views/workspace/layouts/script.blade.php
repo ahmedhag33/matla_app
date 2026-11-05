@@ -22,4 +22,9 @@
          toastr.success("{{ session()->get('success-message-accept-invitation') }}");
      </script>
  @endif
+ @if (session()->has('error-message-part-team'))
+     <script>
+         toastr.error("{{ session()->get('error-message-part-team') }}");
+     </script>
+ @endif
  @yield('script')

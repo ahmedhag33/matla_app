@@ -16,7 +16,8 @@
             <div class="row">
                 @forelse ($programs as $program)
                     <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
-                        id="show-program-{{ $program->id }}">
+                        id="show-program-{{ $program->id }}"
+                       style="display: {{ auth()->guard('member')->user()->checkInProgramTeam($program->slug) ? 'block' : 'none !important' }}">
 
                         <div class="card bg-primary d-flex flex-fill program-card">
                             <div class="card-header text-muted border-bottom-0">

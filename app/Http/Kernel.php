@@ -88,5 +88,6 @@ class Kernel extends HttpKernel
         'identify-workspace-app' => \App\Http\Middleware\Workspace\IdentifyWorkspaceApp::class,
         'check-member-workspace' => \App\Http\Middleware\Workspace\CheckMemberWorkspace::class,
         'check-member-permission' => \App\Http\Middleware\Workspace\CheckMemberPermmision::class,
+        'check-member-in-program-team' => \App\Http\Middleware\Workspace\CkeckMemberInProgramTeam::class,
     ];
 }

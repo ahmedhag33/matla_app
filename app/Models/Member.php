@@ -121,7 +121,7 @@ class Member extends Authenticatable
      */
     public function scopeInProgramTeam(Builder $query, $program_id)
     {
-        return $query->whereIn('id',ProgramTeam::where('program_id', $program_id)->pluck('team_member_id'));
+        return $query->whereIn('id', ProgramTeam::where('program_id', $program_id)->pluck('team_member_id'));
     }
     /**
      * Scope a query to only include members not equal to the creators of workspaces.
@@ -132,6 +132,15 @@ class Member extends Authenticatable
     public function scopeNotWorkspaceCreators(Builder $query)
     {
         return $query->whereNotIn('id', Workspace::where('created_by', auth()->guard('member')->user()->id)->pluck('created_by'));
+    }
+    /**
+     * Get the programs the member is part of.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function programTeam()
+    {
+        return $this->belongsToMany(Program::class, new ProgramTeam()->getTable(), 'team_member_id', 'program_id');
     }
     /**
      * Scope a query to only include members with the specified role.
@@ -215,5 +224,20 @@ class Member extends Authenticatable
             $query->where('workspace_id', current_workspace()->id);
         }
         return $query->get();
+    }
+    /**
+     * Check if the member is part of the program team for the given program slug.
+     *
+     * @param string $programSlug
+     * @return bool
+     */
+    public function checkInProgramTeam($programSlug)
+    {
+        return $this->programTeam()
+            ->where('programs.slug', $programSlug)
+            ->exists()
+            || Program::where('slug', $programSlug)
+                ->where('created_by', $this->id)
+                ->exists();
     }
 }

@@ -109,7 +109,7 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
             ->middleware('check-member-permission:view-program');
         // add route to show program details by slug
         Route::get('{programSlug}', 'details')->name('workspace.program.details')
-            ->middleware('check-member-permission:view-program');
+            ->middleware(['check-member-permission:view-program','check-member-in-program-team']);
         // add route to handle program step validation
         Route::post('/validate/{step}', 'step')->name('workspace.program.step')
             ->middleware('check-member-permission:add-program');
