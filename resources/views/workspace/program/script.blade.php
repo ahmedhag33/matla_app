@@ -3,11 +3,6 @@
          toastr.success("{{ session('success-message-presenters') }}");
      </script>
  @endif
- @if (session()->has('add-presenters-success'))
-     <script>
-         toastr.success("{{ session('add-presenters-success') }}");
-     </script>
- @endif
  <script>
      const $form = $('#add-program-form');
      const panels = ['information-part', 'program-providers-part', 'duration-and-broadcast-part'];
