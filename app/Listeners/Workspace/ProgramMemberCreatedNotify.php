@@ -3,14 +3,14 @@
 namespace App\Listeners\Workspace;
 use App\Models\Program;
 
-use App\Events\Workspace\ProgramPresenterCreated;
 use App\Models\WorkspaceNotification;
-class ProgramPresenterCreatedNotify
+use App\Events\Workspace\ProgramMemberCreated;
+class ProgramMemberCreatedNotify
 {
     /**
      * Handle the event.
      */
-    public function handle(ProgramPresenterCreated $event): void
+    public function handle(ProgramMemberCreated $event): void
     {
         WorkspaceNotification::create([
             'code' => $event->code,

@@ -122,9 +122,9 @@ class Program extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function presenters()
+    public function teamMembers()
     {
-        return $this->belongsToMany(Member::class, new ProgramPresenters()->getTable(), 'program_id', 'presenter_id');
+        return $this->belongsToMany(Member::class, new ProgramTeam()->getTable(), 'program_id', 'team_member_id');
     }
     /**
      * Get the broadcast days associated with the program.

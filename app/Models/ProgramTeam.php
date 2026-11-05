@@ -6,7 +6,7 @@ use App\Service\Database\LogsActivity;
 use App\Service\Enum\Crud;
 use Illuminate\Database\Eloquent\Model;
 
-class ProgramPresenters extends Model
+class ProgramTeam extends Model
 {
     use LogsActivity;
     /**
@@ -14,7 +14,7 @@ class ProgramPresenters extends Model
      *
      * @var string
      */
-    protected $table = 'program_presenters';
+    protected $table = 'program_team';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +22,7 @@ class ProgramPresenters extends Model
      */
     protected $fillable = [
         'program_id',
-        'presenter_id',
+        'team_member_id',
     ];
      /**
      * Get a custom description for an activity log entry.
@@ -37,9 +37,9 @@ class ProgramPresenters extends Model
     protected function getActivityDescription(string $action): ?string
     {
         return match ($action) {
-            Crud::CREATE->value => __('New Program Presenter Created'),
-            Crud::UPDATE->value => __('Program Presenter Updated'),
-            Crud::DELETE->value => __('Program Presenter Deleted'),
+            Crud::CREATE->value => __('New Program Team Member Created'),
+            Crud::UPDATE->value => __('Program Team Member Updated'),
+            Crud::DELETE->value => __('Program Team Member Deleted'),
             default => null,
         };
     }

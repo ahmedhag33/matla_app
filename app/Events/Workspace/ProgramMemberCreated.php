@@ -7,7 +7,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ProgramPresenterCreated implements ShouldBroadcast
+class ProgramMemberCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -38,7 +38,7 @@ class ProgramPresenterCreated implements ShouldBroadcast
 
     public function broadcastOn(): array
     {
-        return ['program-presenter-created-' . $this->workspace_id . '-' . $this->member_id];
+        return ['program-member-created-' . $this->workspace_id . '-' . $this->member_id];
     }
 
     public function broadcastWith(): array

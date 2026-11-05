@@ -1,8 +1,8 @@
  <script>
-     var program_presenter_created_name = 'program-presenter-created-' + workspace_id + '-' + member_id;
-     var program_presenter_created_channel = pusher.subscribe(program_presenter_created_name);
-     program_presenter_created_channel.bind(
-         'App\\Events\\Workspace\\ProgramPresenterCreated',
+     var program_member_created_name = 'program-member-created-' + workspace_id + '-' + member_id;
+     var program_member_created_channel = pusher.subscribe(program_member_created_name);
+     program_member_created_channel.bind(
+         'App\\Events\\Workspace\\ProgramMemberCreated',
          function(data) {
              var newNotificationHtml = `<a href="${data.url}" class="dropdown-item read-notification"
      data-notification-code="${data.code}">
