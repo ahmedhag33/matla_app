@@ -6,8 +6,10 @@ use App\Events\Workspace\NotfiyAcceptToWorkspace;
 use App\Events\Workspace\ProgramCreated;
 use App\Events\Workspace\ProgramMemberCreated;
 use App\Events\Workspace\ProgramUpdated;
+use App\Events\Workspace\ProgramMemberDeleted;
 use App\Listeners\Workspace\NotfiyAcceptToWorkspaceListener;
 use App\Listeners\Workspace\ProgramCreatedNotification;
+use App\Listeners\Workspace\ProgramMemberDeletedNotify;
 use App\Listeners\Workspace\ProgramMemberCreatedNotify;
 use App\Listeners\Workspace\ProgramUpdatedNofiy;
 use Illuminate\Auth\Events\Registered;
@@ -36,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProgramMemberCreated::class => [
             ProgramMemberCreatedNotify::class,
+        ],
+        ProgramMemberDeleted::class => [
+            ProgramMemberDeletedNotify::class,
         ],
     ];
 

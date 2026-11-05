@@ -1218,5 +1218,7 @@
     "There are no programs available at the moment.": "لا توجد برامج متاحة في الوقت الحالي.",
     "New Program Team Member Created": "تم إنشاء عضو جديد في فريق البرنامج",
     "Program Team Member Updated": "تم تحديث عضو فريق البرنامج",
-    "Program Team Member Deleted": "تم حذف عضو فريق البرنامج"
+    "Program Team Member Deleted": "تم حذف عضو فريق البرنامج",
+    "Program Member Deleted": "تم حذف عضو البرنامج",
+    "You have been removed from the program": "تمت إزالتك من برنامج"
 }
