@@ -23,7 +23,7 @@ class ProgramStepRequest extends FormRequest
      */
     public function rules(): array
     {
-        return ProgramRules::step($this->route('step'));
+        return ProgramRules::step((int) $this->route('step'));
     }
     /**
      * Get custom messages for validator errors.

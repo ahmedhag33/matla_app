@@ -1,6 +1,6 @@
- @if (session()->has('success-message-presenters'))
+ @if (session()->has('success-message-program'))
      <script>
-         toastr.success("{{ session('success-message-presenters') }}");
+         toastr.success("{{ session('success-message-program') }}");
      </script>
  @endif
  <script>

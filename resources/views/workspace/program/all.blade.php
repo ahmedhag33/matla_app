@@ -119,7 +119,6 @@
                         </div>
 
                     </div>
-                    @include('workspace.program.program-providers')
                 @empty
                     <div class="error-page">
                         <h2 class="headline ">

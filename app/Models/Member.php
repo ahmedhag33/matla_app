@@ -114,6 +114,16 @@ class Member extends Authenticatable
         return $query->where('id', '!=', auth()->guard('member')->id());
     }
     /**
+     * Scope a query to only include members in the program team.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeInProgramTeam(Builder $query, $program_id)
+    {
+        return $query->whereIn('id',ProgramTeam::where('program_id', $program_id)->pluck('team_member_id'));
+    }
+    /**
      * Scope a query to only include members not equal to the creators of workspaces.
      *
      * @param Builder $query

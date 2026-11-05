@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\ProgramCreated;
+use App\Events\Workspace\ProgramMemberCreated;
+use App\Events\Workspace\ProgramMemberDeleted;
 use App\Events\Workspace\ProgramUpdated;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
@@ -100,6 +102,16 @@ class ProgramController extends Controller
                 $program->save();
                 // Capture changed values
                 $changes = $program->getChanges();
+
+                $team_members = $request->input('team_members', []);
+                // Synchronize team members with the program.
+                $team_members_query = $program->teamMembers();
+                // Capture the changes in team members after synchronization
+                $team_members_changes = $team_members_query->sync($team_members);
+                // Capture the changes in team members after synchronization
+                $new_team_members = $team_members_changes['attached'];
+                // Capture the removed team members after synchronization
+                $removed_team_members = $team_members_changes['detached'];
                 // Get old broadcast days before synchronization
                 $oldDays = $program->broadcastDays()
                     ->get()
@@ -128,19 +140,21 @@ class ProgramController extends Controller
                     'old_values' => $oldValues,
                     'changes' => $changes,
                     'sync_changes' => $syncChanges,
+                    'new_team_members' => $new_team_members,
+                    'removed_team_members' => $removed_team_members,
                     'old_days' => $oldDays,
                     'new_days' => $newDays,
                 ];
             });
-            $members = Member::notEqualCurrentUser()->inWorkspace()->get();
+            $members = Member::notEqualCurrentUser()->inProgramTeam($result['program']->id)->inWorkspace()->get();
             // Extract old and new values for comparison
             $old = $result['old_values'];
             // Extract new values for comparison
             $new = $result['changes'];
-            // Notify members about the new program
-            foreach ($members as $member) {
-                // Perform any additional logic with the members if needed.
-                if ($result['is_new']) {
+            // Extract old and new broadcast days for comparison
+            if ($result['is_new']) {
+                // Notify program members about program creation.
+                foreach ($members as $member) {
                     event(new ProgramCreated(
                         $result['program']->id,
                         $result['program']->name,
@@ -149,8 +163,22 @@ class ProgramController extends Controller
                         current_workspace()->id,
                         current_workspace()->slug
                     ));
-                } else {
-                    // Notify members about the updated program
+                }
+                // Notify newly added team members only once.
+                foreach ($result['new_team_members'] as $team_member_id) {
+                    event(new ProgramMemberCreated(
+                        $result['program']->id,
+                        $result['program']->name,
+                        $result['program']->slug,
+                        $team_member_id,
+                        current_workspace()->id,
+                        current_workspace()->slug
+                    ));
+                }
+
+            } else {
+                foreach ($members as $member) {
+                    // Notify program members about program updates.
                     if (array_key_exists('name', $new)) {
                         event(new ProgramUpdated(
                             $result['program']->id,
@@ -163,9 +191,11 @@ class ProgramController extends Controller
                             current_workspace()->slug
                         ));
                     }
+                    // Notify program members about changes in broadcast days.
                     if ($result['old_days'] !== $result['new_days']) {
                         $oldDaysString = implode(', ', $result['old_days']);
                         $newDaysString = implode(', ', $result['new_days']);
+
                         event(new ProgramUpdated(
                             $result['program']->id,
                             __('Program broadcast days updated.'),
@@ -173,6 +203,17 @@ class ProgramController extends Controller
                             $newDaysString,
                             $result['program']->slug,
                             $member->id,
+                            current_workspace()->id,
+                            current_workspace()->slug
+                        ));
+                    }
+                    // Notify program members about removed team members.
+                    foreach ($result['removed_team_members'] as $team_member_id) {
+                        event(new ProgramMemberDeleted(
+                            $result['program']->id,
+                            $result['program']->name,
+                            $result['program']->slug,
+                            $team_member_id,
                             current_workspace()->id,
                             current_workspace()->slug
                         ));
