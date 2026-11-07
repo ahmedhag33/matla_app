@@ -224,7 +224,7 @@ class Program extends Model
     {
         return Attribute::make(
             get: fn() => $this->created_at->locale('ar')->translatedFormat('l j F Y')
-                . ' ' . timeFormat($this->created_at),
+                . '  ' . timeFormat($this->created_at),
         );
     }
 }

@@ -1228,5 +1228,12 @@
     "Each team member must be an integer.": "يجب أن يكون كل عضو في الفريق عددًا صحيحًا.",
     "The selected team member is invalid.": "العضو المحدد في الفريق غير صالح.",
     "Team": "فريق العمل",
-    "You are not part of this program team.": "أنت لست جزءًا من فريق هذا البرنامج."
+    "You are not part of this program team.": "أنت لست جزءًا من فريق هذا البرنامج.",
+    "Program Team": "فريق العمل",
+    "members": "أعضاء",
+    "Number of Episodes": "عدد الحلقات",
+    "Episode Duration": "مدة الحلقة",
+    "Broadcast Mode": "وضع البث",
+    "Created At": "تاريخ الإنشاء",
+    "Day Schedule": "ايام البث الاسبوعية"
 }

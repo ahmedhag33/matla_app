@@ -38,13 +38,13 @@ class ProgramController extends Controller
     /**
      * retrieve the program details by slug.
      *
-     * @param  string  $programSlug
      * @return \Illuminate\View\View
      */
-    public function details($programSlug)
+    public function details()
     {
-        $program = Program::with(['type', 'createdBy', 'presenters', 'broadcastDays'])
-            ->where('slug', $programSlug)->first();
+        $program = Program::with(['type', 'createdBy', 'teamMembers', 'broadcastDays'])
+            ->withCount('teamMembers')
+            ->where('slug', request()->route('programSlug'))->firstOrFail();
         // Return the program details view with the retrieved program.
         return view('workspace.program.details.index', compact('program'));
     }
@@ -197,7 +197,7 @@ class ProgramController extends Controller
                     }
                 }
             }
-             // Notify newly added team members only once.
+            // Notify newly added team members only once.
             foreach ($result['new_team_members'] as $team_member_id) {
                 event(new ProgramMemberCreated(
                     $result['program']->id,
