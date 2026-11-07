@@ -42,7 +42,9 @@ class ProgramController extends Controller
      */
     public function details()
     {
-        $program = Program::with(['type', 'createdBy', 'teamMembers', 'broadcastDays'])
+        $program = Program::with(['type', 'createdBy', 'teamMembers' => function ($query) {
+            $query->with('role');
+        }, 'broadcastDays'])
             ->withCount('teamMembers')
             ->where('slug', request()->route('programSlug'))->firstOrFail();
         // Return the program details view with the retrieved program.

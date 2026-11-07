@@ -1235,5 +1235,8 @@
     "Episode Duration": "مدة الحلقة",
     "Broadcast Mode": "وضع البث",
     "Created At": "تاريخ الإنشاء",
-    "Day Schedule": "ايام البث الاسبوعية"
+    "Day Schedule": "ايام البث الاسبوعية",
+    "Program Details": "تفاصيل البرنامج",
+    "No Episodes Found": "لن يتم اتشاء حلقات جديدة حتى الان",
+    "Add Episode": "إضافة حلقة"
 }

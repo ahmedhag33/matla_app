@@ -306,3 +306,15 @@ a.btn-matla:hover {
 .program-type-card.selected p {
     color: #FFFF;
 }
+.nav-link.active {
+    background-color:  #17233C !important;
+    color: #fff !important;
+}
+.table-avatar-matla {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-inline-end: 8px;
+    vertical-align: middle;
+}
