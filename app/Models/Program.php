@@ -215,4 +215,16 @@ class Program extends Model
             get: fn() => create_duration_in_hours_and_minutes_to_array($this->default_duration_minutes)['minutes'],
         );
     }
+      /**
+     * Get the created_at attribute value.
+     *
+     * @return Attribute
+     */
+    public function createdAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->created_at->locale('ar')->translatedFormat('l j F Y')
+                . ' ' . timeFormat($this->created_at),
+        );
+    }
 }
