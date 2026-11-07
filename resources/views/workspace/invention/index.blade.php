@@ -43,7 +43,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($inventions as $invention)
-                                                <tr>
+                                                <tr data-id="{{ $invention->id }}">
                                                     <td>{{ $invention->name }}</td>
                                                     <td>{{ $invention->email }}</td>
                                                     <td>{{ $invention->role->name }}</td>

@@ -25,7 +25,6 @@ class WorkspaceInvitations extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
         'name',
         'email',
         'workspace_role_id',
@@ -35,6 +34,15 @@ class WorkspaceInvitations extends Model
         'invited_by',
         'status',
         'workspace_id'
+    ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'expires_at' => 'datetime',
+        'accepted_at' => 'datetime',
     ];
     /**
      * Get a custom description for an activity log entry.
@@ -137,7 +145,7 @@ class WorkspaceInvitations extends Model
     public function createdAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn() => dateFormat($this->created_at)
+            get: fn() => $this->created_at->locale('ar')->translatedFormat('l j F Y')
                 . ' ' . timeFormat($this->created_at),
         );
     }
@@ -149,7 +157,7 @@ class WorkspaceInvitations extends Model
     public function updatedAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn() => dateFormat($this->updated_at)
+            get: fn() => $this->updated_at->locale('ar')->translatedFormat('l j F Y')
                 . ' ' . timeFormat($this->updated_at),
         );
     }
@@ -161,7 +169,7 @@ class WorkspaceInvitations extends Model
     public function expiresAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn() => dateFormat($this->expires_at)
+            get: fn() => $this->expires_at->locale('ar')->translatedFormat('l j F Y')
                 . ' ' . timeFormat($this->expires_at),
         );
     }
@@ -175,8 +183,8 @@ class WorkspaceInvitations extends Model
         return Attribute::make(
             get: fn() => $this->accepted_at === null
                 ? '-'
-                : dateFormat($this->accepted_at)
-                . ' ' . timeFormat($this->accepted_at),
+                : $this->accepted_at->locale('ar')->translatedFormat('l j F Y')
+                . ' ' . timeFormat($this->accepted_at)
         );
     }
 }
