@@ -1252,5 +1252,8 @@
     "New Episode Created": "تم إنشاء حلقة جديدة",
     "Episode Updated": "تم تحديث الحلقة",
     "Episode Deleted": "تم حذف الحلقة",
-    "Add New Episode": "إضافة حلقة جديدة"
+    "Add New Episode": "إضافة حلقة جديدة",
+    "Episode Data": "بيانات الحلقة",
+    "Date and Duration": "التاريخ والمدة",
+    "Reminder": "تذكير"
 }

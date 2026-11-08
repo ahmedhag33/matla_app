@@ -15,7 +15,55 @@
             </div>
 
             <div class="modal-body">
-                <div class="card-body p-0"></div>
+                 <div class="card-body p-0">
+
+                    <div class="bs-stepper">
+
+                        <!-- Stepper Header -->
+                        <div class="bs-stepper-header" role="tablist">
+
+                            <div class="step" data-target="#basic-information-part">
+                                <button type="button" class="step-trigger" role="tab"
+                                    aria-controls="basic-information-part" id="basic-information-part-trigger">
+                                    <span class="bs-stepper-circle-matla">1</span>
+                                    <span class="bs-stepper-label">{{ __('Episode Data') }}</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step" data-target="#date-time-part">
+                                <button type="button" class="step-trigger" role="tab"
+                                    aria-controls="date-time-part" id="date-time-part-trigger">
+                                    <span class="bs-stepper-circle-matla">2</span>
+                                    <span class="bs-stepper-label">{{ __('Date and Duration') }}</span>
+                                </button>
+                            </div>
+                            <div class="line"></div>
+                            <div class="step" data-target="#reminder-part">
+                                <button type="button" class="step-trigger" role="tab"
+                                    aria-controls="reminder-part"
+                                    id="reminder-part-trigger">
+                                    <span class="bs-stepper-circle-matla">3</span>
+                                    <span class="bs-stepper-label">{{ __('Reminder') }}</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- End Stepper Header -->
+
+                        <form id="episode-form">
+                            @csrf
+                            <input type="hidden" name="program_id" value="{{ $program->id }}">
+                            <div class="bs-stepper-content">
+                                <!-- End Step 3 -->
+                            </div>
+                        </form>
+                        <div id="add-program-loading" class="spinner-grow text-dark" role="status"
+                            style="display: none;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <!-- End Stepper -->
+
+                </div>
             </div>
 
         </div>
