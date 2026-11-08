@@ -104,7 +104,7 @@
                                             {{ __('No Episodes Found') }}
                                         </h1>
 
-                                        <button class="btn btn-matla">
+                                        <button class="btn btn-matla" data-toggle="modal" data-target="#addEpisodeModal">
                                             {{ __('Add Episode') }}
                                         </button>
 
@@ -156,4 +156,8 @@
             </div>
         </main>
     </div> <!-- End content-wrapper -->
+    @include('workspace.program.details.create-episode')
+@endsection
+@section('script')
+
 @endsection
