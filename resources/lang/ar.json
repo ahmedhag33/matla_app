@@ -1238,5 +1238,18 @@
     "Day Schedule": "ايام البث الاسبوعية",
     "Program Details": "تفاصيل البرنامج",
     "No Episodes Found": "لن يتم اتشاء حلقات جديدة حتى الان",
-    "Add Episode": "إضافة حلقة"
+    "Add Episode": "إضافة حلقة",
+    "draft": "مسودة",
+    "in_preparation": "قيد التحضير",
+    "under_review": "قيد المراجعة",
+    "approved": "معتمد",
+    "scheduled": "مجدول",
+    "on_air": "على الهواء",
+    "completed": "مكتمل",
+    "cancelled": "ملغى",
+    "postponed": "مؤجل",
+    "completed_percentage": "نسبة الاكتمال",
+    "New Episode Created": "تم إنشاء حلقة جديدة",
+    "Episode Updated": "تم تحديث الحلقة",
+    "Episode Deleted": "تم حذف الحلقة"
 }

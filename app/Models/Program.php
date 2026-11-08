@@ -136,6 +136,15 @@ class Program extends Model
         return $this->hasMany(ProgramBroadcastDays::class, 'program_id');
     }
     /**
+     * Get the episodes associated with the program.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function episodes()
+    {
+        return $this->hasMany(Episode::class, 'program_id');
+    }
+    /**
      * Interact with the broadcast_mode attribute.
      *
      * @return Attribute
