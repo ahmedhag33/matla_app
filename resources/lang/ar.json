@@ -1255,5 +1255,8 @@
     "Add New Episode": "إضافة حلقة جديدة",
     "Episode Data": "بيانات الحلقة",
     "Date and Duration": "التاريخ والمدة",
-    "Reminder": "تذكير"
+    "Reminder": "تذكير",
+    "Episode Title": "عنوان الحلقة",
+    "Episode Description": "وصف الحلقة",
+    "Episode Short Description": "وصف قصير للحلقة"
 }

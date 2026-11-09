@@ -1,9 +1,34 @@
 <div id="basic-information-part" class="content" role="tabpanel" aria-labelledby="basic-information-part-trigger">
 
     <div class="form-group">
-        <label>{{ __('Basic Information') }}</label>
+        <label>{{ __('Episode Data') }}</label>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="episode-title">
+                    {{ __('Episode Title') }}
+                    <span class="text-muted">*</span>
+                </label>
 
+                <input type="text" placeholder="{{ __('Episode Title') }}" class="form-control" id="episode-title"
+                    name="name">
+                <span class="text-danger" data-error="name"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="description">
+                    {{ __('Episode Description') }}
+                </label>
+
+                <textarea id="description" name="description" class="form-control" rows="4"
+                    placeholder="{{ __('Episode Short Description') }}"></textarea>
+
+                <span class="text-danger" data-error="description"></span>
+            </div>
+        </div>
+    </div>
     <button type="button" class="btn btn-matla btn-next-step" onclick="stepper.next()">
         {{ __('Next') }}
     </button>
