@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Program;
+use App\Models\ProgramBroadcastDays;
 use App\Service\Enum\BroadcastDay;
 use App\Service\Enum\BroadcastMode;
 use App\Service\Enum\BroadcastSchedule;
@@ -558,7 +560,7 @@ if (!function_exists('create_duration_in_hours_and_minutes')) {
         // Calculate remaining minutes after extracting hours
         $minutes = $totalMinutes % 60;
         // Return formatted string as "Xh Ym"
-        return $hours .'  '. __('Hour') . '  ' . $minutes . '  ' . __('Minute');
+        return $hours . '  ' . __('Hour') . '  ' . $minutes . '  ' . __('Minute');
     }
 }
 if (!function_exists('create_duration_in_hours_and_minutes_to_array')) {
@@ -575,5 +577,44 @@ if (!function_exists('create_duration_in_hours_and_minutes_to_array')) {
         $minutes = $totalMinutes % 60;
         // Return array with hours and minutes
         return ['hours' => $hours, 'minutes' => $minutes];
+    }
+}
+if (!function_exists('daysEnums')) {
+    /**
+     * Get Days Enums
+     *
+     * @return array
+     */
+    function daysEnums(): array
+    {
+        return array_map(fn($day) => $day->value, BroadcastDay::cases());
+    }
+}
+if (!function_exists('daysNotInprogram')) {
+    /**
+     * Get Days Not In Program
+     *
+     * @param array $programDays
+     * @return array
+     */
+    function daysNotInprogram(array $programDays): array
+    {
+        return array_diff(daysEnums(), $programDays);
+    }
+}
+if (!function_exists('programDays')) {
+    /**
+     * Get program days by program slug
+     *
+     * @param string $slug
+     * @return array
+     */
+    function programDays($slug): array
+    {
+        $programDays =ProgramBroadcastDays::whereIn('program_id', Program::where('slug', $slug)->pluck('id'))->firstOrFail();
+        // Get the days associated with the program
+        $days = $programDays->pluck('day')->toArray();
+        // Return days not in the program
+        return daysNotInprogram($days);
     }
 }

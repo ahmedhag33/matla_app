@@ -42,13 +42,15 @@ class ProgramController extends Controller
      */
     public function details()
     {
+        $programDays = programDays(request()->route('programSlug'));
+        // Retrieve the broadcast days for the program.
         $program = Program::with(['type', 'createdBy', 'teamMembers' => function ($query) {
             $query->with('role');
         }, 'broadcastDays'])
             ->withCount('teamMembers')
             ->where('slug', request()->route('programSlug'))->firstOrFail();
         // Return the program details view with the retrieved program.
-        return view('workspace.program.details.index', compact('program'));
+        return view('workspace.program.details.index', compact('program', 'programDays'));
     }
     /**
      * Handle the program step request.
