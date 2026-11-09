@@ -1,7 +1,10 @@
 <script>
     $(document).ready(function() {
+        moment.locale('ar');
+
+        const date = moment().format('dddd، D MMMM YYYY');
         $('#reservationdate').datetimepicker({
-            format: 'L',
+            format: 'dddd، D MMMM YYYY',
             locale: 'ar'
         });
     });
