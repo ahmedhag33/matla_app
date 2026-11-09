@@ -1263,5 +1263,8 @@
     "Available Days:": "الأيام المتاحة",
     "Episode Time": "وقت الحلقة",
     "Duration Hours": "ساعات المدة",
-    "Duration Minutes": "دقائق المدة"
+    "Duration Minutes": "دقائق المدة",
+    "Set a Reminder": "تعيين تذكير",
+    "Reminder for Episode": "التذكير باعداد الحلقة",
+    "Reminder Before": "التذكير قبلها ب"
 }

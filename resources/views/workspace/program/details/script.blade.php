@@ -12,6 +12,13 @@
             format: 'h:mm A',
             locale: '{{ app()->getLocale() }}',
         });
+        $('.reminder-checkbox').change(function() {
+            if ($(this).is(':checked')) {
+                $('#reminder-time-container').show();
+            } else {
+                $('#reminder-time-container').hide();
+            }
+        });
     });
 </script>
 <script>
