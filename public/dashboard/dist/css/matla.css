@@ -242,21 +242,24 @@ a.btn-matla:hover {
 .program-card .card-header,
 .program-card .card-body,
 .program-card .card-footer {
-    background-color: #17233C  !important;
+    background-color: #17233C !important;
     color: #ffffff !important;
 }
 
 .program-card .text-muted {
     color: #ffffff !important;
 }
+
 .program-card .pagination {
     background-color: #17233C !important;
     color: #ffffff !important;
 }
+
 .program-card .selected {
     border-color: #F59E0B;
     background-color: #fff8e8;
 }
+
 .program-type-card {
     min-height: 75px !important;
     padding: 8px 10px;
@@ -303,13 +306,16 @@ a.btn-matla:hover {
 .program-type-card.selected .info-box-number {
     color: #FFFF;
 }
+
 .program-type-card.selected p {
     color: #FFFF;
 }
+
 .nav-link.active {
-    background-color:  #17233C !important;
+    background-color: #17233C !important;
     color: #fff !important;
 }
+
 .table-avatar-matla {
     width: 30px;
     height: 30px;
@@ -317,4 +323,36 @@ a.btn-matla:hover {
     object-fit: cover;
     margin-inline-end: 8px;
     vertical-align: middle;
+}
+
+.bootstrap-datetimepicker-widget .timepicker-picker a[data-action="togglePeriod"] {
+    display: inline-block !important;
+    width: 48px !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 6px !important;
+    color: #17233C !important;
+    background-color: #fff !important;
+}
+
+.bootstrap-datetimepicker-widget .timepicker-picker td a[data-action="togglePeriod"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 47px !important;
+    height: 47px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background-color: #007bff !important;
+    color: #fff !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
 }

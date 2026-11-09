@@ -1260,5 +1260,8 @@
     "Episode Description": "وصف الحلقة",
     "Episode Short Description": "وصف قصير للحلقة",
     "Episode Date": "تاريخ الحلقة",
-    "Available Days:": "الأيام المتاحة"
+    "Available Days:": "الأيام المتاحة",
+    "Episode Time": "وقت الحلقة",
+    "Duration Hours": "ساعات المدة",
+    "Duration Minutes": "دقائق المدة"
 }

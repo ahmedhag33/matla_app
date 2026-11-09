@@ -8,6 +8,10 @@
             locale: '{{ app()->getLocale() }}',
             daysOfWeekDisabled: programDays,
         });
+        $('#episodeTime').datetimepicker({
+            format: 'h:mm A',
+            locale: '{{ app()->getLocale() }}',
+        });
     });
 </script>
 <script>
