@@ -22,9 +22,5 @@
     @include('workspace.program.details.create-episode')
 @endsection
 @section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'));
-        });
-    </script>
+    @include('workspace.program.details.script')
 @endsection

@@ -12,7 +12,11 @@
  <script src="{{ asset('public/dashboard/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}">
  </script>
  <!-- InputMask -->
- <script src="{{ asset('public/dashboard/plugins/moment/moment.min.js') }}"></script>
+ @if (getCurrentLanguage() == 'ar')
+     <script src="{{ asset('public/js/moment-with-locales.min.js') }}"></script>
+ @else
+     <script src="{{ asset('public/dashboard/plugins/moment/moment.min.js') }}"></script>
+ @endif
  <script src="{{ asset('public/dashboard/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
  <!-- date-range-picker -->
  <script src="{{ asset('public/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
