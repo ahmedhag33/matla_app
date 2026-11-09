@@ -59,53 +59,13 @@
                             <input type="hidden" name="program_id" value="{{ $program->id }}">
 
                             <div class="bs-stepper-content">
-
-                                <div id="basic-information-part" class="content" role="tabpanel"
-                                    aria-labelledby="basic-information-part-trigger">
-
-                                    <div class="form-group">
-                                        <label>{{ __('Basic Information') }}</label>
-                                    </div>
-
-                                    <button type="button" class="btn btn-matla btn-next-step" onclick="stepper.next()">
-                                        {{ __('Next') }}
-                                    </button>
-
-                                </div>
-
-                                <div id="date-time-part" class="content" role="tabpanel"
-                                    aria-labelledby="date-time-part-trigger">
-
-                                    <div class="form-group">
-                                        <label>{{ __('Date and Duration') }}</label>
-                                    </div>
-
-                                    <button type="button" class="btn btn-matla btn-next-step" onclick="stepper.next()">
-                                        {{ __('Next') }}
-                                    </button>
-                                    <button type="button" class="btn btn-matla btn-previous-step"
-                                        onclick="stepper.previous()">
-                                        {{ __('Previous') }}
-                                    </button>
-                                </div>
-
-                                <div id="reminder-part" class="content" role="tabpanel"
-                                    aria-labelledby="reminder-part-trigger">
-
-                                    <div class="form-group">
-                                        <label>{{ __('Reminder') }}</label>
-                                    </div>
-
-                                    <button type="button" class="btn btn-matla btn-previous-step"
-                                        onclick="stepper.previous()">
-                                        {{ __('Previous') }}
-                                    </button>
-
-                                    <button type="submit" class="btn btn-matla">
-                                        {{ __('Save') }}
-                                    </button>
-
-                                </div>
+                                <!-- Stepper Content -->
+                                <!-- Basic Information Part -->
+                                @include('workspace.program.details.episodesForm.data')
+                                <!-- Date and Duration Part -->
+                                @include('workspace.program.details.episodesForm.date-time')
+                                <!-- Reminder Part -->
+                                @include('workspace.program.details.episodesForm.reminder')
 
                             </div>
                         </form>
