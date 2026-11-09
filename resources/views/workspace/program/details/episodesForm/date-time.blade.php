@@ -7,11 +7,11 @@
          <label>{{ __('Episode Date') }}
             <span class="text-muted">* {{ __('Available Days:') }} {{ $programDaysTostring ?? '' }}</span>
          </label>
-         <div class="input-group date" id="reservationdate" data-target-input="nearest">
+         <div class="input-group date" id="episodeDate" data-target-input="nearest">
 
-             <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+             <input type="text" class="form-control datetimepicker-input" data-target="#episodeDate" />
 
-             <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+             <div class="input-group-append" data-target="#episodeDate" data-toggle="datetimepicker">
 
                  <div class="input-group-text">
                      <i class="fa fa-calendar"></i>

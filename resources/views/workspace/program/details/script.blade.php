@@ -3,7 +3,7 @@
         moment.locale('{{ app()->getLocale() }}');
         const programDays = @json(array_keys($programDays));
         const date = moment().format('dddd، D MMMM YYYY');
-        $('#reservationdate').datetimepicker({
+        $('#episodeDate').datetimepicker({
             format: 'dddd، D MMMM YYYY',
             locale: '{{ app()->getLocale() }}',
             daysOfWeekDisabled: programDays,
