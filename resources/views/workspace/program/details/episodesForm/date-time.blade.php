@@ -4,8 +4,9 @@
          <label>{{ __('Date and Duration') }}</label>
      </div>
      <div class="form-group">
-         <label>{{ __('Episode Date') }}</label>
-
+         <label>{{ __('Episode Date') }}
+            <span class="text-muted">* {{ __('Available Days:') }} {{ $programDaysTostring ?? '' }}</span>
+         </label>
          <div class="input-group date" id="reservationdate" data-target-input="nearest">
 
              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />

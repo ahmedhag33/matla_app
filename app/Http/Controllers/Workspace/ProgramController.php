@@ -44,13 +44,20 @@ class ProgramController extends Controller
     {
         $programDays = programDays(request()->route('programSlug'));
         // Retrieve the broadcast days for the program.
-        $program = Program::with(['type', 'createdBy', 'teamMembers' => function ($query) {
-            $query->with('role');
-        }, 'broadcastDays'])
+        $program = Program::with([
+            'type',
+            'createdBy',
+            'teamMembers' => function ($query) {
+                $query->with('role');
+            },
+            'broadcastDays'
+        ])
             ->withCount('teamMembers')
             ->where('slug', request()->route('programSlug'))->firstOrFail();
+
+        $programDaysTostring = implode(' ', collect($program->broadcastDays)->pluck('day_at_from_enum')->toArray());
         // Return the program details view with the retrieved program.
-        return view('workspace.program.details.index', compact('program', 'programDays'));
+        return view('workspace.program.details.index', compact('program', 'programDays', 'programDaysTostring'));
     }
     /**
      * Handle the program step request.
