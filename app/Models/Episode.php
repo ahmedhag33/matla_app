@@ -90,7 +90,20 @@ class Episode extends Model
             if (auth()->guard('member')->check()) {
                 $episode->created_by = auth()->guard('member')->user()->id;
             }
+            // Set the next episode number if not provided.
+            if (empty($episode->episode_number)) {
+                $episode->episode_number = $episode->lastEpisodeNumber();
+            }
         });
+    }
+    /**
+     * Get the next episode number.
+     *
+     * @return int
+     */
+    protected function lastEpisodeNumber()
+    {
+        return static::max('episode_number') + 1 ?? 1;
     }
     /**
      * Get the program that owns the episode.
