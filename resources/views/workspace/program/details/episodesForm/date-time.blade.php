@@ -15,15 +15,16 @@
                 </span>
             </label>
 
-            <div class="input-group date" id="episodeDate" data-target-input="nearest">
-                <input type="text" id="episodeDateInput" name="episode_date"
-                    class="form-control datetimepicker-input" data-target="#episodeDate" />
+            <div class="input-group date" id="air_date" data-target-input="nearest">
+                <input type="text" id="episodeDateInput" name="air_date"
+                    class="form-control datetimepicker-input" data-target="#air_date" />
 
-                <div class="input-group-append" data-target="#episodeDate" data-toggle="datetimepicker">
+                <div class="input-group-append" data-target="#air_date" data-toggle="datetimepicker">
                     <div class="input-group-text">
                         <i class="fa fa-calendar"></i>
                     </div>
                 </div>
+                <span class="text-danger" data-error="air_date"></span>
             </div>
         </div>
 
@@ -34,15 +35,16 @@
                 <span class="text-muted">*</span>
             </label>
 
-            <div class="input-group date" id="episodeTime" data-target-input="nearest">
-                <input type="text" id="episodeTimeInput" name="episode_time"
-                    class="form-control datetimepicker-input" data-target="#episodeTime" />
+            <div class="input-group date" id="air_time" data-target-input="nearest">
+                <input type="text" id="episodeTimeInput" name="air_time"
+                    class="form-control datetimepicker-input" data-target="#air_time" />
 
-                <div class="input-group-append" data-target="#episodeTime" data-toggle="datetimepicker">
+                <div class="input-group-append" data-target="#air_time" data-toggle="datetimepicker">
                     <div class="input-group-text">
                         <i class="far fa-clock"></i>
                     </div>
                 </div>
+                <span class="text-danger" data-error="air_time"></span>
             </div>
         </div>
 

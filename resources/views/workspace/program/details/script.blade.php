@@ -3,12 +3,12 @@
         moment.locale('{{ app()->getLocale() }}');
         const programDays = @json(array_keys($programDays));
         const date = moment().format('dddd، D MMMM YYYY');
-        $('#episodeDate').datetimepicker({
+        $('#air_date').datetimepicker({
             format: 'dddd، D MMMM YYYY',
             locale: '{{ app()->getLocale() }}',
             daysOfWeekDisabled: programDays,
         });
-        $('#episodeTime').datetimepicker({
+        $('#air_time').datetimepicker({
             format: 'h:mm A',
             locale: '{{ app()->getLocale() }}',
         });

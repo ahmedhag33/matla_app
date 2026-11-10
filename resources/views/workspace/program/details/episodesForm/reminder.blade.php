@@ -18,12 +18,12 @@
 
              <div class="col-md-6 mb-3" style="display: none;" id="reminder-time-container">
 
-                 <label for="reminder_count">
+                 <label for="reminder_before_air">
                      {{ __('Reminder Before') }}
                  </label>
 
                  <div class="input-group">
-                     <input type="number" class="form-control" id="reminder_count" name="reminder_count"
+                     <input type="number" class="form-control" id="reminder_before_air" name="reminder_before_air"
                          min="1">
 
                      <div class="input-group-append">

@@ -6,14 +6,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="episode-title">
+                <label for="title">
                     {{ __('Episode Title') }}
                     <span class="text-muted">*</span>
                 </label>
 
-                <input type="text" placeholder="{{ __('Episode Title') }}" class="form-control" id="episode-title"
-                    name="name">
-                <span class="text-danger" data-error="name"></span>
+                <input type="text" placeholder="{{ __('Episode Title') }}" class="form-control" id="title"
+                    name="title">
+                <span class="text-danger" data-error="title"></span>
             </div>
         </div>
         <div class="col-md-12">
