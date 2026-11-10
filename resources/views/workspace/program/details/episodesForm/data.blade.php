@@ -1,8 +1,8 @@
 <div id="basic-information-part" class="content" role="tabpanel" aria-labelledby="basic-information-part-trigger">
-    <input type="hidden" name="program_id" value="{{ $program->id }}">
     <div class="form-group">
         <label>{{ __('Episode Data') }}</label>
     </div>
+    <input type="hidden" name="program_id" value="{{ $program->id }}" form="episode-form">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">

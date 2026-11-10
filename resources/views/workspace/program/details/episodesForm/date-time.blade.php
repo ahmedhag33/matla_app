@@ -85,7 +85,7 @@
         {{ __('Previous') }}
     </button>
 
-    <button type="button" class="btn btn-matla btn-next-step" data-step="1"">
+    <button type="button" class="btn btn-matla btn-next-step" data-step="2">
         {{ __('Next') }}
     </button>
 

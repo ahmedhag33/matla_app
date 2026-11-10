@@ -1278,5 +1278,6 @@
     "The title may not be greater than 255 characters.": "قد لا يكون العنوان أطول من 255 حرفًا.",
     "The description field is required.": "حقل الوصف مطلوب.",
     "The description must be a string.": "يجب أن يكون الوصف نصًا.",
-    "The description may not be greater than 1000 characters.": "قد لا يكون الوصف أطول من 1000 حرف."
+    "The description may not be greater than 1000 characters.": "قد لا يكون الوصف أطول من 1000 حرف.",
+    "The air time must be in the format H:i.": "يجب أن يكون وقت البث بالتنسيق H:i."
 }

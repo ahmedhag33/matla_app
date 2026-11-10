@@ -55,16 +55,16 @@
 
                         <form id="episode-form">
                             @csrf
-                            <div class="bs-stepper-content">
-                                <!-- Stepper Content -->
-                                <!-- Basic Information Part -->
-                                @include('workspace.program.details.episodesForm.data')
-                                <!-- Date and Duration Part -->
-                                @include('workspace.program.details.episodesForm.date-time')
-                                <!-- Reminder Part -->
-                                @include('workspace.program.details.episodesForm.reminder')
+                                <div class="bs-stepper-content">
+                                    <!-- Stepper Content -->
+                                    <!-- Basic Information Part -->
+                                    @include('workspace.program.details.episodesForm.data')
+                                    <!-- Date and Duration Part -->
+                                    @include('workspace.program.details.episodesForm.date-time')
+                                    <!-- Reminder Part -->
+                                    @include('workspace.program.details.episodesForm.reminder')
 
-                            </div>
+                                </div>
                         </form>
 
                         <div id="add-episode-loading" class="spinner-grow text-dark" role="status"
