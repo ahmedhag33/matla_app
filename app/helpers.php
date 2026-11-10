@@ -611,10 +611,34 @@ if (!function_exists('programDays')) {
      */
     function programDays($slug): array
     {
-        $programDays =ProgramBroadcastDays::whereIn('program_id', Program::where('slug', $slug)->pluck('id'))->firstOrFail();
+        $programDays = ProgramBroadcastDays::whereIn('program_id', Program::where('slug', $slug)->pluck('id'))->firstOrFail();
         // Get the days associated with the program
         $days = $programDays->pluck('day')->toArray();
         // Return days not in the program
         return daysNotInprogram($days);
+    }
+}
+if (!function_exists('dateToFormatDB')) {
+    /**
+     * Convert a date to the format used in the database.
+     *
+     * @param string $date
+     * @return string
+     */
+    function dateToFormatDB(string $date): string
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
+}
+if (!function_exists('timeToFormatDB')) {
+    /**
+     * Convert a time to the format used in the database.
+     *
+     * @param string $time
+     * @return string
+     */
+    function timeToFormatDB(string $time): string
+    {
+        return Carbon::parse($time)->format('H:i:s');
     }
 }
