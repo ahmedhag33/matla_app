@@ -1,5 +1,5 @@
 <div id="basic-information-part" class="content" role="tabpanel" aria-labelledby="basic-information-part-trigger">
-
+    <input type="hidden" name="program_id" value="{{ $program->id }}">
     <div class="form-group">
         <label>{{ __('Episode Data') }}</label>
     </div>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-matla btn-next-step" onclick="stepper.next()">
+    <button type="button" class="btn btn-matla btn-next-step" data-step="1">
         {{ __('Next') }}
     </button>
 

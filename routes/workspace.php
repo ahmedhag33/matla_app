@@ -4,6 +4,7 @@ use App\Http\Controllers\Workspace\Auth\ForgetPasswordController;
 use App\Http\Controllers\Workspace\Auth\LoginController;
 use App\Http\Controllers\Workspace\Auth\RegisterController;
 use App\Http\Controllers\Workspace\Auth\VerificationController;
+use App\Http\Controllers\Workspace\EpisodeController;
 use App\Http\Controllers\Workspace\HomeController;
 use App\Http\Controllers\Workspace\InventionController;
 use App\Http\Controllers\Workspace\MemberController;
@@ -109,7 +110,7 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
             ->middleware('check-member-permission:view-program');
         // add route to show program details by slug
         Route::get('{programSlug}', 'details')->name('workspace.program.details')
-            ->middleware(['check-member-permission:view-program','check-member-in-program-team']);
+            ->middleware(['check-member-permission:view-program', 'check-member-in-program-team']);
         // add route to handle program step validation
         Route::post('/validate/{step}', 'step')->name('workspace.program.step')
             ->middleware('check-member-permission:add-program');
@@ -122,5 +123,10 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to delete a program
         Route::delete('/delete', 'delete')->name('workspace.program.delete')
             ->middleware('check-member-permission:delete-program');
+    });
+    Route::prefix('episodes')->controller(EpisodeController::class)->group(function () {
+        // add route to handle episode step validation
+        Route::post('/validate/{step}', 'step')->name('workspace.episode.step')
+            ->middleware('check-member-permission:add-episodes');
     });
 });

@@ -642,3 +642,15 @@ if (!function_exists('timeToFormatDB')) {
         return Carbon::parse($time)->format('H:i:s');
     }
 }
+if (!function_exists('dateToDay')) {
+    /**
+     * Convert a date to the day of the week.
+     *
+     * @param string $date
+     * @return string
+     */
+    function dateToDay(string $date): string
+    {
+        return strtolower(Carbon::parse($date)->format('l'));
+    }
+}

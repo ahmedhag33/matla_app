@@ -55,9 +55,6 @@
 
                         <form id="episode-form">
                             @csrf
-
-                            <input type="hidden" name="program_id" value="{{ $program->id }}">
-
                             <div class="bs-stepper-content">
                                 <!-- Stepper Content -->
                                 <!-- Basic Information Part -->

@@ -1266,5 +1266,17 @@
     "Duration Minutes": "دقائق المدة",
     "Set a Reminder": "تعيين تذكير",
     "Reminder for Episode": "التذكير باعداد الحلقة",
-    "Reminder Before": "التذكير قبلها ب"
+    "Reminder Before": "التذكير قبلها ب",
+    "The air date must match one of the programs broadcast days.": "يجب أن يتطابق تاريخ البث مع أحد أيام بث البرنامج.",
+    "The air date field is required.": "حقل تاريخ البث مطلوب.",
+    "The air date must be a valid date.": "يجب أن يكون تاريخ البث تاريخًا صالحًا.",
+    "The program ID field is required.": "حقل معرف البرنامج مطلوب.",
+    "The program ID must be an integer.": "يجب أن يكون معرف البرنامج عددًا صحيحًا.",
+    "The selected program is invalid.": "البرنامج المحدد غير صالح.",
+    "The title field is required.": "حقل العنوان مطلوب.",
+    "The title must be a string.": "يجب أن يكون العنوان نصًا.",
+    "The title may not be greater than 255 characters.": "قد لا يكون العنوان أطول من 255 حرفًا.",
+    "The description field is required.": "حقل الوصف مطلوب.",
+    "The description must be a string.": "يجب أن يكون الوصف نصًا.",
+    "The description may not be greater than 1000 characters.": "قد لا يكون الوصف أطول من 1000 حرف."
 }
