@@ -132,7 +132,7 @@ class Episode extends Model
         return Attribute::make(
             get: fn() => $this->air_at ? $this->air_at
                 ->locale('ar')
-                ->translatedFormat('l j F Y') : null . ' ' . timeFormat($this->air_at)
+                ->translatedFormat('l j F Y') . ' ' . timeFormat($this->air_at) : null
         );
     }
     /**
@@ -145,7 +145,7 @@ class Episode extends Model
         return Attribute::make(
             get: fn() => $this->reminder_at ? $this->reminder_at
                 ->locale('ar')
-                ->translatedFormat('l j F Y') : null . ' ' . timeFormat($this->reminder_at)
+                ->translatedFormat('l j F Y') . ' ' . timeFormat($this->reminder_at) : null
         );
     }
     /**
