@@ -654,3 +654,31 @@ if (!function_exists('dateToDay')) {
         return strtolower(Carbon::parse($date)->format('l'));
     }
 }
+if (!function_exists('convertArabicDateToDatabase')) {
+    /**
+     * Convert an Arabic date string to the database format (Y-m-d).
+     *
+     * @param string $value
+     * @return string
+     */
+    function convertArabicDateToDatabase(string $value): string
+    {
+        $formatter = new \IntlDateFormatter(
+            'ar_EG',
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::NONE,
+            'Africa/Cairo',
+            \IntlDateFormatter::GREGORIAN,
+            'EEEE، d MMMM yyyy'
+        );
+        // Parse the Arabic date string into a timestamp
+        $timestamp = $formatter->parse($value);
+        // Check if parsing was successful
+        if ($timestamp === false) {
+            throw new \InvalidArgumentException('Invalid Arabic date format.');
+        }
+        // Convert the timestamp to the database format (Y-m-d)
+        return Carbon::createFromTimestamp($timestamp, 'Africa/Cairo')
+            ->format('Y-m-d');
+    }
+}

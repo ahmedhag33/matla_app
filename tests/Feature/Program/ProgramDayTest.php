@@ -24,6 +24,11 @@ class ProgramDayTest extends TestCase
         // Assert that the program has a broadcast day matching the current day
         $this->assertTrue($exists);
     }
+    /**
+     * Data provider for test_program_day_exists.
+     *
+     * @return array
+     */
     public static function arrayOfDates(): array
     {
         return [
@@ -31,6 +36,30 @@ class ProgramDayTest extends TestCase
             ['الأحد، ٨ نوفمبر ٢٠٢٦'],
             ['الاثنين، ٩ نوفمبر ٢٠٢٦'],
             ['الثلاثاء، ١٠ نوفمبر ٢٠٢٦'],
+        ];
+    }
+    #[DataProvider('arabicDates')]
+    /**
+     * @dataProvider arabicDates
+     */
+    public function test_arabic_date_is_converted_to_mysql_format(string $input, string $expected): void
+    {
+        $result = convertArabicDateToDatabase($input);
+        // Assert that the conversion result matches the expected MySQL date format
+        $this->assertSame($expected, $result);
+    }
+    /**
+     * Data provider for test_arabic_date_is_converted_to_mysql_format.
+     *
+     * @return array
+     */
+    public static function arabicDates(): array
+    {
+        return [
+            ['الثلاثاء، ١٠ نوفمبر ٢٠٢٦', '2026-11-10'],
+            ['الأربعاء، ١١ نوفمبر ٢٠٢٦', '2026-11-11'],
+            ['الخميس، ١٢ نوفمبر ٢٠٢٦', '2026-11-12'],
+            ['الجمعة، ١٣ نوفمبر ٢٠٢٦', '2026-11-13'],
         ];
     }
 }
