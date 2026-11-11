@@ -15,16 +15,18 @@ class ValidationServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Validator::extend('episode_scheduled_on_program_day', function ($attribute, $value, $parameters, $validator) {
-            $programId = $validator->getData()['program_id'] ?? null;
+            $programId = $validator->getData()['check_program_id'] ?? null;
             // If program ID is not provided, validation fails
             if (!$programId) {
                 return false;
             }
-            $day = strtolower(Carbon::parse($value)->format('l'));
+            $date = convertArabicDateToDatabase($value);
+            // Extract the day of the week from the converted date
+            $day = strtolower(Carbon::parse($date)->format('l'));
             // Check if the episode's scheduled day is in the program's broadcast days
             return ProgramBroadcastDays::where('program_id', $programId)
                 ->where('day', $day)
-                ->exists() ?? false;
+                ->exists();
         });
     }
 }

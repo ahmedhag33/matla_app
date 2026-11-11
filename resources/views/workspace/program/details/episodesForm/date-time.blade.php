@@ -1,5 +1,5 @@
 <div id="date-time-part" class="content" role="tabpanel" aria-labelledby="date-time-part-trigger">
-
+<input type="hidden" name="check_program_id" value="{{ $program->id  }}">
     <div class="form-group mb-4">
         <label class="d-block">{{ __('Date and Duration') }}</label>
     </div>

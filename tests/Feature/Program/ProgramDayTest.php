@@ -3,6 +3,7 @@
 namespace Tests\Feature\Program;
 
 use App\Models\ProgramBroadcastDays;
+use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -36,6 +37,7 @@ class ProgramDayTest extends TestCase
             ['الأحد، ٨ نوفمبر ٢٠٢٦'],
             ['الاثنين، ٩ نوفمبر ٢٠٢٦'],
             ['الثلاثاء، ١٠ نوفمبر ٢٠٢٦'],
+            ['الجمعة، ١٤ نوفمبر ٢٠٢٦'],
         ];
     }
     #[DataProvider('arabicDates')]
@@ -60,6 +62,39 @@ class ProgramDayTest extends TestCase
             ['الأربعاء، ١١ نوفمبر ٢٠٢٦', '2026-11-11'],
             ['الخميس، ١٢ نوفمبر ٢٠٢٦', '2026-11-12'],
             ['الجمعة، ١٣ نوفمبر ٢٠٢٦', '2026-11-13'],
+        ];
+    }
+    #[DataProvider('arrayOfDatesIsExist')]
+    /**
+     * Test that the date is converted to the correct day and exists in the program's broadcast days.
+     *
+     * @dataProvider arrayOfDatesIsExist
+     */
+    public function test_date_to_day_exit_in_broadcast_program(string $input, bool $expected): void
+    {
+        $result = convertArabicDateToDatabase($input);
+        // Convert the Arabic date to MySQL format and extract the day of the week/weekday name
+        $day = strtolower(Carbon::parse($result)->format('l'));
+        // Check if the program has a broadcast day matching the extracted day of the week
+        $exists = ProgramBroadcastDays::where('program_id', self::PROGRAM_ID)
+            ->where('day', $day)
+            ->exists();
+        // Assert that the program has a broadcast day matching the extracted day of the week
+        $this->assertSame($expected, $exists);
+    }
+    /**
+     * Data provider for test_date_to_day_exit_in_broadcast_program.
+     *
+     * @return array
+     */
+    public static function arrayOfDatesIsExist(): array
+    {
+        return [
+            ['السبت، ٧ نوفمبر ٢٠٢٦', true],
+            ['الأحد، ٨ نوفمبر ٢٠٢٦', true],
+            ['الاثنين، ٩ نوفمبر ٢٠٢٦', true],
+            ['الثلاثاء، ١٠ نوفمبر ٢٠٢٦', true],
+            ['الجمعة، ١٣ نوفمبر ٢٠٢٦', false],
         ];
     }
 }

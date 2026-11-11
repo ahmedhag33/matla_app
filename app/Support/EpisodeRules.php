@@ -25,8 +25,15 @@ class EpisodeRules implements RulesInterface
                 'description' => ['required', 'string', 'max:1000'],
             ],
             2 => [
-                'air_date' => ['required', 'date', 'episode_scheduled_on_program_day'],
-                'air_time' => ['required', 'date_format:H:i'],
+                'air_date' => [
+                    'required',
+                    //'date',
+                    'episode_scheduled_on_program_day'
+                ],
+                'air_time' => [
+                    'required',
+                    //'date_format:H:i'
+                ],
             ],
             default => [],
         };
