@@ -15,7 +15,7 @@
                      <span>{{ __('Program Team') }}</span>
                  </div>
                  <div class="stat">
-                     <strong>0</strong>
+                     <strong>{{ $program->episodes_count }}</strong>
                      <span>
                          {{ __('Number of Episodes') }}</span>
                  </div>
@@ -77,6 +77,16 @@
 
                      @if ($program->episodes->isNotEmpty())
                          <div class="card card-solid">
+                             @if (auth()->guard('member')->user()->hasPermission('add-episodes'))
+                                 <div class="card-header">
+                                     <h3 class="card-title">
+                                         <button type="button" class="btn btn-matla" data-toggle="modal"
+                                             data-target="#addEpisodeModal">
+                                             {{ __('Add New Episode') }}
+                                         </button>
+                                     </h3>
+                                 </div>
+                             @endif
                              <div class="card-body pb-0">
                                  <div class="row">
                                      <div class="card-body table-responsive p-0">
@@ -118,10 +128,12 @@
                                              {{ __('No Episodes Found') }}
                                          </h1>
 
-                                         <button class="btn btn-matla" data-toggle="modal"
-                                             data-target="#addEpisodeModal">
-                                             {{ __('Add Episode') }}
-                                         </button>
+                                         @if (auth()->guard('member')->user()->hasPermission('add-episodes'))
+                                             <button class="btn btn-matla" data-toggle="modal"
+                                                 data-target="#addEpisodeModal">
+                                                 {{ __('Add Episode') }}
+                                             </button>
+                                         @endif
 
                                      </div>
 

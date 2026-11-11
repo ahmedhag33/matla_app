@@ -53,9 +53,9 @@ class ProgramController extends Controller
             'broadcastDays',
             'episodes' => function ($query) {
                 $query->with('creator')
-                    ->orderBy('air_at', 'asc');
+                    ->orderBy('episode_number', 'desc');
             }
-        ])->withCount('teamMembers')
+        ])->withCount('teamMembers','episodes')
             ->where('slug', request()->route('programSlug'))
             ->firstOrFail();
         // Convert the broadcast days to a string representation.

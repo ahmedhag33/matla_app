@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Workspace;
 
+use App\Events\Workspace\EpisodeCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\EpisodeRequest;
 use App\Models\Program;
@@ -44,6 +45,8 @@ class EpisodeController extends Controller
             $programId = $request->input('program_id');
             // Find the program by ID or fail if not found
             $program = Program::findOrFail($programId);
+            // Get the team members of the program
+            $teamMembers = $program->teamMembers()->get();
             // Run the transaction to create or update the episode
             $result = (array) runTransaction(function () use ($program, $request) {
                 // Retrieve the episode ID from the request
@@ -77,10 +80,23 @@ class EpisodeController extends Controller
                 ]);
                 $createOrUpdate->save();
                 // Get the changes made to the episode after saving
-                $newEpisode = $createOrUpdate->getChanges();
+                $newEpisode = $createOrUpdate->fresh()->toArray();
                 // Return whether the episode is new and the changes made to it
                 return ['is_new' => $isNew, 'episode' => $newEpisode];
             });
+            // Trigger the EpisodeCreated event for each team member
+            foreach ($teamMembers as $member) {
+                event(new EpisodeCreated(
+                    $result['episode']['id'],
+                    $program->name,
+                    $program->slug,
+                    $result['episode']['slug'],
+                    $result['episode']['title'],
+                    $member->id,
+                    current_workspace()->id,
+                    current_workspace()->slug
+                ));
+            }
             session()->flash('success-create-episode', $result['is_new'] ? __('Episode created successfully.') : __('Episode updated successfully.'));
             // Return the result of the transaction as a JSON response
             return $this->returnData([

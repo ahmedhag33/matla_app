@@ -1289,5 +1289,7 @@
     "Creator": "المنشئ",
     "Episode created successfully.": "تم إنشاء الحلقة بنجاح.",
     "Episode updated successfully.": "تم تحديث الحلقة بنجاح.",
-    "Reminder Date": "تاريخ التذكير"
+    "Reminder Date": "تاريخ التذكير",
+    "New Episode Created Under": "تم انشاء حلقة جديدة تحت عنوان ",
+    "From Program": "من برنامج "
 }
