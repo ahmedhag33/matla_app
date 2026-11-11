@@ -97,4 +97,28 @@ class ProgramDayTest extends TestCase
             ['الجمعة، ١٣ نوفمبر ٢٠٢٦', false],
         ];
     }
+    #[DataProvider('arabicDateTimes')]
+    /**
+     * @dataProvider arabicDateTimes
+     */
+    public function test_arabic_date_time_is_converted_to_mysql_format(string $date, string $time, string $expected): void
+    {
+        $input = $date . ' ' . $time;
+        // Combine the Arabic date and time into a single string
+        $result = convertArabicDateTimeToDatabase($input);
+        // Assert that the converted date and time matches the expected MySQL format
+        $this->assertSame($expected, $result);
+    }
+    /**
+     * Data provider for test_arabic_date_time_is_converted_to_mysql_format.
+     *
+     * @return array
+     */
+    public static function arabicDateTimes(): array
+    {
+        return [
+            ['الثلاثاء، ١٠ نوفمبر ٢٠٢٦', '٣:٠٠ م', '2026-11-10 15:00:00'],
+            ['الأربعاء، ١١ نوفمبر ٢٠٢٦', '١٠:٣٠ ص', '2026-11-11 10:30:00'],
+        ];
+    }
 }

@@ -682,3 +682,58 @@ if (!function_exists('convertArabicDateToDatabase')) {
             ->format('Y-m-d');
     }
 }
+if (!function_exists('convertArabicTimeToDatabase')) {
+    /**
+     * Convert an Arabic time string to the database format (H:i:s).
+     *
+     * @param string $value
+     * @return string
+     */
+    function convertArabicTimeToDatabase(string $value): string
+    {
+        $formatter = new IntlDateFormatter(
+            'ar_EG',
+            IntlDateFormatter::NONE,
+            IntlDateFormatter::SHORT,
+            'Africa/Cairo',
+            IntlDateFormatter::GREGORIAN,
+            'h:mm a'
+        );
+        // Parse the Arabic time string into a timestamp
+        $timestamp = $formatter->parse($value);
+        // Check if parsing was successful
+        if ($timestamp === false) {
+            throw new InvalidArgumentException('Invalid Arabic time format.');
+        }
+        // Convert the timestamp to the database format (H:i:s)
+        return date('H:i:s', $timestamp);
+    }
+}
+if (!function_exists('convertArabicDateTimeToDatabase')) {
+    /**
+     * Convert an Arabic date and time string to the database format (Y-m-d H:i:s).
+     *
+     * @param string $value
+     * @return string
+     */
+    function convertArabicDateTimeToDatabase(string $value): string
+    {
+        $formatter = new IntlDateFormatter(
+            'ar_EG',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::SHORT,
+            'Africa/Cairo',
+            IntlDateFormatter::GREGORIAN,
+            'EEEE، d MMMM yyyy h:mm a'
+        );
+        // Parse the Arabic date and time string into a timestamp
+        $timestamp = $formatter->parse($value);
+        // Check if parsing was successful
+        if ($timestamp === false) {
+            throw new InvalidArgumentException('Invalid Arabic date and time format.');
+        }
+        // Convert the timestamp to the database format (Y-m-d H:i:s)
+        return Carbon::createFromTimestamp($timestamp, 'Africa/Cairo')
+            ->format('Y-m-d H:i:s');
+    }
+}

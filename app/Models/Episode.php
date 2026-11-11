@@ -30,11 +30,10 @@ class Episode extends Model
         'title',
         'description',
         'slug',
-        'air_date',
-        'air_time',
+        'air_at',
         'duration',
         'reminder_before_air',
-        'reminder_time',
+        'reminder_at',
         'status',
         'completed_percentage',
         'is_active',
@@ -46,8 +45,8 @@ class Episode extends Model
      * @var array
      */
     protected $appends = [
-        'air_date_formatted',
-        'air_time_formatted',
+        'air_at_formatted',
+        'reminder_at_formatted',
         'duration_to_string',
         'duration_hours',
         'duration_minutes',
@@ -103,7 +102,7 @@ class Episode extends Model
      */
     protected function lastEpisodeNumber()
     {
-        return static::max('episode_number') + 1 ?? 1;
+        return self::where('program_id', $this->program_id)->max('episode_number') + 1 ?? 1;
     }
     /**
      * Get the program that owns the episode.
@@ -124,27 +123,29 @@ class Episode extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
     /**
-     * Interact with the air date attribute.
+     * Interact with the air at attribute.
      *
      * @return Attribute
      */
-    public function airDateFormatted(): Attribute
+    public function airAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->air_date ? $this->air_date
+            get: fn() => $this->air_at ? $this->air_at
                 ->locale('ar')
-                ->translatedFormat('l j F Y') : null
+                ->translatedFormat('l j F Y') : null . ' ' . timeFormat($this->air_at)
         );
     }
     /**
-     * Interact with the air time attribute.
+     * Interact with the reminder at attribute.
      *
      * @return Attribute
      */
-    public function airTimeFormatted(): Attribute
+    public function reminderAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->air_time ? timeFormat($this->air_time) : null
+            get: fn() => $this->reminder_at ? $this->reminder_at
+                ->locale('ar')
+                ->translatedFormat('l j F Y') : null . ' ' . timeFormat($this->reminder_at)
         );
     }
     /**
