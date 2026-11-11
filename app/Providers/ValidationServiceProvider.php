@@ -28,5 +28,10 @@ class ValidationServiceProvider extends ServiceProvider
                 ->where('day', $day)
                 ->exists();
         });
+        Validator::extend('episode_scheduled_in_future', function ($attribute, $value, $parameters, $validator) {
+            $date = Carbon::parse(convertArabicDateToDatabase($value));
+            // Check if the episode's scheduled date is today or in the future
+            return $date->greaterThanOrEqualTo(today());
+        });
     }
 }

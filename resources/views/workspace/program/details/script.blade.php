@@ -8,7 +8,8 @@
         $('#air_date').datetimepicker({
             format: 'dddd، D MMMM YYYY',
             locale: '{{ app()->getLocale() }}',
-            //  daysOfWeekDisabled: programDays,
+            daysOfWeekDisabled: programDays,
+            minDate: moment(),
         });
         $('#air_time').datetimepicker({
             format: 'h:mm A',

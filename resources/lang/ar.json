@@ -1279,5 +1279,6 @@
     "The description field is required.": "حقل الوصف مطلوب.",
     "The description must be a string.": "يجب أن يكون الوصف نصًا.",
     "The description may not be greater than 1000 characters.": "قد لا يكون الوصف أطول من 1000 حرف.",
-    "The air time must be in the format H:i.": "يجب أن يكون وقت البث بالتنسيق H:i."
+    "The air time must be in the format H:i.": "يجب أن يكون وقت البث بالتنسيق H:i.",
+    "The air date must be today or a future date.": "تاريخ الحلقة يجب أن يكون هو تاريخ اليوم أو تاريخًا مستقبليًا، ولا يُسمح باختيار أي تاريخ سابق."
 }

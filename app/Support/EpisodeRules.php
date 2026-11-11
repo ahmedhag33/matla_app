@@ -28,7 +28,8 @@ class EpisodeRules implements RulesInterface
                 'air_date' => [
                     'required',
                     //'date',
-                    'episode_scheduled_on_program_day'
+                    'episode_scheduled_on_program_day',
+                    'episode_scheduled_in_future'
                 ],
                 'air_time' => [
                     'required',
@@ -69,6 +70,7 @@ class EpisodeRules implements RulesInterface
             'air_date.episode_scheduled_on_program_day' => __('The air date must match one of the programs broadcast days.'),
             'air_time.required' => __('The air time field is required.'),
             'air_time.date_format' => __('The air time must be in the format H:i.'),
+            'air_date.episode_scheduled_in_future' => __('The air date must be today or a future date.'),
         ];
     }
 }
