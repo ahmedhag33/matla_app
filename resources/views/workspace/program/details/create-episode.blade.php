@@ -55,6 +55,7 @@
 
                         <form id="episode-form">
                             @csrf
+                            <input type="hidden" name="episode_id" value="">
                                 <div class="bs-stepper-content">
                                     <!-- Stepper Content -->
                                     <!-- Basic Information Part -->

@@ -37,7 +37,12 @@ class EpisodeRules implements RulesInterface
                 ],
             ],
             3 => [
-                'reminder_time' => ['required_if:reminder_before_air,1', 'integer', 'min:1']
+                'reminder_time' => [
+                    'nullable',
+                    'required_if:reminder_before_air,1',
+                    'integer',
+                    'min:1'
+                ]
             ],
             default => [],
         };

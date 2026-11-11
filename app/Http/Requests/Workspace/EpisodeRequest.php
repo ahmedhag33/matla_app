@@ -23,7 +23,9 @@ class EpisodeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return EpisodeRules::step($this->route('step'));
+        return $this->routeIs('workspace.episode.create')
+            ? EpisodeRules::all()
+            : EpisodeRules::step((int) $this->route('step'));
     }
     /**
      * Get the custom validation messages.

@@ -737,3 +737,38 @@ if (!function_exists('convertArabicDateTimeToDatabase')) {
             ->format('Y-m-d H:i:s');
     }
 }
+if (!function_exists('routeWorkspace')) {
+    /**
+     * Generate a workspace route URL.
+     *
+     * @param string $name
+     * @param array $parameters
+     * @return string
+     */
+    function routeWorkspace(string $name, array $parameters = []): string
+    {
+        $slug = request()->route('slug');
+        // Merge the workspace slug into the route parameters
+        $parameters = array_merge(['slug' => $slug], $parameters);
+        // Generate the route with the merged parameters
+        return route($name, $parameters);
+    }
+}
+if (!function_exists('routeDetailsProgram')) {
+    /**
+     * Generate a route URL for program details.
+     *
+     * @param array $parameters
+     * @return string
+     */
+    function routeDetailsProgram(string $name, array $parameters = []): string
+    {
+        $slug = request()->route('slug');
+        // Get the program slug from the route
+        $programSlug = request()->route('programSlug');
+        // Merge the workspace slug and program slug into the route parameters
+        $parameters = array_merge(['slug' => $slug, 'programSlug' => $programSlug], $parameters);
+        // Generate the route with the merged parameters
+        return route($name, $parameters);
+    }
+}

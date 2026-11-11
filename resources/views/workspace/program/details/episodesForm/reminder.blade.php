@@ -8,7 +8,7 @@
 
              <div class="col-md-6 mb-3">
                  <div class="custom-control custom-checkbox">
-                     <input type="checkbox" class="custom-control-input reminder-checkbox" id="reminder" name="reminder_before_air">
+                     <input type="checkbox" class="custom-control-input reminder-checkbox" id="reminder" name="reminder_before_air" value="1">
 
                      <label class="custom-control-label" for="reminder">
                          {{ __('Set a Reminder') }}
@@ -41,7 +41,7 @@
          {{ __('Previous') }}
      </button>
 
-     <button type="submit" class="btn btn-matla">
+     <button type="submit" class="btn btn-matla btn-save">
          {{ __('Save') }}
      </button>
 

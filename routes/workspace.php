@@ -128,5 +128,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to handle episode step validation
         Route::post('/validate/{step}', 'step')->name('workspace.episode.step')
             ->middleware('check-member-permission:add-episodes');
+        // add route to create a new episode
+        Route::post('/', 'create')->name('workspace.episode.create')
+            ->middleware('check-member-permission:add-episodes');
     });
 });

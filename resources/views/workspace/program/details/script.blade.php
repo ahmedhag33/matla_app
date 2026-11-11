@@ -103,6 +103,49 @@
                 error: (xhr) => handleFail(xhr)
             });
         });
+        $(document).on('click', '.btn-save', function(e) {
+            e.preventDefault();
+            var formData = new FormData($($form)[0]);
+            $.ajax({
+                type: 'post',
+                enctype: "multipart/form-data",
+                url: "{{ routeWorkspace('workspace.episode.create') }}",
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: function() {
+                    $('#add-episode-loading').show();
+                    $form.hide();
+                },
+                error: function(data) {
+                    $('#add-episode-loading').hide();
+                    $form.show();
+                    if (data.status === 422) {
+                        printError(data.responseJSON.message[0]);
+                    } else {
+                        toastr.error(
+                            data.responseJSON.message ||
+                            "{{ __('An error occurred') }}"
+                        );
+                    }
+                },
+                complete: function() {
+                    $('#add-episode-loading').hide();
+                    $form.show();
+                },
+                success: function(data) {
+                  //  window.location.href = data.url;
+                }
+            });
+
+            function printError(errors) {
+                $.each(errors, function(index, value) {
+                    $('.' + value.field + '_err').html(value.messages);
+                });
+            }
+        });
     });
 </script>
 <script>

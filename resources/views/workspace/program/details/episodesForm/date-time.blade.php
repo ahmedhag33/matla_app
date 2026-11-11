@@ -81,12 +81,12 @@
         </div>
 
     </div>
-    <button type="button" class="btn btn-matla btn-previous-step" onclick="stepper.previous()">
+    <a type="button" class="btn btn-matla btn-previous-step" onclick="stepper.previous()">
         {{ __('Previous') }}
-    </button>
+    </a>
 
-    <button type="button" class="btn btn-matla btn-next-step" data-step="2">
+    <a type="button" class="btn btn-matla btn-next-step" data-step="2">
         {{ __('Next') }}
-    </button>
+    </a>
 
 </div>

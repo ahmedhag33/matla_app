@@ -29,4 +29,21 @@ class EpisodeController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Handle the create request for an episode.
+     *
+     * @param EpisodeRequest $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws HttpResponseException
+     */
+    public function create(EpisodeRequest $request)
+    {
+        try {
+           dd($request->all());
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
 }

@@ -29,8 +29,8 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-matla btn-next-step" data-step="1">
+    <a type="button" class="btn btn-matla btn-next-step" data-step="1">
         {{ __('Next') }}
-    </button>
+    </a>
 
 </div>
