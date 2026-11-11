@@ -36,6 +36,9 @@ class EpisodeRules implements RulesInterface
                     //'date_format:H:i'
                 ],
             ],
+            3 => [
+                'reminder_time' => ['required_if:reminder_before_air,1', 'integer', 'min:1']
+            ],
             default => [],
         };
     }
@@ -46,7 +49,7 @@ class EpisodeRules implements RulesInterface
      */
     public static function all(): array
     {
-        return array_merge(self::step(1), self::step(2));
+        return array_merge(self::step(1), self::step(2), self::step(3));
     }
     /**
      * Get the custom validation messages.
@@ -71,6 +74,9 @@ class EpisodeRules implements RulesInterface
             'air_time.required' => __('The air time field is required.'),
             'air_time.date_format' => __('The air time must be in the format H:i.'),
             'air_date.episode_scheduled_in_future' => __('The air date must be today or a future date.'),
+            'reminder_time.required_if' => __('The reminder time field is required when setting a reminder.'),
+            'reminder_time.integer' => __('The reminder time must be an integer.'),
+            'reminder_time.min' => __('The reminder time must be at least 1.'),
         ];
     }
 }

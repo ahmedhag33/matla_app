@@ -8,7 +8,7 @@
 
              <div class="col-md-6 mb-3">
                  <div class="custom-control custom-checkbox">
-                     <input type="checkbox" class="custom-control-input reminder-checkbox" id="reminder">
+                     <input type="checkbox" class="custom-control-input reminder-checkbox" id="reminder" name="reminder_before_air">
 
                      <label class="custom-control-label" for="reminder">
                          {{ __('Set a Reminder') }}
@@ -23,7 +23,7 @@
                  </label>
 
                  <div class="input-group">
-                     <input type="number" class="form-control" id="reminder_before_air" name="reminder_before_air"
+                     <input type="number" class="form-control" id="reminder_time" name="reminder_time"
                          min="1">
 
                      <div class="input-group-append">
