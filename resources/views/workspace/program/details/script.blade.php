@@ -1,3 +1,8 @@
+@if (session()->has('success-create-episode'))
+    <script>
+        toastr.success("{{ session('success-create-episode') }}");
+    </script>
+@endif
 <script>
     $(document).ready(function() {
         const $form = $('#episode-form');
@@ -136,7 +141,7 @@
                     $form.show();
                 },
                 success: function(data) {
-                  //  window.location.href = data.url;
+                    window.location.href = data.url;
                 }
             });
 

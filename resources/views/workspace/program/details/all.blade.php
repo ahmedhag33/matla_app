@@ -84,7 +84,6 @@
                                              <thead class="table-matla">
                                                  <tr>
                                                      <th>{{ __('Title') }}</th>
-                                                     <th>{{ __('Description') }}</th>
                                                      <th>{{ __('Air Date') }}</th>
                                                      <th>{{ __('Duration and Broadcast') }}</th>
                                                      <th>{{ __('Creator') }}</th>
@@ -95,9 +94,8 @@
                                                  @foreach ($program->episodes as $episode)
                                                      <tr>
                                                          <td>{{ $episode->title }}</td>
-                                                         <td>{{ $episode->description }}</td>
-                                                         <td>{{ $episode->air_date_formatted }}</td>
-                                                         <td>{{ $episode->duration_and_broadcast ?? '-' }}</td>
+                                                         <td>{{ $episode->air_at_formatted }}</td>
+                                                         <td>{{ $episode->duration_to_string ?? '-' }}</td>
                                                          <td>{{ $episode->creator->name ?? '-' }}</td>
                                                          <td>{!! $episode->status_formatted !!}</td>
                                                      </tr>

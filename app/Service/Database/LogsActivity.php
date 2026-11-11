@@ -67,7 +67,7 @@ trait LogsActivity
             );
         }
         // Workspace the activity belongs to (null if the model has none).
-        $workspaceId = $this->getActivityWorkspaceId();
+        $workspaceId = $this->getActivityWorkspaceId() ?? current_workspace()->id;
         // Readable description for this action, provided by the model.
         $description = $this->getActivityDescription($action);
         // Every logged action must have a description, so fail loudly if one is missing.

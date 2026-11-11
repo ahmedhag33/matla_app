@@ -40,6 +40,15 @@ class Episode extends Model
         'created_by',
     ];
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'air_at' => 'datetime',
+        'reminder_at' => 'datetime',
+    ];
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array
@@ -120,7 +129,7 @@ class Episode extends Model
      */
     public function creator()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Member::class, 'created_by');
     }
     /**
      * Interact with the air at attribute.
@@ -130,8 +139,8 @@ class Episode extends Model
     public function airAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->air_at ? $this->air_at
-                ->locale('ar')
+            get: fn() => $this->air_at ?
+            $this->air_at->locale(app()->getLocale())
                 ->translatedFormat('l j F Y') . ' ' . timeFormat($this->air_at) : null
         );
     }

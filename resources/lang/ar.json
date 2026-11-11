@@ -1286,5 +1286,7 @@
     "The reminder time must be at least 1.": "يجب أن يكون وقت التذكير على الأقل 1.",
     "Title": "العنوان",
     "Air Date": "تاريخ البث",
-    "Creator": "المنشئ"
+    "Creator": "المنشئ",
+    "Episode created successfully.": "تم إنشاء الحلقة بنجاح.",
+    "Episode updated successfully.": "تم تحديث الحلقة بنجاح."
 }
