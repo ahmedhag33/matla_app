@@ -50,11 +50,15 @@ class ProgramController extends Controller
             'teamMembers' => function ($query) {
                 $query->with('role');
             },
-            'broadcastDays'
-        ])
-            ->withCount('teamMembers')
-            ->where('slug', request()->route('programSlug'))->firstOrFail();
-
+            'broadcastDays',
+            'episodes' => function ($query) {
+                $query->with('creator')
+                    ->orderBy('air_at', 'asc');
+            }
+        ])->withCount('teamMembers')
+            ->where('slug', request()->route('programSlug'))
+            ->firstOrFail();
+        // Convert the broadcast days to a string representation.
         $programDaysTostring = implode(' ', collect($program->broadcastDays)->pluck('day_at_from_enum')->toArray());
         // Return the program details view with the retrieved program.
         return view('workspace.program.details.index', compact('program', 'programDays', 'programDaysTostring'));

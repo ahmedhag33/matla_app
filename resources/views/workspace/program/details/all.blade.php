@@ -75,24 +75,59 @@
                  {{-- Episodes --}}
                  <div class="tab-pane fade show active" id="episodes">
 
-                     <section class="content">
-                         <div class="error-page">
-
-                             <div class="error-content">
-
-                                 <h1>
-                                     <i class="fas fa-film text-warning-matla"></i>
-                                     {{ __('No Episodes Found') }}
-                                 </h1>
-
-                                 <button class="btn btn-matla" data-toggle="modal" data-target="#addEpisodeModal">
-                                     {{ __('Add Episode') }}
-                                 </button>
-
+                     @if ($program->episodes->isNotEmpty())
+                         <div class="card card-solid">
+                             <div class="card-body pb-0">
+                                 <div class="row">
+                                     <div class="card-body table-responsive p-0">
+                                         <table class="table table-hover text-nowrap">
+                                             <thead class="table-matla">
+                                                 <tr>
+                                                     <th>{{ __('Title') }}</th>
+                                                     <th>{{ __('Description') }}</th>
+                                                     <th>{{ __('Air Date') }}</th>
+                                                     <th>{{ __('Duration and Broadcast') }}</th>
+                                                     <th>{{ __('Creator') }}</th>
+                                                     <th>{{ __('Status') }}</th>
+                                                 </tr>
+                                             </thead>
+                                             <tbody>
+                                                 @foreach ($program->episodes as $episode)
+                                                     <tr>
+                                                         <td>{{ $episode->title }}</td>
+                                                         <td>{{ $episode->description }}</td>
+                                                         <td>{{ $episode->air_date_formatted }}</td>
+                                                         <td>{{ $episode->duration_and_broadcast ?? '-' }}</td>
+                                                         <td>{{ $episode->creator->name ?? '-' }}</td>
+                                                         <td>{!! $episode->status_formatted !!}</td>
+                                                     </tr>
+                                                 @endforeach
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </div>
                              </div>
+                         @else
+                             <section class="content">
+                                 <div class="error-page">
 
-                         </div>
-                     </section>
+                                     <div class="error-content">
+
+                                         <h1>
+                                             <i class="fas fa-film text-warning-matla"></i>
+                                             {{ __('No Episodes Found') }}
+                                         </h1>
+
+                                         <button class="btn btn-matla" data-toggle="modal"
+                                             data-target="#addEpisodeModal">
+                                             {{ __('Add Episode') }}
+                                         </button>
+
+                                     </div>
+
+                                 </div>
+                             </section>
+                     @endif
 
                  </div>
 
