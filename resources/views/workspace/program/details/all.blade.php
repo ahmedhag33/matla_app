@@ -85,6 +85,7 @@
                                                  <tr>
                                                      <th>{{ __('Title') }}</th>
                                                      <th>{{ __('Air Date') }}</th>
+                                                     <th>{{ __('Reminder Date') }}</th>
                                                      <th>{{ __('Duration and Broadcast') }}</th>
                                                      <th>{{ __('Creator') }}</th>
                                                      <th>{{ __('Status') }}</th>
@@ -95,6 +96,7 @@
                                                      <tr>
                                                          <td>{{ $episode->title }}</td>
                                                          <td>{{ $episode->air_at_formatted }}</td>
+                                                         <td>{{ $episode->reminder_at_formatted ?? '-' }}</td>
                                                          <td>{{ $episode->duration_to_string ?? '-' }}</td>
                                                          <td>{{ $episode->creator->name ?? '-' }}</td>
                                                          <td>{!! $episode->status_formatted !!}</td>
