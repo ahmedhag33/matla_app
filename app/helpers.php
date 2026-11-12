@@ -663,6 +663,9 @@ if (!function_exists('convertArabicDateToDatabase')) {
      */
     function convertArabicDateToDatabase(string $value): string
     {
+        if (str_starts_with($value, 'الإثنين')) {
+            $value = 'الاثنين' . substr($value, strlen('الإثنين'));
+        }
         $formatter = new \IntlDateFormatter(
             'ar_EG',
             \IntlDateFormatter::FULL,
@@ -718,6 +721,9 @@ if (!function_exists('convertArabicDateTimeToDatabase')) {
      */
     function convertArabicDateTimeToDatabase(string $value): string
     {
+        if (str_starts_with($value, 'الإثنين')) {
+            $value = 'الاثنين' . substr($value, strlen('الإثنين'));
+        }
         $formatter = new IntlDateFormatter(
             'ar_EG',
             IntlDateFormatter::FULL,
