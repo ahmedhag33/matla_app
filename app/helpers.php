@@ -743,6 +743,41 @@ if (!function_exists('convertArabicDateTimeToDatabase')) {
             ->format('Y-m-d H:i:s');
     }
 }
+if (!function_exists('formatArabicDateTime')) {
+    /**
+     * Format a date and time string into Arabic date and time components.
+     *
+     * @param string $value
+     * @return array
+     */
+    function formatArabicDateTime(string $value): array
+    {
+        $date = Carbon::parse($value)->locale('ar');
+
+        $arabicDigits = [
+            '0' => '٠',
+            '1' => '١',
+            '2' => '٢',
+            '3' => '٣',
+            '4' => '٤',
+            '5' => '٥',
+            '6' => '٦',
+            '7' => '٧',
+            '8' => '٨',
+            '9' => '٩',
+        ];
+
+        $airDate = $date->translatedFormat('l، j F Y');
+
+        $airTime = $date->format('h:i');
+        $period = $date->hour < 12 ? 'ص' : 'م';
+
+        return [
+            'air_date' => strtr($airDate, $arabicDigits),
+            'air_time' => strtr($airTime, $arabicDigits) . ' ' . $period,
+        ];
+    }
+}
 if (!function_exists('routeWorkspace')) {
     /**
      * Generate a workspace route URL.

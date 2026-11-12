@@ -55,8 +55,11 @@ class Episode extends Model
      */
     protected $appends = [
         'air_at_formatted',
+        'air_date_to_arabic_in_input',
+        'air_time_to_arabic_in_input',
         'reminder_at_formatted',
         'duration_to_string',
+        'duration_between_air_and_reminder',
         'duration_hours',
         'duration_minutes',
         'status_formatted',
@@ -142,6 +145,39 @@ class Episode extends Model
             get: fn() => $this->air_at ?
             $this->air_at->locale(app()->getLocale())
                 ->translatedFormat('l j F Y') . ' ' . timeFormat($this->air_at) : null
+        );
+    }
+    /**
+     * Interact with the air date to Arabic in input attribute.
+     *
+     * @return Attribute
+     */
+    public function airDateToArabicInInput(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => formatArabicDateTime($this->air_at)['air_date'] ?? null,
+        );
+    }
+    /**
+     * Interact with the air time to Arabic in input attribute.
+     *
+     * @return Attribute
+     */
+    public function airTimeToArabicInInput(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => formatArabicDateTime($this->air_at)['air_time'] ?? null,
+        );
+    }
+    /**
+     * Interact with the  attribute.
+     *
+     * @return Attribute
+     */
+    public function durationBetweenAirAndReminder(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->reminder_at ? $this->air_at->diffInDays($this->reminder_at) : null,
         );
     }
     /**

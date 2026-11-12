@@ -124,4 +124,31 @@ class ProgramDayTest extends TestCase
             ['الأربعاء، ١١ نوفمبر ٢٠٢٦', '١٠:٣٠ ص', '2026-11-11 10:30:00'],
         ];
     }
+    #[DataProvider('myFormatArabicDateTimes')]
+    /**
+     * @dataProvider myFormatArabicDateTimes
+     */
+    public function test_my_format_convert_to_arabic_date_time(string $input, string $expectDate, string $expectTime): void
+    {
+        $result = formatArabicDateTime($input);
+        // Assert that the formatted Arabic date and time match the expected values
+        $this->assertSame($expectDate, $result['air_date']);
+        // Assert that the formatted Arabic time matches the expected value
+        $this->assertSame($expectTime, $result['air_time']);
+    }
+    /**
+     * Data provider for test_my_format_convert_to_arabic_date_time.
+     *
+     * @return array
+     */
+    public static function myFormatArabicDateTimes(): array
+    {
+        return [
+            ['2026-11-07 09:00:00', 'السبت، ٧ نوفمبر ٢٠٢٦', '٠٩:٠٠ ص'],
+            ['2026-11-08 14:15:00', 'الأحد، ٨ نوفمبر ٢٠٢٦', '٠٢:١٥ م'],
+            ['2026-11-09 11:45:00', 'الاثنين، ٩ نوفمبر ٢٠٢٦', '١١:٤٥ ص'],
+            ['2026-11-10 15:00:00', 'الثلاثاء، ١٠ نوفمبر ٢٠٢٦', '٠٣:٠٠ م'],
+            ['2026-11-11 10:30:00', 'الأربعاء، ١١ نوفمبر ٢٠٢٦', '١٠:٣٠ ص'],
+        ];
+    }
 }
