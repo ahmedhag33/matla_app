@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\EpisodeCreated;
+use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\EpisodeRequest;
+use App\Models\Episode;
 use App\Models\Program;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 //use Illuminate\Http\Request;
 
@@ -109,6 +112,35 @@ class EpisodeController extends Controller
             ]);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
+     * Get an episode by its ID.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException if the episode is not found
+     * @throws \Exception if an unexpected error occurs
+     */
+    public function getById(Request $request)
+    {
+        try {
+            $episodeId = $request->input('episode_id');
+            // Retrieve the episode by its ID from the request
+            $episode = Episode::find($episodeId);
+            // Throw an exception if the episode is not found
+            if (!$episode) {
+                throw new DatabaseException(__('Episode not found.'), HttpStatusCode::NOT_FOUND->value);
+            }
+            // Return the episode data as a JSON response
+            return $this->returnData([
+                'error' => false,
+                'data' => $episode
+            ]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }

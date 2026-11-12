@@ -126,7 +126,7 @@
                                                                      <span class="sr-only">Toggle Dropdown</span>
                                                                  </button>
                                                                  <div class="dropdown-menu" role="menu">
-                                                                     <a class="dropdown-item" href="javascript:void(0)"
+                                                                     <a class="dropdown-item edit-episode" href="javascript:void(0)"
                                                                          edit_id="{{ $episode->id }}"
                                                                          data-toggle="modal"
                                                                          data-target="#addEpisodeModal"><i

@@ -151,6 +151,45 @@
                 });
             }
         });
+        $(document).on('click', '.edit-episode', function() {
+            var episodeId = $(this).attr('edit_id');
+            var slug = "{{ current_Workspace()->slug }}";
+            $.ajax({
+                url: "{{ routeWorkspace('workspace.episode.get-by-id') }}",
+                method: 'POST',
+                data: {
+                    episode_id: episodeId,
+                    _token: "{{ csrf_token() }}"
+                },
+                headers: {
+                    'Accept': 'application/json'
+                },
+                success: function(data) {
+                    // Populate the form with the episode data
+                    var episode = data.data;
+                    $form.find('input[name="episode_id"]').val(episode.id);
+                    $form.find('input[name="title"]').val(episode.title);
+                    $form.find('textarea[name="description"]').val(episode.description);
+                    $form.find('input[name="air_date"]').val(episode
+                        .air_date_to_arabic_in_input);
+                    $form.find('input[name="air_time"]').val(episode
+                        .air_time_to_arabic_in_input);
+                    $('#duration_hours option[value="' + episode.duration_hours + '"]')
+                        .prop('selected', true);
+                    $('#duration_minutes option[value="' + episode.duration_minutes + '"]')
+                        .prop('selected', true);
+                    if (episode.reminder_before_air) {
+                        $('#reminder').prop('checked', true);
+                        $('#reminder-time-container').show();
+                        $('#reminder_time').val(episode.duration_between_air_and_reminder);
+                    }
+                },
+                error: function(xhr) {
+                    toastr.error(xhr.responseJSON.message ||
+                        "{{ __('An error occurred') }}");
+                }
+            });
+        });
     });
 </script>
 <script>

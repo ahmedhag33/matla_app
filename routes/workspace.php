@@ -131,5 +131,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to create a new episode
         Route::post('/', 'create')->name('workspace.episode.create')
             ->middleware('check-member-permission:add-episodes');
+        // add route to get episode by ID
+        Route::post('/get-by-id', 'getById')->name('workspace.episode.get-by-id')
+            ->middleware('check-member-permission:view-episodes');
     });
 });
