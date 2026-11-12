@@ -93,23 +93,52 @@
                                          <table class="table table-hover text-nowrap">
                                              <thead class="table-matla">
                                                  <tr>
+                                                     <th>{{ __('Episode Number') }}</th>
                                                      <th>{{ __('Title') }}</th>
                                                      <th>{{ __('Air Date') }}</th>
+                                                     <th>{{ __('Duration Between Air and Reminder') }}</th>
                                                      <th>{{ __('Reminder Date') }}</th>
                                                      <th>{{ __('Duration and Broadcast') }}</th>
                                                      <th>{{ __('Creator') }}</th>
                                                      <th>{{ __('Status') }}</th>
+                                                     <th>{{ __('Actions') }}</th>
                                                  </tr>
                                              </thead>
                                              <tbody>
                                                  @foreach ($program->episodes as $episode)
-                                                     <tr>
+                                                     <tr data-id="{{ $episode->id }}">
+                                                         <td>{{ $episode->episode_number }}</td>
                                                          <td>{{ $episode->title }}</td>
                                                          <td>{{ $episode->air_at_formatted }}</td>
+                                                         <td>{{ $episode->duration_between_air_and_reminder ?? null ? $episode->duration_between_air_and_reminder . ' ' . __('Days') : '-' }}
+                                                         </td>
                                                          <td>{{ $episode->reminder_at_formatted ?? '-' }}</td>
                                                          <td>{{ $episode->duration_to_string ?? '-' }}</td>
                                                          <td>{{ $episode->creator->name ?? '-' }}</td>
                                                          <td>{!! $episode->status_formatted !!}</td>
+                                                         <td>
+                                                             <div class="btn-group">
+                                                                 <button type="button"
+                                                                     class="btn btn-default">....</button>
+                                                                 <button type="button"
+                                                                     class="btn btn-default dropdown-toggle dropdown-icon"
+                                                                     data-toggle="dropdown">
+                                                                     <span class="sr-only">Toggle Dropdown</span>
+                                                                 </button>
+                                                                 <div class="dropdown-menu" role="menu">
+                                                                     <a class="dropdown-item" href="javascript:void(0)"
+                                                                         edit_id="{{ $episode->id }}"
+                                                                         data-toggle="modal"
+                                                                         data-target="#addEpisodeModal"><i
+                                                                             class="fas fa-edit"></i>
+                                                                         {{ __('Edit') }}</a>
+                                                                     <a class="dropdown-item" href="javascript:void(0)"
+                                                                         delete_id="{{ $episode->id }}"><i
+                                                                             class="fas fa-trash"></i>
+                                                                         {{ __('Delete') }}</a>
+                                                                 </div>
+                                                             </div>
+                                                         </td>
                                                      </tr>
                                                  @endforeach
                                              </tbody>

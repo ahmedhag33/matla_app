@@ -143,8 +143,8 @@ class Episode extends Model
     {
         return Attribute::make(
             get: fn() => $this->air_at ?
-            $this->air_at->locale(app()->getLocale())
-                ->translatedFormat('l j F Y') . ' ' . timeFormat($this->air_at) : null
+                $this->air_at->locale(app()->getLocale())
+                    ->translatedFormat('l j F Y') . ' ' . timeFormat($this->air_at) : null
         );
     }
     /**
@@ -155,7 +155,7 @@ class Episode extends Model
     public function airDateToArabicInInput(): Attribute
     {
         return Attribute::make(
-            get: fn () => formatArabicDateTime($this->air_at)['air_date'] ?? null,
+            get: fn() => formatArabicDateTime($this->air_at)['air_date'] ?? null,
         );
     }
     /**
@@ -166,7 +166,7 @@ class Episode extends Model
     public function airTimeToArabicInInput(): Attribute
     {
         return Attribute::make(
-            get: fn () => formatArabicDateTime($this->air_at)['air_time'] ?? null,
+            get: fn() => formatArabicDateTime($this->air_at)['air_time'] ?? null,
         );
     }
     /**
@@ -177,7 +177,7 @@ class Episode extends Model
     public function durationBetweenAirAndReminder(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->reminder_at ? $this->air_at->diffInDays($this->reminder_at) : null,
+            get: fn() => $this->reminder_at ? $this->reminder_at->diffInDays($this->air_at) : null,
         );
     }
     /**
