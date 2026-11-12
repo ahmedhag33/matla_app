@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Workspace;
 
 use App\Events\Workspace\EpisodeCreated;
+use App\Events\Workspace\EpisodeUpdated;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\EpisodeRequest;
@@ -87,18 +88,31 @@ class EpisodeController extends Controller
                 // Return whether the episode is new and the changes made to it
                 return ['is_new' => $isNew, 'episode' => $newEpisode];
             });
-            // Trigger the EpisodeCreated event for each team member
+            // Trigger the appropriate events for each team member based on whether the episode is new or updated
             foreach ($teamMembers as $member) {
-                event(new EpisodeCreated(
-                    $result['episode']['id'],
-                    $program->name,
-                    $program->slug,
-                    $result['episode']['slug'],
-                    $result['episode']['title'],
-                    $member->id,
-                    current_workspace()->id,
-                    current_workspace()->slug
-                ));
+                if ($result['is_new'] == false) {
+                    event(new EpisodeUpdated(
+                        $result['episode']['id'],
+                        $program->name,
+                        $program->slug,
+                        $result['episode']['slug'],
+                        $result['episode']['episode_number'],
+                        $member->id,
+                        current_workspace()->id,
+                        current_workspace()->slug
+                    ));
+                } else {
+                    event(new EpisodeCreated(
+                        $result['episode']['id'],
+                        $program->name,
+                        $program->slug,
+                        $result['episode']['slug'],
+                        $result['episode']['title'],
+                        $member->id,
+                        current_workspace()->id,
+                        current_workspace()->slug
+                    ));
+                }
             }
             session()->flash('success-create-episode', $result['is_new'] ? __('Episode created successfully.') : __('Episode updated successfully.'));
             // Return the result of the transaction as a JSON response
