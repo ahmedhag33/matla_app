@@ -159,4 +159,34 @@ class EpisodeController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Delete an episode by its ID.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException if the episode is not found
+     * @throws \Exception if an unexpected error occurs
+     */
+    public function delete(Request $request)
+    {
+        try {
+            $episodeId = $request->input('episode_id');
+            // Retrieve the episode by its ID from the request
+            $episode = Episode::find($episodeId);
+            // Throw an exception if the episode is not found
+            if (!$episode) {
+                throw new DatabaseException(__('Episode not found.'), HttpStatusCode::NOT_FOUND->value);
+            }
+            $episode->delete();
+            // Return a success message after deleting the episode
+            return $this->returnData([
+                'error' => false,
+                'message' => __('Episode Deleted Successfully')
+            ]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
 }

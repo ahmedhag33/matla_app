@@ -134,5 +134,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to get episode by ID
         Route::post('/get-by-id', 'getById')->name('workspace.episode.get-by-id')
             ->middleware('check-member-permission:view-episodes');
+        // add route to delete an episode
+        Route::delete('/delete', 'delete')->name('workspace.episode.delete')
+            ->middleware('check-member-permission:delete-episodes');
     });
 });

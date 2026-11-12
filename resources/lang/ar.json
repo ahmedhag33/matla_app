@@ -1296,5 +1296,6 @@
     "Reminder Date": "تاريخ التذكير بالاعداد",
     "Duration Between Air and Reminder": "مدة التذكير قبل الحلقة",
     "Episode Data Updated Number": "تم تحديث بيانات الحلقة رقم",
-    "Episode Data Updated": "تم تحديث بيانات الحلقة"
+    "Episode Data Updated": "تم تحديث بيانات الحلقة",
+    "Episode Deleted Successfully": "تم حذف الحلقة بنجاح."
 }

@@ -132,7 +132,7 @@
                                                                          data-target="#addEpisodeModal"><i
                                                                              class="fas fa-edit"></i>
                                                                          {{ __('Edit') }}</a>
-                                                                     <a class="dropdown-item" href="javascript:void(0)"
+                                                                     <a class="dropdown-item delete-episode" href="javascript:void(0)"
                                                                          delete_id="{{ $episode->id }}"><i
                                                                              class="fas fa-trash"></i>
                                                                          {{ __('Delete') }}</a>

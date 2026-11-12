@@ -190,6 +190,36 @@
                 }
             });
         });
+        $(document).on('click', '.delete-episode', function(e) {
+            Swal.fire({
+                title: "<b>{{ __('Do you Are Delete') }}</b>",
+                icon: "warning",
+                iconColor: "#17233C",
+                showCancelButton: true,
+                confirmButtonColor: "#17233C",
+                cancelButtonColor: "#F59E0B",
+                confirmButtonText: "{{ __('Delete') }}",
+                cancelButtonText: "{{ __('Cancel') }}"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    e.preventDefault();
+                    var id = $(this).attr('delete_id');
+                    $.ajax({
+                        type: 'DELETE',
+                        url: "{{ routeWorkspace('workspace.episode.delete') }}",
+                        dataType: 'json',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            'episode_id': id,
+                        },
+                        success: function(data) {
+                            $(`tr[data-id="${id}"]`).remove();
+                            toastr.success(data.message);
+                        }
+                    });
+                }
+            });
+        });
     });
 </script>
 <script>
