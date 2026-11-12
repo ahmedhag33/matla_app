@@ -126,16 +126,22 @@
                                                                      <span class="sr-only">Toggle Dropdown</span>
                                                                  </button>
                                                                  <div class="dropdown-menu" role="menu">
-                                                                     <a class="dropdown-item edit-episode" href="javascript:void(0)"
-                                                                         edit_id="{{ $episode->id }}"
-                                                                         data-toggle="modal"
-                                                                         data-target="#addEpisodeModal"><i
-                                                                             class="fas fa-edit"></i>
-                                                                         {{ __('Edit') }}</a>
-                                                                     <a class="dropdown-item delete-episode" href="javascript:void(0)"
-                                                                         delete_id="{{ $episode->id }}"><i
-                                                                             class="fas fa-trash"></i>
-                                                                         {{ __('Delete') }}</a>
+                                                                     @if (auth()->guard('member')->user()->hasPermission('edit-episodes'))
+                                                                         <a class="dropdown-item edit-episode"
+                                                                             href="javascript:void(0)"
+                                                                             edit_id="{{ $episode->id }}"
+                                                                             data-toggle="modal"
+                                                                             data-target="#addEpisodeModal"><i
+                                                                                 class="fas fa-edit"></i>
+                                                                             {{ __('Edit') }}</a>
+                                                                     @endif
+                                                                     @if (auth()->guard('member')->user()->hasPermission('delete-episodes'))
+                                                                         <a class="dropdown-item delete-episode"
+                                                                             href="javascript:void(0)"
+                                                                             delete_id="{{ $episode->id }}"><i
+                                                                                 class="fas fa-trash"></i>
+                                                                             {{ __('Delete') }}</a>
+                                                                     @endif
                                                                  </div>
                                                              </div>
                                                          </td>
