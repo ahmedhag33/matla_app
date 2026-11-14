@@ -1,44 +1,41 @@
- <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+<!DOCTYPE html>
 @if (getCurrentLanguage() == 'ar')
     <html lang="ar" dir="rtl">
 @else
-    <html lang="en">
+    <html lang="en" dir="ltr">
 @endif
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name') }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Font: Source Sans Pro -->
+    <title>{{ config('app.name') }}</title>
+
+    {{-- Main CSS Files --}}
     @include('membership.layouts.link')
+
+    {{-- Page Specific CSS --}}
+    @yield('styles')
 </head>
+
 <body class="hold-transition layout-top-nav">
-<div class="wrapper">
-  <!-- Navbar -->
-    @include('membership.layouts.nav')
-  <!-- /.navbar -->
 
-  <!-- Content Wrapper. Contains page content -->
- @yield('content')
-  <!-- /.content-wrapper -->
+    <div class="wrapper">
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+        {{-- Main Navbar --}}
+        @include('membership.layouts.nav')
 
-  <!-- Main Footer -->
-</div>
-<!-- ./wrapper -->
+        {{-- Page Content --}}
+        @yield('content')
 
-<!-- REQUIRED SCRIPTS -->
+    </div>
 
-<!-- jQuery -->
-@include('membership.layouts.script')
+    {{-- Main JavaScript Files --}}
+    @include('membership.layouts.script')
+
+    {{-- Page Specific JavaScript --}}
+    @yield('script')
+
 </body>
+
 </html>

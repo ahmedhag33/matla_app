@@ -1305,5 +1305,17 @@
     "Manage channel programs, broadcast schedules and teams.":"إدارة برامج القناة وجداول البث والفرق.",
     "Total Programs":"إجمالي البرامج",
     "Team Members": "أعضاء الفريق",
-    "Broadcast Days":"أيام البث"
+    "Broadcast Days":"أيام البث",
+    "Your media workspace":"مساحة عملك الإعلامية",
+    "Workspaces": "مساحات العمل",
+    "Manage your media work and content in one place.":"قم بإدارة عملك الإعلامي ومحتواك في مكان واحد.",
+    "Create New Workspace": "إنشاء مساحة عمل جديدة",
+    "Create a workspace for your media project.": "قم بإنشاء مساحة عمل لمشروعك الإعلامي.",
+    "Organize programs and broadcast schedules.":"قم بتنظيم البرامج وجداول البث.",
+    "Prepare episodes and manage their content.":"قم بتحضير الحلقات وإدارة محتواها.",
+    "Manage roles and team permissions.":"قم بإدارة الأدوار وصلاحيات الفريق.",
+    "Episode Management":"إدارة الحلقات",
+    "Team Management":"إدارة الفريق",
+    "Customize your workspace settings.":"قم بتخصيص إعدادات مساحة العمل الخاصة بك.",
+    "Your spaces":"مساحاتك"
 }

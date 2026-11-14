@@ -1,5 +1,7 @@
 @extends('membership.layouts.app')
-
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/membership-home.css') }}">
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -118,7 +120,8 @@
                                                         </div>
                                                     @endforeach
 
-                                                    <input type="hidden" name="workspace_type_id" id="workspace_type_id">
+                                                    <input type="hidden" name="workspace_type_id"
+                                                        id="workspace_type_id">
                                                 </div>
 
                                                 <span class="text-danger d-block mb-2"
@@ -146,39 +149,29 @@
         </section>
     </div>
 @endsection
-@section('script')
-    <script>
-        $('.country').select2();
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.stepper = new Stepper(document.querySelector('.workpace-create'));
-        });
-        $(document).on('click', '.workspace-type-card', function() {
-            // إزالة التحديد من كل الكروت
-            $('.workspace-type-card').removeClass('selected');
-            // تحديد الكارت الذي ضغط عليه المستخدم
-            $(this).addClass('selected');
-            // الحصول على ID النوع المختار
-            let workspaceTypeId = $(this).data('workspace-type');
-            // تخزينه في الـ hidden input
-            $('#workspace_type_id').val(workspaceTypeId);
 
-        });
-    </script>
+@section('script')
     <script>
         $(function() {
             const $form = $('#workspaceForm');
+            const stepperElement = document.querySelector('.workpace-create');
             const panels = ['basic-part', 'country-part', 'media-part'];
 
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'), {
+            // Initialize Stepper once only
+            window.stepper = new Stepper(stepperElement, {
                 linear: true
             });
 
-            $('.workspace-type-card').on('click', function() {
-                $('.workspace-type-card').removeClass('active');
-                $(this).addClass('active');
-                $('#workspace_type_id').val($(this).data('workspace-type'));
+            $('.country').select2();
+
+            // Workspace type selection
+            $(document).on('click', '.workspace-type-card', function() {
+                $('.workspace-type-card').removeClass('selected active');
+                $(this).addClass('selected active');
+
+                const workspaceTypeId = $(this).data('workspace-type');
+
+                $('#workspace_type_id').val(workspaceTypeId);
                 $('[data-error="workspace_type_id"]').text('');
             });
 
@@ -187,10 +180,11 @@
                 $('[data-error]').text('');
             }
 
-            // بتفهم شكل الـ trait بتاعك وشكل Laravel العادي
+            // Normalize Laravel validation errors
             function normalizeErrors(json) {
                 const out = {};
-                (function walk(node) {
+
+                function walk(node) {
                     if (Array.isArray(node)) {
                         node.forEach(walk);
                     } else if (node && typeof node === 'object') {
@@ -198,8 +192,11 @@
                             out[node.field] = [].concat(node.messages);
                         } else {
                             $.each(node, function(key, value) {
-                                if (Array.isArray(value) && value.length && value.every(v =>
-                                        typeof v === 'string')) {
+                                if (
+                                    Array.isArray(value) &&
+                                    value.length &&
+                                    value.every(v => typeof v === 'string')
+                                ) {
                                     out[key] = value;
                                 } else {
                                     walk(value);
@@ -207,16 +204,18 @@
                             });
                         }
                     }
-                })(json);
+                }
+
+                walk(json);
                 return out;
             }
 
-            // بتعرض الأخطاء جوه الفورمة، وبترجّع رقم أول خطوة فيها غلط
+            // Display errors and identify the first invalid step
             function showErrors(errors) {
                 let firstStep = null;
 
-                $.each(errors, function(field, msgs) {
-                    const html = [].concat(msgs).join('<br>');
+                $.each(errors, function(field, messages) {
+                    const html = [].concat(messages).join('<br>');
                     const $span = $(`[data-error="${field}"]`);
 
                     if ($span.length) {
@@ -227,76 +226,110 @@
                     }
 
                     const panelId = $(`[name="${field}"]`).closest('.content').attr('id');
-                    const idx = panels.indexOf(panelId);
-                    if (idx !== -1 && (firstStep === null || idx < firstStep)) firstStep = idx;
+                    const index = panels.indexOf(panelId);
+
+                    if (index !== -1 && (firstStep === null || index < firstStep)) {
+                        firstStep = index;
+                    }
                 });
 
                 return firstStep;
             }
 
-            // أي فشل من السيرفر يتعرض جوه الفورمة
             function handleFail(xhr) {
                 const errors = normalizeErrors(xhr.responseJSON);
 
                 if ($.isEmptyObject(errors)) {
-                    const msg = (xhr.responseJSON && xhr.responseJSON.message) || 'حصل خطأ، حاول تاني';
+                    const message =
+                        (xhr.responseJSON && xhr.responseJSON.message) ||
+                        'حصل خطأ، حاول تاني';
+
                     $('.bs-stepper-content .content.active')
-                        .prepend(`<div class="alert alert-danger alert-fallback">${msg}</div>`);
-                    return null;
+                        .prepend(`<div class="alert alert-danger alert-fallback">${message}</div>`);
+
+                    return;
                 }
 
-                return showErrors(errors);
+                const firstStep = showErrors(errors);
+
+                if (firstStep !== null) {
+                    stepper.to(firstStep + 1);
+                }
             }
 
-            $('.btn-next-step').on('click', function() {
-                const step = parseInt($(this).data('step'));
+            // Validate current step before moving to the next one
+            $('.btn-next-step').on('click', function(e) {
+                e.preventDefault();
+
+                const step = parseInt($(this).data('step'), 10);
                 const $panel = $(this).closest('.content');
+
                 clearErrors();
 
                 $.ajax({
                     url: `/member/create-workspace/validate/${step}`,
                     method: 'POST',
                     data: $panel.find(':input').serialize() +
-                        '&_token=' + encodeURIComponent($form.find('input[name="_token"]').val()),
+                        '&_token=' + encodeURIComponent(
+                            $form.find('input[name="_token"]').val()
+                        ),
                     headers: {
                         'Accept': 'application/json'
                     },
-                    success: () => stepper.next(),
-                    error: (xhr) => handleFail(xhr)
+                    success: function() {
+                        if (step === 1) {
+                            stepper.to(2);
+                        } else if (step === 2) {
+                            stepper.to(3);
+                        }
+                    },
+                    error: function(xhr) {
+                        handleFail(xhr);
+                    }
                 });
             });
+
+            // Submit workspace
+            $('#workspaceForm').on('submit', function(e) {
+                e.preventDefault();
+            });
+
             $(document).on('click', '.btn-confirm', function(e) {
                 e.preventDefault();
-                var formData = new FormData($('#workspaceForm')[0]);
+
+                const formData = new FormData($form[0]);
+
                 $.ajax({
-                    type: 'post',
-                    enctype: "multipart/form-data",
+                    type: 'POST',
+                    enctype: 'multipart/form-data',
                     url: "{{ route('workspace.create-workspace.store') }}",
                     data: formData,
                     dataType: 'json',
                     processData: false,
                     contentType: false,
                     cache: false,
+
                     beforeSend: function() {
                         $('#workspace-loading').show();
-                        $('#workspaceForm').hide();
+                        $form.hide();
                     },
-                    error: function(data) {
-                        $('#workspace-loading').hide();
-                        $('#workspaceForm').show();
-                        if (data.status === 422) {
-                            printErrorMsgWorkspace(data.responseJSON.message[0]);
+
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            printErrorMsgWorkspace(xhr.responseJSON.message[0]);
                         } else {
                             toastr.error(
-                                data.responseJSON.message ||
+                                xhr.responseJSON.message ||
                                 "{{ __('An error occurred') }}"
                             );
                         }
                     },
+
                     complete: function() {
                         $('#workspace-loading').hide();
-                        $('#workspaceForm').show();
+                        $form.show();
                     },
+
                     success: function(data) {
                         window.location.href = data.url;
                     }

@@ -1,0 +1,801 @@
+/* Matla membership home. Navbar, logo and shared layout are intentionally untouched. */
+.matla-membership-home {
+    --matla-navy: #17233c;
+    --matla-navy-soft: #223653;
+    --matla-orange: #f59e0b;
+    --matla-blue: #2475d2;
+    --matla-text: #172b49;
+    --matla-muted: #718096;
+    --matla-border: #e2e8f0;
+    direction: rtl;
+    padding: 30px max(22px, calc((100% - 1320px) / 2)) 42px;
+    background: #f3f6fb;
+    min-height: calc(100vh - 84px);
+}
+
+.matla-membership-home,
+.matla-membership-home * {
+    box-sizing: border-box;
+}
+
+.matla-home-hero {
+    position: relative;
+    min-height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 32px 42px;
+    margin-bottom: 27px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-top: 3px solid var(--matla-orange);
+    border-radius: 17px;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(45, 111, 190, .30), transparent 28%),
+        linear-gradient(115deg, #203d62 0%, #172b49 48%, #14233d 100%);
+    box-shadow: 0 9px 25px rgba(23, 35, 60, .10);
+}
+
+.matla-home-hero-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 75%;
+    color: #fff;
+}
+
+.matla-home-eyebrow {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: #ffbd4b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.matla-home-hero h1 {
+    margin: 0 0 9px;
+    color: #fff;
+    font-size: 29px;
+    line-height: 1.5;
+    font-weight: 800;
+}
+
+.matla-home-hero p {
+    margin: 0;
+    color: rgba(255, 255, 255, .86);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.matla-home-hero-art {
+    position: relative;
+    width: 245px;
+    height: 135px;
+    flex: 0 0 245px;
+    display: grid;
+    place-items: center;
+}
+
+.matla-hero-clapper {
+    position: relative;
+    z-index: 2;
+    width: 92px;
+    height: 78px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 17px;
+    color: #eaf3ff;
+    font-size: 43px;
+    background: linear-gradient(145deg, #397fc8, #15345f 75%);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .3);
+    transform: rotate(-7deg);
+}
+
+.matla-hero-orbit {
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    border: 1px solid rgba(255, 183, 71, .7);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-9deg);
+    box-shadow: 0 0 13px rgba(245, 158, 11, .28);
+}
+
+.matla-hero-orbit-one {
+    width: 220px;
+    height: 46px;
+}
+
+.matla-hero-orbit-two {
+    width: 175px;
+    height: 31px;
+    border-color: rgba(255, 255, 255, .25);
+}
+
+.matla-hero-spark {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffb43d;
+    box-shadow: 0 0 12px #ffb43d;
+}
+
+.matla-hero-spark-one {
+    top: 18px;
+    right: 43px;
+}
+
+.matla-hero-spark-two {
+    bottom: 17px;
+    left: 28px;
+}
+
+.matla-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.matla-section-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #8a98aa;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.matla-section-heading h2 {
+    margin: 0;
+    color: var(--matla-navy);
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.matla-count-badge {
+    min-width: 30px;
+    height: 30px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0 8px;
+    border-radius: 30px;
+    background: #fff1d6;
+    color: #a96400;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.matla-invitations-section {
+    margin-bottom: 28px;
+}
+
+.matla-invitations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.matla-invitation-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding: 17px;
+    border: 1px solid #f0d9aa;
+    border-radius: 13px;
+    background: #fffdf8;
+    box-shadow: 0 3px 10px rgba(23, 35, 60, .035);
+}
+
+.matla-invitation-symbol {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #fff1d6;
+    color: #c17a08;
+    font-size: 19px;
+}
+
+.matla-invitation-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.matla-invitation-info span,
+.matla-invitation-info p {
+    color: var(--matla-muted);
+    font-size: 10px;
+    margin: 0;
+}
+
+.matla-invitation-info h3 {
+    margin: 3px 0;
+    color: var(--matla-navy);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.matla-membership-home .btn-matla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 39px;
+    padding: 9px 15px;
+    border: 1px solid var(--matla-orange);
+    border-radius: 9px;
+    background: var(--matla-orange);
+    color: var(--matla-navy);
+    font-size: 12px;
+    font-weight: 800;
+    box-shadow: none;
+    white-space: nowrap;
+}
+
+.matla-membership-home .btn-matla:hover,
+.matla-membership-home .btn-matla:focus {
+    border-color: #e99200;
+    background: #e99200;
+    color: var(--matla-navy);
+}
+
+.matla-workspaces-section {
+    margin-bottom: 26px;
+}
+
+.matla-create-workspace {
+    text-decoration: none !important;
+}
+
+.matla-workspaces-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.matla-workspace-card {
+    min-height: 235px;
+    display: flex;
+    flex-direction: column;
+    padding: 21px;
+    border: 1px solid var(--matla-border);
+    border-top: 3px solid var(--matla-orange);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 4px 13px rgba(23, 35, 60, .055);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.matla-workspace-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 23px rgba(23, 35, 60, .09);
+}
+
+.matla-workspace-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.matla-workspace-icon {
+    width: 49px;
+    height: 49px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: #edf4ff;
+    color: #216cc2;
+    font-size: 21px;
+}
+
+.matla-workspace-label {
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #f1f5fa;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.matla-workspace-card-content {
+    flex: 1;
+    padding: 17px 0 13px;
+}
+
+.matla-workspace-card-content h3 {
+    margin: 0 0 7px;
+    color: var(--matla-navy);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.matla-workspace-card-content p {
+    margin: 0;
+    color: var(--matla-muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.matla-workspace-card-footer {
+    display: flex;
+    justify-content: flex-start;
+    border-top: 1px solid #edf0f5;
+    padding-top: 13px;
+}
+
+.matla-enter-workspace {
+    min-width: 175px;
+    text-decoration: none !important;
+}
+
+.matla-add-workspace-card {
+    min-height: 235px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 22px;
+    border: 1px dashed #cbd6e4;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .62);
+    color: var(--matla-navy);
+    text-align: center;
+    text-decoration: none !important;
+    transition: .2s ease;
+}
+
+.matla-add-workspace-card:hover {
+    border-color: var(--matla-orange);
+    background: #fff;
+    color: var(--matla-navy);
+}
+
+.matla-add-workspace-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff1d6;
+    color: #bb7400;
+    font-size: 18px;
+}
+
+.matla-add-workspace-card strong {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.matla-add-workspace-card>span:last-child {
+    color: var(--matla-muted);
+    font-size: 11px;
+}
+
+.matla-no-workspaces {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 24px;
+    border: 1px dashed #d4deea;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.matla-no-workspaces-icon {
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    background: #fff3dc;
+    color: #c17a08;
+    font-size: 22px;
+}
+
+.matla-no-workspaces-copy {
+    flex: 1;
+}
+
+.matla-no-workspaces-copy h3 {
+    margin: 0 0 5px;
+    color: var(--matla-navy);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.matla-no-workspaces-copy p {
+    margin: 0;
+    color: var(--matla-muted);
+    font-size: 12px;
+}
+
+.matla-home-features {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    padding: 20px 10px;
+    border: 1px solid #e7edf5;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, .82);
+    box-shadow: 0 4px 14px rgba(23, 35, 60, .035);
+}
+
+.matla-home-feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 5px 15px;
+    border-left: 1px solid #e0e7f0;
+}
+
+.matla-home-feature:last-child {
+    border-left: 0;
+}
+
+.matla-feature-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf4ff;
+    color: #1d67b8;
+    font-size: 18px;
+}
+
+.matla-home-feature h3 {
+    margin: 0 0 4px;
+    color: var(--matla-navy);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.matla-home-feature p {
+    margin: 0;
+    color: var(--matla-muted);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+@media (max-width: 991px) {
+    .matla-membership-home {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .matla-home-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 17px;
+    }
+
+    .matla-home-feature:nth-child(2) {
+        border-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .matla-membership-home {
+        padding: 18px 13px 30px;
+    }
+
+    .matla-home-hero {
+        min-height: 175px;
+        padding: 25px 22px;
+    }
+
+    .matla-home-hero-copy {
+        max-width: 100%;
+    }
+
+    .matla-home-hero h1 {
+        font-size: 22px;
+    }
+
+    .matla-home-hero p {
+        font-size: 12px;
+    }
+
+    .matla-home-hero-art {
+        position: absolute;
+        left: -65px;
+        bottom: -18px;
+        opacity: .22;
+    }
+
+    .matla-invitations-grid,
+    .matla-workspaces-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .matla-invitation-card {
+        flex-wrap: wrap;
+    }
+
+    .matla-invitation-card .btn {
+        width: 100%;
+    }
+
+    .matla-section-heading {
+        align-items: flex-start;
+    }
+
+    .matla-home-features {
+        padding: 15px 5px;
+    }
+
+    .matla-home-feature {
+        justify-content: flex-start;
+        padding: 5px 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .matla-home-features {
+        grid-template-columns: 1fr;
+    }
+
+    .matla-home-feature,
+    .matla-home-feature:nth-child(2) {
+        border-left: 0;
+        border-bottom: 1px solid #e0e7f0;
+        padding: 10px 8px;
+    }
+
+    .matla-home-feature:last-child {
+        border-bottom: 0;
+    }
+
+    .matla-no-workspaces {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .matla-no-workspaces .btn {
+        width: 100%;
+    }
+
+    .matla-create-workspace {
+        font-size: 10px !important;
+        padding: 8px 10px !important;
+    }
+}
+
+
+
+/* ==========================================================
+   Matla Membership Navbar
+   Uses existing logo, routes, dropdowns and logout function.
+   ========================================================== */
+.navbar-matla.matla-membership-navbar {
+    min-height: 84px;
+    padding: 0;
+    margin: 0;
+    background: #17233c;
+    border: 0;
+    box-shadow: 0 2px 9px rgba(12, 25, 45, .12);
+    direction: rtl;
+    z-index: 1030;
+}
+
+.matla-membership-navbar .matla-navbar-container {
+    min-height: 84px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    max-width: 1320px;
+}
+
+.matla-membership-navbar .matla-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+}
+
+.matla-membership-navbar .matla-navbar-brand img {
+    display: block;
+    width: auto;
+    height: 48px;
+    max-width: 165px;
+    object-fit: contain;
+}
+
+.matla-membership-navbar .matla-navbar-links {
+    flex: 1 1 auto;
+    align-items: center;
+}
+
+.matla-membership-navbar .matla-main-nav {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+}
+
+.matla-membership-navbar .matla-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 43px;
+    padding: 10px 17px !important;
+    border-radius: 24px;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background .18s ease, color .18s ease;
+}
+
+.matla-membership-navbar .matla-nav-link i {
+    font-size: 14px;
+}
+
+.matla-membership-navbar .matla-nav-home {
+    background: rgba(255, 255, 255, .10);
+}
+
+.matla-membership-navbar .matla-nav-link:hover,
+.matla-membership-navbar .matla-nav-link:focus {
+    background: rgba(255, 255, 255, .15);
+    color: #fff !important;
+}
+
+.matla-membership-navbar .matla-nav-add {
+    background: transparent;
+}
+
+.matla-membership-navbar .matla-navbar-tools {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 0 auto;
+}
+
+.matla-membership-navbar .matla-navbar-tool-item {
+    position: relative;
+}
+
+.matla-membership-navbar .matla-navbar-tool-link {
+    position: relative;
+    width: 43px;
+    height: 43px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px !important;
+    border-radius: 50%;
+    transition: background .18s ease;
+}
+
+.matla-membership-navbar .matla-navbar-tool-link:hover,
+.matla-membership-navbar .matla-navbar-tool-link:focus {
+    background: rgba(255, 255, 255, .12);
+}
+
+.matla-membership-navbar .matla-navbar-user-icon {
+    display: block;
+    width: 27px;
+    height: 27px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.matla-membership-navbar .matla-navbar-bell-icon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.matla-membership-navbar .navbar-badge-matla {
+    position: absolute;
+    top: 1px;
+    right: 0;
+}
+
+.matla-membership-navbar .matla-navbar-dropdown {
+    top: calc(100% + 8px);
+    min-width: 190px;
+    padding: 7px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(10, 25, 45, .18);
+    text-align: right;
+}
+
+.matla-membership-navbar .matla-navbar-dropdown .dropdown-item {
+    border-radius: 7px;
+    padding: 9px 11px;
+    color: #263852;
+    font-size: 12px;
+}
+
+.matla-membership-navbar .matla-navbar-dropdown .dropdown-item:hover {
+    background: #f1f5fa;
+}
+
+.matla-membership-navbar .matla-navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 8px;
+    padding: 6px 9px;
+}
+
+.matla-membership-navbar .matla-navbar-toggler .navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+@media (max-width: 767px) {
+
+    .navbar-matla.matla-membership-navbar,
+    .matla-membership-navbar .matla-navbar-container {
+        min-height: 70px;
+    }
+
+    .matla-membership-navbar .matla-navbar-container {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 9px 15px;
+    }
+
+    .matla-membership-navbar .matla-navbar-brand img {
+        height: 41px;
+    }
+
+    .matla-membership-navbar .matla-navbar-tools {
+        margin-right: auto;
+        margin-left: 0;
+        gap: 4px;
+    }
+
+    .matla-membership-navbar .matla-navbar-links {
+        order: 4;
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .matla-membership-navbar .matla-main-nav {
+        align-items: stretch;
+        gap: 3px;
+        padding: 8px 0 3px;
+    }
+
+    .matla-membership-navbar .matla-main-nav .nav-item,
+    .matla-membership-navbar .matla-nav-link {
+        width: 100%;
+    }
+
+    .matla-membership-navbar .matla-nav-link {
+        justify-content: flex-start;
+        border-radius: 8px;
+    }
+}
+
+.matla-membership-navbar .matla-navbar-brand img {
+    display: block;
+    width: auto;
+    height: 62px;
+    max-width: 190px;
+    object-fit: contain;
+}
+
+.navbar-matla.matla-membership-navbar,
+.matla-membership-navbar .matla-navbar-container {
+    min-height: 90px;
+}
