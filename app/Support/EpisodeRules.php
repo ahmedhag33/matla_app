@@ -29,7 +29,8 @@ class EpisodeRules implements RulesInterface
                     'required',
                     //'date',
                     'episode_scheduled_on_program_day',
-                    'episode_scheduled_in_future'
+                    'episode_scheduled_in_future',
+                    Rule::unique('episodes', 'air_at')->where('program_id', request()->input('check_program_id'))
                 ],
                 'air_time' => [
                     'required',
@@ -76,6 +77,7 @@ class EpisodeRules implements RulesInterface
             'air_date.required' => __('The air date field is required.'),
             'air_date.date' => __('The air date must be a valid date.'),
             'air_date.episode_scheduled_on_program_day' => __('The air date must match one of the programs broadcast days.'),
+            'air_at.unique' => __('The combination of air date and program must be unique.'),
             'air_time.required' => __('The air time field is required.'),
             'air_time.date_format' => __('The air time must be in the format H:i.'),
             'air_date.episode_scheduled_in_future' => __('The air date must be today or a future date.'),
