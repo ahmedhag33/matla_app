@@ -1,144 +1,132 @@
-<section class="content">
-    <div class="card-header">
-        <h3 class="card-title">
-            @if (auth()->guard('member')->user()->hasPermission('add-program'))
-                <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
-                    <span><i class="fas fa-plus"></i>
-                        {{ __('Add Program') }}
-                    </span>
-                </button>
-            @endif
-        </h3>
-    </div>
-    <!-- Default box -->
-    <div class="card card-solid">
-        <div class="card-body pb-0">
-            <div class="row">
-                @forelse ($programs as $program)
-                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
-                        id="show-program-{{ $program->id }}"
-                       style="display: {{ auth()->guard('member')->user()->checkInProgramTeam($program->slug) ? 'block' : 'none !important' }}">
-
-                        <div class="card bg-primary d-flex flex-fill program-card">
-                            <div class="card-header text-muted border-bottom-0">
-                                <span class="badge bg-light">
-                                    <img src="{{ $program->type->icon_at_full }}" alt="{{ $program->type->name }}"
-                                        width="20">
-
-                                    {{ $program->type->name }}
-                                </span>
-                            </div>
-
-                            <div class="card-body pt-0">
-
-                                <div class="row">
-
-                                    <div class="col-7">
-
-                                        <h2 class="lead program-title">
-                                            <b>{{ $program->name }}</b>
-                                        </h2>
-
-                                        <p class="text-muted text-sm">
-                                            <i class="far fa-calendar-alt"></i>
-
-                                            @foreach ($program->broadcastDays as $day)
-                                                <small>{{ $day->day_at_from_enum . ' ' }}</small>
-                                            @endforeach
-                                        </p>
-
-                                        <p class="text-muted text-sm">
-                                            <i class="fas fa-calendar-alt"></i>
-                                            {{ $program->broadcast_schedule_attribute }}
-                                        </p>
-
-                                        <p class="text-muted text-sm">
-                                            <i class="far fa-clock"></i>
-                                            {{ $program->default_duration_minutes_to_string }}
-                                        </p>
-
-                                        <p class="text-muted text-sm">
-                                            <i class="fas fa-podcast"></i>
-                                            {!! $program->broadcast_mode_attribute !!}
-                                        </p>
-
-                                    </div>
-
-                                    <div class="col-5 text-center">
-                                        <img src="{{ asset('public/img/program.png') }}" alt="program"
-                                            class="img-circle img-fluid program-image">
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="card-footer mt-auto">
-                                <div class="text-right">
-                                    <button type="button" class="btn btn-sm bg-teal btn-matla" data-toggle="dropdown">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                    <div class="dropdown-menu text-right" role="menu">
-                                        @if (auth()->guard('member')->user()->hasPermission('edit-program'))
-                                            <a class="dropdown-item edit-program"
-                                                data-edit-program="{{ $program->id }}" href="javascript:void(0)">
-                                                <i class="fas fa-edit"></i>
-                                                {{ __('Edit') }}
-                                            </a>
-                                        @endif
-                                        @if (auth()->guard('member')->user()->hasPermission('delete-program'))
-                                            <a class="dropdown-item delete-program" delete_id="{{ $program->id }}"
-                                                data-delete-program="{{ $program->id }}" href="javascript:void(0)">
-                                                <i class="fas fa-recycle"></i>
-                                                {{ __('Delete') }}
-                                            </a>
-                                        @endif
-                                        @if (auth()->guard('member')->user()->hasPermission('edit-program'))
-                                            <a class="dropdown-item" data-update-status="{{ $program->id }}"
-                                                href="javascript:void(0)">
-                                                <i class="fas fa-sync-alt"></i>
-                                                {{ __('Update Status') }}
-                                            </a>
-                                        @endif
-                                    </div>
-                                    {{-- <a href="#" class="btn btn-sm bg-teal btn-matla">
-                                                <i class="fas fa-cog"></i>
-                                            </a> --}}
-                                    <a href="{{ route('workspace.program.details', [
-                                        'slug' => request()->route('slug'),
-                                        'programSlug' => $program->slug,
-                                    ]) }}"
-                                        class="btn btn-sm btn-matla">
-                                        <i class="fas fa-play"></i>
-                                        {{ __('Manage Episodes') }}
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                @empty
-                    <div class="error-page">
-                        <h2 class="headline ">
-                            <i class="fas fa-cloud"></i>
-                        </h2>
-                        <div class="error-content">
-                            <h2>{{ __('No Data') }}</h2>
-                            <p>
-                                {{ __('There are no programs available at the moment.') }}
-                            </p>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
+<section class="content matla-programs-content">
+    <div class="matla-programs-summary">
+        <div class="matla-summary-card">
+            <span class="matla-summary-icon"><i class="fas fa-layer-group"></i></span>
+            <div><span>{{ __('Total Programs') }}</span><strong>{{ $programs->total() }}</strong></div>
         </div>
-        <!-- /.card-body -->
-        {{ $programs->links('workspace.pagination.custom') }}
-        <!-- /.card-footer -->
     </div>
-    <!-- /.card -->
 
+    <div class="matla-programs-grid">
+        @forelse ($programs as $program)
+            @php
+                $episodesCount = $program->episodes_count ?? $program->episodes()->count();
+                $teamMembersCount = $program->team_members_count ?? $program->teamMembers()->count();
+            @endphp
+
+            <article class="matla-program-card" id="show-program-{{ $program->id }}"
+                style="display: {{ auth()->guard('member')->user()->checkInProgramTeam($program->slug) ? 'flex' : 'none' }}">
+
+                <div class="matla-program-card-top">
+                    <span class="matla-program-type-badge">
+                        @if ($program->type?->icon_at_full)
+                            <img src="{{ $program->type->icon_at_full }}" alt="{{ $program->type->name }}"
+                                width="18" height="18">
+                        @endif
+                        {{ $program->type->name }}
+                    </span>
+
+                    <div class="matla-program-card-menu dropdown">
+                        <button type="button" class="matla-icon-button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" aria-label="{{ __('Program options') }}">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right text-right">
+                            @if (auth()->guard('member')->user()->hasPermission('edit-program'))
+                                <a class="dropdown-item edit-program" data-edit-program="{{ $program->id }}"
+                                    href="javascript:void(0)">
+                                    <i class="fas fa-edit"></i> {{ __('Edit') }}
+                                </a>
+                            @endif
+                            @if (auth()->guard('member')->user()->hasPermission('delete-program'))
+                                <a class="dropdown-item delete-program" delete_id="{{ $program->id }}"
+                                    data-delete-program="{{ $program->id }}" href="javascript:void(0)">
+                                    <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
+                                </a>
+                            @endif
+                            @if (auth()->guard('member')->user()->hasPermission('edit-program'))
+                                <a class="dropdown-item" data-update-status="{{ $program->id }}"
+                                    href="javascript:void(0)">
+                                    <i class="fas fa-sync-alt"></i> {{ __('Update Status') }}
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="matla-program-card-main">
+                    <div class="matla-program-card-copy">
+                        <h2>{{ $program->name }}</h2>
+                        @if ($program->description)
+                            <p class="matla-program-description">{{ $program->description }}</p>
+                        @endif
+                    </div>
+                    <img src="{{ asset('public/img/program.png') }}" alt="{{ $program->name }}"
+                        class="matla-program-card-image">
+                </div>
+
+                <div class="matla-program-card-meta">
+                    <div class="matla-program-meta-item">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>
+                            @forelse ($program->broadcastDays as $day)
+                                {{ $day->day_at_from_enum }}@if (!$loop->last)
+                                    ،
+                                @endif
+                            @empty
+                                -
+                            @endforelse
+                        </span>
+                        <small>{{ __('Broadcast Days') }}</small>
+                    </div>
+                    <div class="matla-program-meta-item">
+                        <i class="far fa-clock"></i>
+                        <span>{{ $program->default_duration_minutes_to_string }}</span>
+                        <small>{{ __('Episode Duration') }}</small>
+                    </div>
+                    <div class="matla-program-meta-item">
+                        <i
+                            class="fas fa-film"></i><span>{{ $episodesCount }}</span><small>{{ __('Episodes') }}</small>
+                    </div>
+                    <div class="matla-program-meta-item">
+                        <i
+                            class="fas fa-users"></i><span>{{ $teamMembersCount }}</span><small>{{ __('Team Members') }}</small>
+                    </div>
+                </div>
+
+                <div class="matla-program-card-footer">
+                    <div class="matla-program-broadcast">
+                        <i class="fas fa-broadcast-tower"></i>
+                        {!! $program->broadcast_mode_attribute !!}
+                        <span class="matla-broadcast-separator">·</span>
+                        {{ $program->broadcast_schedule_attribute }}
+                    </div>
+                    <div class="matla-program-card-actions">
+                        <a href="{{ route('workspace.program.details', ['slug' => request()->route('slug'), 'programSlug' => $program->slug]) }}"
+                            class="btn matla-btn-outline">
+                            <i class="fas fa-sliders-h"></i> {{ __('Program Details') }}
+                        </a>
+                        <a href="{{ route('workspace.program.details', ['slug' => request()->route('slug'), 'programSlug' => $program->slug]) }}"
+                            class="btn btn-matla matla-manage-episodes">
+                            {{ __('Manage Episodes') }} <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        @empty
+            <div class="matla-programs-empty">
+                <div class="matla-empty-icon"><i class="fas fa-tv"></i></div>
+                <h2>{{ __('No Data') }}</h2>
+                <p>{{ __('There are no programs available at the moment.') }}</p>
+                @if (auth()->guard('member')->user()->hasPermission('add-program'))
+                    <button type="button" class="btn btn-matla" data-toggle="modal" data-target="#add-program">
+                        <i class="fas fa-plus"></i> {{ __('Add Program') }}
+                    </button>
+                @endif
+            </div>
+        @endforelse
+    </div>
+
+    @if ($programs->hasPages())
+        <div class="matla-programs-pagination">{{ $programs->links('workspace.pagination.custom') }}</div>
+    @endif
 </section>

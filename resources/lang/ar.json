@@ -1301,5 +1301,9 @@
     "The combination of air date and program must be unique.":
     "يجب أن يكون مزيج تاريخ البث والبرنامج فريدًا.",
     "Epsoides": "حلقات",
-    "Start by adding the first episode to this program.":"ابدأ بإضافة الحلقة الأولى لهذا البرنامج."
+    "Start by adding the first episode to this program.":"ابدأ بإضافة الحلقة الأولى لهذا البرنامج.",
+    "Manage channel programs, broadcast schedules and teams.":"إدارة برامج القناة وجداول البث والفرق.",
+    "Total Programs":"إجمالي البرامج",
+    "Team Members": "أعضاء الفريق",
+    "Broadcast Days":"أيام البث"
 }
