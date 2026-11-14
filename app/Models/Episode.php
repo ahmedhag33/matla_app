@@ -135,6 +135,15 @@ class Episode extends Model
         return $this->belongsTo(Member::class, 'created_by');
     }
     /**
+     * Get the segments that belong to the episode.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function segments()
+    {
+        return $this->hasMany(Segments::class, 'episode_id');
+    }
+    /**
      * Interact with the air at attribute.
      *
      * @return Attribute

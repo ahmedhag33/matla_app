@@ -1317,5 +1317,17 @@
     "Episode Management":"إدارة الحلقات",
     "Team Management":"إدارة الفريق",
     "Customize your workspace settings.":"قم بتخصيص إعدادات مساحة العمل الخاصة بك.",
-    "Your spaces":"مساحاتك"
+    "Your spaces":"مساحاتك",
+    "opening": "افتتاح",
+    "news": "أخبار",
+    "report": "تقرير",
+    "analysis": "تحليل",
+    "interview": "مقابلة",
+    "live_call": "مكالمة مباشرة",
+    "statistics": "إحصائيات",
+    "break": "استراحة",
+    "closing": "اختتام",
+    "New Segment Created": "تم إنشاء مقطع جديد",
+    "Segment Updated": "تم تحديث المقطع",
+    "Segment Deleted": "تم حذف المقطع"
 }
