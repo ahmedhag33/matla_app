@@ -146,5 +146,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to create or update a segment
         Route::post('/', 'createOrUpdate')->name('workspace.segment.create-or-update')
             ->middleware('check-member-permission:add-segments');
+        // add route to get segment by ID
+        Route::post('/get-by-id', 'getById')->name('workspace.segment.get-by-id')
+            ->middleware('check-member-permission:view-segments');
     });
 });

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Workspace;
 
+use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\SegmentRequest;
 use App\Models\Episode;
+use App\Models\Segments;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 
 class SegmentController extends Controller
 {
@@ -57,6 +60,38 @@ class SegmentController extends Controller
             ], HttpStatusCode::CREATED->value);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
+     * Get a segment by its ID.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
+    public function getById(Request $request)
+    {
+        try {
+            $segmentId = $request->input('segment_id');
+            // Validate that the segment ID is provided
+            if (!$segmentId) {
+                return $this->errorException(HttpStatusCode::BAD_REQUEST->value, __('Segment ID is required'));
+            }
+            // Retrieve the segment by ID
+            $segment = Segments::find($segmentId);
+            // Check if the segment exists
+            if (!$segment) {
+                throw new DatabaseException(__('Segment not found'), HttpStatusCode::NOT_FOUND->value);
+            }
+            return $this->returnData([
+                'error' => false,
+                'data' => $segment
+            ], HttpStatusCode::OK->value);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }

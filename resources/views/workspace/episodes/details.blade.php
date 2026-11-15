@@ -72,6 +72,32 @@
                     });
                 }
             });
+            $(document).on('click', '.btn-get-segment', function(e) {
+                e.preventDefault();
+                var segmentId = $(this).attr('edit_id');
+                $.ajax({
+                    type: 'post',
+                    url: "{{ routeWorkspace('workspace.segment.get-by-id') }}",
+                    data: {
+                        segment_id: segmentId,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                       $('#addSegmentForm').find('input[name="title"]').val(data.data.title);
+                       $('#addSegmentForm').find('input[name="duration"]').val(data.data.duration);
+                       $('#addSegmentForm').find('select[name="type"]').val(data.data.type);
+                       $('#addSegmentForm').find('input[name="segment_id"]').val(data.data.id);
+                       $('#addSegmentForm').find('textarea[name="description"]').val(data.data.description);
+                    },
+                    error: function(data) {
+                        toastr.error(
+                            data.responseJSON.message ||
+                            "{{ __('An error occurred') }}"
+                        );
+                    }
+                });
+            });
         });
     </script>
 @endsection

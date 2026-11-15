@@ -19,8 +19,8 @@
         <div class="matla-program-stats">
             <div class="matla-stat-card">
                 <i class="fas fa-layer-group"></i>
-                <span>{{ __('Segments Count') }}</span><strong>{{ $episode->segment_count }}
-                    {{ __('Segments') }}</strong>
+                <span>{{ __('Segments Count') }}</span><strong>{{ $episode->segments_count }}
+                  </strong>
             </div>
             <div class="matla-stat-card"><i class="far fa-clock"></i>
                 <span>{{ __('Episode Duration') }}</span><strong>{{ $episode->duration_to_string }}</strong>
@@ -52,7 +52,7 @@
                 <div class="matla-table-toolbar">
                     <div class="matla-table-heading">
                         <h3>{{ __('Episodes') }}</h3>
-                        <span>{{ $episode->segments_count }} {{ __('Segments') }}</span>
+                        <span>{{ $episode->segments_count }}</span>
                     </div>
                     @if (auth()->guard('member')->user()->hasPermission('add-segments'))
                         <button type="button" class="btn btn-matla matla-add-episode" data-toggle="modal"
@@ -95,14 +95,14 @@
                                                         data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        @if (auth()->guard('member')->user()->hasPermission('edit-episodes'))
-                                                            <a class="dropdown-item edit-episode"
+                                                        @if (auth()->guard('member')->user()->hasPermission('edit-segments'))
+                                                            <a class="dropdown-item btn-get-segment"
                                                                 href="javascript:void(0)" edit_id="{{ $segment->id }}"
-                                                                data-toggle="modal" data-target="#addEpisodeModal"><i
+                                                                data-toggle="modal" data-target="#addSegmentModal"><i
                                                                     class="fas fa-edit"></i>{{ __('Edit') }}</a>
                                                         @endif
-                                                        @if (auth()->guard('member')->user()->hasPermission('delete-episodes'))
-                                                            <a class="dropdown-item delete-episode"
+                                                        @if (auth()->guard('member')->user()->hasPermission('delete-segments'))
+                                                            <a class="dropdown-item delete-segment"
                                                                 href="javascript:void(0)"
                                                                 delete_id="{{ $segment->id }}"><i
                                                                     class="fas fa-trash"></i>{{ __('Delete') }}</a>
