@@ -17,16 +17,18 @@
                 <div class="card-body p-0">
                     <form id="addSegmentForm">
                         @csrf
+                        <input type="hidden" name="episode_id" value="{{ $episode->id ?? '' }}">
+                        <input type="hidden" name="segment_id" value="">
                         <div class="row">
                             {{-- Segment Name --}}
                             <div class="col-md-6 form-group">
-                                <label for="name">
+                                <label for="title">
                                     {{ __('Segment Name') }}
                                     <span class="text-danger">*</span>
                                 </label>
-
-                                <input type="text" name="name" id="name" class="form-control"
+                                <input type="text" name="title" id="title" class="form-control"
                                     placeholder="{{ __('Enter segment name') }}">
+                                <span class="text-danger title_err"></span>
                             </div>
 
                             {{-- Segment Type --}}
@@ -43,6 +45,7 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <span class="text-danger type_err"></span>
                             </div>
 
                             {{-- Duration --}}
@@ -54,6 +57,7 @@
 
                                 <input type="number" name="duration" id="duration" class="form-control" min="1"
                                     placeholder="{{ __('Enter duration in minutes') }}">
+                                <span class="text-danger duration_err"></span>
                             </div>
 
                             {{-- Description --}}
@@ -64,6 +68,7 @@
 
                                 <textarea name="description" id="description" class="form-control" rows="3"
                                     placeholder="{{ __('Enter segment description') }}"></textarea>
+                                <span class="text-danger description_err"></span>
                             </div>
 
                         </div>
@@ -80,7 +85,9 @@
                         </div>
 
                     </form>
-
+                    <div id="segment-loading" class="spinner-grow text-dark" role="status" style="display: none;">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
             </div>
 

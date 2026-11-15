@@ -9,6 +9,7 @@ use App\Http\Controllers\Workspace\HomeController;
 use App\Http\Controllers\Workspace\InventionController;
 use App\Http\Controllers\Workspace\MemberController;
 use App\Http\Controllers\Workspace\ProgramController;
+use App\Http\Controllers\Workspace\SegmentController;
 use App\Http\Controllers\Workspace\WorkspaceController;
 use Illuminate\Support\Facades\Route;
 
@@ -140,5 +141,10 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to show episode details by slug
         Route::get('{episodeSlug}', 'details')->name('workspace.episode.details')
             ->middleware(['check-member-permission:view-episodes']);
+    });
+    Route::prefix('segments')->controller(SegmentController::class)->group(function () {
+        // add route to create or update a segment
+        Route::post('/', 'createOrUpdate')->name('workspace.segment.create-or-update')
+            ->middleware('check-member-permission:add-segments');
     });
 });

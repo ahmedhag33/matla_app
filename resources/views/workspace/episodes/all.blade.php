@@ -80,14 +80,14 @@
                                 <tbody>
                                     @foreach ($episode->segments as $segment)
                                         <tr data-id="{{ $segment->id }}">
-                                            <td><span class="matla-episode-number">{{ $segment->sort }}</span>
+                                            <td><span class="matla-episode-number">{{ $segment->segment_number }}</span>
                                             </td>
                                             <td class="matla-episode-title">{{ $segment->title }}</td>
-                                            <td>{{ $segment->duration ?? '-' }}</td>
+                                            <td>{{ $segment->duration. ' ' . __('Minutes') ?? '-' }}</td>
                                             <td><span class="matla-creator"><i
                                                         class="fas fa-user"></i>{{ $segment->creator->name ?? '-' }}</span>
                                             </td>
-                                            <td>{{ $segment->type_to_string }}</td>
+                                            <td>{!! !empty($segment->type_to_string) ? $segment->type_to_string : '-' !!}</td>
                                             <td>{!! $segment->status_to_string !!}</td>
                                             <td>
                                                 <div class="btn-group matla-actions">
