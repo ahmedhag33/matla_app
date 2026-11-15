@@ -1334,5 +1334,10 @@
     "Segments Count": "عدد الفقرات",
     "Date And Time Broadcast": "تاريخ ووقت البث",
     "Total Segments Duration": "اجمالى مدة الفقرات",
-    "Remaining Duration": "المدة المتبقية"
+    "Remaining Duration": "المدة المتبقية",
+    "Sort": "ترتيب",
+    "Duration": "المدة",
+    "No Segments Found": "لم يتم العثور على فقرات",
+    "Start by adding the first segment to this episode.":"ابدأ بإضافة المقطع الأول لهذه الحلقة.",
+    "Add New Segment": "إضافة فقرة جديدة"
 }

@@ -1,7 +1,8 @@
 <main class="matla-program-details">
     <section class="matla-program-overview">
         <div class="matla-program-main">
-            <img src="{{ asset('public/img/photo-video-solid.svg') }}" alt="{{ $episode->title }}" width="118" height="118">
+            <img src="{{ asset('public/img/photo-video-solid.svg') }}" alt="{{ $episode->title }}" width="118"
+                height="118">
             <div class="matla-program-copy">
                 <div class="matla-program-heading">
                     <h2>{{ $episode->title . ' - ' . $episode->program->name }}</h2>
@@ -38,13 +39,11 @@
         </div>
     </section>
 
-    {{-- <section class="matla-program-content">
+    <section class="matla-program-content">
         <div class="matla-tabs-header">
             <ul class="nav nav-pills matla-program-tabs" role="tablist">
                 <li class="nav-item"><a class="nav-link active" href="#episodes" data-toggle="tab" role="tab"><i
                             class="fas fa-clapperboard"></i>{{ __('Episodes') }}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#program-team" data-toggle="tab" role="tab"><i
-                            class="fas fa-users"></i>{{ __('Program Team') }}</a></li>
             </ul>
         </div>
 
@@ -53,55 +52,41 @@
                 <div class="matla-table-toolbar">
                     <div class="matla-table-heading">
                         <h3>{{ __('Episodes') }}</h3>
-                        <span>{{ $program->episodes_count }} {{ __('Epsoides') }}</span>
+                        <span>{{ $episode->segments_count }} {{ __('Segments') }}</span>
                     </div>
-                    @if (auth()->guard('member')->user()->hasPermission('add-episodes'))
+                    @if (auth()->guard('member')->user()->hasPermission('add-segments'))
                         <button type="button" class="btn btn-matla matla-add-episode" data-toggle="modal"
-                            data-target="#addEpisodeModal">
-                            <i class="fas fa-plus"></i>{{ __('Add New Episode') }}
+                            data-target="#addSegmentModal">
+                            <i class="fas fa-plus"></i>{{ __('Add New Segment') }}
                         </button>
                     @endif
                 </div>
 
-                @if ($program->episodes->isNotEmpty())
+                @if ($episode->segments->isNotEmpty())
                     <div class="matla-table-container">
                         <div class="table-responsive">
                             <table class="table matla-episodes-table">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('Episode Number') }}</th>
+                                        <th>{{ __('Sort') }}</th>
                                         <th>{{ __('Title') }}</th>
-                                        <th><i class="far fa-calendar"></i> {{ __('Air Date') }}</th>
-                                        <th>{{ __('Duration Between Air and Reminder') }}</th>
-                                        <th><i class="far fa-calendar"></i> {{ __('Reminder Date') }}</th>
-                                        <th>
-                                            <i class="fas fa-clock"></i>
-                                            {{ __('Duration and Broadcast') }}
-                                        </th>
+                                        <th>{{ __('Duration') }}</th>
                                         <th>{{ __('Creator') }}</th>
                                         <th>{{ __('Status') }}</th>
                                         <th>{{ __('Actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($program->episodes as $episode)
-                                        <tr data-id="{{ $episode->id }}">
-                                            <td><span
-                                                    class="matla-episode-number">{{ $episode->episode_number }}</span>
+                                    @foreach ($episode->segments as $segment)
+                                        <tr data-id="{{ $segment->id }}">
+                                            <td><span class="matla-episode-number">{{ $segment->sort }}</span>
                                             </td>
-                                            <td class="matla-episode-title">{{ $episode->title }}</td>
-                                            <td><i class="far fa-calendar"></i>
-                                                {{ $episode->air_at_formatted }}</td>
-                                            <td>{{ $episode->duration_between_air_and_reminder ?? null ? $episode->duration_between_air_and_reminder . ' ' . __('Days') : '-' }}
-                                            </td>
-                                            <td>{!!  '<i class="far fa-calendar"></i> ' . $episode->reminder_at_formatted ?? '-' !!}
-                                            </td>
-                                            <td><i class="far fa-clock"></i> {{ $episode->duration_to_string ?? '-' }}
-                                            </td>
+                                            <td class="matla-episode-title">{{ $segment->title }}</td>
+                                            <td>{{ $segment->duration ?? '-' }}</td>
                                             <td><span class="matla-creator"><i
-                                                        class="fas fa-user"></i>{{ $episode->creator->name ?? '-' }}</span>
+                                                        class="fas fa-user"></i>{{ $segment->creator->name ?? '-' }}</span>
                                             </td>
-                                            <td>{!! $episode->status_formatted !!}</td>
+                                            <td>{!! $segment->status_formatted !!}</td>
                                             <td>
                                                 <div class="btn-group matla-actions">
                                                     <button type="button" class="btn matla-action-toggle"
@@ -110,19 +95,16 @@
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         @if (auth()->guard('member')->user()->hasPermission('edit-episodes'))
                                                             <a class="dropdown-item edit-episode"
-                                                                href="javascript:void(0)" edit_id="{{ $episode->id }}"
+                                                                href="javascript:void(0)" edit_id="{{ $segment->id }}"
                                                                 data-toggle="modal" data-target="#addEpisodeModal"><i
                                                                     class="fas fa-edit"></i>{{ __('Edit') }}</a>
                                                         @endif
                                                         @if (auth()->guard('member')->user()->hasPermission('delete-episodes'))
                                                             <a class="dropdown-item delete-episode"
                                                                 href="javascript:void(0)"
-                                                                delete_id="{{ $episode->id }}"><i
+                                                                delete_id="{{ $segment->id }}"><i
                                                                     class="fas fa-trash"></i>{{ __('Delete') }}</a>
                                                         @endif
-                                                        <a class="dropdown-item"
-                                                            href="{{ routeWorkspace('workspace.episode.details', ['episodeSlug' => $episode->slug]) }}"><i
-                                                                class="fas fa-eye"></i>{{ __('Episode Details') }}</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -134,49 +116,18 @@
                     </div>
                 @else
                     <div class="matla-empty-state">
-                        <div class="matla-empty-icon"><i class="fas fa-film"></i></div>
-                        <h3>{{ __('No Episodes Found') }}</h3>
-                        <p>{{ __('Start by adding the first episode to this program.') }}</p>
-                        @if (auth()->guard('member')->user()->hasPermission('add-episodes'))
+                        <div class="matla-empty-icon"> <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>{{ __('No Segments Found') }}</h3>
+                        <p>{{ __('Start by adding the first segment to this episode.') }}</p>
+                        @if (auth()->guard('member')->user()->hasPermission('add-segments'))
                             <button type="button" class="btn btn-matla" data-toggle="modal"
-                                data-target="#addEpisodeModal"><i
-                                    class="fas fa-plus"></i>{{ __('Add Episode') }}</button>
+                                data-target="#addSegmentModal"><i
+                                    class="fas fa-plus"></i>{{ __('Add New Segment') }}</button>
                         @endif
                     </div>
                 @endif
             </div>
-
-            <div class="tab-pane fade" id="program-team" role="tabpanel">
-                <div class="matla-table-toolbar">
-                    <div class="matla-table-heading">
-                        <h3>{{ __('Program Team') }}</h3><span>{{ $program->team_members_count }}
-                            {{ __('members') }}</span>
-                    </div>
-                </div>
-                <div class="matla-table-container">
-                    <div class="table-responsive">
-                        <table class="table matla-episodes-table matla-team-table">
-                            <thead>
-                                <tr>
-                                    <th>{{ __('Name') }}</th>
-                                    <th>{{ __('The Role') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($program->teamMembers as $teamMember)
-                                    <tr data-id="{{ $teamMember->id }}">
-                                        <td><span class="matla-team-member"><img alt="Avatar"
-                                                    class="table-avatar-matla"
-                                                    src="{{ asset('public/img/da7ed7b0-5f66-4f97-a610-51100d3b9fd2.jpg') }}">{{ $teamMember->name }}</span>
-                                        </td>
-                                        <td>{{ $teamMember->role->name }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
-    </section> --}}
+    </section>
 </main>
