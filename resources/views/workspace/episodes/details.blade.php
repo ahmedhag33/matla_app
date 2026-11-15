@@ -19,4 +19,5 @@
         </div>
         @include('workspace.episodes.all')
     </div> <!-- End content-wrapper -->
+    @include('workspace.episodes.create')
 @endsection

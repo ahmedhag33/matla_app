@@ -6,6 +6,7 @@ use App\Service\Enum\BroadcastDay;
 use App\Service\Enum\BroadcastMode;
 use App\Service\Enum\BroadcastSchedule;
 use App\Service\Enum\ProgramStatus;
+use App\Service\Enum\SegmentType;
 use App\Service\Secure\PasswordGenerator;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -811,5 +812,26 @@ if (!function_exists('routeDetailsProgram')) {
         $parameters = array_merge(['slug' => $slug, 'programSlug' => $programSlug], $parameters);
         // Generate the route with the merged parameters
         return route($name, $parameters);
+    }
+}
+if (!function_exists('segmentTypes')) {
+    /**
+     * Get the list of segment types.
+     *
+     * @return array
+     */
+    function segmentTypes(): array
+    {
+        return [
+            SegmentType::OPENING->value => __('opening'),
+            SegmentType::NEWS->value => __('news'),
+            SegmentType::REPORT->value => __('report'),
+            SegmentType::ANALYSIS->value => __('analysis'),
+            SegmentType::INTERVIEW->value => __('interview'),
+            SegmentType::LIVE_CALL->value => __('live_call'),
+            SegmentType::STATISTICS->value => __('statistics'),
+            SegmentType::BREAK ->value => __('break'),
+            SegmentType::CLOSING->value => __('closing'),
+        ];
     }
 }

@@ -72,6 +72,7 @@
                                         <th>{{ __('Title') }}</th>
                                         <th>{{ __('Duration') }}</th>
                                         <th>{{ __('Creator') }}</th>
+                                        <th>{{ __('Segment Type') }}</th>
                                         <th>{{ __('Status') }}</th>
                                         <th>{{ __('Actions') }}</th>
                                     </tr>
@@ -86,7 +87,8 @@
                                             <td><span class="matla-creator"><i
                                                         class="fas fa-user"></i>{{ $segment->creator->name ?? '-' }}</span>
                                             </td>
-                                            <td>{!! $segment->status_formatted !!}</td>
+                                            <td>{{ $segment->type_to_string }}</td>
+                                            <td>{!! $segment->status_to_string !!}</td>
                                             <td>
                                                 <div class="btn-group matla-actions">
                                                     <button type="button" class="btn matla-action-toggle"
