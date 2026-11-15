@@ -17,5 +17,6 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
+        @include('workspace.episodes.all')
     </div> <!-- End content-wrapper -->
 @endsection

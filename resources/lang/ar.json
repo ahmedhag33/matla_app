@@ -1330,5 +1330,9 @@
     "New Segment Created": "تم إنشاء مقطع جديد",
     "Segment Updated": "تم تحديث المقطع",
     "Segment Deleted": "تم حذف المقطع",
-    "Episode Details": "تفاصيل الحلقة"
+    "Episode Details": "تفاصيل الحلقة",
+    "Segments Count": "عدد الفقرات",
+    "Date And Time Broadcast": "تاريخ ووقت البث",
+    "Total Segments Duration": "اجمالى مدة الفقرات",
+    "Remaining Duration": "المدة المتبقية"
 }

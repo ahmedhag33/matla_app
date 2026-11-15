@@ -48,7 +48,7 @@ class Program extends Model
      *
      * @var array
      */
-    protected $appends = ['default_hours', 'default_minutes'];
+    protected $appends = ['default_hours', 'default_minutes','status_attribute'];
     /**
      * Get a custom description for an activity log entry.
      *

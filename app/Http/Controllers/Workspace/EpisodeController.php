@@ -27,7 +27,10 @@ class EpisodeController extends Controller
     {
         $episodeSlug = request()->route('episodeSlug');
         // Retrieve the episode by its slug from the route parameter
-        $episode = Episode::with(['program', 'segments'])->where('slug', $episodeSlug)->firstOrFail();
+        $episode = Episode::with(['program', 'segments'])
+        ->withCount('segments')
+        ->where('slug', $episodeSlug)
+        ->firstOrFail();
         // Pass the episode to the view for rendering its details
         return view('workspace.episodes.details', compact('episode'));
     }

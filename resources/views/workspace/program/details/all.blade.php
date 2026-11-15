@@ -5,8 +5,8 @@
             <div class="matla-program-copy">
                 <div class="matla-program-heading">
                     <h2>{{ $program->name }}</h2>
-                    @if (isset($program->status_formatted))
-                        <span class="matla-program-status">{!! $program->status_formatted !!}</span>
+                    @if (isset($program->status_attribute))
+                        <span class="matla-program-status">{!! $program->status_attribute !!}</span>
                     @endif
                 </div>
                 <div class="matla-program-type">
