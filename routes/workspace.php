@@ -137,5 +137,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to delete an episode
         Route::delete('/delete', 'delete')->name('workspace.episode.delete')
             ->middleware('check-member-permission:delete-episodes');
+        // add route to show episode details by slug
+        Route::get('{episodeSlug}', 'details')->name('workspace.episode.details')
+            ->middleware(['check-member-permission:view-episodes']);
     });
 });

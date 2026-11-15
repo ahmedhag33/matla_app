@@ -129,6 +129,9 @@
                                                                 delete_id="{{ $episode->id }}"><i
                                                                     class="fas fa-trash"></i>{{ __('Delete') }}</a>
                                                         @endif
+                                                        <a class="dropdown-item"
+                                                            href="{{ routeWorkspace('workspace.episode.details', ['episodeSlug' => $episode->slug]) }}"><i
+                                                                class="fas fa-eye"></i>{{ __('Episode Details') }}</a>
                                                     </div>
                                                 </div>
                                             </td>

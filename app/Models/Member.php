@@ -240,4 +240,19 @@ class Member extends Authenticatable
                 ->where('created_by', $this->id)
                 ->exists();
     }
+    /**
+     * Check if the member is part of the program team for the program associated with the given episode slug.
+     *
+     * @param string $episodeSlug
+     * @return bool
+     */
+    public function checkInProgramTeamToShowEpisode($episodeSlug)
+    {
+        $episode = Episode::with('program')->where('slug', $episodeSlug)->first();
+        // If the episode exists, check if the member is in the program team for the episode's program
+        if (!$episode) {
+            return false;
+        }
+        return $this->checkInProgramTeam($episode->program->slug);
+    }
 }
