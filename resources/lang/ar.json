@@ -1355,13 +1355,14 @@
     "Enter duration in minutes": "أدخل مدة الفقرة بالدقائق",
     "Enter segment description": "أدخل وصف الفقرة",
     "Save Segment": "حفظ الفقرة",
-     "The title field is required":"حقل العنوان مطلوب.",
-     "The type field is required":"حقل النوع مطلوب.",
-     "The duration field is required":"حقل المدة مطلوب.",
-     "The segment duration must be positive":"يجب أن تكون مدة الفقرة موجبة.",
-     "The segment duration must be less than the episode duration":"يجب أن تكون مدة الفقرة أقل من مدة الحلقة.",
-     "The total duration of all segments must be less than the episode duration":"يجب أن تكون المدة الإجمالية لجميع الفقرات أقل من مدة الحلقة.",
-     "Segment created successfully": "تم إنشاء الفقرة بنجاح.",
-     "Segment updated successfully": "تم تحديث الفقرة بنجاح.",
-     "The duration field is required.":"حقل المدة مطلوب."
+    "The title field is required": "حقل العنوان مطلوب.",
+    "The type field is required": "حقل النوع مطلوب.",
+    "The duration field is required": "حقل المدة مطلوب.",
+    "The segment duration must be positive": "يجب أن تكون مدة الفقرة موجبة.",
+    "The segment duration must be less than the episode duration": "يجب أن تكون مدة الفقرة أقل من مدة الحلقة.",
+    "The total duration of all segments must be less than the episode duration": "يجب أن تكون المدة الإجمالية لجميع الفقرات أقل من مدة الحلقة.",
+    "Segment created successfully": "تم إنشاء الفقرة بنجاح.",
+    "Segment updated successfully": "تم تحديث الفقرة بنجاح.",
+    "The duration field is required.": "حقل المدة مطلوب.",
+    "The segment duration must be less than the episode duration.": "يجب أن تكون مدة الفقرة أقل من مدة الحلقة."
 }

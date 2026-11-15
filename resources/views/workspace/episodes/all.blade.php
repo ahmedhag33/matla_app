@@ -30,11 +30,11 @@
             </div>
             <div class="matla-stat-card">
                 <i class="fas fa-bars"></i>
-                <span>{{ __('Total Segments Duration') }}</span><strong>{{ '0' . ' ' . __('Minute') }}</strong>
+                <span>{{ __('Total Segments Duration') }}</span><strong>{{ $episode->segments_sum_duration . ' ' . __('Minute') }}</strong>
             </div>
             <div class="matla-stat-card matla-stat-days">
                 <i class="fas fa-circle-notch"></i>
-                <span>{{ __('Remaining Duration') }}</span><strong>{{ '0' . ' ' . __('Minute') }}</strong>
+                <span>{{ __('Remaining Duration') }}</span><strong>{{ $episode->reminder_duration . ' ' . __('Minute') }}</strong>
             </div>
         </div>
     </section>

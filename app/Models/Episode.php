@@ -63,6 +63,7 @@ class Episode extends Model
         'duration_hours',
         'duration_minutes',
         'status_formatted',
+        'reminder_duration',
     ];
     /**
      * Get a custom description for an activity log entry.
@@ -254,6 +255,24 @@ class Episode extends Model
                 EpisodeStatus::CANCELLED->value => $this->span('danger', __('cancelled')),
                 EpisodeStatus::POSTPONED->value => $this->span('warning', __('postponed')),
             },
+        );
+    }
+
+    /**
+     * Interact with the reminder duration attribute.
+     *
+     * @return Attribute
+     */
+    public function reminderDuration(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $totalSegmentsDuration = $this->segments()->sum('duration');
+                // Calculate the remaining duration by subtracting the total segments duration from the episode duration
+                $remainingDuration = $this->duration - $totalSegmentsDuration;
+                // Ensure the remaining duration is not negative
+                return max($remainingDuration, 0);
+            }
         );
     }
 }

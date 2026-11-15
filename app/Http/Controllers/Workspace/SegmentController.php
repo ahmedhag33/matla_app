@@ -48,11 +48,11 @@ class SegmentController extends Controller
                     ]);
                 }
             });
-            session()->flash('success-message-segment', ($request->input('segment_id') ? __('Segment updated successfully.') : __('Segment created successfully.')));
+            session()->flash('success-message-segment', ($request->input('segment_id') ? __('Segment updated successfully') : __('Segment created successfully')));
             // Flash a success message to the session for the segment operation
             return $this->returnData([
                 'error' => false,
-                'message' => ($request->input('segment_id') ? __('Segment updated successfully.') : __('Segment created successfully.')),
+                'message' => ($request->input('segment_id') ? __('Segment updated successfully') : __('Segment created successfully')),
                 'url' => routeWorkspace('workspace.episode.details', ['episodeSlug' => $episode->slug])
             ], HttpStatusCode::CREATED->value);
         } catch (HttpResponseException $e) {

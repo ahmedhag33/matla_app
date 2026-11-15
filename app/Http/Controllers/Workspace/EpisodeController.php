@@ -29,6 +29,7 @@ class EpisodeController extends Controller
         // Retrieve the episode by its slug from the route parameter
         $episode = Episode::with(['program', 'segments'])
         ->withCount('segments')
+        ->withSum('segments', 'duration')
         ->where('slug', $episodeSlug)
         ->firstOrFail();
         // Pass the episode to the view for rendering its details
