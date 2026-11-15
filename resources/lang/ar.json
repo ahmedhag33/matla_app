@@ -1364,5 +1364,7 @@
     "Segment created successfully": "تم إنشاء الفقرة بنجاح.",
     "Segment updated successfully": "تم تحديث الفقرة بنجاح.",
     "The duration field is required.": "حقل المدة مطلوب.",
-    "The segment duration must be less than the episode duration.": "يجب أن تكون مدة الفقرة أقل من مدة الحلقة."
+    "The segment duration must be less than the episode duration.":
+    "يجب أن تكون مدة الفقرة أقل من مدة الحلقة.",
+    "The total duration of all segments must be less than the episode duration.": "يجب أن تكون المدة الإجمالية لجميع الفقرات أقل من مدة الحلقة."
 }
