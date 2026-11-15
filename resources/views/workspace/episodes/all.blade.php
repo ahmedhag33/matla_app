@@ -1,7 +1,7 @@
 <main class="matla-program-details">
     <section class="matla-program-overview">
         <div class="matla-program-main">
-            <img src="{{ asset('public/img/photo-video-solid.svg') }}" alt="{{ $episode->title }}" class="matla-program-logo">
+            <img src="{{ asset('public/img/photo-video-solid.svg') }}" alt="{{ $episode->title }}" width="118" height="118">
             <div class="matla-program-copy">
                 <div class="matla-program-heading">
                     <h2>{{ $episode->title . ' - ' . $episode->program->name }}</h2>
