@@ -149,5 +149,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to get segment by ID
         Route::post('/get-by-id', 'getById')->name('workspace.segment.get-by-id')
             ->middleware('check-member-permission:view-segments');
+        // add route to delete a segment
+        Route::delete('/delete', 'delete')->name('workspace.segment.delete')
+            ->middleware('check-member-permission:delete-segments');
     });
 });

@@ -96,4 +96,40 @@ class SegmentController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Delete a segment by its ID.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
+    public function delete(Request $request)
+    {
+        try {
+            // Get the segment ID from the request
+            $segmentId = $request->input('segment_id');
+            // Validate that the segment ID is provided
+            if (!$segmentId) {
+                return $this->errorException(HttpStatusCode::BAD_REQUEST->value, __('Segment ID is required'));
+            }
+            // Retrieve the segment by ID
+            $segment = Segments::find($segmentId);
+            // Check if the segment exists
+            if (!$segment) {
+                throw new DatabaseException(__('Segment not found'), HttpStatusCode::NOT_FOUND->value);
+            }
+            // Delete the segment
+            $segment->delete();
+            // Return success response
+            return $this->returnData([
+                'error' => false,
+                'message' => __('Segment deleted successfully')
+            ], HttpStatusCode::OK->value);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
 }

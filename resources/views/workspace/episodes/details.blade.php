@@ -84,17 +84,49 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                       $('#addSegmentForm').find('input[name="title"]').val(data.data.title);
-                       $('#addSegmentForm').find('input[name="duration"]').val(data.data.duration);
-                       $('#addSegmentForm').find('select[name="type"]').val(data.data.type);
-                       $('#addSegmentForm').find('input[name="segment_id"]').val(data.data.id);
-                       $('#addSegmentForm').find('textarea[name="description"]').val(data.data.description);
+                        $('#addSegmentForm').find('input[name="title"]').val(data.data.title);
+                        $('#addSegmentForm').find('input[name="duration"]').val(data.data
+                            .duration);
+                        $('#addSegmentForm').find('select[name="type"]').val(data.data.type);
+                        $('#addSegmentForm').find('input[name="segment_id"]').val(data.data.id);
+                        $('#addSegmentForm').find('textarea[name="description"]').val(data.data
+                            .description);
                     },
                     error: function(data) {
                         toastr.error(
                             data.responseJSON.message ||
                             "{{ __('An error occurred') }}"
                         );
+                    }
+                });
+            });
+            $(document).on('click', '.delete-segment', function(e) {
+                Swal.fire({
+                    title: "<b>{{ __('Do you Are Delete') }}</b>",
+                    icon: "warning",
+                    iconColor: "#17233C",
+                    showCancelButton: true,
+                    confirmButtonColor: "#17233C",
+                    cancelButtonColor: "#F59E0B",
+                    confirmButtonText: "{{ __('Delete') }}",
+                    cancelButtonText: "{{ __('Cancel') }}"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        e.preventDefault();
+                        var id = $(this).attr('delete_id');
+                        $.ajax({
+                            type: 'DELETE',
+                            url: "{{ routeWorkspace('workspace.segment.delete') }}",
+                            dataType: 'json',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                'segment_id': id,
+                            },
+                            success: function(data) {
+                                $(`tr[data-id="${id}"]`).remove();
+                                toastr.success(data.message);
+                            }
+                        });
                     }
                 });
             });

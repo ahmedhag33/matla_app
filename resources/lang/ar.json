@@ -1366,5 +1366,6 @@
     "The duration field is required.": "حقل المدة مطلوب.",
     "The segment duration must be less than the episode duration.":
     "يجب أن تكون مدة الفقرة أقل من مدة الحلقة.",
-    "The total duration of all segments must be less than the episode duration.": "يجب أن تكون المدة الإجمالية لجميع الفقرات أقل من مدة الحلقة."
+    "The total duration of all segments must be less than the episode duration.": "يجب أن تكون المدة الإجمالية لجميع الفقرات أقل من مدة الحلقة.",
+    "Segment deleted successfully": "تم حذف الفقرة بنجاح."
 }
