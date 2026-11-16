@@ -130,6 +130,40 @@
                     }
                 });
             });
+            $('#segmentsTable').sortable({
+                handle: '.drag-handle',
+                axis: 'y',
+                update: function(event, ui) {
+                    let segmentId = ui.item.data('id');
+                    let newPosition = ui.item.index() + 1;
+                    $('#segmentsTable tr').each(function(index) {
+                        $(this).find('.segment-number').text(index + 1);
+                    });
+                    $.ajax({
+                        url: '{{ routeWorkspace('workspace.segment.sort') }}',
+                        type: 'POST',
+                        data: {
+                            segments_id: segmentId,
+                            segment_number: newPosition,
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(data) {
+                            // Update displayed positions
+                            $('#segmentsTable tr').each(function(index) {
+                                $(this).find('td:first').contents()
+                                    .filter(function() {
+                                        return this.nodeType === 3;
+                                    }).last()[0].textContent = ' ' + (
+                                        index + 1);
+                            });
+                            toastr.success(data.message);
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseJSON);
+                        }
+                    });
+                }
+            });
         });
     </script>
 @endsection

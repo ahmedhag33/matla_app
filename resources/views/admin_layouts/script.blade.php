@@ -33,6 +33,7 @@
  <script src="{{ asset('public/dashboard/plugins/dropzone/min/dropzone.min.js') }}"></script>
 
  <script src="{{ asset('public/dashboard/plugins/select2/js/select2.full.min.js') }}"></script>
+ <script src="{{ asset('public/dashboard/plugins/jquery-ui/jquery-ui.js') }}"></script>
  <script>
      toastr.options = {
          "closeButton": true,

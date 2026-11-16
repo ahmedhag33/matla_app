@@ -27,7 +27,9 @@ class EpisodeController extends Controller
     {
         $episodeSlug = request()->route('episodeSlug');
         // Retrieve the episode by its slug from the route parameter
-        $episode = Episode::with(['program', 'segments'])
+        $episode = Episode::with(['program', 'segments' => function ($query) {
+            $query->orderBy('segment_number');
+        }])
         ->withCount('segments')
         ->withSum('segments', 'duration')
         ->where('slug', $episodeSlug)

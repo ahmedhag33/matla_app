@@ -28,6 +28,7 @@
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/select2/css/select2.min.css') }}">
  <link rel="stylesheet"
      href="{{ asset('public/dashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+ <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jquery-ui/jquery-ui.css') }}">
  <!-- Theme style -->
  @if (getCurrentLanguage() == 'ar')
      <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/admintle.rtl.min.css') }}">

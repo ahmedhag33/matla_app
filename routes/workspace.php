@@ -152,5 +152,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to delete a segment
         Route::delete('/delete', 'delete')->name('workspace.segment.delete')
             ->middleware('check-member-permission:delete-segments');
+        // add route to sort a segment
+        Route::post('/sort', 'sort')->name('workspace.segment.sort')
+            ->middleware('check-member-permission:edit-segments');
     });
 });

@@ -20,7 +20,7 @@
             <div class="matla-stat-card">
                 <i class="fas fa-layer-group"></i>
                 <span>{{ __('Segments Count') }}</span><strong>{{ $episode->segments_count }}
-                  </strong>
+                </strong>
             </div>
             <div class="matla-stat-card"><i class="far fa-clock"></i>
                 <span>{{ __('Episode Duration') }}</span><strong>{{ $episode->duration_to_string }}</strong>
@@ -77,13 +77,16 @@
                                         <th>{{ __('Actions') }}</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="segmentsTable">
                                     @foreach ($episode->segments as $segment)
                                         <tr data-id="{{ $segment->id }}">
-                                            <td><span class="matla-episode-number">{{ $segment->segment_number }}</span>
+                                            <td>
+                                                <i class="fas fa-grip-vertical drag-handle"></i>
+                                                <span
+                                                    class="matla-episode-number segment-number">{{ $segment->segment_number }}</span>
                                             </td>
                                             <td class="matla-episode-title">{{ $segment->title }}</td>
-                                            <td>{{ $segment->duration. ' ' . __('Minutes') ?? '-' }}</td>
+                                            <td>{{ $segment->duration . ' ' . __('Minutes') ?? '-' }}</td>
                                             <td><span class="matla-creator"><i
                                                         class="fas fa-user"></i>{{ $segment->creator->name ?? '-' }}</span>
                                             </td>
