@@ -195,6 +195,11 @@ class EpisodeController extends Controller
             if (!$episode) {
                 throw new DatabaseException(__('Episode not found.'), HttpStatusCode::NOT_FOUND->value);
             }
+            $segments = $episode->segments()->exists();
+            // Check if the episode has any existing segments before deletion
+            if ($segments) {
+                throw new DatabaseException(__('Cannot delete episode with existing segments.'), HttpStatusCode::CONFLICT->value);
+            }
             $episode->delete();
             // Return a success message after deleting the episode
             return $this->returnData([

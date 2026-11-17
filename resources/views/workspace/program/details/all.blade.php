@@ -103,7 +103,7 @@
                                                 {{ $episode->air_at_formatted }}</td>
                                             <td>{{ $episode->duration_between_air_and_reminder ?? null ? $episode->duration_between_air_and_reminder . ' ' . __('Days') : '-' }}
                                             </td>
-                                            <td>{!!  '<i class="far fa-calendar"></i> ' . $episode->reminder_at_formatted ?? '-' !!}
+                                            <td>{!! '<i class="far fa-calendar"></i> ' . $episode->reminder_at_formatted ?? '-' !!}
                                             </td>
                                             <td><i class="far fa-clock"></i> {{ $episode->duration_to_string ?? '-' }}
                                             </td>
@@ -124,10 +124,16 @@
                                                                     class="fas fa-edit"></i>{{ __('Edit') }}</a>
                                                         @endif
                                                         @if (auth()->guard('member')->user()->hasPermission('delete-episodes'))
-                                                            <a class="dropdown-item delete-episode"
-                                                                href="javascript:void(0)"
-                                                                delete_id="{{ $episode->id }}"><i
-                                                                    class="fas fa-trash"></i>{{ __('Delete') }}</a>
+                                                            @if (WorkspaceView::check_segments_in_episode($episode->id))
+                                                                <a class="dropdown-item disabled"
+                                                                    href="javascript:void(0)"><i
+                                                                        class="fas fa-trash"></i>{{ __('Cannot delete episode with existing segments.') }}</a>
+                                                            @else
+                                                                <a class="dropdown-item delete-episode"
+                                                                    href="javascript:void(0)"
+                                                                    delete_id="{{ $episode->id }}"><i
+                                                                        class="fas fa-trash"></i>{{ __('Delete') }}</a>
+                                                            @endif
                                                         @endif
                                                         <a class="dropdown-item"
                                                             href="{{ routeWorkspace('workspace.episode.details', ['episodeSlug' => $episode->slug]) }}"><i

@@ -212,6 +212,9 @@
                             _token: "{{ csrf_token() }}",
                             'episode_id': id,
                         },
+                        error: function(xhr) {
+                            toastr.error(xhr.responseJSON.message || "{{ __('An unexpected error occurred.') }}");
+                        },
                         success: function(data) {
                             $(`tr[data-id="${id}"]`).remove();
                             toastr.success(data.message);
