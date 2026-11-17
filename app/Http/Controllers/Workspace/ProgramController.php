@@ -55,7 +55,7 @@ class ProgramController extends Controller
                 $query->with('creator')
                     ->orderBy('episode_number', 'desc');
             }
-        ])->withCount('teamMembers','episodes')
+        ])->withCount('teamMembers', 'episodes')
             ->where('slug', request()->route('programSlug'))
             ->firstOrFail();
         // Convert the broadcast days to a string representation.
@@ -297,7 +297,12 @@ class ProgramController extends Controller
             $program = Program::find($programId);
             // Check if the program exists
             if (!$program) {
-                throw new DatabaseException(HttpStatusCode::NOT_FOUND->value, __('Program not found.'));
+                throw new DatabaseException(__('Program not found.'), HttpStatusCode::NOT_FOUND->value);
+            }
+            $Episodes = $program->episodes()->exists();
+            // Check if the program has any existing episodes before deletion
+            if ($Episodes) {
+                throw new DatabaseException(__('Cannot delete program with existing episodes.'), HttpStatusCode::CONFLICT->value);
             }
             // Delete the program from the database
             $program->delete();
@@ -309,7 +314,7 @@ class ProgramController extends Controller
         } catch (DatabaseException $e) {
             return $this->errorException($e->getCode(), $e->getMessage());
         } catch (\Exception $e) {
-            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
         }
     }
 }

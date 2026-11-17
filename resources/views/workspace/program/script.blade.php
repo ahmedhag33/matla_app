@@ -123,7 +123,7 @@
      }
      $('.btn-next-step').on('click', function() {
          var slug = "{{ current_Workspace()->slug }}"
-         const step =$(this).data('step');
+         const step = $(this).data('step');
          console.log(step);
          const $panel = $(this).closest('.content');
          clearErrors();
@@ -258,6 +258,10 @@
                      data: {
                          _token: "{{ csrf_token() }}",
                          'id': id,
+                     },
+                     error: function(xhr) {
+                         toastr.error(xhr.responseJSON.message ||
+                             "{{ __('An error occurred') }}");
                      },
                      success: function(data) {
                          $('#show-program-' + id).remove();

@@ -38,10 +38,17 @@
                                 </a>
                             @endif
                             @if (auth()->guard('member')->user()->hasPermission('delete-program'))
-                                <a class="dropdown-item delete-program" delete_id="{{ $program->id }}"
-                                    data-delete-program="{{ $program->id }}" href="javascript:void(0)">
-                                    <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
-                                </a>
+                                @if (!WorkspaceView::check_episodes_in_program($program->id))
+                                    <a class="dropdown-item delete-program" delete_id="{{ $program->id }}"
+                                        data-delete-program="{{ $program->id }}" href="javascript:void(0)">
+                                        <i class="fas fa-trash-alt"></i> {{ __('Delete') }}
+                                    </a>
+                                @else
+                                    <a class="dropdown-item disabled" href="javascript:void(0)">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        {{ __('Cannot delete program with existing episodes.') }}
+                                    </a>
+                                @endif
                             @endif
                             @if (auth()->guard('member')->user()->hasPermission('edit-program'))
                                 <a class="dropdown-item" data-update-status="{{ $program->id }}"
