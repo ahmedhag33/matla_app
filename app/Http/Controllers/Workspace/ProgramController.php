@@ -246,7 +246,7 @@ class ProgramController extends Controller
         } catch (HttpResponseException $e) {
             return $e->getResponse();
         } catch (\Exception $e) {
-            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
         }
     }
     /**
@@ -278,7 +278,7 @@ class ProgramController extends Controller
         } catch (DatabaseException $e) {
             return $this->errorException($e->getCode(), $e->getMessage());
         } catch (\Exception $e) {
-            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
         }
     }
     /**
