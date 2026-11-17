@@ -29,6 +29,8 @@
  <link rel="stylesheet"
      href="{{ asset('public/dashboard/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jquery-ui/jquery-ui.css') }}">
+ <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jsgrid/jsgrid.min.css') }}">
+ <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jsgrid/jsgrid-theme.min.css') }}">
  <!-- Theme style -->
  @if (getCurrentLanguage() == 'ar')
      <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/admintle.rtl.min.css') }}">
