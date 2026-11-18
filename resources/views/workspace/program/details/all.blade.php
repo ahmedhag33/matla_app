@@ -62,7 +62,7 @@
                 <div class="matla-table-toolbar">
                     <div class="matla-table-heading">
                         <h3>{{ __('Episodes') }}</h3>
-                        <span>{{ $program->episodes_count }} {{ __('Epsoides') }}</span>
+                        <span id="episode-count">0</span>
                     </div>
                     @if (auth()->guard('member')->user()->hasPermission('add-episodes'))
                         <button type="button" class="btn btn-matla matla-add-episode" data-toggle="modal"

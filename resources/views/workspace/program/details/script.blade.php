@@ -263,7 +263,19 @@
                         method: "GET",
                         data: filter,
                         dataType: "json"
+                    }).then(function(response) {
+                        // Update Episodes Count
+                        $("#episode-count").text(
+                            response.itemCount ?? response.itemsCount ?? 0
+                        );
+                        // Return data to jsGrid
+                        return {
+                            data: response.data ?? response.data ?? [],
+                            itemsCount: response.itemCount ?? response.itemsCount ?? 0
+                        };
+
                     });
+
                 }
             },
 
@@ -410,8 +422,13 @@
 
                 }
 
-            ]
+            ],
 
+        });
+        $("#episodesGrid").jsGrid({
+            noDataContent: $(
+                '<div class="matla-empty-state"><div class="matla-empty-icon"><i class="fas fa-film"></i></div><h3>{{ __('No Episodes Found') }}</h3><p>{{ __('Start by adding the first episode to this program.') }}</p></div>'
+            ),
         });
 
     });
