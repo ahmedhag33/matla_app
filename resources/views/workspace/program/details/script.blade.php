@@ -213,7 +213,8 @@
                             'episode_id': id,
                         },
                         error: function(xhr) {
-                            toastr.error(xhr.responseJSON.message || "{{ __('An unexpected error occurred.') }}");
+                            toastr.error(xhr.responseJSON.message ||
+                                "{{ __('An unexpected error occurred.') }}");
                         },
                         success: function(data) {
                             $(`tr[data-id="${id}"]`).remove();
@@ -228,5 +229,189 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         window.stepper = new Stepper(document.querySelector('.bs-stepper'));
+    });
+</script>
+<script>
+    window.matlaEpisodes = {
+        permissions: {
+            edit: "{{ auth()->guard('member')->user()->hasPermission('edit-episodes') }}",
+
+            delete: "{{ auth()->guard('member')->user()->hasPermission('delete-episodes') }}"
+        },
+        gridUrl: "{{ routeWorkspace('workspace.episode.all', ['programSlug' => $program->slug]) }}",
+        detailsUrl: "{{ routeWorkspace('workspace.episode.details', ['episodeSlug' => '__SLUG__']) }}",
+    };
+</script>
+<script>
+    $(function() {
+
+        $("#episodesGrid").jsGrid({
+            height: "auto",
+            width: "100%",
+            autoload: true,
+            filtering: true,
+            sorting: true,
+            paging: true,
+            pageLoading: true,
+            pageSize: 10,
+            pageButtonCount: 5,
+            controller: {
+                loadData: function(filter) {
+                    return $.ajax({
+                        url: window.matlaEpisodes.gridUrl,
+                        method: "GET",
+                        data: filter,
+                        dataType: "json"
+                    });
+                }
+            },
+
+            fields: [
+
+                {
+                    name: "episode_number",
+                    title: "{{ __('Episode Number') }}",
+                    type: "number",
+                    width: 90,
+                    align: "center"
+                },
+
+                {
+                    name: "title",
+                    title: "{{ __('Title') }}",
+                    type: "text"
+                },
+
+                {
+                    name: "air_at",
+                    title: "{{ __('Air Date') }}",
+                    type: "text",
+                    sorting: false,
+                    filtering: false
+                },
+
+                {
+                    name: "reminder_duration",
+                    title: "{{ __('Duration Between Air and Reminder') }}",
+                    type: "text",
+                    sorting: false,
+                    filtering: false
+                },
+
+                {
+                    name: "reminder_at",
+                    title: "{{ __('Reminder Date') }}",
+                    type: "text",
+                    sorting: false,
+                    filtering: false
+                },
+
+                {
+                    name: "duration",
+                    title: "{{ __('Duration and Broadcast') }}",
+                    type: "text",
+                    sorting: false,
+                    filtering: false
+                },
+
+                {
+                    name: "creator",
+                    title: "{{ __('Creator') }}",
+                    type: "text",
+                    sorting: false
+                },
+
+                {
+                    name: "status",
+                    title: "{{ __('Status') }}",
+                    type: "text",
+                    sorting: false,
+                    filtering: false
+                },
+
+                {
+                    name: "id",
+                    title: "{{ __('Actions') }}",
+                    sorting: false,
+                    filtering: false,
+                    width: 100,
+                    itemTemplate: function(value, item) {
+                        let $container = $("<div>")
+                            .addClass("btn-group matla-actions");
+                        let $toggle = $("<button>", {
+                            type: "button",
+                            class: "btn matla-action-toggle",
+                            "data-toggle": "dropdown",
+                            "aria-haspopup": true,
+                            "aria-expanded": false
+                        }).append(
+                            $("<i>").addClass("fas fa-ellipsis-h")
+                        );
+                        let $menu = $("<div>")
+                            .addClass("dropdown-menu dropdown-menu-right");
+                        // Edit Episode
+                        if (window.matlaEpisodes.permissions.edit) {
+                            let $edit = $("<a>", {
+                                    href: "javascript:void(0)",
+                                    class: "dropdown-item edit-episode",
+                                    edit_id: item.id,
+                                    "data-toggle": "modal",
+                                    "data-target": "#addEpisodeModal"
+                                })
+                                .append(
+                                    $("<i>").addClass("fas fa-edit")
+                                )
+                                .append(" {{ __('Edit') }}");
+
+                            $menu.append($edit);
+
+                        }
+                        // Delete Episode
+                        if (window.matlaEpisodes.permissions.delete) {
+                            let $delete = $("<a>", {
+                                    href: "javascript:void(0)",
+
+                                    class: item.can_delete ?
+                                        "dropdown-item delete-episode" :
+                                        "dropdown-item disabled",
+
+                                    delete_id: item.id
+                                })
+                                .append(
+                                    $("<i>").addClass("fas fa-trash")
+                                )
+                                .append(
+                                    item.can_delete ?
+                                    " {{ __('Delete') }}" :
+                                    " {{ __('Cannot delete episode with existing segments.') }}"
+                                );
+
+                            $menu.append($delete);
+
+                        }
+                        // Episode Details
+                        let detailsUrl = window.matlaEpisodes.detailsUrl.replace(
+                            "__SLUG__",
+                            encodeURIComponent(item.slug)
+                        );
+                        let $details = $("<a>", {
+                                href: detailsUrl,
+                                class: "dropdown-item"
+                            })
+                            .append(
+                                $("<i>").addClass("fas fa-eye")
+                            )
+                            .append(" {{ __('Episode Details') }}");
+                        $menu.append($details);
+                        $container.append($toggle, $menu);
+                        return $container;
+                    }
+
+                }
+
+            ]
+
+        });
+
     });
 </script>

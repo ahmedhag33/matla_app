@@ -126,6 +126,9 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
             ->middleware('check-member-permission:delete-program');
     });
     Route::prefix('episodes')->controller(EpisodeController::class)->group(function () {
+        // add route to retrieve all episodes for a given program
+        Route::get('/all/{programSlug}', 'all')->name('workspace.episode.all')
+            ->middleware('check-member-permission:view-episodes');
         // add route to handle episode step validation
         Route::post('/validate/{step}', 'step')->name('workspace.episode.step')
             ->middleware('check-member-permission:add-episodes');

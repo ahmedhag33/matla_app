@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Workspace;
 use App\Events\Workspace\EpisodeCreated;
 use App\Events\Workspace\EpisodeUpdated;
 use App\Exceptions\DatabaseException;
+use App\Helpers\WorkspaceView;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\EpisodeRequest;
 use App\Models\Episode;
@@ -19,6 +20,92 @@ class EpisodeController extends Controller
 {
     use JsonAPIMessages;
     /**
+     * Retrieve all episodes for a given program with optional filters, sorting, and pagination.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function all(Request $request)
+    {
+        $programSlug = $request->route('programSlug');
+        // Retrieve the program by its slug from the route parameter
+        $program = Program::where('slug', $programSlug)->firstOrFail();
+        // Retrieve all episodes for the program
+        $query = $program->episodes()->with('creator');
+        // Apply filters based on request parameters if provided
+        if ($request->filled('episode_number')) {
+            $query->where('episode_number', $request->input('episode_number'));
+        }
+        // Apply filter for title if provided
+        if ($request->filled('title')) {
+            $query->whereLike('title', '%' . $request->title . '%');
+        }
+        // Apply filter for creation date if provided
+        if ($request->filled('creator')) {
+            $query->whereHas('creator', function ($q) use ($request) {
+                $q->whereLike('name', '%' . $request->creator . '%');
+            });
+        }
+        // Count filtered records
+        $itemsCount = (clone $query)->count();
+        // Sorting
+        $sortableFields = [
+            'episode_number' => 'episode_number',
+            'title' => 'title',
+            'air_at' => 'air_at',
+            'reminder_at' => 'reminder_at',
+        ];
+        // Determine the sort field and order from the request parameters
+        $sortField = $request->input('sortField', 'episode_number');
+        // Determine the sort order from the request parameters
+        $sortOrder = strtolower($request->input('sortOrder', 'desc'));
+        // Validate the sort field against the allowed sortable fields
+        if (!isset($sortableFields[$sortField])) {
+            $sortField = 'episode_number';
+        }
+        // Validate the sort order
+        if (!in_array($sortOrder, ['asc', 'desc'], true)) {
+            $sortOrder = 'desc';
+        }
+        // Apply sorting to the query based on the validated sort field and order
+        $query->orderBy($sortableFields[$sortField], $sortOrder);
+        // Pagination
+        $pageIndex = max(1, (int) $request->input('pageIndex', 1));
+        // Determine the page size for pagination
+        $pageSize = min(
+            100,
+            max(1, (int) $request->input('pageSize', 10))
+        );
+        // Retrieve the paginated episodes based on the calculated page index and page size
+        $episodes = $query
+            ->skip(($pageIndex - 1) * $pageSize)
+            ->take($pageSize)
+            ->get();
+        $data = $episodes->map(function ($episode) {
+            return [
+                'id' => $episode->id,
+                'slug' => $episode->slug,
+                'episode_number' => $episode->episode_number,
+                'title' => $episode->title,
+                'air_at' => $episode->air_at_formatted ?? '-',
+                'reminder_duration' =>
+                    $episode->duration_between_air_and_reminder !== null
+                    ? $episode->duration_between_air_and_reminder
+                    . ' ' . __('Days')
+                    : '-',
+                'reminder_at' => $episode->reminder_at_formatted ?? '-',
+                'duration' => $episode->duration_to_string ?? '-',
+                'creator' => $episode->creator->name ?? '-',
+                'status' => $episode->status_formatted ?? '-',
+                'can_delete' => !WorkspaceView::check_segments_in_episode(
+                    $episode->id
+                ),
+            ];
+        });
+        //
+        return $this->returnData(['data' => $data, 'itemCount' => $itemsCount ?? 0]);
+    }
+    /**
      * Display the details of a specific episode.
      *
      * @return \Illuminate\View\View
@@ -27,13 +114,16 @@ class EpisodeController extends Controller
     {
         $episodeSlug = request()->route('episodeSlug');
         // Retrieve the episode by its slug from the route parameter
-        $episode = Episode::with(['program', 'segments' => function ($query) {
-            $query->orderBy('segment_number');
-        }])
-        ->withCount('segments')
-        ->withSum('segments', 'duration')
-        ->where('slug', $episodeSlug)
-        ->firstOrFail();
+        $episode = Episode::with([
+            'program',
+            'segments' => function ($query) {
+                $query->orderBy('segment_number');
+            }
+        ])
+            ->withCount('segments')
+            ->withSum('segments', 'duration')
+            ->where('slug', $episodeSlug)
+            ->firstOrFail();
         // Pass the episode to the view for rendering its details
         return view('workspace.episodes.details', compact('episode'));
     }
