@@ -275,7 +275,7 @@
     font-size: 12px;
     font-weight: 700;
     vertical-align: middle;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .matla-episodes-table tbody td {
@@ -284,7 +284,7 @@
     border-bottom: 0;
     vertical-align: middle;
     white-space: nowrap;
-    background: #fff
+    background: #fff;
 }
 
 .matla-episodes-table tbody tr:hover td {
@@ -472,4 +472,17 @@
         align-items: flex-start;
         flex-direction: column
     }
+}
+
+.matla-episodes-table .jsgrid-header-row>th {
+    background: var(--navy);
+    color: #fff;
+    border: 0;
+    padding: 13px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #17233C !important;
+    color: #F8FAFC !important;
 }

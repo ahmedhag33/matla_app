@@ -255,6 +255,7 @@
             pageLoading: true,
             pageSize: 10,
             pageButtonCount: 5,
+            tableClass: "table matla-episodes-table",
             controller: {
                 loadData: function(filter) {
                     return $.ajax({

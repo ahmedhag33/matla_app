@@ -71,8 +71,12 @@
                         </button>
                     @endif
                 </div>
-                <div id="episodesGrid">
+                <div class="matla-table-container">
+                    <div class="table-responsive">
+                        <div id="episodesGrid">
 
+                        </div>
+                    </div>
                 </div>
             </div>
 
