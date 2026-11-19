@@ -88,24 +88,6 @@
                                       </a>
                                   </li>
                               @endif
-                              @if (auth()->guard('member')->user()->hasPermission('view-episodes'))
-                                  <li class="nav-item">
-                                      <a href="" class="nav-link text-white">
-                                          <img src="{{ asset('public/img/podcast-solid-full.svg') }}"
-                                              alt="Program Episodes" style="width: 30px;">
-                                          <p>{{ __('Program Episodes') }}</p>
-                                      </a>
-                                  </li>
-                              @endif
-                              @if (auth()->guard('member')->user()->hasPermission('view-segments'))
-                                  <li class="nav-item">
-                                      <a href="" class="nav-link text-white">
-                                          <img src="{{ asset('public/img/object-ungroup-regular-full.svg') }}"
-                                              alt="Segments" style="width: 30px;">
-                                          <p>{{ __('Segments') }}</p>
-                                      </a>
-                                  </li>
-                              @endif
                           </ul>
                       </li>
                   @endif
