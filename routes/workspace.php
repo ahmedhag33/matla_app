@@ -10,6 +10,7 @@ use App\Http\Controllers\Workspace\InventionController;
 use App\Http\Controllers\Workspace\MemberController;
 use App\Http\Controllers\Workspace\ProgramController;
 use App\Http\Controllers\Workspace\SegmentController;
+use App\Http\Controllers\Workspace\TasksController;
 use App\Http\Controllers\Workspace\WorkspaceController;
 use Illuminate\Support\Facades\Route;
 
@@ -158,5 +159,10 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to sort a segment
         Route::post('/sort', 'sort')->name('workspace.segment.sort')
             ->middleware('check-member-permission:edit-segments');
+    });
+    Route::prefix('tasks')->controller(TasksController::class)->group(function () {
+        // add route to display the list of tasks
+        Route::get('/', 'index')->name('workspace.tasks.index')
+            ->middleware('check-member-permission:view-task');
     });
 });

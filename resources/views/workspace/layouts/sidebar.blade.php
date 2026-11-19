@@ -47,7 +47,7 @@
 
                               @if (auth()->guard('member')->user()->hasPermission('invite-members'))
                                   <li class="nav-item">
-                                      <a href="{{ route('workspace.invention.index', ['slug' => request()->route('slug')]) }}"
+                                      <a href="{{ routeWorkspace('workspace.invention.index') }}"
                                           class="nav-link text-white">
                                           <img src="{{ asset('public/img/person-circle-plus-solid-full.svg') }}"
                                               alt="Invite Members" style="width: 30px;">
@@ -81,13 +81,15 @@
                           <ul class="nav nav-treeview">
                               @if (auth()->guard('member')->user()->hasPermission('view-program'))
                                   <li class="nav-item">
-                                      <a href="{{ route('workspace.program.index', ['slug' => request()->route('slug')]) }}" class="nav-link text-white">
+                                      <a href="{{ routeWorkspace('workspace.program.index') }}"
+                                          class="nav-link text-white">
                                           <img src="{{ asset('public/img/chromecast-brands-solid-full.svg') }}"
                                               alt="Programs" style="width: 30px;">
                                           <p>{{ __('Programs') }}</p>
                                       </a>
                                   </li>
                               @endif
+
                           </ul>
                       </li>
                   @endif
@@ -104,7 +106,8 @@
                           <ul class="nav nav-treeview">
                               @if (auth()->guard('member')->user()->hasPermission('view-task'))
                                   <li class="nav-item">
-                                      <a href="" class="nav-link text-white">
+                                      <a href="{{ routeWorkspace('workspace.tasks.index') }}"
+                                          class="nav-link text-white">
                                           <img src="{{ asset('public/img/table-list-solid-full.svg') }}" alt="Programs"
                                               style="width: 30px;">
                                           <p>{{ __('Tasks') }}</p>
@@ -137,8 +140,8 @@
                               @if (auth()->guard('member')->user()->hasPermission('view-news'))
                                   <li class="nav-item">
                                       <a href="" class="nav-link text-white">
-                                          <img src="{{ asset('public/img/newspaper-solid-full.svg') }}"
-                                              alt="News" style="width: 30px;">
+                                          <img src="{{ asset('public/img/newspaper-solid-full.svg') }}" alt="News"
+                                              style="width: 30px;">
                                           <p>{{ __('News') }}</p>
                                       </a>
                                   </li>
