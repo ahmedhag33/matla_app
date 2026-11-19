@@ -1369,5 +1369,8 @@
     "Segment deleted successfully": "تم حذف الفقرة بنجاح.",
     "Segment sorted successfully": "تم ترتيب الفقرة بنجاح.",
     "Cannot delete program with existing episodes.": "لا يمكن حذف البرنامج إذا كان يحتوي على حلقات موجودة.",
-    "Cannot delete episode with existing segments.": "لا يمكن حذف الحلقة إذا كانت تحتوي على فقرات موجودة."
+    "Cannot delete episode with existing segments.": "لا يمكن حذف الحلقة إذا كانت تحتوي على فقرات موجودة.",
+    "No Tasks Found":"لم يتم العثور على مهام",
+    "Start by adding the first task.": "ابدأ بإضافة المهمة الأولى.",
+    "Add Task": "إضافة مهمة"
 }
