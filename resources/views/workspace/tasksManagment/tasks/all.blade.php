@@ -6,7 +6,7 @@
                        <div class="card-header">
                            <h3 class="card-title">
                                <button type="button" class="btn btn-matla" data-toggle="modal"
-                                   data-target="#add-invention">
+                                   data-target="#add-task">
                                    <i class="fas fa-plus"></i>
                                    {{ __('Add Task') }}
                                </button>

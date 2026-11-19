@@ -19,4 +19,5 @@
         </div>
         @include('workspace.tasksManagment.tasks.all')
     </div> <!-- End content-wrapper -->
+    @include('workspace.tasksManagment.tasks.create')
 @endsection
