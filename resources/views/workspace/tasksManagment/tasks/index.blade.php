@@ -1,6 +1,7 @@
 @extends('workspace.layouts.app')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/episode.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/task.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">

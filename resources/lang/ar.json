@@ -1376,5 +1376,7 @@
     "Task Context": "سياق المهمة",
     "Content Type": "نوع المحتوى",
     "Content Details": "تفاصيل المحتوى",
-    "Date And Task": "الأسناذ والموعد"
+    "Date And Task": "الأسناذ والموعد",
+    "Select Program First": "يجب اختيار البرنامج اولا",
+    "Select Program": "اختر البرنامج"
 }
