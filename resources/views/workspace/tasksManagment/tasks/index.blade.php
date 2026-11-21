@@ -21,3 +21,10 @@
     </div> <!-- End content-wrapper -->
     @include('workspace.tasksManagment.tasks.create')
 @endsection
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'));
+        });
+    </script>
+@endsection

@@ -1372,5 +1372,9 @@
     "Cannot delete episode with existing segments.": "لا يمكن حذف الحلقة إذا كانت تحتوي على فقرات موجودة.",
     "No Tasks Found":"لم يتم العثور على مهام",
     "Start by adding the first task.": "ابدأ بإضافة المهمة الأولى.",
-    "Add Task": "إضافة مهمة"
+    "Add Task": "إضافة مهمة",
+    "Task Context": "سياق المهمة",
+    "Content Type": "نوع المحتوى",
+    "Content Details": "تفاصيل المحتوى",
+    "Date And Task": "الأسناذ والموعد"
 }
