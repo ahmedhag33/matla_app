@@ -1398,5 +1398,9 @@
     "Reference Links or Sources": "روابط أو مصادر مرجعية",
     "Ready Script": "صياغة خبرية جاهزة للبث",
     "Documented Sources": "مصادر موثقة",
-    "Supporting Images": "صور أو لقطات داعمة"
+    "Supporting Images": "صور أو لقطات داعمة",
+    "Task Date": "موعد التسليم",
+    "Task Time": "وقت التسليم",
+    "Requires Review Before Approval": "يتطلب المراجعة قبل الموافقة",
+    "Notify Assignee When Assigned": "إشعار المسؤول عند التعيين"
 }

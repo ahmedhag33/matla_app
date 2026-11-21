@@ -28,5 +28,14 @@
             window.stepper = new Stepper(document.querySelector('.bs-stepper'));
         });
         $('#description').summernote();
+         $('#air_date').datetimepicker({
+            format: 'dddd، D MMMM YYYY',
+            locale: '{{ app()->getLocale() }}',
+            minDate: moment(),
+        });
+        $('#air_time').datetimepicker({
+            format: 'h:mm A',
+            locale: '{{ app()->getLocale() }}',
+        });
     </script>
 @endsection
