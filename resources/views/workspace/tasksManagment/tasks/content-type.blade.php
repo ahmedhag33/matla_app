@@ -6,7 +6,7 @@
 
     <div class="content-type-section" dir="rtl">
 
-        <h4 class="content-type-title">اختر نوع المحتوى</h4>
+        <h4 class="content-type-title">{{ __('Select Content Type') }}</h4>
 
         <div class="content-type-options">
 
