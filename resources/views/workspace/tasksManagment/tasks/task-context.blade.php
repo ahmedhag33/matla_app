@@ -10,7 +10,7 @@
             <!-- البرنامج -->
             <div class="form-group">
                 <label class="field-label">
-                    البرنامج <span class="required">*</span>
+                    {{ __('Program') }} <span class="required">*</span>
                 </label>
 
                 <div class="select-wrapper">
@@ -27,7 +27,7 @@
             <!-- الحلقة -->
             <div class="form-group">
                 <label class="field-label">
-                    الحلقة <span class="required">*</span>
+                    {{ __('Episode') }} <span class="required">*</span>
                 </label>
 
                 <div class="select-wrapper">
@@ -59,8 +59,8 @@
                     <span class="scope-icon">▷</span>
 
                     <span class="scope-content">
-                        <strong>الحلقة بالكامل</strong>
-                        <small>المهمة تخص محتوى الحلقة كاملة.</small>
+                        <strong>{{ __('Entire Episode') }}</strong>
+                        <small>{{ __('The task pertains to the entire episode content.') }}</small>
                     </span>
 
                 </label>
@@ -75,8 +75,8 @@
                     <span class="scope-icon">☷</span>
 
                     <span class="scope-content">
-                        <strong>فقرة محددة</strong>
-                        <small>ربط المهمة بفقرة معينة من الحلقة.</small>
+                        <strong>{{ __('Specific Segment') }}</strong>
+                        <small>{{ __('Link the task to a specific segment of the episode.') }}</small>
                     </span>
 
                 </label>
@@ -89,7 +89,7 @@
         <div class="form-group segment-field" style="display: none;">
 
             <label class="field-label">
-                الفقرة <span class="optional">(اختياري)</span>
+                {{ __('Segment') }} <span class="optional">({{ __('Optional') }})</span>
             </label>
 
             <div class="select-wrapper">

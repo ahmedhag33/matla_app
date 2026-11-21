@@ -31,6 +31,7 @@
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jquery-ui/jquery-ui.css') }}">
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jsgrid/jsgrid.min.css') }}">
  <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/jsgrid/jsgrid-theme.min.css') }}">
+ <link rel="stylesheet" href="{{ asset('public/dashboard/plugins/summernote/summernote-bs4.min.css') }}">
  <!-- Theme style -->
  @if (getCurrentLanguage() == 'ar')
      <link rel="stylesheet" href="{{ asset('public/dashboard/dist/css/admintle.rtl.min.css') }}">

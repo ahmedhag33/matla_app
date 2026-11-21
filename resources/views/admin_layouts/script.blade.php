@@ -35,6 +35,7 @@
  <script src="{{ asset('public/dashboard/plugins/select2/js/select2.full.min.js') }}"></script>
  <script src="{{ asset('public/dashboard/plugins/jquery-ui/jquery-ui.js') }}"></script>
  <script src="{{ asset('public/dashboard/plugins/jsgrid/jsgrid.min.js') }}"></script>
+ <script src="{{ asset('public/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
  <script>
      toastr.options = {
          "closeButton": true,

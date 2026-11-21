@@ -1385,5 +1385,18 @@
     "Topic Description": "إعداد موضوع متكامل مع المحاور والضيوف.",
     "Research": "بحث",
     "Research Description": "جمع وتحليل معلومات حول موضوع محدد.",
-    "Select Content Type": "اختر نوع المحتوى"
+    "Select Content Type": "اختر نوع المحتوى",
+    "Entire Episode": "الحلقة بالكامل",
+    "The task pertains to the entire episode content.": "المهمة تخص محتوى الحلقة كاملة.",
+    "Specific Segment": "فقرة محددة",
+    "Link the task to a specific segment of the episode.": "ربط المهمة بفقرة معينة من الحلقة.",
+    "Segment": "الفقرة",
+    "Optional": "اختياري",
+    "Task Title": "عنوان المهمة",
+    "Task Details": "تفاصيل المهمة",
+    "Required Requirements": "المتطلبات المطلوبة",
+    "Reference Links or Sources": "روابط أو مصادر مرجعية",
+    "Ready Script": "صياغة خبرية جاهزة للبث",
+    "Documented Sources": "مصادر موثقة",
+    "Supporting Images": "صور أو لقطات داعمة"
 }
