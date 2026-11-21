@@ -1378,5 +1378,11 @@
     "Content Details": "تفاصيل المحتوى",
     "Date And Task": "الأسناذ والموعد",
     "Select Program First": "يجب اختيار البرنامج اولا",
-    "Select Program": "اختر البرنامج"
+    "Select Program": "اختر البرنامج",
+    "New":"خبر",
+    "New Description": "إعداد خبر صحفي أو تقرير إخباري.",
+    "Topic": "موضوع",
+    "Topic Description": "إعداد موضوع متكامل مع المحاور والضيوف.",
+    "Research": "بحث",
+    "Research Description": "جمع وتحليل معلومات حول موضوع محدد."
 }
