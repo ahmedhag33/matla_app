@@ -19,9 +19,8 @@
                     <span class="required">*</span>
                 </label>
 
-                <select name="assigned_to" class="assignment-select">
+                <select name="assigned_to" class="assignment-select" disabled>
                     <option value="">{{ __('members') }}</option>
-                    <option value="1">محمد علي</option>
                 </select>
 
             </div>
