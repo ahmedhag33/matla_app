@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Episode;
 use App\Models\Member;
 use App\Models\Program;
+use App\Models\Segments;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
 use Illuminate\Http\Request;
@@ -60,6 +61,34 @@ class TasksController extends Controller
             return $this->returnData([
                 'episodes' => $episodes ?? [],
                 'members' => $members ?? []
+            ]);
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred. Please try again.'));
+        }
+    }
+    /**
+     * Search for segments based on the selected episode.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws DatabaseException
+     * @throws \Exception
+     */
+    public function searchSegments(Request $request)
+    {
+        try {
+            $episodeId = $request->input('episode_id');
+            // Retrieve segments for the selected episode.
+            $segments = Segments::where('episode_id', $episodeId)->get();
+            // Map segments to include only necessary data for the response.
+            $segments = $segments->map(function ($segment) {
+                return [
+                    'id' => $segment->id,
+                    'name' =>__('Segment Number') .' '.$segment->segment_number . ' ' . $segment->name,
+                ];
+            });
+            return $this->returnData([
+                'segments' => $segments ?? []
             ]);
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred. Please try again.'));

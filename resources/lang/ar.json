@@ -1411,5 +1411,7 @@
     "Urgent":"عاجلة",
     "Select Episode": "اختر الحلقة",
     "Number Episode": " الحلقة رقم",
-    "Select Member": "اختر العضو"
+    "Select Member": "اختر العضو",
+    "Select Segment": "اختر الفقرة",
+    "Segment Number": "رقم الفقرة"
 }

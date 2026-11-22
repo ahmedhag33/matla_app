@@ -167,5 +167,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to search for tasks based on the selected program
         Route::post('/search', 'search')->name('workspace.episode.search')
             ->middleware('check-member-permission:view-task');
+        // add route to search for segments based on the selected episode
+        Route::post('/search-segments', 'searchSegments')->name('workspace.episode.search-segments')
+            ->middleware('check-member-permission:view-task');
     });
 });

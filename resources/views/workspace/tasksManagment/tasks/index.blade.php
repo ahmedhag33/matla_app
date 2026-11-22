@@ -76,6 +76,44 @@
                     }
                 });
             });
+            $('select[name="episode_id"]').change(function() {
+                var episodeId = $(this).val();
+                // Enable segment select and fetch segments based on episodeId
+                $.ajax({
+                    url: "{{ routeWorkspace('workspace.episode.search-segments') }}",
+                    type: 'POST',
+                    data: {
+                        episode_id: episodeId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        var segmentSelect = $('select[name="segment_id"]');
+                        $('option', 'select[name="segment_id"]').text(
+                            "{{ __('Select Segment') }}");
+                        segmentSelect.prop('disabled', false);
+                        segmentSelect.empty();
+                        segmentSelect.append(
+                            '<option value="">{{ __('Select Segment') }}</option>');
+                        $.each(data.segments, function(key, value) {
+                            segmentSelect.append('<option value="' + value.id +
+                                '">' +
+                                value.name + '</option>');
+                        });
+                    }
+                });
+            });
+            $(document).on('change', 'input[name="task_scope"]', function() {
+                let isSegment = $(this).val() === 'segment';
+                $('.segment-field').toggle(isSegment);
+                $('.segment-field select[name="segment_id"]')
+                    .prop('disabled', !isSegment);
+            });
+            // تنفيذ الحالة الافتراضية عند فتح الصفحة
+            let isSegmentSelected = $('input[name="task_scope"]:checked').val() === 'segment';
+            $('.segment-field').toggle(isSegmentSelected);
+            $('.segment-field select[name="segment_id"]')
+                .prop('disabled', !isSegmentSelected);
+            $('.segment-field select[name="segment_id"]').empty();
         });
     </script>
 @endsection
