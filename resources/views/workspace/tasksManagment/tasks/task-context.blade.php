@@ -14,7 +14,7 @@
                 </label>
 
                 <div class="select-wrapper">
-                    <select name="program_id" class="task-select" required>
+                    <select name="program_id" id="program_id" class="task-select" required>
                         <option value="">{{ __('Select Program') }}</option>
                         @foreach ($programs as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>

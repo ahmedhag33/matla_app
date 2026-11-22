@@ -27,15 +27,55 @@
         document.addEventListener('DOMContentLoaded', function() {
             window.stepper = new Stepper(document.querySelector('.bs-stepper'));
         });
-        $('#description').summernote();
-         $('#air_date').datetimepicker({
-            format: 'dddd، D MMMM YYYY',
-            locale: '{{ app()->getLocale() }}',
-            minDate: moment(),
-        });
-        $('#air_time').datetimepicker({
-            format: 'h:mm A',
-            locale: '{{ app()->getLocale() }}',
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#description').summernote();
+            $('#air_date').datetimepicker({
+                format: 'dddd، D MMMM YYYY',
+                locale: '{{ app()->getLocale() }}',
+                minDate: moment(),
+            });
+            $('#air_time').datetimepicker({
+                format: 'h:mm A',
+                locale: '{{ app()->getLocale() }}',
+            });
+            $('select[name="program_id"]').change(function() {
+                var programId = $(this).val();
+                // Enable episode select and fetch episodes based on programId
+                $.ajax({
+                    url: "{{ routeWorkspace('workspace.episode.search') }}",
+                    type: 'POST',
+                    data: {
+                        program_id: programId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        var episodeSelect = $('select[name="episode_id"]');
+                        $('option', 'select[name="episode_id"]').text(
+                            "{{ __('Select Episode') }}");
+                        episodeSelect.prop('disabled', false);
+                        episodeSelect.empty();
+                        episodeSelect.append(
+                            '<option value="">{{ __('Select Episode') }}</option>');
+                        $.each(data.episodes, function(key, value) {
+                            episodeSelect.append('<option value="' + value.id +
+                                '">' +
+                                value.title + '</option>');
+                        });
+                        var memberSelect = $('select[name="assigned_to"]');
+                        memberSelect.prop('disabled', false);
+                        memberSelect.empty();
+                        memberSelect.append(
+                            '<option value="">{{ __('Select Member') }}</option>');
+                        $.each(data.members, function(key, value) {
+                            memberSelect.append('<option value="' + value.id +
+                                '">' +
+                                value.name + '</option>');
+                        });
+                    }
+                });
+            });
         });
     </script>
 @endsection

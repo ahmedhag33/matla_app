@@ -1408,5 +1408,8 @@
     "Assigned To":"مخصص لـ ",
     "Priority":"الأولوية",
     "High":"عالية",
-    "Urgent":"عاجلة"
+    "Urgent":"عاجلة",
+    "Select Episode": "اختر الحلقة",
+    "Number Episode": " الحلقة رقم",
+    "Select Member": "اختر العضو"
 }
