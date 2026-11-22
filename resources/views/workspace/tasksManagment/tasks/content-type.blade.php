@@ -78,10 +78,15 @@
         </div>
 
     </div>
-    <a class="btn btn-matla btn-next-step" href="javascript:void(0);" onclick="stepper.previous();">
-        {{ __('Previous') }}
-    </a>
-    <a class="btn btn-matla btn-next-step" href="javascript:void(0);" onclick="stepper.next();">
-        {{ __('Next') }}
-    </a>
+    <div class="step-navigation">
+
+        <a class="btn btn-matla btn-step-previous" href="javascript:void(0);" onclick="stepper.previous();">
+            <span>{{ __('Previous') }}</span>
+        </a>
+
+        <a class="btn btn-matla btn-step-next" href="javascript:void(0);" onclick="stepper.next();">
+            <span>{{ __('Next') }}</span>
+        </a>
+
+    </div>
 </div>

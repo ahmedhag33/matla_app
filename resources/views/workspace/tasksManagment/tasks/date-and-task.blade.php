@@ -20,7 +20,7 @@
                 </label>
 
                 <select name="assigned_to" class="assignment-select">
-                    <option value="">{{ __('Select User') }}</option>
+                    <option value="">{{ __('members') }}</option>
                     <option value="1">محمد علي</option>
                 </select>
 

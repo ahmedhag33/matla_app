@@ -104,7 +104,9 @@
 
     </div>
 
-    <a class="btn btn-matla btn-next-step" href="javascript:void(0);" onclick="stepper.next();">
-        {{ __('Next') }}
-    </a>
+    <div class="step-navigation">
+        <a class="btn btn-matla btn-step-next" href="javascript:void(0);" onclick="stepper.next();">
+            <span>{{ __('Next') }}</span>
+        </a>
+    </div>
 </div>

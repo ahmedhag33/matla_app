@@ -1402,5 +1402,11 @@
     "Task Date": "موعد التسليم",
     "Task Time": "وقت التسليم",
     "Requires Review Before Approval": "يتطلب المراجعة قبل الموافقة",
-    "Notify Assignee When Assigned": "إشعار المسؤول عند التعيين"
+    "Notify Assignee When Assigned": "إشعار المسؤول عند التعيين",
+    "Program":"البرنامج",
+    "Task Assignment":"تعيين المهمة",
+    "Assigned To":"مخصص لـ ",
+    "Priority":"الأولوية",
+    "High":"عالية",
+    "Urgent":"عاجلة"
 }
