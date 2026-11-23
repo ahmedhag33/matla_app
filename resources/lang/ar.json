@@ -1413,5 +1413,9 @@
     "Number Episode": " الحلقة رقم",
     "Select Member": "اختر العضو",
     "Select Segment": "اختر الفقرة",
-    "Segment Number": "رقم الفقرة"
+    "Segment Number": "رقم الفقرة",
+    "New Task Created": "تم إنشاء مهمة جديدة",
+    "Task Updated": "تم تحديث المهمة",
+    "Task Deleted": "تم حذف المهمة",
+    "Low": "منخفض"
 }
