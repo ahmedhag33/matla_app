@@ -73,7 +73,7 @@
                 <span>{{ __('Previous') }}</span>
             </a>
 
-            <a class="btn btn-matla btn-step-next" href="javascript:void(0);" onclick="stepper.next();">
+            <a class="btn btn-matla btn-next-step" data-step="3">
                 <span>{{ __('Next') }}</span>
             </a>
 

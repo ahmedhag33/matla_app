@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Workspace;
 
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Workspace\TaskRequest;
 use App\Models\Episode;
 use App\Models\Member;
 use App\Models\Program;
 use App\Models\Segments;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -54,7 +56,7 @@ class TasksController extends Controller
             $members = $members->map(function ($member) {
                 return [
                     'id' => $member->id,
-                    'name' => $member->name.'-'.$member->role->name ?? '',
+                    'name' => $member->name . '-' . $member->role->name ?? '',
                 ];
             });
             // Return the episodes data if found.
@@ -84,7 +86,7 @@ class TasksController extends Controller
             $segments = $segments->map(function ($segment) {
                 return [
                     'id' => $segment->id,
-                    'name' =>__('Segment Number') .' '.$segment->segment_number . ' ' . $segment->name,
+                    'name' => __('Segment Number') . ' ' . $segment->segment_number . ' ' . $segment->name,
                 ];
             });
             return $this->returnData([
@@ -92,6 +94,24 @@ class TasksController extends Controller
             ]);
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred. Please try again.'));
+        }
+    }
+    /**
+     * Handle the step request for a task.
+     *
+     * @param TaskRequest $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws HttpResponseException
+     * @throws \Exception
+     */
+    public function step(TaskRequest $request)
+    {
+        try {
+            return $this->returnData(['step' => $request->route('taskStep'), 'data' => $request->validated()]);
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
         }
     }
 }

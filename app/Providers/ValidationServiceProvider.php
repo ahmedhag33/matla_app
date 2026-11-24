@@ -74,5 +74,22 @@ class ValidationServiceProvider extends ServiceProvider
             // Check if adding the new segment exceeds the episode duration
             return ($totalSegmentDuration + $value) < $episodeDuration;
         });
+        // Validate that the due date is in the future
+        Validator::extend('due_date_in_future', function ($attribute, $value, $parameters, $validator) {
+            // Convert the Arabic date to a Carbon instance
+            $date = Carbon::createFromLocaleFormat(
+                'l، j F Y',
+                'ar',
+                $value
+            );
+            // Check if the date was successfully parsed
+            return $date && $date->startOfDay()->gte(now()->startOfDay());
+        });
+        // Validate that the due time is in a valid format
+        Validator::extend('valid_due_time', function ($attribute, $value, $parameters, $validator) {
+            $time = Carbon::createFromFormat('h:i A', $value);
+            // Check if the time was successfully parsed
+            return $time !== false;
+        });
     }
 }

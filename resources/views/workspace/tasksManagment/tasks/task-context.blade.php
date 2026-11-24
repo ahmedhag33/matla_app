@@ -21,6 +21,7 @@
                         @endforeach
                     </select>
                     <span class="field-icon"><i class="icon-arrow-down"></i></span>
+                    <span class="text-danger" data-error="program_id"></span>
                 </div>
             </div>
 
@@ -35,6 +36,7 @@
                         <option value="">{{ __('Select Program First') }}</option>
                     </select>
                     <span class="field-icon">▦</span>
+                    <span class="text-danger" data-error="episode_id"></span>
                 </div>
             </div>
 
@@ -44,7 +46,7 @@
         <div class="form-group">
 
             <label class="field-label">
-               {{ __('Task Scope') }} <span class="required">*</span>
+                {{ __('Task Scope') }} <span class="required">*</span>
             </label>
 
             <div class="scope-options">
@@ -80,7 +82,7 @@
                     </span>
 
                 </label>
-
+                <span class="text-danger" data-error="task_context"></span>
             </div>
 
         </div>
@@ -96,16 +98,15 @@
                 <select name="segment_id" class="task-select" disabled>
                     <option value="">{{ __('Select Segment') }}</option>
                 </select>
-
                 <span class="field-icon">☷</span>
+                <span class="text-danger" data-error="segment_id"></span>
             </div>
-
         </div>
 
     </div>
 
     <div class="step-navigation">
-        <a class="btn btn-matla btn-step-next" href="javascript:void(0);" onclick="stepper.next();">
+        <a class="btn btn-matla btn-next-step" data-step="1">
             <span>{{ __('Next') }}</span>
         </a>
     </div>

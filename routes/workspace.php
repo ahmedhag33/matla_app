@@ -170,5 +170,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to search for segments based on the selected episode
         Route::post('/search-segments', 'searchSegments')->name('workspace.episode.search-segments')
             ->middleware('check-member-permission:view-task');
+        // add route to handle task step validation
+        Route::post('/validate/{taskStep}', 'step')->name('workspace.tasks.step')
+            ->middleware('check-member-permission:add-task');
     });
 });
