@@ -1417,5 +1417,7 @@
     "New Task Created": "تم إنشاء مهمة جديدة",
     "Task Updated": "تم تحديث المهمة",
     "Task Deleted": "تم حذف المهمة",
-    "Low": "منخفض"
+    "Low": "منخفض",
+    "Task Scope": "نطاق المهمة",
+    "Episode": "الحلقة"
 }

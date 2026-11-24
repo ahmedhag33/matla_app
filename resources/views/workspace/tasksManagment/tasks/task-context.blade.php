@@ -44,7 +44,7 @@
         <div class="form-group">
 
             <label class="field-label">
-                نطاق المهمة <span class="required">*</span>
+               {{ __('Task Scope') }} <span class="required">*</span>
             </label>
 
             <div class="scope-options">
@@ -52,7 +52,7 @@
                 <!-- الحلقة بالكامل -->
                 <label class="scope-card active">
 
-                    <input type="radio" name="task_scope" value="episode" checked>
+                    <input type="radio" name="task_context" value="episode" checked>
 
                     <span class="radio-circle"></span>
 
@@ -68,7 +68,7 @@
                 <!-- فقرة محددة -->
                 <label class="scope-card">
 
-                    <input type="radio" name="task_scope" value="segment">
+                    <input type="radio" name="task_context" value="segment">
 
                     <span class="radio-circle"></span>
 

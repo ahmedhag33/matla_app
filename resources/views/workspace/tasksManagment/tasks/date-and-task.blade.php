@@ -19,7 +19,7 @@
                     <span class="required">*</span>
                 </label>
 
-                <select name="assigned_to" class="assignment-select" disabled>
+                <select name="assigned_id" class="assignment-select" disabled>
                     <option value="">{{ __('members') }}</option>
                 </select>
 
@@ -69,16 +69,16 @@
                     {{ __('Task Date') }}
                 </label>
 
-                <div class="input-group date" id="air_date" data-target-input="nearest">
-                    <input type="text" id="episodeDateInput" name="air_date" class="form-control datetimepicker-input"
-                        data-target="#air_date" />
+                <div class="input-group date" id="due_date" data-target-input="nearest">
+                    <input type="text" id="episodeDateInput" name="due_date" class="form-control datetimepicker-input"
+                        data-target="#due_date" />
 
-                    <div class="input-group-append" data-target="#air_date" data-toggle="datetimepicker">
+                    <div class="input-group-append" data-target="#due_date" data-toggle="datetimepicker">
                         <div class="input-group-text">
                             <i class="fa fa-calendar"></i>
                         </div>
                     </div>
-                    <span class="text-danger" data-error="air_date"></span>
+                    <span class="text-danger" data-error="due_date"></span>
                 </div>
             </div>
 
@@ -89,16 +89,16 @@
                     <span class="text-muted">*</span>
                 </label>
 
-                <div class="input-group date" id="air_time" data-target-input="nearest">
-                    <input type="text" id="episodeTimeInput" name="air_time" class="form-control datetimepicker-input"
-                        data-target="#air_time" />
+                <div class="input-group date" id="due_time" data-target-input="nearest">
+                    <input type="text" id="episodeTimeInput" name="due_time" class="form-control datetimepicker-input"
+                        data-target="#due_time" />
 
-                    <div class="input-group-append" data-target="#air_time" data-toggle="datetimepicker">
+                    <div class="input-group-append" data-target="#due_time" data-toggle="datetimepicker">
                         <div class="input-group-text">
                             <i class="far fa-clock"></i>
                         </div>
                     </div>
-                    <span class="text-danger" data-error="air_time"></span>
+                    <span class="text-danger" data-error="due_time"></span>
                 </div>
             </div>
 

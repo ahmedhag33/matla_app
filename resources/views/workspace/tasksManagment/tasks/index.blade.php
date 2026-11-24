@@ -31,12 +31,12 @@
     <script>
         $(document).ready(function() {
             $('#description').summernote();
-            $('#air_date').datetimepicker({
+            $('#due_date').datetimepicker({
                 format: 'dddd، D MMMM YYYY',
                 locale: '{{ app()->getLocale() }}',
                 minDate: moment(),
             });
-            $('#air_time').datetimepicker({
+            $('#due_time').datetimepicker({
                 format: 'h:mm A',
                 locale: '{{ app()->getLocale() }}',
             });
@@ -63,7 +63,7 @@
                                 '">' +
                                 value.title + '</option>');
                         });
-                        var memberSelect = $('select[name="assigned_to"]');
+                        var memberSelect = $('select[name="assigned_id"]');
                         memberSelect.prop('disabled', false);
                         memberSelect.empty();
                         memberSelect.append(
@@ -102,14 +102,14 @@
                     }
                 });
             });
-            $(document).on('change', 'input[name="task_scope"]', function() {
+            $(document).on('change', 'input[name="task_context"]', function() {
                 let isSegment = $(this).val() === 'segment';
                 $('.segment-field').toggle(isSegment);
                 $('.segment-field select[name="segment_id"]')
                     .prop('disabled', !isSegment);
             });
             // تنفيذ الحالة الافتراضية عند فتح الصفحة
-            let isSegmentSelected = $('input[name="task_scope"]:checked').val() === 'segment';
+            let isSegmentSelected = $('input[name="task_context"]:checked').val() === 'segment';
             $('.segment-field').toggle(isSegmentSelected);
             $('.segment-field select[name="segment_id"]')
                 .prop('disabled', !isSegmentSelected);
