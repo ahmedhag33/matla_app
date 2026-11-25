@@ -486,3 +486,30 @@
     background-color: #17233C !important;
     color: #F8FAFC !important;
 }
+
+.matla-episodes-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+}
+
+.matla-episodes-table th,
+.matla-episodes-table td {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    vertical-align: middle !important;
+    text-align: center;
+    padding: 12px 8px !important;
+    line-height: 1.7;
+}
+
+.matla-episodes-table th {
+    font-weight: 700;
+    white-space: normal !important;
+}
+
+.jsgrid-grid-body,
+.jsgrid-grid-header {
+    width: 100%;
+}

@@ -39,61 +39,74 @@ class TasksController extends Controller
     {
         try {
             $query = Tasks::with([
-                'episode' => function ($query) {
-                    $query->with('program');
-                },
+                'episode.program',
                 'segment',
-                'member'
+                'assignee'
             ]);
+            // Count the total number of items before pagination.
             $itemsCount = (clone $query)->count();
-            // Define the fields that can be used for sorting the tasks list.
+            // Define the fields that can be used for sorting.
             $sortableFields = [
                 'title' => 'title',
             ];
-            // Determine the sort field from the request parameters
+            // Get the sort field from the request, defaulting to 'title'.
             $sortField = $request->input('sortField', 'title');
-            // Determine the sort order from the request parameters
+            // Validate the sort field against the allowed sortable fields.
+            if (!isset($sortableFields[$sortField])) {
+                $sortField = 'title';
+            }
+            // Get the sort order from the request, defaulting to 'desc'.
             $sortOrder = strtolower($request->input('sortOrder', 'desc'));
-            // Validate the sort order
+            // Validate the sort order.
             if (!in_array($sortOrder, ['asc', 'desc'], true)) {
                 $sortOrder = 'desc';
             }
-            // Apply sorting to the query based on the validated sort field and order
+            // Apply the sorting to the query.
             $query->orderBy($sortableFields[$sortField], $sortOrder);
-            // Pagination
+            // Get the current page index from the request, defaulting to 1.
             $pageIndex = max(1, (int) $request->input('pageIndex', 1));
-            // Determine the page size for pagination
-            $pageSize = min(
-                100,
-                max(1, (int) $request->input('pageSize', 10))
-            );
-            // Retrieve the paginated episodes based on the calculated page index and page size
+            // Get the page size from the request, defaulting to 10 and limiting to 100.
+            $pageSize = min(100, max(1, (int) $request->input('pageSize', 10)));
+            // Retrieve the tasks for the current page with the specified page size.
             $tasks = $query
                 ->skip(($pageIndex - 1) * $pageSize)
                 ->take($pageSize)
                 ->get();
-            // Map the tasks to include only necessary data for the response.
+            // Map the tasks to the desired data structure.
             $data = $tasks->map(function ($task) {
                 return [
                     'id' => $task->id,
                     'content' => $task->content_string ?? '',
-                    'title' => $task->title,
-                    'episode' => $task->episode->title.'-'.$task->episode->program->name,
-                    'segment' => __('Segment Number') . ' ' . $task->segment->segment_number.'-'.$task->segment->name ?? '',
-                    'member' => $task->member->name ?? '',
+                    'title' => $task->title ?? '',
+                    'episode' => $task->episode
+                        ? $task->episode->title . ' - ' . ($task->episode->program->name ?? '')
+                        : '',
+                    'segment' => $task->segment
+                        ? __('Segment Number') . ' ' .
+                        $task->segment->segment_number . ' - ' .
+                        $task->segment->name
+                        : '',
+                    'member' => $task->assignee->name ?? '',
                     'due_at' => $task->due_at_formatted ?? '',
                     'completed_at' => $task->completed_at_formatted ?? '',
                     'status' => $task->status_formatted ?? '',
-                    'priority' => $task->priority_formatted ?? ''
+                    'priority' => $task->priority_formatted ?? '',
                 ];
             });
-            // Return the mapped tasks data along with the total items count.
+
             return $this->returnData([
-                'data' => $data ?? [],
+                'data' => $data,
                 'itemsCount' => $itemsCount,
             ]);
+
         } catch (\Exception $e) {
-            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred. Please try again.'));
+
+            report($e);
+
+            return $this->errorException(
+                HttpStatusCode::INTERNAL_SERVER_ERROR->value,
+                __('An error occurred. Please try again.')
+            );
         }
     }
     /**
@@ -180,6 +193,59 @@ class TasksController extends Controller
             return $e->getResponse();
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
+        }
+    }
+    public function create(TaskRequest $request)
+    {
+        try {
+            runTransaction(function () use ($request) {
+                $episodeId = $request->input('episode_id');
+                // Retrieve the task context from the request.
+                $task_context = $request->input('task_context');
+                // Retrieve the segment ID from the request.
+                $segmentId = ($task_context == 'segment') ? $request->input('segment_id') : null;
+                // Retrieve the content type from the request.
+                $content_type = $request->input('content_type');
+                // Retrieve the description from the request.
+                $description = $request->input('description');
+                // Retrieve the requirements from the request.
+                $requirements = $request->input('requirements', []);
+                // Retrieve the reference URL from the request.
+                $reference_url = $request->input('reference_url');
+                // Retrieve the due date from the request.
+                $due_date = $request->input('due_date');
+                // Retrieve the due time from the request.
+                $due_time = $request->input('due_time');
+                // Convert the air date and air time to the database format.
+                $due_at = convertArabicDateTimeToDatabase($due_date . ' ' . $due_time);
+                // Retrieve the assigned ID from the request.
+                $assigned_id = $request->input('assigned_id');
+                // Retrieve the priority from the request.
+                $priority = $request->input('priority');
+                // create the task with the retrieved data.
+                Tasks::create([
+                    'episode_id' => $episodeId,
+                    'task_context' => $task_context,
+                    'segment_id' => $segmentId,
+                    'content_type' => $content_type,
+                    'content_id' => $request->input('content_id'),
+                    'title' => $request->input('title'),
+                    'description' => $description,
+                    'requirements' => $requirements,
+                    'source' => $reference_url,
+                    'assigned_id' => $assigned_id,
+                    'priority' => $priority,
+                    'due_at' => $due_at,
+                    'completed_at' => $request->input('completed_at'),
+                ]);
+            });
+            session()->flash('success-message-create-task', __('Task created successfully'));
+            // Return a success response to the client.
+            return $this->returnData(['message' => __('Task created successfully')]);
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
 }

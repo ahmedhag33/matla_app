@@ -61,6 +61,10 @@
                                 @include('workspace.tasksManagment.tasks.date-and-task')
                             </div>
                         </form>
+                        <div id="add-task-loading" class="spinner-grow text-dark" role="status"
+                            style="display: none;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
                 </div>
             </div>

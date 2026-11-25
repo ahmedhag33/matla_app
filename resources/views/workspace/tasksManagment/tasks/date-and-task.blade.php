@@ -106,7 +106,7 @@
 
         <!-- Task Settings -->
 
-        <div class="task-settings">
+        <div class="task-settings" style="display: none;">
 
             <label class="task-setting-item">
                 <span>{{ __('Requires Review Before Approval') }}</span>

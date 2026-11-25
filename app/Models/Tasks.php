@@ -103,6 +103,10 @@ class Tasks extends Model
                 $task->created_by = auth()->guard('member')->user()->id;
             }
             $task->status = TaskEnum::PENDING->value;
+            // Set the workspace ID to the current workspace.
+            $task->workspace_id = current_workspace()->id;
+            // Set the content ID to 0 initially.
+            $task->content_id = 0;
         });
         // Apply the current workspace scope globally.
         static::addGlobalScope(new CurrentWorkspaceScope());
@@ -209,8 +213,8 @@ class Tasks extends Model
         return Attribute::make(
             get: fn() => match ($this->content_type) {
                 'news' => __('New'),
-                'topic' => __('Topic'),
-                'research' => __('Research'),
+                'topics' => __('Topic'),
+                'researchs' => __('Research'),
                 default => __('Unknown'),
             },
         );

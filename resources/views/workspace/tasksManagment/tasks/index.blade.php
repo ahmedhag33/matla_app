@@ -23,6 +23,11 @@
     @include('workspace.tasksManagment.tasks.create')
 @endsection
 @section('script')
+    @if (session()->has('success-message-create-task'))
+        <script>
+            toastr.success("{{ session()->get('success-message-create-task') }}");
+        </script>
+    @endif
     <script>
         const $form = $('#add-task-form');
         const panels = ['task-context-part', 'content-type-part', 'content-details-part'];
@@ -197,14 +202,56 @@
                     error: (xhr) => handleFail(xhr)
                 });
             });
+            $(document).on('click', '.btn-assignment-save', function(e) {
+                e.preventDefault();
+                var formData = new FormData($($form)[0]);
+                $.ajax({
+                    type: 'post',
+                    enctype: "multipart/form-data",
+                    url: "{{ routeWorkspace('workspace.tasks.create') }}",
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function() {
+                        $('#add-task-loading').show();
+                        $form.hide();
+                    },
+                    error: function(data) {
+                        $('#add-task-loading').hide();
+                        $form.show();
+                        if (data.status === 422) {
+                            printError(data.responseJSON.message[0]);
+                        } else {
+                            toastr.error(
+                                data.responseJSON.message ||
+                                "{{ __('An error occurred') }}"
+                            );
+                        }
+                    },
+                    complete: function() {
+                        $('#add-task-loading').hide();
+                        $form.show();
+                    },
+                    success: function(data) {
+                        window.location.reload();
+                    }
+                });
+
+                function printError(errors) {
+                    $.each(errors, function(index, value) {
+                        $('.' + value.field + '_err').html(value.messages);
+                    });
+                }
+            });
         });
     </script>
     <script>
         window.tasks = {
-            girdUrl: "{{ routeWorkspace('workspace.tasks.all') }}"
+            gridUrl: "{{ routeWorkspace('workspace.tasks.all') }}"
         };
-    </script>
-    <script>
+
         $(function() {
             $('#tasks-list').jsGrid({
                 height: "auto",
@@ -217,6 +264,21 @@
                 pageSize: 10,
                 pageButtonCount: 5,
                 tableClass: "table matla-episodes-table",
+
+                noDataContent: $(`
+            <section class="content">
+                <div class="error-page">
+                    <div class="error-content">
+                        <h3>
+                            <i class="fas fa-tasks"></i>
+                            {{ __('No Tasks Found') }}
+                        </h3>
+                        <p>{{ __('Start by adding the first task.') }}</p>
+                    </div>
+                </div>
+            </section>
+        `),
+
                 controller: {
                     loadData: function(filter) {
                         return $.ajax({
@@ -225,32 +287,29 @@
                             data: filter,
                             dataType: "json"
                         }).then(function(response) {
-                            // Update Episodes Count
-                            // $("#episode-count").text(
-                            //     response.itemCount ?? response.itemsCount ?? 0
-                            // );
-                            // Return data to jsGrid
                             return {
-                                data: response.data ?? response.data ?? [],
-                                itemsCount: response.itemCount ?? response.itemsCount ?? 0
+                                data: response.data ?? [],
+                                itemsCount: response.itemsCount ?? 0
                             };
-
                         });
-
                     }
                 },
+
                 fields: [{
                         name: "content",
                         title: "{{ __('Content Type') }}",
                         type: "text",
+                        width: "9%",
+                        align: "center",
                         sorting: false,
                         filtering: false
                     },
                     {
-
                         name: "title",
                         title: "{{ __('Title') }}",
                         type: "text",
+                        width: "22%",
+                        align: "center",
                         sorting: true,
                         filtering: false
                     },
@@ -258,6 +317,8 @@
                         name: "episode",
                         title: "{{ __('Episode') }}",
                         type: "text",
+                        width: "15%",
+                        align: "center",
                         sorting: false,
                         filtering: false
                     },
@@ -265,6 +326,17 @@
                         name: "segment",
                         title: "{{ __('Segment') }}",
                         type: "text",
+                        width: "11%",
+                        align: "center",
+                        sorting: false,
+                        filtering: false
+                    },
+                    {
+                        name: "member",
+                        title: "{{ __('Assigned To') }}",
+                        type: "text",
+                        width: "10%",
+                        align: "center",
                         sorting: false,
                         filtering: false
                     },
@@ -272,6 +344,8 @@
                         name: "due_at",
                         title: "{{ __('Due Date') }}",
                         type: "text",
+                        width: "13%",
+                        align: "center",
                         sorting: false,
                         filtering: false
                     },
@@ -279,6 +353,8 @@
                         name: "completed_at",
                         title: "{{ __('Completed At') }}",
                         type: "text",
+                        width: "12%",
+                        align: "center",
                         sorting: false,
                         filtering: false
                     },
@@ -286,25 +362,12 @@
                         name: "status",
                         title: "{{ __('Status') }}",
                         type: "text",
+                        width: "8%",
+                        align: "center",
                         sorting: false,
                         filtering: false
-                    },
+                    }
                 ]
-            });
-            $('#tasks-list').jsGrid({
-                noDataContent: $(`
-        <section class="content">
-            <div class="error-page">
-                <div class="error-content">
-                    <h3>
-                        <i class="fas fa-tasks"></i>
-                        {{ __('No Tasks Found') }}
-                    </h3>
-                    <p>{{ __('Start by adding the first task.') }}</p>
-                </div>
-            </div>
-        </section>
-    `)
             });
         });
     </script>

@@ -32,6 +32,7 @@ class TaskRules implements RulesInterface
                     Rule::in(['episode', 'segment']) // Replace with actual valid contexts
                 ],
                 'segment_id' => [
+                    'nullable',
                     Rule::requiredIf(function () {
                             return request()->input('task_context') === 'segment';
                         }),
@@ -43,7 +44,7 @@ class TaskRules implements RulesInterface
                 'content_type' => [
                     'required',
                     'string',
-                    Rule::in(['news', 'topic', 'research']) // Replace with actual valid content types
+                    Rule::in(['news', 'topics', 'researchs']) // Replace with actual valid content types
                 ]
             ],
             3 => [

@@ -35,7 +35,7 @@
             <!-- موضوع -->
             <label class="content-type-card">
 
-                <input type="radio" name="content_type" value="topic">
+                <input type="radio" name="content_type" value="topics">
 
                 <span class="content-type-radio"></span>
 
@@ -57,7 +57,7 @@
             <!-- بحث -->
             <label class="content-type-card">
 
-                <input type="radio" name="content_type" value="research">
+                <input type="radio" name="content_type" value="researchs">
 
                 <span class="content-type-radio"></span>
 

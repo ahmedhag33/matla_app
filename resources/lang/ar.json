@@ -1441,5 +1441,6 @@
     "The due date must be in the future": "تاريخ الاستحقاق يجب أن يكون اليوم أو في المستقبل",
     "The due time must be in a valid format": "وقت الاستحقاق يجب أن يكون بتنسيق صحيح",
     "Due Date": "تاريخ الاستحقاق",
-    "Completed At": "تم الانتهاء في"
+    "Completed At": "تم الانتهاء في",
+    "Task created successfully": "تم إنشاء المهمة بنجاح"
 }

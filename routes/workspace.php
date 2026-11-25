@@ -176,5 +176,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to handle task step validation
         Route::post('/validate/{taskStep}', 'step')->name('workspace.tasks.step')
             ->middleware('check-member-permission:add-task');
+        // add route to create a new task
+        Route::post('/', 'create')->name('workspace.tasks.create')
+            ->middleware('check-member-permission:add-task');
     });
 });
