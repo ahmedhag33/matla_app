@@ -1439,5 +1439,7 @@
     "The due date is required": "تاريخ الاستحقاق مطلوب",
     "The due time is required": "وقت الاستحقاق مطلوب",
     "The due date must be in the future": "تاريخ الاستحقاق يجب أن يكون اليوم أو في المستقبل",
-    "The due time must be in a valid format": "وقت الاستحقاق يجب أن يكون بتنسيق صحيح"
+    "The due time must be in a valid format": "وقت الاستحقاق يجب أن يكون بتنسيق صحيح",
+    "Due Date": "تاريخ الاستحقاق",
+    "Completed At": "تم الانتهاء في"
 }

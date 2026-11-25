@@ -66,7 +66,8 @@ class Tasks extends Model
         'due_at_formatted',
         'completed_at_formatted',
         'status_formatted',
-        'priority_formatted'
+        'priority_formatted',
+        'content_string',
     ];
     /**
      * Get a custom description for an activity log entry.
@@ -195,6 +196,22 @@ class Tasks extends Model
                 TaskPriorityEnum::LOW->value => $this->span('warning', __('Low')),
                 TaskPriorityEnum::MEDIUM->value => $this->span('primary', __('Medium')),
                 TaskPriorityEnum::HIGH->value => $this->span('success', __('High')),
+            },
+        );
+    }
+    /**
+     * Interact with the contentString attribute.
+     *
+     * @return Attribute
+     */
+    public function contentString(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => match ($this->content_type) {
+                'news' => __('New'),
+                'topic' => __('Topic'),
+                'research' => __('Research'),
+                default => __('Unknown'),
             },
         );
     }

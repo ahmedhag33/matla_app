@@ -9,6 +9,7 @@ use App\Models\Episode;
 use App\Models\Member;
 use App\Models\Program;
 use App\Models\Segments;
+use App\Models\Tasks;
 use App\Service\Base\JsonAPIMessages;
 use App\Service\Enum\HttpStatusCode;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -27,6 +28,73 @@ class TasksController extends Controller
         $programs = Program::get();
         // Retrieve all programs to populate the program select dropdown in the view.
         return view('workspace.tasksManagment.tasks.index', compact('programs'));
+    }
+    /**
+     * Retrieve all tasks with pagination and sorting.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function all(Request $request)
+    {
+        try {
+            $query = Tasks::with([
+                'episode' => function ($query) {
+                    $query->with('program');
+                },
+                'segment',
+                'member'
+            ]);
+            $itemsCount = (clone $query)->count();
+            // Define the fields that can be used for sorting the tasks list.
+            $sortableFields = [
+                'title' => 'title',
+            ];
+            // Determine the sort field from the request parameters
+            $sortField = $request->input('sortField', 'title');
+            // Determine the sort order from the request parameters
+            $sortOrder = strtolower($request->input('sortOrder', 'desc'));
+            // Validate the sort order
+            if (!in_array($sortOrder, ['asc', 'desc'], true)) {
+                $sortOrder = 'desc';
+            }
+            // Apply sorting to the query based on the validated sort field and order
+            $query->orderBy($sortableFields[$sortField], $sortOrder);
+            // Pagination
+            $pageIndex = max(1, (int) $request->input('pageIndex', 1));
+            // Determine the page size for pagination
+            $pageSize = min(
+                100,
+                max(1, (int) $request->input('pageSize', 10))
+            );
+            // Retrieve the paginated episodes based on the calculated page index and page size
+            $tasks = $query
+                ->skip(($pageIndex - 1) * $pageSize)
+                ->take($pageSize)
+                ->get();
+            // Map the tasks to include only necessary data for the response.
+            $data = $tasks->map(function ($task) {
+                return [
+                    'id' => $task->id,
+                    'content' => $task->content_string ?? '',
+                    'title' => $task->title,
+                    'episode' => $task->episode->title.'-'.$task->episode->program->name,
+                    'segment' => __('Segment Number') . ' ' . $task->segment->segment_number.'-'.$task->segment->name ?? '',
+                    'member' => $task->member->name ?? '',
+                    'due_at' => $task->due_at_formatted ?? '',
+                    'completed_at' => $task->completed_at_formatted ?? '',
+                    'status' => $task->status_formatted ?? '',
+                    'priority' => $task->priority_formatted ?? ''
+                ];
+            });
+            // Return the mapped tasks data along with the total items count.
+            return $this->returnData([
+                'data' => $data ?? [],
+                'itemsCount' => $itemsCount,
+            ]);
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An error occurred. Please try again.'));
+        }
     }
     /**
      * Search for episodes based on the selected program.

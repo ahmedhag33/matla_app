@@ -199,4 +199,113 @@
             });
         });
     </script>
+    <script>
+        window.tasks = {
+            girdUrl: "{{ routeWorkspace('workspace.tasks.all') }}"
+        };
+    </script>
+    <script>
+        $(function() {
+            $('#tasks-list').jsGrid({
+                height: "auto",
+                width: "100%",
+                autoload: true,
+                filtering: true,
+                sorting: true,
+                paging: true,
+                pageLoading: true,
+                pageSize: 10,
+                pageButtonCount: 5,
+                tableClass: "table matla-episodes-table",
+                controller: {
+                    loadData: function(filter) {
+                        return $.ajax({
+                            url: window.tasks.gridUrl,
+                            method: "GET",
+                            data: filter,
+                            dataType: "json"
+                        }).then(function(response) {
+                            // Update Episodes Count
+                            // $("#episode-count").text(
+                            //     response.itemCount ?? response.itemsCount ?? 0
+                            // );
+                            // Return data to jsGrid
+                            return {
+                                data: response.data ?? response.data ?? [],
+                                itemsCount: response.itemCount ?? response.itemsCount ?? 0
+                            };
+
+                        });
+
+                    }
+                },
+                fields: [{
+                        name: "content",
+                        title: "{{ __('Content Type') }}",
+                        type: "text",
+                        sorting: false,
+                        filtering: false
+                    },
+                    {
+
+                        name: "title",
+                        title: "{{ __('Title') }}",
+                        type: "text",
+                        sorting: true,
+                        filtering: false
+                    },
+                    {
+                        name: "episode",
+                        title: "{{ __('Episode') }}",
+                        type: "text",
+                        sorting: false,
+                        filtering: false
+                    },
+                    {
+                        name: "segment",
+                        title: "{{ __('Segment') }}",
+                        type: "text",
+                        sorting: false,
+                        filtering: false
+                    },
+                    {
+                        name: "due_at",
+                        title: "{{ __('Due Date') }}",
+                        type: "text",
+                        sorting: false,
+                        filtering: false
+                    },
+                    {
+                        name: "completed_at",
+                        title: "{{ __('Completed At') }}",
+                        type: "text",
+                        sorting: false,
+                        filtering: false
+                    },
+                    {
+                        name: "status",
+                        title: "{{ __('Status') }}",
+                        type: "text",
+                        sorting: false,
+                        filtering: false
+                    },
+                ]
+            });
+            $('#tasks-list').jsGrid({
+                noDataContent: $(`
+        <section class="content">
+            <div class="error-page">
+                <div class="error-content">
+                    <h3>
+                        <i class="fas fa-tasks"></i>
+                        {{ __('No Tasks Found') }}
+                    </h3>
+                    <p>{{ __('Start by adding the first task.') }}</p>
+                </div>
+            </div>
+        </section>
+    `)
+            });
+        });
+    </script>
 @endsection
