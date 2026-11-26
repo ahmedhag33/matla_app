@@ -84,7 +84,7 @@ class TasksController extends Controller
                     'segment' => $task->segment
                         ? __('Segment Number') . ' ' .
                         $task->segment->segment_number . ' - ' .
-                        $task->segment->name
+                        $task->segment->title
                         : '',
                     'member' => $task->assignee->name ?? '',
                     'due_at' => $task->due_at_formatted ?? '',
