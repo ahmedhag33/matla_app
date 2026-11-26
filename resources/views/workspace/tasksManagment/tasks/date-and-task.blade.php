@@ -107,14 +107,6 @@
         <!-- Task Settings -->
 
         <div class="task-settings" style="display: none;">
-
-            <label class="task-setting-item">
-                <span>{{ __('Requires Review Before Approval') }}</span>
-
-                <input type="checkbox" name="requires_review" value="1">
-                <span class="setting-switch"></span>
-            </label>
-
             <label class="task-setting-item">
                 <span>{{ __('Notify Assignee When Assigned') }}</span>
 
