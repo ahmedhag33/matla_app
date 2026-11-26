@@ -98,6 +98,7 @@ class Tasks extends Model
         parent::booted();
 
         static::creating(function ($task) {
+            $task->slug = str()->uuid();
             // Set the created_by attribute to the currently authenticated member's ID if available.
             if (auth()->guard('member')->check()) {
                 $task->created_by = auth()->guard('member')->user()->id;
