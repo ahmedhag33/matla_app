@@ -26,9 +26,27 @@ class TasksController extends Controller
      */
     public function index()
     {
+        $data = null;
+        // Initialize the task slug variable.
+        $taskSlug = null;
+        if (request()->has('task_slug')) {
+            $taskSlug = request()->input('task_slug');
+            // If a task slug is provided, attempt to retrieve the corresponding task.
+            if (filled($taskSlug)) {
+                $data = Tasks::with([
+                    'episode.program',
+                    'segment',
+                    'assignee'
+                ])->where('slug', $taskSlug)->first();
+            }
+        }
+        // Retrieve all programs to be used in the view.
         $programs = Program::get();
-        // Retrieve all programs to populate the program select dropdown in the view.
-        return view('workspace.tasksManagment.tasks.index', compact('programs'));
+        // Return the view with the programs, task data, and task slug.
+        return view(
+            'workspace.tasksManagment.tasks.index',
+            compact('programs', 'data', 'taskSlug')
+        );
     }
     /**
      * Retrieve all tasks with pagination and sorting.
@@ -77,6 +95,7 @@ class TasksController extends Controller
             $data = $tasks->map(function ($task) {
                 return [
                     'id' => $task->id,
+                    'slug' => $task->slug ?? '',
                     'content' => $task->content_string ?? '',
                     'title' => $task->title ?? '',
                     'episode' => $task->episode

@@ -21,8 +21,14 @@
         @include('workspace.tasksManagment.tasks.all')
     </div> <!-- End content-wrapper -->
     @include('workspace.tasksManagment.tasks.create')
+    @include('workspace.tasksManagment.tasks.details')
 @endsection
 @section('script')
+    @if ($taskSlug)
+        <script>
+            $('#show-task').modal('show');
+        </script>
+    @endif
     @if (session()->has('success-message-create-task'))
         <script>
             toastr.success("{{ session()->get('success-message-create-task') }}");

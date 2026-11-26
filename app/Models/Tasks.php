@@ -29,6 +29,7 @@ class Tasks extends Model
      * @var array
      */
     protected $fillable = [
+        'slug',
         'workspace_id',
         'episode_id',
         'task_context',
