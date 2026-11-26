@@ -1447,5 +1447,9 @@
     "Public": "عام",
     "Not Completed": "لن يتم الانتهاء",
     "Task deleted successfully": "تم حذف المهمة بنجاح",
-    "Assigned a new task": "تم تكليفك بهمة جديدة برجاء الاطلاع عليها"
+    "Assigned a new task": "تم تكليفك بهمة جديدة برجاء الاطلاع عليها",
+    "ready script": "النص الجاهز",
+    "documented sources": "المصادر الموثقة",
+    "supporting images": "صور أو لقطات داعمة",
+    "Requirements": "المتطلبات"
 }

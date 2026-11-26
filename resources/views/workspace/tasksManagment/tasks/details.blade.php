@@ -50,6 +50,10 @@
                                     <th scope="row">{{ __('Assigned To') }}</th>
                                     <td>{{ $data->assignee->name }}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row">{{ __('Requirements') }}</th>
+                                    <td>{{ $data->requirements_to_string }}</td>
+                                </tr>
                             </tbody>
                         @endif
                     </table>

@@ -835,3 +835,18 @@ if (!function_exists('segmentTypes')) {
         ];
     }
 }
+if (!function_exists('requirementTypes')) {
+    /**
+     * Get the list of requirement types.
+     *
+     * @return array
+     */
+    function requirementTypes(): array
+    {
+        return [
+            'ready_script' => __('ready script'),
+            'documented_sources' => __('documented sources'),
+            'supporting_images' => __('supporting images'),
+        ];
+    }
+}

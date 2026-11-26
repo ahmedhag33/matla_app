@@ -69,6 +69,7 @@ class Tasks extends Model
         'status_formatted',
         'priority_formatted',
         'content_string',
+        'requirements_to_string'
     ];
     /**
      * Get a custom description for an activity log entry.
@@ -219,6 +220,26 @@ class Tasks extends Model
                 'researchs' => __('Research'),
                 default => __('Unknown'),
             },
+        );
+    }
+    /**
+     * Interact with the requirementsToString attribute.
+     *
+     * @return Attribute
+     */
+    public function requirementsToString(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $requirements = json_decode(
+                    $this->getRawOriginal('requirements') ?? '[]',
+                    true
+                );
+                return implode(' - ', array_map(
+                    fn($requirement) => requirementTypes()[$requirement] ?? $requirement,
+                    $requirements
+                ));
+            }
         );
     }
 }
