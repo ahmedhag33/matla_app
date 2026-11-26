@@ -245,13 +245,49 @@
                     });
                 }
             });
+            $(document).on('click', '.delete-task', function(e) {
+                Swal.fire({
+                    title: "<b>{{ __('Do you Are Delete') }}</b>",
+                    icon: "warning",
+                    iconColor: "#17233C",
+                    showCancelButton: true,
+                    confirmButtonColor: "#17233C",
+                    cancelButtonColor: "#F59E0B",
+                    confirmButtonText: "{{ __('Delete') }}",
+                    cancelButtonText: "{{ __('Cancel') }}"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        e.preventDefault();
+                        var id = $(this).attr('delete_id');
+                        $.ajax({
+                            type: 'DELETE',
+                            url: "{{ routeWorkspace('workspace.tasks.delete') }}",
+                            dataType: 'json',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                'task_id': id,
+                            },
+                            error: function(xhr) {
+                                toastr.error(xhr.responseJSON.message ||
+                                    "{{ __('An unexpected error occurred.') }}");
+                            },
+                            success: function(data) {
+                                $('#tasks-list').jsGrid('loadData');
+                                toastr.success(data.message);
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
     <script>
         window.tasks = {
-            gridUrl: "{{ routeWorkspace('workspace.tasks.all') }}"
+            gridUrl: "{{ routeWorkspace('workspace.tasks.all') }}",
+            permissions: {
+                delete: "{{ auth()->guard('member')->user()->hasPermission('delete-task') }}"
+            },
         };
-
         $(function() {
             $('#tasks-list').jsGrid({
                 height: "auto",
@@ -366,6 +402,43 @@
                         align: "center",
                         sorting: false,
                         filtering: false
+                    },
+                    {
+                        name: "id",
+                        title: "{{ __('Actions') }}",
+                        sorting: false,
+                        filtering: false,
+                        width: 100,
+                        itemTemplate: function(value, item) {
+                            let $container = $("<div>")
+                                .addClass("btn-group matla-actions");
+                            let $toggle = $("<button>", {
+                                type: "button",
+                                class: "btn matla-action-toggle",
+                                "data-toggle": "dropdown",
+                                "aria-haspopup": true,
+                                "aria-expanded": false
+                            }).append(
+                                $("<i>").addClass("fas fa-ellipsis-h")
+                            );
+                            let $menu = $("<div>")
+                                .addClass("dropdown-menu dropdown-menu-right");
+                            // Delete Episode
+                            if (window.tasks.permissions.delete) {
+                                let $delete = $("<a>", {
+                                        href: "javascript:void(0)",
+                                        class: "dropdown-item delete-task",
+                                        delete_id: item.id
+                                    })
+                                    .append(
+                                        $("<i>").addClass("fas fa-trash")
+                                    )
+                                    .append("{{ __('Delete') }}");
+                                $menu.append($delete);
+                            }
+                            $container.append($toggle, $menu);
+                            return $container;
+                        }
                     }
                 ]
             });

@@ -1442,5 +1442,9 @@
     "The due time must be in a valid format": "وقت الاستحقاق يجب أن يكون بتنسيق صحيح",
     "Due Date": "تاريخ الاستحقاق",
     "Completed At": "تم الانتهاء في",
-    "Task created successfully": "تم إنشاء المهمة بنجاح"
+    "Task created successfully": "تم إنشاء المهمة بنجاح",
+    "Cannot delete task with existing segments.": "لا يمكن حذف المهمة إذا كانت تحتوي على فقرات موجودة",
+    "Public": "عام",
+    "Not Completed": "لن يتم الانتهاء",
+    "Task deleted successfully": "تم حذف المهمة بنجاح"
 }

@@ -85,15 +85,14 @@ class TasksController extends Controller
                         ? __('Segment Number') . ' ' .
                         $task->segment->segment_number . ' - ' .
                         $task->segment->title
-                        : '',
+                        : __('Public'),
                     'member' => $task->assignee->name ?? '',
                     'due_at' => $task->due_at_formatted ?? '',
-                    'completed_at' => $task->completed_at_formatted ?? '',
+                    'completed_at' => $task->completed_at_formatted ?? __('Not Completed'),
                     'status' => $task->status_formatted ?? '',
                     'priority' => $task->priority_formatted ?? '',
                 ];
             });
-
             return $this->returnData([
                 'data' => $data,
                 'itemsCount' => $itemsCount,
@@ -244,6 +243,30 @@ class TasksController extends Controller
             return $this->returnData(['message' => __('Task created successfully')]);
         } catch (HttpResponseException $e) {
             return $e->getResponse();
+        } catch (\Exception $e) {
+            return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
+        }
+    }
+    /**
+     * Handle the delete request for a task.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws HttpResponseException
+     * @throws \Exception
+     */
+    public function delete(Request $request)
+    {
+        try {
+            $id = $request->input('task_id');
+            // Delete the task with the specified ID from the database.
+            Tasks::where('id', $id)->delete();
+            // Flash a success message to the session.
+            session()->flash('success-message-delete-task', __('Task deleted successfully'));
+            // Return a success response to the client.
+            return $this->returnData(['message' => __('Task deleted successfully')]);
+        } catch (DatabaseException $e) {
+            return $this->errorException($e->getCode(), $e->getMessage());
         } catch (\Exception $e) {
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
