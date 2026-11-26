@@ -285,6 +285,17 @@
                     }
                 });
             });
+            $(document).on('click', '.task-details', function(e) {
+                e.preventDefault();
+                var taskSlug = $(this).attr('task_slug');
+                var detailsUrl = "{{ url()->current() }}" + "?task_slug=" + taskSlug;
+                window.location.href = detailsUrl;
+            });
+            $(document).on('click', '.close-details-task', function(e) {
+                e.preventDefault();
+                $('#show-task').modal('hide');
+                window.location.href = "{{ url()->current() }}";
+            });
         });
     </script>
     <script>
@@ -442,6 +453,16 @@
                                     .append("{{ __('Delete') }}");
                                 $menu.append($delete);
                             }
+                            let $details = $("<a>", {
+                                    href: "javascript:void(0)",
+                                    class: "dropdown-item task-details",
+                                    task_slug: item.slug
+                                })
+                                .append(
+                                    $("<i>").addClass("fas fa-eye")
+                                )
+                                .append(" {{ __('Task Details') }}");
+                            $menu.append($details);
                             $container.append($toggle, $menu);
                             return $container;
                         }
