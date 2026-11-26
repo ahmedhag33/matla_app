@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Workspace;
 
+use App\Events\Workspace\NotifyToMemberTask;
 use App\Exceptions\DatabaseException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Workspace\TaskRequest;
@@ -197,7 +198,7 @@ class TasksController extends Controller
     public function create(TaskRequest $request)
     {
         try {
-            runTransaction(function () use ($request) {
+            $create = (object) runTransaction(function () use ($request) {
                 $episodeId = $request->input('episode_id');
                 // Retrieve the task context from the request.
                 $task_context = $request->input('task_context');
@@ -222,7 +223,7 @@ class TasksController extends Controller
                 // Retrieve the priority from the request.
                 $priority = $request->input('priority');
                 // create the task with the retrieved data.
-                Tasks::create([
+                $create = Tasks::create([
                     'episode_id' => $episodeId,
                     'task_context' => $task_context,
                     'segment_id' => $segmentId,
@@ -237,7 +238,17 @@ class TasksController extends Controller
                     'due_at' => $due_at,
                     'completed_at' => $request->input('completed_at'),
                 ]);
+                return $create;
             });
+            // Notify the assigned member about the new task.
+            event(new NotifyToMemberTask(
+                $create->id,
+                $create->slug,
+                $create->assigned_id,
+                current_workspace()->id,
+                current_workspace()->slug
+            ));
+            // Flash a success message to the session.
             session()->flash('success-message-create-task', __('Task created successfully'));
             // Return a success response to the client.
             return $this->returnData(['message' => __('Task created successfully')]);

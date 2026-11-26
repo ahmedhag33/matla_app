@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Events\Workspace\EpisodeCreated;
 use App\Events\Workspace\EpisodeUpdated;
 use App\Events\Workspace\NotfiyAcceptToWorkspace;
+use App\Events\Workspace\NotifyToMemberTask;
+use App\Listeners\Workspace\NotifyToMemberTaskListener;
 use App\Events\Workspace\ProgramCreated;
 use App\Events\Workspace\ProgramMemberCreated;
 use App\Events\Workspace\ProgramMemberDeleted;
@@ -51,6 +53,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         EpisodeUpdated::class => [
             EpisodeUpdatedNotify::class,
+        ],
+        NotifyToMemberTask::class => [
+           NotifyToMemberTaskListener::class,
         ]
     ];
 

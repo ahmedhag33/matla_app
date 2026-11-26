@@ -36,8 +36,8 @@
                 <div class="priority-options">
 
                     <label class="priority-option urgent">
-                        <input type="radio" name="priority" value="urgent">
-                        <span>{{ __('Urgent') }}</span>
+                        <input type="radio" name="priority" value="low">
+                        <span>{{ __('Low') }}</span>
                     </label>
 
                     <label class="priority-option high">
@@ -46,7 +46,7 @@
                     </label>
 
                     <label class="priority-option normal">
-                        <input type="radio" name="priority" value="normal">
+                        <input type="radio" name="priority" value="medium">
                         <span>{{ __('Normal') }}</span>
                     </label>
 
@@ -106,7 +106,7 @@
 
         <!-- Task Settings -->
 
-        <div class="task-settings" style="display: none;">
+        <div class="task-settings">
             <label class="task-setting-item">
                 <span>{{ __('Notify Assignee When Assigned') }}</span>
 
