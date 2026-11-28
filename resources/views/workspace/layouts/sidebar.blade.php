@@ -116,7 +116,7 @@
                               @endif
                               @if (auth()->guard('member')->user()->hasPermission('my-tasks'))
                                   <li class="nav-item">
-                                      <a href="" class="nav-link text-white">
+                                      <a href="{{ routeWorkspace('workspace.tasks.my-tasks') }}" class="nav-link text-white">
                                           <img src="{{ asset('public/img/list-solid-full.svg') }}" alt="Programs"
                                               style="width: 30px;">
                                           <p>{{ __('My Tasks') }}</p>

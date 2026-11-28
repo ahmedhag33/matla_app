@@ -306,4 +306,13 @@ class TasksController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, $e->getMessage());
         }
     }
+    /**
+     * Display the "My Tasks" page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function myTasks()
+    {
+        return view('workspace.tasksManagment.mytasks.index');
+    }
 }

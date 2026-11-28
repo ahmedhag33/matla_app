@@ -182,5 +182,8 @@ Route::prefix('{slug}/workspace')->middleware(['member-not-authenticate', 'membe
         // add route to delete a task
         Route::delete('/delete', 'delete')->name('workspace.tasks.delete')
             ->middleware('check-member-permission:delete-task');
+        // add route to display the "My Tasks" page
+        Route::get('/my-tasks', 'myTasks')->name('workspace.tasks.my-tasks')
+            ->middleware('check-member-permission:my-tasks');
     });
 });
