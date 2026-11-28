@@ -106,15 +106,6 @@
 
         <!-- Task Settings -->
 
-        <div class="task-settings">
-            <label class="task-setting-item">
-                <span>{{ __('Notify Assignee When Assigned') }}</span>
-
-                <input type="checkbox" name="notify_assignee" value="1" checked>
-                <span class="setting-switch"></span>
-            </label>
-
-        </div>
 
         <!-- Actions -->
 

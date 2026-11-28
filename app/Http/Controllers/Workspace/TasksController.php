@@ -43,10 +43,7 @@ class TasksController extends Controller
         // Retrieve all programs to be used in the view.
         $programs = Program::get();
         // Return the view with the programs, task data, and task slug.
-        return view(
-            'workspace.tasksManagment.tasks.index',
-            compact('programs', 'data', 'taskSlug')
-        );
+        return view('workspace.tasksManagment.tasks.index', compact('programs', 'data', 'taskSlug'));
     }
     /**
      * Retrieve all tasks with pagination and sorting.
@@ -214,6 +211,14 @@ class TasksController extends Controller
             return $this->errorException(HttpStatusCode::INTERNAL_SERVER_ERROR->value, __('An unexpected error occurred.'));
         }
     }
+    /**
+     * Handle the creation of a new task.
+     *
+     * @param TaskRequest $request
+     * @return \Illuminate\Http\JsonResponse|string
+     * @throws HttpResponseException
+     * @throws \Exception
+     */
     public function create(TaskRequest $request)
     {
         try {
