@@ -1,0 +1,112 @@
+/* =================================
+   MATLA FULLCALENDAR THEME
+================================= */
+
+#task-calendar {
+    --fc-border-color: #E5E7EB;
+    --fc-today-bg-color: #FFF4DC;
+    --fc-button-bg-color: #17233C;
+    --fc-button-border-color: #17233C;
+    --fc-button-hover-bg-color: #F59E0B;
+    --fc-button-hover-border-color: #F59E0B;
+    --fc-button-active-bg-color: #F59E0B;
+    --fc-button-active-border-color: #F59E0B;
+}
+
+/* Toolbar Title */
+#task-calendar .fc-toolbar-title {
+    color: #17233C;
+    font-weight: 700;
+}
+
+/* Toolbar Buttons */
+#task-calendar .fc .fc-toolbar .fc-button {
+    background-color: #17233C !important;
+    border-color: #17233C !important;
+    color: #FFFFFF !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    font-weight: 600;
+}
+
+/* Button Hover */
+#task-calendar .fc .fc-toolbar .fc-button:hover {
+    background-color: #F59E0B !important;
+    border-color: #F59E0B !important;
+    color: #17233C !important;
+}
+
+/* Active Button */
+#task-calendar .fc .fc-toolbar .fc-button-active,
+#task-calendar .fc .fc-toolbar .fc-button:active {
+    background-color: #F59E0B !important;
+    border-color: #F59E0B !important;
+    color: #17233C !important;
+}
+
+/* Disabled Buttons */
+#task-calendar .fc .fc-toolbar .fc-button:disabled {
+    background-color: #17233C !important;
+    border-color: #17233C !important;
+    color: #FFFFFF !important;
+    opacity: .5;
+}
+
+/* Week Header */
+#task-calendar .fc-col-header-cell {
+    background-color: #17233C !important;
+}
+
+#task-calendar .fc-col-header-cell-cushion {
+    color: #FFFFFF !important;
+    text-decoration: none;
+    padding: 12px 4px;
+}
+
+/* Day Numbers */
+#task-calendar .fc-daygrid-day-number {
+    color: #17233C;
+    text-decoration: none;
+    padding: 8px;
+}
+
+/* Today */
+#task-calendar .fc-day-today {
+    background-color: #FFF4DC !important;
+}
+
+/* Calendar Grid */
+#task-calendar .fc-scrollgrid,
+#task-calendar .fc-theme-standard td,
+#task-calendar .fc-theme-standard th {
+    border-color: #E5E7EB !important;
+}
+
+/* Matla FullCalendar Bootstrap Buttons */
+
+#task-calendar .fc-toolbar .btn-primary {
+    background-color: #17233C !important;
+    border-color: #17233C !important;
+    color: #FFFFFF !important;
+    box-shadow: none !important;
+}
+
+/* Hover */
+#task-calendar .fc-toolbar .btn-primary:hover {
+    background-color: #F59E0B !important;
+    border-color: #F59E0B !important;
+    color: #17233C !important;
+}
+
+/* Active */
+#task-calendar .fc-toolbar .btn-primary:not(:disabled):active,
+#task-calendar .fc-toolbar .btn-primary.active {
+    background-color: #F59E0B !important;
+    border-color: #F59E0B !important;
+    color: #17233C !important;
+}
+
+/* Focus */
+#task-calendar .fc-toolbar .btn-primary:focus {
+    box-shadow: none !important;
+}
